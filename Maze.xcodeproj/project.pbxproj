@@ -15,6 +15,7 @@
 		4368A2891C83D2E9006E1779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */; };
 		4368A2941C83D2EA006E1779 /* MazeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2931C83D2EA006E1779 /* MazeTests.m */; };
 		4368A29F1C83D2EA006E1779 /* MazeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A29E1C83D2EA006E1779 /* MazeUITests.m */; };
+		4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,9 @@
 		4368A29A1C83D2EA006E1779 /* MazeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MazeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368A29E1C83D2EA006E1779 /* MazeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MazeUITests.m; sourceTree = "<group>"; };
 		4368A2A01C83D2EA006E1779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4368A2AC1C83D688006E1779 /* DEIntegerPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEIntegerPoint.h; sourceTree = "<group>"; };
+		4368A2AD1C83D688006E1779 /* DEMazeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMazeGenerator.h; sourceTree = "<group>"; };
+		4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMazeGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		4368A2781C83D2E9006E1779 /* Maze */ = {
 			isa = PBXGroup;
 			children = (
+				4368A2B01C83D691006E1779 /* MazeGenerator */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
 				4368A27F1C83D2E9006E1779 /* ViewController.h */,
@@ -138,6 +143,16 @@
 				4368A2A01C83D2EA006E1779 /* Info.plist */,
 			);
 			path = MazeUITests;
+			sourceTree = "<group>";
+		};
+		4368A2B01C83D691006E1779 /* MazeGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				4368A2AC1C83D688006E1779 /* DEIntegerPoint.h */,
+				4368A2AD1C83D688006E1779 /* DEMazeGenerator.h */,
+				4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */,
+			);
+			name = MazeGenerator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4368A2811C83D2E9006E1779 /* ViewController.m in Sources */,
+				4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 			);
@@ -498,6 +514,7 @@
 				4368A2A51C83D2EA006E1779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4368A2A61C83D2EA006E1779 /* Build configuration list for PBXNativeTarget "MazeTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +523,7 @@
 				4368A2A81C83D2EA006E1779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4368A2A91C83D2EA006E1779 /* Build configuration list for PBXNativeTarget "MazeUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +532,7 @@
 				4368A2AB1C83D2EA006E1779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
