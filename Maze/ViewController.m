@@ -21,6 +21,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self createMaze];
+}
+
+- (IBAction)randomizeMaze:(id)sender {
+    [self createMaze];
+}
+
+- (void)createMaze {
+    [self removeSubviews];
+    
     int blocks = 15;
     
     self.n = blocks;
@@ -34,7 +44,6 @@
     
     [maze arrayMaze:^(bool **item) {
         
-        NSMutableString *rowString = [NSMutableString string];
         BOOL start = NO;
         BOOL end = NO;
         int min = 0;
@@ -64,17 +73,24 @@
                 NSInteger size = (self.view.frame.size.width - padding * 2) / (self.m * 2 + 1);
                 
                 if (item[r][c] == 1 && !dontDraw) {
-                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*3, size, size)];
+                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
                     block.backgroundColor = [self getRandomColor];
+                    block.tag = 1;
                     [self.view addSubview:block];
                 }
             }
-            
-            NSLog(@"%@", rowString);
         }
         
     }];
-    
+}
+
+- (void)removeSubviews {
+    NSArray *viewsToRemove = [self.view subviews];
+    for (UIView *v in viewsToRemove) {
+        if (v.tag == 1) {
+            [v removeFromSuperview];
+        }
+    }
 }
 
 -(UIColor*)getRandomColor {
