@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    int blocks = 10;
+    int blocks = 15;
     
     self.n = blocks;
     self.m = blocks;
