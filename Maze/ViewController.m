@@ -35,8 +35,10 @@
 
 - (void)createMaze {
     [self removeSubviews:1];
+    [self removeSubviews:2];
+    [self removeSubviews:3];
     
-    int blocks = 15;
+    int blocks = 20;
     
     self.n = blocks;
     self.m = blocks;
@@ -59,12 +61,13 @@
         
         BOOL start = NO;
         BOOL end = NO;
-        int min = 0;
+        int min = 1;
         int max = self.n*2;
         
         for (int r = 0; r < self.n * 2 + 1 ; r++) {
             int rndValue = min + arc4random() % (max - min);
             for (int c = 0; c < self.m * 2 + 1 ; c++) {
+                
                 BOOL dontDraw = NO;
                 if (r == 0 && !start && c == rndValue) {
                     if (item[r+1][c] != 1) {
@@ -72,14 +75,14 @@
                         start = YES;
                         rndValue = min + arc4random() % (max - min);
                     } else {
-                        rndValue = min + arc4random() % (max - min);
+                        rndValue++;
                     }
                 } else if (r == self.n*2 && !end && c == rndValue) {
                     if (item[r-1][c] != 1) {
                         dontDraw = YES;
                         end = YES;
                     } else {
-                        rndValue = min + arc4random() % (max - min);
+                        rndValue++;
                     }
                 }
                 
@@ -111,7 +114,7 @@
             }
         }
         [self drawSolveLine];
-        [self performSelector:@selector(solve) withObject:self afterDelay:1.0];
+        [self performSelector:@selector(solve) withObject:self afterDelay:0.5];
     }];
 }
 
