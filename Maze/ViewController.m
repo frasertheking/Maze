@@ -13,6 +13,7 @@
 
 @property (nonatomic) int n;
 @property (nonatomic) int m;
+@property (nonatomic) NSMutableArray* blockArray;
 
 @end
 
@@ -37,11 +38,15 @@
     self.m = blocks;
     
     NSInteger padding = 25;
-    
+    self.blockArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
+    for(int i=0; i<blocks*2+1; i++) {
+        [self.blockArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
+    }
+
     DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.n
                                                           andCol:self.m
                                                withStartingPoint:DEIntegerPointMake(1, 1)];
-    
+   
     [maze arrayMaze:^(bool **item) {
         
         BOOL start = NO;
@@ -77,10 +82,17 @@
                     block.backgroundColor = [self getRandomColor];
                     block.tag = 1;
                     [self.view addSubview:block];
+                    [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                } else {
+                    if (dontDraw) {
+                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
+                    } else {
+                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
+                    }
                 }
             }
         }
-        
+        NSLog(@"Array:\n\n%@", self.blockArray);
     }];
 }
 
