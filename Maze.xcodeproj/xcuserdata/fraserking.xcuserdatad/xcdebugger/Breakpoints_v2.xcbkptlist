@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/ViewController.m"
-            timestampString = "479500019.903711"
+            timestampString = "479501601.69741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "-printArrayPretty:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/ViewController.m"
-            timestampString = "479500019.903711"
+            timestampString = "479501601.69741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "-solveMaze:column:"
             landmarkType = "5">
          </BreakpointContent>

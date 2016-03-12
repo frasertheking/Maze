@@ -24,13 +24,32 @@
                                     <action selector="randomizeMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="igp-pN-g1H"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxS-Vu-Ufp">
+                                <rect key="frame" x="272" y="528" width="57" height="30"/>
+                                <state key="normal" title="Animate"/>
+                                <connections>
+                                    <action selector="animateMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="gaD-6x-mXG"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ocf-we-m1Q">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="S3b-QH-AnQ"/>
+                                    <constraint firstAttribute="width" constant="300" id="v2i-xZ-dTM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3MG-af-gmH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="42D-WL-ADP"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="Ffo-vO-33d"/>
+                            <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H7Q-u2-mZz"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JU1-lE-SEa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="KQg-OC-lDY"/>
+                            <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="42" id="VHK-TI-ZR6"/>
+                            <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -39,6 +58,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

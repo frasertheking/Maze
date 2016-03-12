@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "DEMazeGenerator.h"
 
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 @interface ViewController ()
 
 @property (nonatomic) int n;
@@ -33,6 +35,13 @@
     [self createMaze];
 }
 
+- (IBAction)animateMaze:(id)sender {
+    [UIView animateWithDuration:2 animations:^{
+        double rads = DEGREES_TO_RADIANS(180);
+        self.mazeView.layer.transform = CATransform3DMakeRotation(rads, 0, 0, 1);
+    }];
+}
+
 - (void)createMaze {
     [self removeSubviews:1];
     [self removeSubviews:2];
@@ -43,7 +52,7 @@
     self.n = blocks;
     self.m = blocks;
     
-    NSInteger padding = 25;
+    NSInteger padding = 0;
     self.blockArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     for(int i=0; i<blocks*2+1; i++) {
@@ -86,7 +95,7 @@
                     }
                 }
                 
-                NSInteger size = (self.view.frame.size.width - padding * 2) / (self.m * 2 + 1);
+                NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
                 BOOL first = YES;
                 
                 if (item[r][c] == 1 && !dontDraw) {
@@ -94,7 +103,7 @@
                     block.backgroundColor = [UIColor blueColor];
                     block.tag = 1;
                     block.alpha = 0.5;
-                    [self.view addSubview:block];
+                    [self.mazeView addSubview:block];
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
                     if (dontDraw) {
@@ -182,8 +191,8 @@
 
 
 -(void)drawSolveLine {
-    NSInteger padding = 25;
-    NSInteger size = (self.view.frame.size.width - padding * 2) / (self.m * 2 + 1);
+    NSInteger padding = 0;
+    NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
     [self removeSubviews:2];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
@@ -193,15 +202,15 @@
                 block.alpha = 0.5;
                 block.backgroundColor = [UIColor redColor];
                 block.tag = 2;
-                [self.view addSubview:block];
+                [self.mazeView addSubview:block];
             }
         }
     }
 }
 
 -(void)drawSolveLine2 {
-    NSInteger padding = 25;
-    NSInteger size = (self.view.frame.size.width - padding * 2) / (self.m * 2 + 1);
+    NSInteger padding = 0;
+    NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
     [self removeSubviews:3];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
@@ -211,14 +220,14 @@
                 block.alpha = 0.5;
                 block.backgroundColor = [UIColor yellowColor];
                 block.tag = 3;
-                [self.view addSubview:block];
+                [self.mazeView addSubview:block];
             }
         }
     }
 }
 
 - (void)removeSubviews:(NSInteger)tag {
-    NSArray *viewsToRemove = [self.view subviews];
+    NSArray *viewsToRemove = [self.mazeView subviews];
     for (UIView *v in viewsToRemove) {
         if (v.tag == tag) {
             [v removeFromSuperview];
