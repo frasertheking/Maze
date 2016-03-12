@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DEMazeGenerator.h"
+#import "MazeCell.h"
 
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
@@ -28,11 +29,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
+    [self.mazeView addGestureRecognizer:panGesture];
     [self createMaze];
 }
 
 - (IBAction)randomizeMaze:(id)sender {
     [self createMaze];
+}
+
+- (IBAction)solveMaze:(id)sender {
+    [self solve];
 }
 
 - (IBAction)animateMaze:(id)sender {
@@ -46,8 +53,9 @@
     [self removeSubviews:1];
     [self removeSubviews:2];
     [self removeSubviews:3];
+    [self removeSubviews:4];
     
-    int blocks = 20;
+    int blocks = 6;
     
     self.n = blocks;
     self.m = blocks;
@@ -122,8 +130,7 @@
                 [[self.solArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
             }
         }
-        [self drawSolveLine];
-        [self performSelector:@selector(solve) withObject:self afterDelay:0.5];
+        [self drawMazePaths];
     }];
 }
 
@@ -145,13 +152,12 @@
 -(BOOL)solveMaze:(NSInteger)row column:(NSInteger)column {
     if ([[[self.blockArray objectAtIndex:row] objectAtIndex:column] integerValue] == 2) {
         [[self.solArray objectAtIndex:row] replaceObjectAtIndex:column withObject:[NSNumber numberWithInt:1]];
-        [self drawSolveLine2];
+        [self drawSolveLine];
         return YES;
     }
     
     if ([self isSafe:row y:column]) {
         [[self.solArray objectAtIndex:row] replaceObjectAtIndex:column withObject:[NSNumber numberWithInt:1]];
-        //[self printArrayPretty:self.solArray];
         
         if ([self solveMaze:(row + 1) column:column]) {
             return YES;
@@ -190,17 +196,23 @@
 }
 
 
--(void)drawSolveLine {
+-(void)drawMazePaths {
     NSInteger padding = 0;
     NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
     [self removeSubviews:2];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+            if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
+                MazeCell *block = [[MazeCell alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
                 block.alpha = 0.5;
                 block.backgroundColor = [UIColor redColor];
+                block.tag = 4;
+                [self.mazeView addSubview:block];
+            } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                block.alpha = 0.5;
+                block.backgroundColor = [UIColor whiteColor];
                 block.tag = 2;
                 [self.mazeView addSubview:block];
             }
@@ -208,7 +220,18 @@
     }
 }
 
--(void)drawSolveLine2 {
+- (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint draggingPoint = [gestureRecognizer locationInView:self.view];
+    UIView *hitView = [self.view hitTest:draggingPoint withEvent:nil];
+    if (hitView.superview == self.view) {
+        hitView.center = draggingPoint;
+    } else if (hitView.tag == 2) {
+        hitView.backgroundColor = [UIColor orangeColor];
+    }
+}
+
+-(void)drawSolveLine {
     NSInteger padding = 0;
     NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
     [self removeSubviews:3];
