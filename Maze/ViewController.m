@@ -24,6 +24,8 @@
 
 @end
 
+double rads = DEGREES_TO_RADIANS(180);
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -34,28 +36,13 @@
     [self createMaze];
 }
 
-- (IBAction)randomizeMaze:(id)sender {
-    [self createMaze];
-}
-
-- (IBAction)solveMaze:(id)sender {
-    [self solve];
-}
-
-- (IBAction)animateMaze:(id)sender {
-    [UIView animateWithDuration:2 animations:^{
-        double rads = DEGREES_TO_RADIANS(180);
-        self.mazeView.layer.transform = CATransform3DMakeRotation(rads, 0, 0, 1);
-    }];
-}
-
 - (void)createMaze {
     [self removeSubviews:1];
     [self removeSubviews:2];
     [self removeSubviews:3];
     [self removeSubviews:4];
-    
-    int blocks = 6;
+        
+    int blocks =  5 + arc4random() % (15 - 5);
     
     self.n = blocks;
     self.m = blocks;
@@ -134,6 +121,8 @@
     }];
 }
 
+#pragma mark - Maze Solving
+
 -(void)solve {
     [self solveMaze:self.startRow column:self.startCol];
 }
@@ -182,46 +171,7 @@
     return NO;
 }
 
--(void)printArrayPretty:(NSMutableArray*)array {
-    NSMutableString *rowString = [NSMutableString string];
-
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        [rowString setString:[NSString stringWithFormat:@"%d: ", r]];
-
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            [rowString appendFormat:@"%@ ", [[[array objectAtIndex:c] objectAtIndex:r] integerValue] == 1 ? @"*" : @" "];
-        }
-        NSLog(@"%@", rowString);
-    }
-}
-
-
--(void)drawMazePaths {
-    NSInteger padding = 0;
-    NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
-    [self removeSubviews:2];
-    
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
-                MazeCell *block = [[MazeCell alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
-                block.alpha = 0.5;
-                block.backgroundColor = [UIColor redColor];
-                block.tag = 4;
-                [self.mazeView addSubview:block];
-            } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
-                block.alpha = 0.5;
-                block.backgroundColor = [UIColor whiteColor];
-                block.tag = 2;
-                [self.mazeView addSubview:block];
-            }
-        }
-    }
-}
-
-- (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer
-{
+- (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint draggingPoint = [gestureRecognizer locationInView:self.view];
     UIView *hitView = [self.view hitTest:draggingPoint withEvent:nil];
     if (hitView.superview == self.view) {
@@ -230,6 +180,8 @@
         hitView.backgroundColor = [UIColor orangeColor];
     }
 }
+
+#pragma mark - Maze Drawing
 
 -(void)drawSolveLine {
     NSInteger padding = 0;
@@ -241,8 +193,31 @@
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
                 block.alpha = 0.5;
-                block.backgroundColor = [UIColor yellowColor];
+                block.backgroundColor = [UIColor greenColor];
                 block.tag = 3;
+                [self.mazeView addSubview:block];
+            }
+        }
+    }
+}
+
+-(void)drawMazePaths {
+    NSInteger padding = 0;
+    NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
+    [self removeSubviews:2];
+    
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
+                MazeCell *block = [[MazeCell alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                block.backgroundColor = [UIColor redColor];
+                block.tag = 4;
+                block.alpha = 0.5;
+                [self.mazeView addSubview:block];
+            } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                block.backgroundColor = [UIColor whiteColor];
+                block.tag = 2;
                 [self.mazeView addSubview:block];
             }
         }
@@ -258,11 +233,43 @@
     }
 }
 
+#pragma mark - Helpers
+
+-(void)printArrayPretty:(NSMutableArray*)array {
+    NSMutableString *rowString = [NSMutableString string];
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        [rowString setString:[NSString stringWithFormat:@"%d: ", r]];
+        
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            [rowString appendFormat:@"%@ ", [[[array objectAtIndex:c] objectAtIndex:r] integerValue] == 1 ? @"*" : @" "];
+        }
+        NSLog(@"%@", rowString);
+    }
+}
+
 -(UIColor*)getRandomColor {
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+}
+
+#pragma mark - Actions
+
+- (IBAction)randomizeMaze:(id)sender {
+    [self createMaze];
+}
+
+- (IBAction)solveMaze:(id)sender {
+    [self solve];
+}
+
+- (IBAction)animateMaze:(id)sender {
+    [UIView animateWithDuration:5 delay:0 options:(UIViewAnimationOptionAllowUserInteraction) animations:^{
+        self.mazeView.layer.transform = CATransform3DMakeRotation(rads, 0, 0, 1);
+    } completion:^(BOOL finished) {
+        rads += DEGREES_TO_RADIANS(180);
+    }];
 }
 
 @end
