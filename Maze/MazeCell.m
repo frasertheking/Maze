@@ -10,10 +10,12 @@
 
 @implementation MazeCell
 
--(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    self.backgroundColor = [UIColor purpleColor];
-    [self setNeedsDisplay];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.backgroundColor == [UIColor whiteColor]) {
+        self.backgroundColor = [UIColor orangeColor];
+    } else {
+        self.backgroundColor = [UIColor whiteColor];
+    }
 }
-
 
 @end

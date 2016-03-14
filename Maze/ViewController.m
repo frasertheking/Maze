@@ -18,9 +18,16 @@
 @property (nonatomic) int m;
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
+@property (nonatomic) NSMutableArray* attemptArray;
+@property (nonatomic) UIView* previousPreviousView;
+@property (nonatomic) UIView* previousView;
 
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
+
+@property NSInteger currentX;
+@property NSInteger currentY;
+@property BOOL allowDraw;
 
 @end
 
@@ -31,6 +38,7 @@ double rads = DEGREES_TO_RADIANS(180);
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.allowDraw = YES;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
     [self.mazeView addGestureRecognizer:panGesture];
     [self createMaze];
@@ -50,11 +58,15 @@ double rads = DEGREES_TO_RADIANS(180);
     NSInteger padding = 0;
     self.blockArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
+    self.attemptArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     for(int i=0; i<blocks*2+1; i++) {
         [self.blockArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
     }
     for(int i=0; i<blocks*2+1; i++) {
         [self.solArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
+    }
+    for(int i=0; i<blocks*2+1; i++) {
+        [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
     }
 
     DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.n
@@ -115,8 +127,11 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                 }
                 [[self.solArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
+                [[self.attemptArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
             }
         }
+        self.currentX = self.startRow;
+        self.currentY = self.startCol;
         [self drawMazePaths];
     }];
 }
@@ -172,16 +187,117 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
-    CGPoint draggingPoint = [gestureRecognizer locationInView:self.view];
-    UIView *hitView = [self.view hitTest:draggingPoint withEvent:nil];
-    if (hitView.superview == self.view) {
-        hitView.center = draggingPoint;
-    } else if (hitView.tag == 2) {
-        hitView.backgroundColor = [UIColor orangeColor];
+    
+    CGPoint vel = [gestureRecognizer velocityInView:self.view];
+    if (self.allowDraw) {
+        if (fabs(vel.x) > fabs(vel.y)) {
+            if (vel.x > 0) {
+                NSLog(@"RIGHT");
+                if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    self.currentX++;
+                    if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                    } else {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                    }
+                }
+            } else {
+                NSLog(@"LEFT");
+                if (self.currentX - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    self.currentX--;
+                    if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                    } else {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                    }
+                }
+            }
+        } else {
+            if (vel.y < 0) {
+                NSLog(@"UP");
+                if (self.currentY - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1) {
+                    self.currentY--;
+                    if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                    } else {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                    }
+                }
+            } else {
+                NSLog(@"DOWN");
+                if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1) {
+                    self.currentY++;
+                    if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                    } else {
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                    }
+                }
+            }
+        }
+        [self stopDraw];
     }
+    [self drawAttempt];
+    [self printArrayPretty:self.attemptArray];
+    
+//    CGPoint draggingPoint = [gestureRecognizer locationInView:self.view];
+//    UIView *hitView = [self.view hitTest:draggingPoint withEvent:nil];
+//    NSInteger size = (self.mazeView.frame.size.width) / (self.m * 2);
+//    
+//    if (hitView.superview == self.view) {
+//        hitView.center = draggingPoint;
+//    } else if (hitView.tag == 2) {
+//        if (hitView == self.previousPreviousView) {
+//            [[self.attemptArray objectAtIndex:self.previousView.frame.origin.x / size] replaceObjectAtIndex:self.previousView.frame.origin.y / size withObject:[NSNumber numberWithInt:0]];
+//            self.previousView.backgroundColor = [UIColor whiteColor];
+//            self.previousPreviousView = nil;
+//        } else if (hitView != self.previousView) {
+//            if (hitView.backgroundColor == [UIColor whiteColor]) {
+//                [[self.attemptArray objectAtIndex:hitView.frame.origin.x / size] replaceObjectAtIndex:hitView.frame.origin.y / size withObject:[NSNumber numberWithInt:1]];
+//                hitView.backgroundColor = [UIColor orangeColor];
+//            } else {
+//                [[self.attemptArray objectAtIndex:hitView.frame.origin.x / size] replaceObjectAtIndex:hitView.frame.origin.y / size withObject:[NSNumber numberWithInt:0]];
+//                hitView.backgroundColor = [UIColor whiteColor];
+//            }
+//            [self printArrayPretty:self.attemptArray];
+//            self.previousPreviousView = self.previousView;
+//            self.previousView = hitView;
+//        }
+//    }
+}
+
+-(void)stopDraw {
+    self.allowDraw = NO;
+    [NSTimer scheduledTimerWithTimeInterval:0.05
+                                     target:self
+                                   selector:@selector(drawable)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+-(void)drawable {
+    self.allowDraw = YES;
 }
 
 #pragma mark - Maze Drawing
+
+-(void)drawAttempt {
+    NSInteger padding = 0;
+    NSInteger size = (self.mazeView.frame.size.width - padding * 2) / (self.m * 2);
+    [self removeSubviews:4];
+    
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                block.alpha = 0.5;
+                block.backgroundColor = [UIColor orangeColor];
+                block.tag = 4;
+                [self.mazeView addSubview:block];
+            }
+        }
+    }
+}
 
 -(void)drawSolveLine {
     NSInteger padding = 0;
