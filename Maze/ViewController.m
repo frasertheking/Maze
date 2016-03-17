@@ -28,6 +28,15 @@
 @property NSInteger currentX;
 @property NSInteger currentY;
 @property BOOL allowDraw;
+@property CGPoint previousLoc;
+
+typedef NS_ENUM(NSInteger, Direction) {
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
+};
+@property Direction previousDirection;
 
 @end
 
@@ -132,6 +141,7 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         self.currentX = self.startRow;
         self.currentY = self.startCol;
+        self.previousDirection = RIGHT;
         [self drawMazePaths];
     }];
 }
@@ -189,21 +199,26 @@ double rads = DEGREES_TO_RADIANS(180);
 - (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
     
     CGPoint vel = [gestureRecognizer velocityInView:self.view];
-    if (self.allowDraw) {
+    CGPoint currentPoint = [gestureRecognizer locationInView:self.view];
+    NSInteger size = (self.mazeView.frame.size.width) / (self.m * 2);
+    
+    if (self.allowDraw && [self distanceFrom:currentPoint to:self.previousLoc] >= size) {
         if (fabs(vel.x) > fabs(vel.y)) {
             if (vel.x > 0) {
-                NSLog(@"RIGHT");
                 if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    if ([self updateForDirectionChange:RIGHT]) return;
                     self.currentX++;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
+                    self.previousLoc = currentPoint;
+                    self.previousDirection = RIGHT;
                 }
             } else {
-                NSLog(@"LEFT");
                 if (self.currentX - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    if ([self updateForDirectionChange:LEFT]) return;
                     self.currentX--;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
@@ -211,31 +226,37 @@ double rads = DEGREES_TO_RADIANS(180);
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
                 }
+                self.previousLoc = currentPoint;
+                self.previousDirection = LEFT;
             }
         } else {
             if (vel.y < 0) {
-                NSLog(@"UP");
                 if (self.currentY - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1) {
+                    if ([self updateForDirectionChange:UP]) return;
                     self.currentY--;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
+                    self.previousLoc = currentPoint;
+                    self.previousDirection = UP;
                 }
             } else {
-                NSLog(@"DOWN");
                 if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1) {
+                    if ([self updateForDirectionChange:DOWN]) return;
                     self.currentY++;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
+                    self.previousLoc = currentPoint;
+                    self.previousDirection = DOWN;
                 }
             }
         }
-        [self stopDraw];
+        //[self stopDraw];
     }
     [self drawAttempt];
     [self printArrayPretty:self.attemptArray];
@@ -266,18 +287,55 @@ double rads = DEGREES_TO_RADIANS(180);
 //    }
 }
 
--(void)stopDraw {
-    self.allowDraw = NO;
-    [NSTimer scheduledTimerWithTimeInterval:0.05
-                                     target:self
-                                   selector:@selector(drawable)
-                                   userInfo:nil
-                                    repeats:NO];
+//-(void)stopDraw {
+//    self.allowDraw = NO;
+//    [NSTimer scheduledTimerWithTimeInterval:0.05
+//                                     target:self
+//                                   selector:@selector(drawable)
+//                                   userInfo:nil
+//                                    repeats:NO];
+//}
+
+-(BOOL)updateForDirectionChange:(Direction)direction {
+    if ((direction == UP && self.previousDirection == DOWN) ||
+        (direction == DOWN && self.previousDirection == UP) ||
+        (direction == LEFT && self.previousDirection == RIGHT) ||
+        (direction == RIGHT && self.previousDirection == LEFT)) {
+        if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+        } else {
+            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+        }
+        
+        self.previousDirection = direction;
+        [self drawAttempt];
+        [self printArrayPretty:self.attemptArray];
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 -(void)drawable {
     self.allowDraw = YES;
 }
+
+-(void)removeLonelyPieces {
+  
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 &&
+                [[[self.attemptArray objectAtIndex:r-1] objectAtIndex:c] integerValue] == 0 &&
+                [[[self.attemptArray objectAtIndex:r+1] objectAtIndex:c] integerValue] == 0 &&
+                [[[self.attemptArray objectAtIndex:r] objectAtIndex:c-1] integerValue] == 0 &&
+                [[[self.attemptArray objectAtIndex:r] objectAtIndex:c+1] integerValue] == 0 &&
+                r != self.startRow && c != self.startCol) {
+                    [[self.attemptArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
+            }
+        }
+    }
+}
+
 
 #pragma mark - Maze Drawing
 
@@ -368,6 +426,12 @@ double rads = DEGREES_TO_RADIANS(180);
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+}
+
+-(float)distanceFrom:(CGPoint)point1 to:(CGPoint)point2 {
+    CGFloat xDist = (point2.x - point1.x);
+    CGFloat yDist = (point2.y - point1.y);
+    return sqrt((xDist * xDist) + (yDist * yDist));
 }
 
 #pragma mark - Actions
