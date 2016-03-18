@@ -206,10 +206,10 @@ double rads = DEGREES_TO_RADIANS(180);
         if (fabs(vel.x) > fabs(vel.y)) {
             if (vel.x > 0) {
                 if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1) {
-                    if ([self updateForDirectionChange:RIGHT]) return;
+                    //if ([self updateForDirectionChange:RIGHT]) return;
                     self.currentX++;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                        [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
@@ -218,10 +218,10 @@ double rads = DEGREES_TO_RADIANS(180);
                 }
             } else {
                 if (self.currentX - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
-                    if ([self updateForDirectionChange:LEFT]) return;
+                    //if ([self updateForDirectionChange:LEFT]) return;
                     self.currentX--;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                        [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
@@ -232,10 +232,10 @@ double rads = DEGREES_TO_RADIANS(180);
         } else {
             if (vel.y < 0) {
                 if (self.currentY - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1) {
-                    if ([self updateForDirectionChange:UP]) return;
+                   // if ([self updateForDirectionChange:UP]) return;
                     self.currentY--;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
@@ -244,10 +244,10 @@ double rads = DEGREES_TO_RADIANS(180);
                 }
             } else {
                 if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1) {
-                    if ([self updateForDirectionChange:DOWN]) return;
+                    //if ([self updateForDirectionChange:DOWN]) return;
                     self.currentY++;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                        [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:0]];
                     } else {
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
@@ -324,12 +324,11 @@ double rads = DEGREES_TO_RADIANS(180);
   
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 &&
+            if (r > 1 && [[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 &&
                 [[[self.attemptArray objectAtIndex:r-1] objectAtIndex:c] integerValue] == 0 &&
                 [[[self.attemptArray objectAtIndex:r+1] objectAtIndex:c] integerValue] == 0 &&
                 [[[self.attemptArray objectAtIndex:r] objectAtIndex:c-1] integerValue] == 0 &&
-                [[[self.attemptArray objectAtIndex:r] objectAtIndex:c+1] integerValue] == 0 &&
-                r != self.startRow && c != self.startCol) {
+                [[[self.attemptArray objectAtIndex:r] objectAtIndex:c+1] integerValue] == 0) {
                     [[self.attemptArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
             }
         }

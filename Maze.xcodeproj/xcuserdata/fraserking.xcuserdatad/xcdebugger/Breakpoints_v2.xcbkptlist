@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/ViewController.m"
-            timestampString = "479865760.761451"
+            timestampString = "480029876.615365"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "-removeLonelyPieces"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "-panPiece:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/ViewController.m"
-            timestampString = "479865835.444873"
+            timestampString = "480029877.091707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
-            landmarkName = "-updateForDirectionChange:"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-panPiece:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
