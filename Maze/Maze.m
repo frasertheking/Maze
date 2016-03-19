@@ -66,7 +66,6 @@ double rads = DEGREES_TO_RADIANS(180);
     self.n = blocks;
     self.m = blocks;
     
-    NSInteger padding = 0;
     self.blockArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
     self.attemptArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
@@ -113,11 +112,10 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                 }
                 
-                NSInteger size = (self.frame.size.width - padding * 2) / (self.m * 2);
+                float size = (self.frame.size.width) / (self.m * 2+1);
                 BOOL first = YES;
-                
                 if (item[r][c] == 1 && !dontDraw) {
-                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                     block.backgroundColor = [UIColor blueColor];
                     block.tag = 1;
                     block.alpha = 0.5;
@@ -259,14 +257,13 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - Maze Drawing
 
 -(void)drawAttempt {
-    NSInteger padding = 0;
-    NSInteger size = (self.frame.size.width - padding * 2) / (self.m * 2);
+    NSInteger size = (self.frame.size.width) / (self.m * 2 + 1);
     [self removeSubviews:4];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.alpha = 0.5;
                 block.backgroundColor = [UIColor orangeColor];
                 block.tag = 4;
@@ -277,14 +274,13 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawSolveLine {
-    NSInteger padding = 0;
-    NSInteger size = (self.frame.size.width - padding * 2) / (self.m * 2);
+    NSInteger size = (self.frame.size.width) / (self.m * 2 + 1);
     [self removeSubviews:3];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.alpha = 0.5;
                 block.backgroundColor = [UIColor greenColor];
                 block.tag = 3;
@@ -295,20 +291,19 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawMazePaths {
-    NSInteger padding = 0;
-    NSInteger size = (self.frame.size.width - padding * 2) / (self.m * 2);
+    float size = (self.frame.size.width) / (self.m * 2 + 1);
+
     [self removeSubviews:2];
-    
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [UIColor redColor];
                 block.tag = 4;
                 block.alpha = 0.5;
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size + padding, c*size + padding*5, size, size)];
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [UIColor whiteColor];
                 block.tag = 2;
                 [self addSubview:block];
