@@ -257,7 +257,7 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - Maze Drawing
 
 -(void)drawAttempt {
-    NSInteger size = (self.frame.size.width) / (self.m * 2 + 1);
+    float size = (self.frame.size.width) / (self.m * 2 + 1);
     [self removeSubviews:4];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
@@ -274,7 +274,7 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawSolveLine {
-    NSInteger size = (self.frame.size.width) / (self.m * 2 + 1);
+    float size = (self.frame.size.width) / (self.m * 2 + 1);
     [self removeSubviews:3];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
