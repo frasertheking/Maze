@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Maze.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
+@property (nonatomic, weak) IBOutlet UITextField *sizeTextField;
 
 @end
 

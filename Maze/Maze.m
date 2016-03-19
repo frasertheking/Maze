@@ -12,6 +12,7 @@
 
 @property (nonatomic) int n;
 @property (nonatomic) int m;
+@property (nonatomic) int blocks;
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
 @property (nonatomic) NSMutableArray* attemptArray;
@@ -35,14 +36,14 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (id)initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
-        [self initialize];
+
     }
     return self;
 }
 
 - (id)initWithFrame:(CGRect)rect{
     if(self = [super initWithFrame:rect]){
-        [self initialize];
+
     }
     return self;
 }
@@ -56,6 +57,19 @@ double rads = DEGREES_TO_RADIANS(180);
     [view addGestureRecognizer:panGesture];
 }
 
+-(void)initMazeWithSize:(int)size {
+    if (size > 2) {
+        self.n = size;
+        self.m = size;
+        self.blocks = size;
+    } else {
+        self.n = 5 + arc4random() % (15 - 5);
+        self.m = self.n;
+        self.blocks = self.m;
+    }
+    [self initialize];
+}
+
 #pragma mark - generation
 
 - (void)createMaze {
@@ -65,22 +79,21 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:4];
     [self removeSubviews:5];
     
-    int blocks =  5 + arc4random() % (15 - 5);
+    //[self setupArray:self.blockArray];
+    //[self setupArray:self.solArray];
+    //[self setupArray:self.attemptArray];
     
-    self.n = blocks;
-    self.m = blocks;
-    
-    self.blockArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
-    self.solArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
-    self.attemptArray = [NSMutableArray arrayWithCapacity:blocks*2+1];
-    for(int i=0; i<blocks*2+1; i++) {
-        [self.blockArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
+    self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
+    self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
+    self.attemptArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
+    for(int i=0; i<self.blocks*2+1; i++) {
+        [self.blockArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
     }
-    for(int i=0; i<blocks*2+1; i++) {
-        [self.solArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
+    for(int i=0; i<self.blocks*2+1; i++) {
+        [self.solArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
     }
-    for(int i=0; i<blocks*2+1; i++) {
-        [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:blocks*2+1]];
+    for(int i=0; i<self.blocks*2+1; i++) {
+        [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
     }
     
     DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.n
@@ -360,6 +373,11 @@ double rads = DEGREES_TO_RADIANS(180);
     }];
 }
 
-
+-(void)setupArray:(NSMutableArray*)array {
+    array = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
+    for(int i=0; i<self.blocks*2+1; i++) {
+        [array addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
+    }
+}
 
 @end

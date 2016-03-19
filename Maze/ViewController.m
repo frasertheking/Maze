@@ -12,21 +12,44 @@
 
 @interface ViewController ()
 
-@end
+@property (nonatomic) int size;
 
+@end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.mazeView setupGestureRecognizer:self.view];    
+    self.size = 0;
+    self.sizeTextField.keyboardType = UIKeyboardTypeNumberPad;
+    [self.sizeTextField addTarget:self
+                  action:@selector(textFieldDidChange:)
+        forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignTextField)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    
+    [self.mazeView setupGestureRecognizer:self.view];
+    [self.mazeView initMazeWithSize:self.size];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    self.size = [textField.text intValue];
+    [self.mazeView initMazeWithSize:self.size];
+}
+
+- (void)resignTextField {
+    [self.sizeTextField resignFirstResponder];
 }
 
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
-    [self.mazeView createMaze];
+    [self.mazeView initMazeWithSize:self.size];
 }
 
 - (IBAction)solveMaze:(id)sender {

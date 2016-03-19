@@ -18,5 +18,6 @@
 -(void)solve;
 -(void)transformMaze;
 -(void)setupGestureRecognizer:(UIView*)view;
+-(void)initMazeWithSize:(int)size;
 
 @end
