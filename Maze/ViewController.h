@@ -13,6 +13,7 @@
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UITextField *sizeTextField;
+@property (nonatomic, weak) IBOutlet UILabel *complexityLabel;
 
 @end
 

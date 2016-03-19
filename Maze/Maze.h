@@ -14,6 +14,8 @@
 
 @interface Maze : UIView
 
+@property (nonatomic) double complexity;
+
 -(void)createMaze;
 -(void)solve;
 -(void)transformMaze;

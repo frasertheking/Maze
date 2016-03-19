@@ -54,6 +54,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUm-wb-Rcn">
+                                <rect key="frame" x="260" y="499" width="80" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="hOG-7L-L9S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -67,9 +76,11 @@
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oh4-qZ-kia"/>
                             <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="42" id="VHK-TI-ZR6"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
+                            <constraint firstItem="BUm-wb-Rcn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3A-KK-o3W"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="8" id="jtG-SY-IE4"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kS9-2q-Vbs"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="top" secondItem="lpa-xI-gZl" secondAttribute="bottom" constant="8" id="lke-Tw-oqO"/>
+                            <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="BUm-wb-Rcn" secondAttribute="bottom" constant="8" id="qD4-0x-EpS"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="mLM-zv-ilq" secondAttribute="bottom" constant="8" id="qZp-bn-xxC"/>
                         </constraints>
                         <variation key="default">
@@ -82,6 +93,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
                         <outlet property="sizeTextField" destination="mLM-zv-ilq" id="Sv3-3F-iE6"/>
                     </connections>

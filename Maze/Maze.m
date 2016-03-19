@@ -67,6 +67,8 @@ double rads = DEGREES_TO_RADIANS(180);
         self.m = self.n;
         self.blocks = self.m;
     }
+    self.complexity = 0;
+    
     [self initialize];
 }
 
@@ -78,10 +80,6 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:3];
     [self removeSubviews:4];
     [self removeSubviews:5];
-    
-    //[self setupArray:self.blockArray];
-    //[self setupArray:self.solArray];
-    //[self setupArray:self.attemptArray];
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -159,6 +157,7 @@ double rads = DEGREES_TO_RADIANS(180);
         self.currentX = self.startRow;
         self.currentY = self.startCol;
         [self drawMazePaths];
+        [self solve];
     }];
 }
 
@@ -182,7 +181,11 @@ double rads = DEGREES_TO_RADIANS(180);
 -(BOOL)solveMaze:(NSInteger)row column:(NSInteger)column {
     if ([[[self.blockArray objectAtIndex:row] objectAtIndex:column] integerValue] == 2) {
         [[self.solArray objectAtIndex:row] replaceObjectAtIndex:column withObject:[NSNumber numberWithInt:1]];
-        [self drawSolveLine];
+        if (self.complexity == 0) {
+            [self calculateComplexity];
+        } else {
+            [self drawSolveLine];
+        }
         return YES;
     }
     
@@ -378,6 +381,19 @@ double rads = DEGREES_TO_RADIANS(180);
     for(int i=0; i<self.blocks*2+1; i++) {
         [array addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
     }
+}
+
+-(void)calculateComplexity {
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                self.complexity++;
+                [[self.solArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
+
+            }
+        }
+    }
+    self.complexity = self.complexity / self.blocks;
 }
 
 @end

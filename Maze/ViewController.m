@@ -22,13 +22,18 @@
     [super viewDidLoad];
     
     self.size = 0;
+
+    [self setupTextField];
+    [self.mazeView setupGestureRecognizer:self.view];
+    [self.mazeView initMazeWithSize:self.size];
+    self.complexityLabel.text = [NSString stringWithFormat:@"%f", self.mazeView.complexity];
+}
+
+-(void) setupTextField {
     self.sizeTextField.keyboardType = UIKeyboardTypeNumberPad;
     [self.sizeTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignTextField)];
     [self.view addGestureRecognizer:tapGesture];
-    
-    [self.mazeView setupGestureRecognizer:self.view];
-    [self.mazeView initMazeWithSize:self.size];
 }
 
 #pragma mark - UITextViewDelegate
@@ -37,6 +42,7 @@
     if ([textField.text intValue] < 76) {
         self.size = [textField.text intValue];
         [self.mazeView initMazeWithSize:self.size];
+        self.complexityLabel.text = [NSString stringWithFormat:@"%f", self.mazeView.complexity];
     } else {
         textField.text = 0;
     }
@@ -50,6 +56,7 @@
 
 - (IBAction)randomizeMaze:(id)sender {
     [self.mazeView initMazeWithSize:self.size];
+    self.complexityLabel.text = [NSString stringWithFormat:@"%f", self.mazeView.complexity];
 }
 
 - (IBAction)solveMaze:(id)sender {
