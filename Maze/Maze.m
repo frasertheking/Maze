@@ -48,9 +48,12 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)initialize {
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
-    [self addGestureRecognizer:panGesture];
     [self createMaze];
+}
+
+-(void)setupGestureRecognizer:(UIView*)view {
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
+    [view addGestureRecognizer:panGesture];
 }
 
 #pragma mark - generation
@@ -60,6 +63,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:2];
     [self removeSubviews:3];
     [self removeSubviews:4];
+    [self removeSubviews:5];
     
     int blocks =  5 + arc4random() % (15 - 5);
     
@@ -118,7 +122,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                     block.backgroundColor = [UIColor blueColor];
                     block.tag = 1;
-                    block.alpha = 0.5;
+                    block.alpha = 0.75;
                     [self addSubview:block];
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
@@ -264,8 +268,7 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.alpha = 0.5;
-                block.backgroundColor = [UIColor orangeColor];
+                block.backgroundColor = [UIColor grayColor];
                 block.tag = 4;
                 [self addSubview:block];
             }
@@ -294,12 +297,13 @@ double rads = DEGREES_TO_RADIANS(180);
     float size = (self.frame.size.width) / (self.m * 2 + 1);
 
     [self removeSubviews:2];
+    [self removeSubviews:5];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [UIColor redColor];
-                block.tag = 4;
+                block.tag = 5;
                 block.alpha = 0.5;
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {

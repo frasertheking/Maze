@@ -19,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.mazeView setupGestureRecognizer:self.view];    
 }
 
 #pragma mark - Actions

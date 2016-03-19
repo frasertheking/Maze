@@ -17,4 +17,6 @@
 -(void)createMaze;
 -(void)solve;
 -(void)transformMaze;
+-(void)setupGestureRecognizer:(UIView*)view;
+
 @end
