@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Maze.h"
 
 @interface ViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIView *mazeView;
+@property (nonatomic, weak) IBOutlet Maze *mazeView;
 
 @end
 
