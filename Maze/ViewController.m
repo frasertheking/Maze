@@ -23,13 +23,9 @@
     
     self.size = 0;
     self.sizeTextField.keyboardType = UIKeyboardTypeNumberPad;
-    [self.sizeTextField addTarget:self
-                  action:@selector(textFieldDidChange:)
-        forControlEvents:UIControlEventEditingChanged];
-    
+    [self.sizeTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignTextField)];
     [self.view addGestureRecognizer:tapGesture];
-    
     
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
@@ -38,8 +34,12 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textFieldDidChange:(UITextField *)textField {
-    self.size = [textField.text intValue];
-    [self.mazeView initMazeWithSize:self.size];
+    if ([textField.text intValue] < 76) {
+        self.size = [textField.text intValue];
+        [self.mazeView initMazeWithSize:self.size];
+    } else {
+        textField.text = 0;
+    }
 }
 
 - (void)resignTextField {
