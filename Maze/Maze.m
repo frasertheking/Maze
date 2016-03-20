@@ -223,7 +223,7 @@ double rads = DEGREES_TO_RADIANS(180);
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
     NSInteger size = (self.frame.size.width) / (self.m * 2);
     
-    if ([self distanceFrom:currentPoint to:self.previousLoc] >= size) {
+    if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5)) {
         if (fabs(vel.x) > fabs(vel.y)) {
             if (vel.x > 0) {
                 if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1) {
@@ -234,9 +234,11 @@ double rads = DEGREES_TO_RADIANS(180);
                         [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                     }
                     self.previousLoc = currentPoint;
+                } else if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
+                    [self initMazeWithSize:self.blocks];
                 }
             } else {
-                if (self.currentX - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
+                if (self.currentX - 1 > 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
                     self.currentX--;
                     if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                         [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
