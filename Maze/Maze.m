@@ -70,6 +70,10 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)setupGestureRecognizer:(UIView*)view {
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
     [view addGestureRecognizer:panGesture];
+    
+    UITapGestureRecognizer *resetTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasDoubleTapped:)];
+    [resetTapGestureRecognizer setNumberOfTapsRequired:2];
+    [view addGestureRecognizer:resetTapGestureRecognizer];
 }
 
 #pragma mark - generation
@@ -131,7 +135,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.backgroundColor = [UIColor blueColor];
+                    block.backgroundColor = PALE;
                     block.tag = 1;
                     block.alpha = 0.75;
                     [self addSubview:block];
@@ -218,7 +222,6 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - gestures
 
 - (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
-    
     CGPoint vel = [gestureRecognizer velocityInView:self];
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
     NSInteger size = (self.frame.size.width) / (self.m * 2);
@@ -276,6 +279,19 @@ double rads = DEGREES_TO_RADIANS(180);
     //[self printArrayPretty:self.attemptArray];
 }
 
+- (void)viewWasDoubleTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                [[self.attemptArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
+            }
+        }
+    }
+    self.currentX = self.startRow;
+    self.currentY = self.startCol;
+    [self drawAttempt];
+}
+
 #pragma mark - Maze Drawing
 
 -(void)drawAttempt {
@@ -286,7 +302,7 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [UIColor grayColor];
+                block.backgroundColor = ORANGE;
                 block.tag = 4;
                 [self addSubview:block];
             }
@@ -303,7 +319,7 @@ double rads = DEGREES_TO_RADIANS(180);
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.alpha = 0.5;
-                block.backgroundColor = [UIColor greenColor];
+                block.backgroundColor = SOLVE;
                 block.tag = 3;
                 [self addSubview:block];
             }
@@ -320,13 +336,13 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [UIColor redColor];
+                block.backgroundColor = ORANGE;
                 block.tag = 5;
                 block.alpha = 0.5;
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [UIColor whiteColor];
+                block.backgroundColor = GRAY_DARK;
                 block.tag = 2;
                 [self addSubview:block];
             }

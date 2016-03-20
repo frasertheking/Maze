@@ -32,6 +32,13 @@
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
+    
+    self.view.backgroundColor = GRAY_DARK;
+    self.mazeView.backgroundColor = GRAY_DARK;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 -(void) setupTextField {

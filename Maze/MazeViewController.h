@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Maze.h"
+#import "AppDelegate.h"
 
 @interface MazeViewController : UIViewController <UITextViewDelegate>
 
