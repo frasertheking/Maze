@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4368A27B1C83D2E9006E1779 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27A1C83D2E9006E1779 /* main.m */; };
 		4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27D1C83D2E9006E1779 /* AppDelegate.m */; };
-		4368A2811C83D2E9006E1779 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2801C83D2E9006E1779 /* ViewController.m */; };
+		4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2801C83D2E9006E1779 /* MazeViewController.m */; };
 		4368A2841C83D2E9006E1779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4368A2821C83D2E9006E1779 /* Main.storyboard */; };
 		4368A2861C83D2E9006E1779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4368A2851C83D2E9006E1779 /* Assets.xcassets */; };
 		4368A2891C83D2E9006E1779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */; };
@@ -41,8 +41,8 @@
 		4368A27A1C83D2E9006E1779 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4368A27C1C83D2E9006E1779 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4368A27D1C83D2E9006E1779 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4368A27F1C83D2E9006E1779 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4368A2801C83D2E9006E1779 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4368A27F1C83D2E9006E1779 /* MazeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MazeViewController.h; sourceTree = "<group>"; };
+		4368A2801C83D2E9006E1779 /* MazeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MazeViewController.m; sourceTree = "<group>"; };
 		4368A2831C83D2E9006E1779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4368A2851C83D2E9006E1779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4368A2881C83D2E9006E1779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 				437B80A41C9CEE6F0024F758 /* Maze */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
-				4368A27F1C83D2E9006E1779 /* ViewController.h */,
-				4368A2801C83D2E9006E1779 /* ViewController.m */,
+				4368A27F1C83D2E9006E1779 /* MazeViewController.h */,
+				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
 				4368A2821C83D2E9006E1779 /* Main.storyboard */,
 				4368A2851C83D2E9006E1779 /* Assets.xcassets */,
 				4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */,
@@ -299,7 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
-				4368A2811C83D2E9006E1779 /* ViewController.m in Sources */,
+				4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */,
 				4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,

@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Maze View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MazeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,15 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72M-oM-AXh">
-                                <rect key="frame" x="262" y="36" width="76" height="30"/>
-                                <state key="normal" title="Randomize"/>
-                                <connections>
-                                    <action selector="randomizeMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="igp-pN-g1H"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxS-Vu-Ufp">
-                                <rect key="frame" x="272" y="528" width="57" height="30"/>
+                                <rect key="frame" x="272" y="554" width="57" height="30"/>
                                 <state key="normal" title="Animate"/>
                                 <connections>
                                     <action selector="animateMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="gaD-6x-mXG"/>
@@ -39,15 +32,8 @@
                                     <constraint firstAttribute="width" constant="300" id="v2i-xZ-dTM"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpa-xI-gZl">
-                                <rect key="frame" x="281" y="74" width="38" height="30"/>
-                                <state key="normal" title="Solve"/>
-                                <connections>
-                                    <action selector="solveMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="Ci0-jH-yEC"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLM-zv-ilq">
-                                <rect key="frame" x="275" y="112" width="50" height="30"/>
+                                <rect key="frame" x="360" y="36" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="NPv-UF-YOy"/>
                                 </constraints>
@@ -55,47 +41,89 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUm-wb-Rcn">
-                                <rect key="frame" x="260" y="499" width="80" height="21"/>
+                                <rect key="frame" x="0.0" y="525" width="600" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="hOG-7L-L9S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hOG-7L-L9S"/>
+                                    </mask>
+                                </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yJ-nk-bzz">
+                                <rect key="frame" x="538" y="562" width="54" height="30"/>
+                                <state key="normal" title="Options"/>
+                                <connections>
+                                    <action selector="showOptions:" destination="BYZ-38-t0r" eventType="touchDown" id="8yy-bg-PHs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72M-oM-AXh">
+                                <rect key="frame" x="262" y="36" width="76" height="30"/>
+                                <state key="normal" title="Randomize"/>
+                                <connections>
+                                    <action selector="randomizeMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="igp-pN-g1H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpa-xI-gZl">
+                                <rect key="frame" x="202" y="36" width="38" height="30"/>
+                                <state key="normal" title="Solve"/>
+                                <connections>
+                                    <action selector="solveMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="Ci0-jH-yEC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0xY-YS-vt5"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3MG-af-gmH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="42D-WL-ADP"/>
+                            <constraint firstItem="mLM-zv-ilq" firstAttribute="leading" secondItem="72M-oM-AXh" secondAttribute="trailing" constant="22" id="9E0-ou-r4I"/>
+                            <constraint firstAttribute="trailing" secondItem="BUm-wb-Rcn" secondAttribute="trailing" id="CZ1-UD-r3M"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="Ffo-vO-33d"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H7Q-u2-mZz"/>
+                            <constraint firstItem="72M-oM-AXh" firstAttribute="leading" secondItem="lpa-xI-gZl" secondAttribute="trailing" constant="22" id="Hka-cu-kLl"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JU1-lE-SEa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="KQg-OC-lDY"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oh4-qZ-kia"/>
-                            <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="42" id="VHK-TI-ZR6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4yJ-nk-bzz" secondAttribute="bottom" constant="8" id="Ufd-cN-BHi"/>
+                            <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="16" id="VHK-TI-ZR6"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3A-KK-o3W"/>
+                            <constraint firstItem="72M-oM-AXh" firstAttribute="centerY" secondItem="lpa-xI-gZl" secondAttribute="centerY" id="jdM-HH-hm8"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="8" id="jtG-SY-IE4"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kS9-2q-Vbs"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="top" secondItem="lpa-xI-gZl" secondAttribute="bottom" constant="8" id="lke-Tw-oqO"/>
+                            <constraint firstItem="BUm-wb-Rcn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n47-hP-aY1"/>
+                            <constraint firstAttribute="trailing" secondItem="4yJ-nk-bzz" secondAttribute="trailing" constant="8" id="oK2-4c-kou"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="BUm-wb-Rcn" secondAttribute="bottom" constant="8" id="qD4-0x-EpS"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="mLM-zv-ilq" secondAttribute="bottom" constant="8" id="qZp-bn-xxC"/>
+                            <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="36" id="thN-7L-vdU"/>
+                            <constraint firstItem="mLM-zv-ilq" firstAttribute="centerY" secondItem="72M-oM-AXh" secondAttribute="centerY" id="zW1-HE-Vas"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="0xY-YS-vt5"/>
-                                <exclude reference="qZp-bn-xxC"/>
+                                <exclude reference="jtG-SY-IE4"/>
+                                <exclude reference="kS9-2q-Vbs"/>
+                                <exclude reference="Ffo-vO-33d"/>
+                                <exclude reference="Oh4-qZ-kia"/>
+                                <exclude reference="lke-Tw-oqO"/>
                                 <exclude reference="42D-WL-ADP"/>
                                 <exclude reference="KQg-OC-lDY"/>
+                                <exclude reference="0xY-YS-vt5"/>
+                                <exclude reference="qZp-bn-xxC"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="VHK-TI-ZR6" id="2lZ-Ij-HQ6"/>
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
                         <outlet property="sizeTextField" destination="mLM-zv-ilq" id="Sv3-3F-iE6"/>
+                        <outlet property="topConstraint" destination="thN-7L-vdU" id="Km2-bK-6Iw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

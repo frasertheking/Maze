@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MazeViewController.h
 //  Maze
 //
 //  Created by Fraser King on 2016-02-28.
@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Maze.h"
 
-@interface ViewController : UIViewController <UITextViewDelegate>
+@interface MazeViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UITextField *sizeTextField;
 @property (nonatomic, weak) IBOutlet UILabel *complexityLabel;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
+
 
 @end
 

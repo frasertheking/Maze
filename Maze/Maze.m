@@ -48,15 +48,6 @@ double rads = DEGREES_TO_RADIANS(180);
     return self;
 }
 
-- (void)initialize {
-    [self createMaze];
-}
-
--(void)setupGestureRecognizer:(UIView*)view {
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
-    [view addGestureRecognizer:panGesture];
-}
-
 -(void)initMazeWithSize:(int)size {
     if (size > 2) {
         self.n = size;
@@ -70,6 +61,15 @@ double rads = DEGREES_TO_RADIANS(180);
     self.complexity = 0;
     
     [self initialize];
+}
+
+- (void)initialize {
+    [self createMaze];
+}
+
+-(void)setupGestureRecognizer:(UIView*)view {
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
+    [view addGestureRecognizer:panGesture];
 }
 
 #pragma mark - generation
@@ -396,6 +396,15 @@ double rads = DEGREES_TO_RADIANS(180);
         }
     }
     self.complexity = self.complexity / self.blocks;
+}
+
+- (void) rotateImageView {
+    [UIView animateWithDuration:1.0
+                     animations:^
+     {
+         self.transform = CGAffineTransformMakeRotation(M_PI);
+         self.transform = CGAffineTransformMakeRotation(0);
+     }];
 }
 
 @end
