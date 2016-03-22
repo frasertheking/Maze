@@ -14,6 +14,8 @@
 
 @property (nonatomic) int size;
 @property (nonatomic) BOOL showingOptions;
+@property (nonatomic) NSTimer* timer;
+@property (nonatomic) int remainingCounts;
 
 @end
 
@@ -35,6 +37,7 @@
     
     self.view.backgroundColor = GRAY_DARK;
     self.mazeView.backgroundColor = GRAY_DARK;
+    [self resetCountdown];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -48,6 +51,45 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
+-(void)recreateMaze {    
+    [self.mazeView initMazeWithSize:self.size];
+    self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
+    [self resetCountdown];
+}
+
+
+#pragma mark - Countdown
+
+-(void)resetCountdown {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                  target:self
+                                                selector:@selector(countDown)
+                                                userInfo:nil
+                                                 repeats:YES];
+    self.remainingCounts = (self.view.frame.size.width - 80) / 2;
+}
+
+-(void)countDown {
+    self.leadingTimerConstraint.constant += 1;
+    self.trailingTimerConstraint.constant += 1;
+    
+    if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.75) {
+        self.timerView.backgroundColor = [UIColor greenColor];
+    } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.5) {
+        self.timerView.backgroundColor = [UIColor yellowColor];
+    } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.25){
+        self.timerView.backgroundColor = [UIColor orangeColor];
+    } else {
+        self.timerView.backgroundColor = [UIColor redColor];
+    }
+    
+    if (--self.remainingCounts == 0) {
+        [self.timer invalidate];
+        NSLog(@"YOU LOSE");
+        self.timerView.hidden = YES;
+    }
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textFieldDidChange:(UITextField *)textField {
@@ -55,6 +97,7 @@
         self.size = [textField.text intValue];
         [self.mazeView initMazeWithSize:self.size];
         self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
+        [self resetCountdown];
     } else {
         textField.text = 0;
     }
@@ -67,8 +110,7 @@
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
-    [self.mazeView initMazeWithSize:self.size];
-    self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
+    [self recreateMaze];
 }
 
 - (IBAction)solveMaze:(id)sender {
