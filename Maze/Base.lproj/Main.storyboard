@@ -85,7 +85,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITf-Q6-a5M">
-                                <rect key="frame" x="40" y="75" width="520" height="10"/>
+                                <rect key="frame" x="40" y="115" width="520" height="10"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="fgN-K6-BTl"/>
@@ -97,10 +97,18 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hS-hl-qgV">
+                                <rect key="frame" x="16" y="462" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0xY-YS-vt5"/>
+                            <constraint firstItem="7hS-hl-qgV" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="12" id="15G-TD-EhJ"/>
+                            <constraint firstItem="7hS-hl-qgV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="28u-5a-tJ8"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3MG-af-gmH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="42D-WL-ADP"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="leading" secondItem="72M-oM-AXh" secondAttribute="trailing" constant="22" id="9E0-ou-r4I"/>
@@ -109,12 +117,14 @@
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="Ffo-vO-33d"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H7Q-u2-mZz"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="leading" secondItem="lpa-xI-gZl" secondAttribute="trailing" constant="22" id="Hka-cu-kLl"/>
+                            <constraint firstItem="Ocf-we-m1Q" firstAttribute="top" secondItem="ITf-Q6-a5M" secondAttribute="bottom" constant="25" id="JHG-2o-bmd"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JU1-lE-SEa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="KQg-OC-lDY"/>
                             <constraint firstAttribute="trailing" secondItem="ITf-Q6-a5M" secondAttribute="trailing" constant="40" id="KiK-me-rtY"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oh4-qZ-kia"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4yJ-nk-bzz" secondAttribute="bottom" constant="8" id="Ufd-cN-BHi"/>
                             <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="16" id="VHK-TI-ZR6"/>
+                            <constraint firstAttribute="trailing" secondItem="7hS-hl-qgV" secondAttribute="trailing" constant="16" id="YXD-9q-MWV"/>
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="cnP-XH-yOp"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3A-KK-o3W"/>
@@ -131,6 +141,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="cnP-XH-yOp"/>
                                 <exclude reference="jtG-SY-IE4"/>
                                 <exclude reference="kS9-2q-Vbs"/>
                                 <exclude reference="Ffo-vO-33d"/>
@@ -148,6 +159,7 @@
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
+                        <outlet property="resultLabel" destination="7hS-hl-qgV" id="YcH-na-gzi"/>
                         <outlet property="sizeTextField" destination="mLM-zv-ilq" id="Sv3-3F-iE6"/>
                         <outlet property="timerView" destination="ITf-Q6-a5M" id="hso-Pk-3kd"/>
                         <outlet property="topConstraint" destination="thN-7L-vdU" id="Km2-bK-6Iw"/>

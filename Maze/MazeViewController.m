@@ -62,6 +62,8 @@
 #pragma mark - Countdown
 
 -(void)resetCountdown {
+    self.resultLabel.text = @"";
+    [self.timer invalidate];
     self.leadingTimerConstraint.constant = 40;
     self.trailingTimerConstraint.constant = 40;
     self.timerView.hidden = NO;
@@ -78,18 +80,18 @@
     self.trailingTimerConstraint.constant += 1;
     
     if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.75) {
-        self.timerView.backgroundColor = [UIColor greenColor];
+        self.timerView.backgroundColor = SEVERITY_GREEN;
     } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.5) {
-        self.timerView.backgroundColor = [UIColor yellowColor];
+        self.timerView.backgroundColor = SEVERITY_YELLOW;
     } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.25){
-        self.timerView.backgroundColor = [UIColor orangeColor];
+        self.timerView.backgroundColor = SEVERITY_ORANGE;
     } else {
-        self.timerView.backgroundColor = [UIColor redColor];
+        self.timerView.backgroundColor = SEVERITY_RED;
     }
     
     if (--self.remainingCounts == 0) {
         [self.timer invalidate];
-        NSLog(@"YOU LOSE");
+        self.resultLabel.text = @"Times up";
         self.timerView.hidden = YES;
     }
 }

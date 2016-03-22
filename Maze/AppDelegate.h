@@ -15,6 +15,12 @@
 #define GRAY_DARK UIColorFromRGB(0x1E1E20)
 #define SOLVE UIColorFromRGB(0x45BF55)
 
+
+#define SEVERITY_GREEN UIColorFromRGB(0x349940)
+#define SEVERITY_YELLOW UIColorFromRGB(0xFFE15E)
+#define SEVERITY_ORANGE UIColorFromRGB(0xFF912D)
+#define SEVERITY_RED UIColorFromRGB(0xB6340D)
+
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

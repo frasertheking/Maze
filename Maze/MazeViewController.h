@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UITextField *sizeTextField;
 @property (nonatomic, weak) IBOutlet UILabel *complexityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *resultLabel;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
