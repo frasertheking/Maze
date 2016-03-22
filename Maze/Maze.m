@@ -7,6 +7,7 @@
 //
 
 #import "Maze.h"
+#import "MazeViewController.h"
 
 @interface Maze ()
 
@@ -238,7 +239,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                     self.previousLoc = currentPoint;
                 } else if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
-                    [self initMazeWithSize:self.blocks];
+                    [((MazeViewController*)self.delegate) recreateMaze];
                 }
             } else {
                 if (self.currentX - 1 > 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {

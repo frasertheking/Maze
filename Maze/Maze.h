@@ -16,6 +16,7 @@
 @interface Maze : UIView
 
 @property (nonatomic) double complexity;
+@property (nonatomic) UIViewController *delegate;
 
 -(void)createMaze;
 -(void)solve;

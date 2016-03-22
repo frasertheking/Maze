@@ -27,6 +27,7 @@
     self.size = 0;
 
     [self setupTextField];
+    self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
@@ -61,6 +62,9 @@
 #pragma mark - Countdown
 
 -(void)resetCountdown {
+    self.leadingTimerConstraint.constant = 40;
+    self.trailingTimerConstraint.constant = 40;
+    self.timerView.hidden = NO;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
                                                 selector:@selector(countDown)
