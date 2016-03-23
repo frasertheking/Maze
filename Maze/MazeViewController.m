@@ -16,6 +16,7 @@
 @property (nonatomic) BOOL showingOptions;
 @property (nonatomic) NSTimer* timer;
 @property (nonatomic) int remainingCounts;
+@property (nonatomic) int score;
 
 @end
 
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     
     self.size = 0;
+    self.score = 0;
 
     [self setupTextField];
     self.mazeView.delegate = self;
@@ -58,11 +60,16 @@
     [self resetCountdown];
 }
 
+-(void)finished {
+    self.score++;
+    self.resultLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
+}
+
 
 #pragma mark - Countdown
 
 -(void)resetCountdown {
-    self.resultLabel.text = @"";
+    self.resultLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
     [self.timer invalidate];
     self.leadingTimerConstraint.constant = 40;
     self.trailingTimerConstraint.constant = 40;
@@ -92,6 +99,7 @@
     if (--self.remainingCounts == 0) {
         [self.timer invalidate];
         self.resultLabel.text = @"Times up";
+        self.score = 0;
         self.timerView.hidden = YES;
     }
 }
@@ -116,6 +124,7 @@
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
+    self.score = 0;
     [self recreateMaze];
 }
 

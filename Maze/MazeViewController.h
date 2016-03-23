@@ -24,5 +24,6 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 -(void)recreateMaze;
+-(void)finished;
 @end
 

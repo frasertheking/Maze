@@ -97,12 +97,21 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hS-hl-qgV">
-                                <rect key="frame" x="16" y="462" width="568" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hS-hl-qgV">
+                                <rect key="frame" x="16" y="462" width="568" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdr-km-0v4">
+                                <rect key="frame" x="16" y="562" width="30" height="30"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" red="0.86274509799999999" green="0.20784313730000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="randomizeMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="Xhp-GF-USw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -133,9 +142,11 @@
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kS9-2q-Vbs"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="top" secondItem="lpa-xI-gZl" secondAttribute="bottom" constant="8" id="lke-Tw-oqO"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n47-hP-aY1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hdr-km-0v4" secondAttribute="bottom" constant="8" id="nvu-WB-3oU"/>
                             <constraint firstAttribute="trailing" secondItem="4yJ-nk-bzz" secondAttribute="trailing" constant="8" id="oK2-4c-kou"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="BUm-wb-Rcn" secondAttribute="bottom" constant="8" id="qD4-0x-EpS"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="mLM-zv-ilq" secondAttribute="bottom" constant="8" id="qZp-bn-xxC"/>
+                            <constraint firstItem="hdr-km-0v4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="ski-rS-3Q4"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="36" id="thN-7L-vdU"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerY" secondItem="72M-oM-AXh" secondAttribute="centerY" id="zW1-HE-Vas"/>
                         </constraints>
