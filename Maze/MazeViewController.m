@@ -38,13 +38,49 @@
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
     
-    self.view.backgroundColor = GRAY_DARK;
-    self.mazeView.backgroundColor = GRAY_DARK;
+    [self setGradientBackground];
+    [self setupParallaxEffect];
     [self resetCountdown];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+-(void)setupParallaxEffect {
+    // Set vertical effect
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.y"
+     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-15);
+    verticalMotionEffect.maximumRelativeValue = @(15);
+    
+    // Set horizontal effect
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.x"
+     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-15);
+    horizontalMotionEffect.maximumRelativeValue = @(15);
+    
+    // Create group to combine both
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    // Add both effects to your view
+    [self.mazeView addMotionEffect:group];
+}
+
+-(void)setGradientBackground {
+    UIColor *topColor = GRAY_LIGHT;
+    UIColor *bottomColor = GRAY_DARK;
+    
+    CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+    theViewGradient.frame = self.view.bounds;
+    
+    [self.view.layer insertSublayer:theViewGradient atIndex:0];
 }
 
 -(void) setupTextField {

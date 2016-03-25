@@ -37,7 +37,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (id)initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
-
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -344,7 +344,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = GRAY_DARK;
+                block.backgroundColor = [UIColor clearColor];
                 block.tag = 2;
                 [self addSubview:block];
             }
