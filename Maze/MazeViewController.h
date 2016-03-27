@@ -23,6 +23,10 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 
+@property (nonatomic) UIColor* topColor;
+@property (nonatomic) UIColor* bottomColor;
+
+
 -(void)recreateMaze;
 -(void)finished;
 @end

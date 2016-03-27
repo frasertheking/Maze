@@ -27,7 +27,8 @@
     
     self.size = 2;
     self.score = 0;
-
+    
+    [self setGradientBackground];
     [self setupTextField];
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
@@ -38,7 +39,6 @@
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
     
-    [self setGradientBackground];
     [self setupParallaxEffect];
     [self resetCountdown];
 }
@@ -73,11 +73,11 @@
 }
 
 -(void)setGradientBackground {
-    UIColor *topColor = GRAY_LIGHT;
-    UIColor *bottomColor = GRAY_DARK;
+    self.topColor = [self getRandomColor];
+    self.bottomColor = [self getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.topColor.CGColor, (id)self.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
@@ -197,6 +197,17 @@
                              [self.view layoutIfNeeded];
                          } completion:nil];
     }
+}
+
+#pragma mark - Helpers
+
+- (UIColor *) getRandomColor {
+    float golden_ratio_conjugate = 0.618033988749895;
+    float h = (float)arc4random() / RAND_MAX;
+    h += golden_ratio_conjugate;
+    h = fmodf(h, 1.0);
+    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
+    return tempColor;
 }
 
 @end

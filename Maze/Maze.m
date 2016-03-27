@@ -156,7 +156,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.backgroundColor = PALE;
+                    block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).topColor)];
                     block.tag = 1;
                     block.alpha = 0.75;
                     [self addSubview:block];
@@ -328,7 +328,7 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = ORANGE;
+                block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 4;
                 [self addSubview:block];
             }
@@ -363,9 +363,8 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = ORANGE;
+                block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 5;
-                block.alpha = 0.5;
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
@@ -405,13 +404,6 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         NSLog(@"%@", rowString);
     }
-}
-
--(UIColor*)getRandomColor {
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
 -(float)distanceFrom:(CGPoint)point1 to:(CGPoint)point2 {
@@ -454,6 +446,21 @@ double rads = DEGREES_TO_RADIANS(180);
          self.transform = CGAffineTransformMakeRotation(M_PI);
          self.transform = CGAffineTransformMakeRotation(0);
      }];
+}
+
+-(UIColor*) inverseColor:(UIColor*)color {
+    const CGFloat *componentColors = CGColorGetComponents(color.CGColor);
+    
+    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.45) green:(componentColors[1] - 0.45) blue:(componentColors[2] - 0.45) alpha:componentColors[3] - 0.2];
+}
+
+- (UIColor *) getRandomColor {
+    float golden_ratio_conjugate = 0.618033988749895;
+    float h = (float)arc4random() / RAND_MAX;
+    h += golden_ratio_conjugate;
+    h = fmodf(h, 1.0);
+    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
+    return tempColor;
 }
 
 @end
