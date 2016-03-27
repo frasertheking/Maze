@@ -26,6 +26,9 @@
 @property NSInteger currentX;
 @property NSInteger currentY;
 @property CGPoint previousLoc;
+@property NSInteger powerX;
+@property NSInteger powerY;
+@property BOOL power;
 
 @end
 
@@ -60,6 +63,9 @@ double rads = DEGREES_TO_RADIANS(180);
         self.blocks = self.m;
     }
     self.complexity = 0;
+    self.power = NO;
+    self.powerX = 1 + arc4random() % (self.n*2 - 1);
+    self.powerY = 1 + arc4random() % (self.m*2 - 1);
     
     [self initialize];
 }
@@ -85,6 +91,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:3];
     [self removeSubviews:4];
     [self removeSubviews:5];
+    [self removeSubviews:6];
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -334,6 +341,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
     [self removeSubviews:2];
     [self removeSubviews:5];
+    [self removeSubviews:6];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
@@ -344,8 +352,14 @@ double rads = DEGREES_TO_RADIANS(180);
                 [self addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [UIColor clearColor];
-                block.tag = 2;
+                if (r >= self.powerX && c >= self.powerY && !self.power) {
+                    block.backgroundColor = [UIColor cyanColor];
+                    block.tag = 6;
+                    self.power = YES;
+                } else {
+                    block.backgroundColor = [UIColor clearColor];
+                    block.tag = 2;
+                }
                 [self addSubview:block];
             }
         }
