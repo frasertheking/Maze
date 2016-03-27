@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.size = 0;
+    self.size = 2;
     self.score = 0;
 
     [self setupTextField];
@@ -97,6 +97,7 @@
 }
 
 -(void)finished {
+    self.size++;
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
 }
@@ -137,6 +138,7 @@
         self.resultLabel.text = @"Times up";
         self.score = 0;
         self.timerView.hidden = YES;
+        self.size = 2;
     }
 }
 
@@ -160,6 +162,7 @@
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
+    self.size = 2;
     self.score = 0;
     [self recreateMaze];
 }

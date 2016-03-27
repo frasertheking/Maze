@@ -29,6 +29,7 @@
 @property NSInteger powerX;
 @property NSInteger powerY;
 @property BOOL power;
+@property double complexityScale;
 
 @end
 
@@ -58,12 +59,24 @@ double rads = DEGREES_TO_RADIANS(180);
         self.m = size;
         self.blocks = size;
     } else {
-        self.n = 5 + arc4random() % (15 - 5);
+        self.n = 2;
         self.m = self.n;
         self.blocks = self.m;
     }
     self.complexity = 0;
-    self.power = NO;
+    self.complexityScale = 0;
+    if (self.n > 10) {
+        self.power = NO;
+    } else {
+        self.power = YES;
+    }
+    
+    if (self.n > 17) {
+        self.complexityScale += 0.25;
+        self.n -= 1;
+        self.m -= 1;
+    }
+    
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
     self.powerY = 1 + arc4random() % (self.m*2 - 1);
     
@@ -195,6 +208,10 @@ double rads = DEGREES_TO_RADIANS(180);
         [[self.solArray objectAtIndex:row] replaceObjectAtIndex:column withObject:[NSNumber numberWithInt:1]];
         if (self.complexity == 0) {
             [self calculateComplexity];
+            if (self.complexity < self.n*self.complexityScale) {
+                [self createMaze];
+                return NO;
+            }
         } else {
             [self drawSolveLine];
         }
@@ -246,8 +263,8 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                     self.previousLoc = currentPoint;
                 } else if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
-                    [((MazeViewController*)self.delegate) recreateMaze];
                     [((MazeViewController*)self.delegate) finished];
+                    [((MazeViewController*)self.delegate) recreateMaze];
                 }
             } else {
                 if (self.currentX - 1 > 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
@@ -354,6 +371,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 if (r >= self.powerX && c >= self.powerY && !self.power) {
                     block.backgroundColor = [UIColor cyanColor];
+                    block.alpha = 0.4;
                     block.tag = 6;
                     self.power = YES;
                 } else {
@@ -423,11 +441,10 @@ double rads = DEGREES_TO_RADIANS(180);
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 self.complexity++;
                 [[self.solArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
-
             }
         }
     }
-    self.complexity = self.complexity / self.blocks;
+    self.complexity = self.complexity / self.blocks*2;
 }
 
 - (void) rotateImageView {
