@@ -361,7 +361,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:6];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            if ((r == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2) {
+            if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 5;

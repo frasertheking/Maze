@@ -34,10 +34,11 @@
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
-    
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
+    self.mazeView.layer.cornerRadius = 10;
+    self.mazeView.layer.masksToBounds = YES;
     
     [self setupParallaxEffect];
     [self resetCountdown];
