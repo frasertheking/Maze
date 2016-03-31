@@ -65,10 +65,14 @@ double rads = DEGREES_TO_RADIANS(180);
     }
     self.complexity = 0;
     self.complexityScale = 0;
-    if (self.n > 10) {
+    if (self.n > 5) {
         self.power = NO;
     } else {
         self.power = YES;
+    }
+    
+    if (self.n % 4 == 0) {
+        [self transformMaze];
     }
     
     if (self.n > 17) {
@@ -370,7 +374,9 @@ double rads = DEGREES_TO_RADIANS(180);
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 if (r >= self.powerX && c >= self.powerY && !self.power) {
-                    block.backgroundColor = [UIColor cyanColor];
+                    block.layer.cornerRadius = size/2;
+                    block.layer.masksToBounds = YES;
+                    block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                     block.alpha = 0.4;
                     block.tag = 6;
                     self.power = YES;

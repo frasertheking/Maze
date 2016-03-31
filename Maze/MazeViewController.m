@@ -44,8 +44,8 @@
     [self resetCountdown];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 -(void)setupParallaxEffect {
@@ -100,14 +100,14 @@
 -(void)finished {
     self.size++;
     self.score++;
-    self.resultLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
+    self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
 }
 
 
 #pragma mark - Countdown
 
 -(void)resetCountdown {
-    self.resultLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
+    self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
     [self.timer invalidate];
     self.leadingTimerConstraint.constant = 40;
     self.trailingTimerConstraint.constant = 40;

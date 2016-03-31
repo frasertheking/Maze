@@ -17,6 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7x-Yn-39d">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="agk-gu-Sz9"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72M-oM-AXh">
                                 <rect key="frame" x="262" y="36" width="76" height="30"/>
                                 <state key="normal" title="Randomize">
@@ -103,8 +110,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdr-km-0v4">
-                                <rect key="frame" x="16" y="562" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdr-km-0v4">
+                                <rect key="frame" x="8" y="562" width="30" height="30"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" red="0.86274509799999999" green="0.20784313730000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -112,11 +119,19 @@
                                     <action selector="randomizeMaze:" destination="BYZ-38-t0r" eventType="touchDown" id="Xhp-GF-USw"/>
                                 </connections>
                             </button>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oq5-80-koU" userLabel="Seperator">
+                                <rect key="frame" x="0.0" y="555" width="600" height="1"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="eiD-NT-MkD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0xY-YS-vt5"/>
                             <constraint firstItem="7hS-hl-qgV" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="12" id="15G-TD-EhJ"/>
+                            <constraint firstAttribute="trailing" secondItem="D7x-Yn-39d" secondAttribute="trailing" id="1dg-xs-mo3"/>
                             <constraint firstItem="7hS-hl-qgV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="28u-5a-tJ8"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3MG-af-gmH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="40" id="42D-WL-ADP"/>
@@ -133,14 +148,18 @@
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oh4-qZ-kia"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4yJ-nk-bzz" secondAttribute="bottom" constant="8" id="Ufd-cN-BHi"/>
                             <constraint firstAttribute="bottom" secondItem="AxS-Vu-Ufp" secondAttribute="bottom" constant="16" id="VHK-TI-ZR6"/>
+                            <constraint firstItem="D7x-Yn-39d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Xls-Lm-cHb"/>
                             <constraint firstAttribute="trailing" secondItem="7hS-hl-qgV" secondAttribute="trailing" constant="16" id="YXD-9q-MWV"/>
+                            <constraint firstItem="Oq5-80-koU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="add-Ud-u2g"/>
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="cnP-XH-yOp"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D7x-Yn-39d" secondAttribute="bottom" id="dZT-rh-jAF"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3A-KK-o3W"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="centerY" secondItem="lpa-xI-gZl" secondAttribute="centerY" id="jdM-HH-hm8"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="8" id="jtG-SY-IE4"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kS9-2q-Vbs"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="top" secondItem="lpa-xI-gZl" secondAttribute="bottom" constant="8" id="lke-Tw-oqO"/>
+                            <constraint firstItem="D7x-Yn-39d" firstAttribute="top" secondItem="Oq5-80-koU" secondAttribute="bottom" id="n13-Ae-TDF"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n47-hP-aY1"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hdr-km-0v4" secondAttribute="bottom" constant="8" id="nvu-WB-3oU"/>
                             <constraint firstAttribute="trailing" secondItem="4yJ-nk-bzz" secondAttribute="trailing" constant="8" id="oK2-4c-kou"/>
@@ -148,6 +167,7 @@
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="top" secondItem="mLM-zv-ilq" secondAttribute="bottom" constant="8" id="qZp-bn-xxC"/>
                             <constraint firstItem="hdr-km-0v4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="ski-rS-3Q4"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="36" id="thN-7L-vdU"/>
+                            <constraint firstAttribute="trailing" secondItem="Oq5-80-koU" secondAttribute="trailing" id="vw5-eS-W9K"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerY" secondItem="72M-oM-AXh" secondAttribute="centerY" id="zW1-HE-Vas"/>
                         </constraints>
                         <variation key="default">
@@ -166,6 +186,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomBanner" destination="D7x-Yn-39d" id="lBd-8q-hFC"/>
                         <outlet property="bottomConstraint" destination="VHK-TI-ZR6" id="2lZ-Ij-HQ6"/>
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
