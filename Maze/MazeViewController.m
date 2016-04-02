@@ -76,6 +76,10 @@
 -(void)setGradientBackground {
     self.topColor = [self getRandomColor];
     self.bottomColor = [self getRandomColor];
+    self.mazeTopColor = [self getRandomColor];
+    self.mazeBottomColor = [self getRandomColor];
+    self.lineTopColor = [self getRandomColor];
+    self.lineBottomColor = [self getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)self.topColor.CGColor, (id)self.bottomColor.CGColor, nil];

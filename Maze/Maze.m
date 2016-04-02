@@ -179,12 +179,10 @@ double rads = DEGREES_TO_RADIANS(180);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.tag = 1;
                     block.alpha = 0.75;
                     [self.mazeViewWalls addSubview:block];
                     
                     block.backgroundColor = [UIColor whiteColor];
-                    block.tag = 1;
                     [self.mazeViewMask addSubview:block];
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
@@ -217,7 +215,7 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)captureWalls {
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.bounds;
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor blueColor].CGColor, (id)[UIColor redColor].CGColor, nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
     gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
     gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
     [self.mazeViewWalls.layer insertSublayer:gradientLayer atIndex:0];
@@ -387,7 +385,7 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)captureAttemptPath {
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.bounds;
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor orangeColor].CGColor, (id)[UIColor greenColor].CGColor, nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
     gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
     gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
     [self.mazeViewPath.layer insertSublayer:gradientLayer atIndex:0];
@@ -404,7 +402,6 @@ double rads = DEGREES_TO_RADIANS(180);
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.alpha = 0.5;
                 block.backgroundColor = SOLVE;
-                block.tag = 3;
                 [self.mazeViewRest addSubview:block];
             }
         }
@@ -421,7 +418,6 @@ double rads = DEGREES_TO_RADIANS(180);
             if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
-                block.tag = 5;
                 [self.mazeViewPath addSubview:block];
                 block.backgroundColor = [UIColor whiteColor];
                 [self.mazeViewPathMask addSubview:block];
@@ -432,11 +428,9 @@ double rads = DEGREES_TO_RADIANS(180);
                     block.layer.masksToBounds = YES;
                     block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                     block.alpha = 0.4;
-                    block.tag = 6;
                     self.power = YES;
                 } else {
                     block.backgroundColor = [UIColor clearColor];
-                    block.tag = 2;
                 }
                 [self.mazeViewPath addSubview:block];
             }
@@ -518,7 +512,7 @@ double rads = DEGREES_TO_RADIANS(180);
     float h = (float)arc4random() / RAND_MAX;
     h += golden_ratio_conjugate;
     h = fmodf(h, 1.0);
-    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
+    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.8 brightness:0.95 alpha:1];
     return tempColor;
 }
 

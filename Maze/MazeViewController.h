@@ -27,6 +27,10 @@
 
 @property (nonatomic) UIColor* topColor;
 @property (nonatomic) UIColor* bottomColor;
+@property (nonatomic) UIColor* mazeTopColor;
+@property (nonatomic) UIColor* mazeBottomColor;
+@property (nonatomic) UIColor* lineTopColor;
+@property (nonatomic) UIColor* lineBottomColor;
 
 
 -(void)recreateMaze;
