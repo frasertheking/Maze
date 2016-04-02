@@ -39,7 +39,9 @@
     self.showingOptions = NO;
     self.mazeView.layer.cornerRadius = 10;
     self.mazeView.layer.masksToBounds = YES;
-    
+    self.checkbox.onAnimationType = BEMAnimationTypeBounce;
+    self.checkbox.hidden = YES;
+
     [self setupParallaxEffect];
     [self resetCountdown];
 }
@@ -106,6 +108,8 @@
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
     [self resetCountdown];
+    [self.checkbox setOn:YES animated:YES];
+    self.checkbox.hidden = NO;
     
     [UIView animateWithDuration:1 animations:^{
         self.mazeViewCenterConstraint.constant = -600;
@@ -117,10 +121,16 @@
         [UIView animateWithDuration:1 animations:^{
             self.mazeViewCenterConstraint.constant = 0;
             [self.view layoutIfNeeded];
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            [self.checkbox setOn:NO animated:YES];
+            [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(hideCheckbox) userInfo:nil repeats:NO];
+        }];
     }];
 }
 
+-(void)hideCheckbox {
+    self.checkbox.hidden = YES;
+}
 
 #pragma mark - Countdown
 
@@ -130,11 +140,7 @@
     self.leadingTimerConstraint.constant = 40;
     self.trailingTimerConstraint.constant = 40;
     self.timerView.hidden = NO;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                  target:self
-                                                selector:@selector(countDown)
-                                                userInfo:nil
-                                                 repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     self.remainingCounts = (self.view.frame.size.width - 80) / 2;
 }
 

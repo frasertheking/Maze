@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Maze.h"
 #import "AppDelegate.h"
+#import "BEMCheckBox.h"
 
 @interface MazeViewController : UIViewController <UITextViewDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
+@property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

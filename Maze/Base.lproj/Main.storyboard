@@ -126,9 +126,18 @@
                                     <constraint firstAttribute="height" constant="1" id="eiD-NT-MkD"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLs-hC-72s" userLabel="Checkbox" customClass="BEMCheckBox">
+                                <rect key="frame" x="225" y="225" width="150" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="I6b-A8-kaf"/>
+                                    <constraint firstAttribute="width" constant="150" id="Le8-Xr-OFq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="oLs-hC-72s" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="065-1N-S0d"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0xY-YS-vt5"/>
                             <constraint firstItem="7hS-hl-qgV" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="12" id="15G-TD-EhJ"/>
                             <constraint firstAttribute="trailing" secondItem="D7x-Yn-39d" secondAttribute="trailing" id="1dg-xs-mo3"/>
@@ -168,6 +177,7 @@
                             <constraint firstItem="hdr-km-0v4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="ski-rS-3Q4"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="36" id="thN-7L-vdU"/>
                             <constraint firstAttribute="trailing" secondItem="Oq5-80-koU" secondAttribute="trailing" id="vw5-eS-W9K"/>
+                            <constraint firstItem="oLs-hC-72s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xhs-Ct-Pz6"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="centerY" secondItem="72M-oM-AXh" secondAttribute="centerY" id="zW1-HE-Vas"/>
                         </constraints>
                         <variation key="default">
@@ -188,6 +198,7 @@
                     <connections>
                         <outlet property="bottomBanner" destination="D7x-Yn-39d" id="lBd-8q-hFC"/>
                         <outlet property="bottomConstraint" destination="VHK-TI-ZR6" id="2lZ-Ij-HQ6"/>
+                        <outlet property="checkbox" destination="oLs-hC-72s" id="hIf-as-Ih9"/>
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
