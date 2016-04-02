@@ -472,10 +472,11 @@ double rads = DEGREES_TO_RADIANS(180);
                     block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                     block.alpha = 0.4;
                     self.power = YES;
+                    [self.mazeViewRest addSubview:block];
                 } else {
                     block.backgroundColor = [UIColor clearColor];
+                    [self.mazeViewPath addSubview:block];
                 }
-                [self.mazeViewPath addSubview:block];
             }
         }
     }
