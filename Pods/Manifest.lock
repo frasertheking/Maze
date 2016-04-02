@@ -1,10 +1,13 @@
 PODS:
   - BEMCheckBox (1.2.0)
+  - SCLAlertView-Objective-C (1.0.2)
 
 DEPENDENCIES:
   - BEMCheckBox
+  - SCLAlertView-Objective-C
 
 SPEC CHECKSUMS:
   BEMCheckBox: fcfbbf42cf23d38fbb605c72f63db9ae82d6acd3
+  SCLAlertView-Objective-C: 25f7ea3a3526dde177d8b8056a0b88fe4187651e
 
 COCOAPODS: 0.39.0

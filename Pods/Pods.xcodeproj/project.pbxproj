@@ -10,18 +10,18 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>0176FCBC02551B82C55782D12BC78DEE</key>
+		<key>0611A8D84E70844D6C3D5BB05A9022AB</key>
 		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
+			<key>includeInIndex</key>
 			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>8C80F913EE213FA1EE3801FF8CEF0DD4</string>
-			<key>remoteInfo</key>
-			<string>BEMCheckBox</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SCLAlertView-Objective-C-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>07E92DE48449AB9BA836B60A0CC58D2C</key>
 		<dict>
@@ -36,21 +36,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>11E8A56895964F72EBE37F928EC74004</key>
+		<key>092DFD287DE6065CCCCEAA4C0D4F803F</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
+			<string>7AA57B5C36FEDB318359D0BE6EB17645</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>1566A3BF6977BD666050CB55471A2676</key>
-		<dict>
-			<key>fileRef</key>
-			<string>874B4301A4F974BFF474C1AC37B7924D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1627A6E81483E7308AB1FF8C27C20349</key>
+		<key>0B7BE6BE80E8233593233BBA7DD423C1</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -64,6 +64,103 @@
 			<string>Classes/BEMAnimationManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>129531405B12A3500C6C7E0BAC658E2A</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>07E92DE48449AB9BA836B60A0CC58D2C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>12EF9BA313571047B7646B109ABAC531</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>25CC91B0AE2E771E752FCA42B0DEE924</string>
+				<string>F3411A1FBC4AD8F274DCA12A02B1DBE5</string>
+				<string>0611A8D84E70844D6C3D5BB05A9022AB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/SCLAlertView-Objective-C</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1566A3BF6977BD666050CB55471A2676</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E4CD3CC623656283747C8AA5E06B452C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1948F6F5E066BA831A02625EC970B15C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6A2657E6982B2E131DDF67A70E54AA70</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1AAD9A7248C95F5CD88B91E96064C17C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>25CC91B0AE2E771E752FCA42B0DEE924</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
 		</dict>
 		<key>1B479E200C30304B1CC5328F1348752C</key>
 		<dict>
@@ -91,18 +188,74 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1E3BDD487FD2DFB5D131A1DBA8AD3675</key>
+		<key>1FFFCEF4D66ED5BC23F01EA9CE5ED04A</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>11E8A56895964F72EBE37F928EC74004</string>
+				<string>767ED972EEAB7BF9C3527A2E71FD419A</string>
+				<string>AB9493FEDB0B4668191246600A56A5C3</string>
+				<string>EC7DAF64BB5AA9D977F047E61A863ECD</string>
+				<string>531499673B0ED37E22D67B9C412DCA6C</string>
+				<string>2717152FD6138FEFAD0F530AA8B06E15</string>
+				<string>B4AB8C474488DA016DAAB6D128C6872D</string>
+				<string>30E91F73D7937938BD8CFE0D3E32843A</string>
+				<string>D52CDBA053CC7EC9C07CA3BD1577215E</string>
+				<string>453349B0875527176103F19C0E056C84</string>
 			</array>
 			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
+			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
+		</dict>
+		<key>20B56609144CE204DFA8221F742B2D76</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>96332FAECB787C41651F2C64D4CE1956</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>256E3371FBB336CCF78ECE4B635691E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImage+ImageEffects.m</string>
+			<key>path</key>
+			<string>SCLAlertView/UIImage+ImageEffects.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>25CC91B0AE2E771E752FCA42B0DEE924</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SCLAlertView-Objective-C.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2717152FD6138FEFAD0F530AA8B06E15</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E97B4DEB371D8B9D3F1D9C18825DB0D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>2C0A0B07BB873624C413790AE010A356</key>
 		<dict>
@@ -129,8 +282,8 @@
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>8D1534490D941DCA47C62AC4314182AF</string>
-				<string>C5A18280E9321A9268D1C80B7DA43967</string>
+				<string>A70CDAD61F90AC503C7D04CC22DA2923</string>
+				<string>FB45FFD90572718D82AB9092B750F0CA</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -138,6 +291,30 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
+		</dict>
+		<key>30E91F73D7937938BD8CFE0D3E32843A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>ABA48D4B57BD2DFB76AF91436422FE9F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>37D8EC8C6297761F8BB3A1ABE4699DF5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>CC7CDC2C502A48159D7F184921F1D60D</string>
+				<string>9B2537DBE8C02DD41F2E36C7AEA2A046</string>
+				<string>C7E3A51BE2FB24B90FF1D9038CC83C4E</string>
+				<string>52B6D059EF4DD11CDBAAB83D5AB0CCD8</string>
+				<string>C2D6272F5B8E92587DDA8F9B213983DC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>3B17FAABD5DF9D1708839120258D3E7C</key>
 		<dict>
@@ -152,81 +329,43 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3E4E89230EF59BC255123B67864ACF77</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>43517132E0D5859CC0272B7F375B94C7</key>
+		<key>3E97B4DEB371D8B9D3F1D9C18825DB0D</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>BEMCheckBox.h</string>
+			<string>SCLButton.m</string>
 			<key>path</key>
-			<string>Classes/BEMCheckBox.h</string>
+			<string>SCLAlertView/SCLButton.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>45EF84EEF5276601945E4E91D72E5DE2</key>
+		<key>43F6140780BE5189FAB8E642AD6BBF60</key>
 		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>88F2779C7F91EBD8064350FE32592B3F</string>
-				<string>4968D3A64F9B7B520C3B0A6830C8DC20</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
+			<key>fileRef</key>
+			<string>913271E5F3E7D44D21CA971C6F02BC60</string>
 			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>4968D3A64F9B7B520C3B0A6830C8DC20</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>07E92DE48449AB9BA836B60A0CC58D2C</string>
-			<key>buildSettings</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
 			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
 			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
 		</dict>
-		<key>5FA7ACE486ADE3AB5E6F226391FC35EE</key>
+		<key>453349B0875527176103F19C0E056C84</key>
+		<dict>
+			<key>fileRef</key>
+			<string>256E3371FBB336CCF78ECE4B635691E0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4671AB3227CA677091C3547F22609A27</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXTargetDependency</string>
@@ -235,7 +374,172 @@
 			<key>target</key>
 			<string>8C80F913EE213FA1EE3801FF8CEF0DD4</string>
 			<key>targetProxy</key>
-			<string>0176FCBC02551B82C55782D12BC78DEE</string>
+			<string>6F771AE6576A4416D457852F103888E9</string>
+		</dict>
+		<key>481D4730D21EE7421496305F55F16AE3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLTimerDisplay.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLTimerDisplay.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4D13D3D015D7E0C1D4E55024FEB7F77C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>57EFE020DA013E5997081172264E8A1C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>502C58BB9D1149448AE5AFEAA22A9E4A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9B16082BE5E563AFA05FA58604D36165</string>
+				<string>574860194141DC315D55991F4557227B</string>
+				<string>6D0D1699C5BE96EC4377BE781540ECB6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52B6D059EF4DD11CDBAAB83D5AB0CCD8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6A2657E6982B2E131DDF67A70E54AA70</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>531499673B0ED37E22D67B9C412DCA6C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5E4F982B8C85D025ADF92042576363A7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5320879BACCDBF2E2DC0795BA4300640</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>BEMPathManager.h</string>
+			<key>path</key>
+			<string>Classes/BEMPathManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>53996D68B0AD556A0306C9A89E304D58</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A9DD452E86D184BFC4022E278754A8DF</string>
+				<string>613F4B017A1FFECD129AF26D35A68B41</string>
+				<string>E135BAF231C020516E3931967E3F3274</string>
+				<string>9AE13168267AE4C3786B97AFF3EF2E03</string>
+				<string>C3ADE126B8B577234634724AF211E65F</string>
+				<string>5E4F982B8C85D025ADF92042576363A7</string>
+				<string>913271E5F3E7D44D21CA971C6F02BC60</string>
+				<string>3E97B4DEB371D8B9D3F1D9C18825DB0D</string>
+				<string>C17B1F328C91D7EC078726DE540668CC</string>
+				<string>8116AC9A293E68B5D763455F644DD030</string>
+				<string>EEA322AEDBEDFA731B8FE62AED4A3A05</string>
+				<string>57EFE020DA013E5997081172264E8A1C</string>
+				<string>ABA48D4B57BD2DFB76AF91436422FE9F</string>
+				<string>481D4730D21EE7421496305F55F16AE3</string>
+				<string>6552A5B0039DB1B8740CF32C484E5F71</string>
+				<string>7AA57B5C36FEDB318359D0BE6EB17645</string>
+				<string>256E3371FBB336CCF78ECE4B635691E0</string>
+				<string>12EF9BA313571047B7646B109ABAC531</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SCLAlertView-Objective-C</string>
+			<key>path</key>
+			<string>SCLAlertView-Objective-C</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>574860194141DC315D55991F4557227B</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods-Maze.a</string>
+			<key>path</key>
+			<string>libPods-Maze.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>57EFE020DA013E5997081172264E8A1C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLTextView.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLTextView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5E4F982B8C85D025ADF92042576363A7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLAlertViewStyleKit.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertViewStyleKit.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>613F4B017A1FFECD129AF26D35A68B41</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLAlertView.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>63FBB7A4A44B9329E9359F67B4365B98</key>
 		<dict>
@@ -252,32 +556,108 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>6A6AE3F3FB140B6F666FD89AFC08965C</key>
+		<key>6552A5B0039DB1B8740CF32C484E5F71</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>72BA9F621C349CBB49A09AE862BA7E3E</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLTimerDisplay.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLTimerDisplay.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6A2657E6982B2E131DDF67A70E54AA70</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
 		</dict>
 		<key>6C695A44B2F0B402B4D9ABEBCECEDFB6</key>
 		<dict>
 			<key>fileRef</key>
-			<string>B4DB335F1CDA6DAE417B796A91AB0E3A</string>
+			<string>E0AEEE21FB6CD84354E1E9F50F298DCA</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>72BA9F621C349CBB49A09AE862BA7E3E</key>
+		<key>6D0D1699C5BE96EC4377BE781540ECB6</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libSCLAlertView-Objective-C.a</string>
+			<key>path</key>
+			<string>libSCLAlertView-Objective-C.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>6D80CEF68D9EF3CE18E9CF12A4CE297C</key>
 		<dict>
 			<key>fileRef</key>
-			<string>1B479E200C30304B1CC5328F1348752C</string>
+			<string>A9DD452E86D184BFC4022E278754A8DF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>6F76F5821F292BBB3CFC9658F7343D7A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>BEMCheckBox.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6F771AE6576A4416D457852F103888E9</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>8C80F913EE213FA1EE3801FF8CEF0DD4</string>
+			<key>remoteInfo</key>
+			<string>BEMCheckBox</string>
+		</dict>
+		<key>6F8FA945487B4126779791BAF0679432</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Accelerate.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Accelerate.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
 		</dict>
 		<key>747FCEE73D6A15F6BACAF046214E83FD</key>
 		<dict>
@@ -292,27 +672,106 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>7788A2E920DD15CF983EF0C25D7DFFEC</key>
+		<key>753235F45271C1D860F94E9E0C974718</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>945BF5DF6571A0C7BDF35080A0A6F10A</string>
+			<key>remoteInfo</key>
+			<string>SCLAlertView-Objective-C</string>
+		</dict>
+		<key>767ED972EEAB7BF9C3527A2E71FD419A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F3411A1FBC4AD8F274DCA12A02B1DBE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>78E31958FA254D89FE343DC53D7A0D92</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>BEMCheckBox.h</string>
 			<key>path</key>
-			<string>BEMCheckBox.xcconfig</string>
+			<string>Classes/BEMCheckBox.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>79410FD4BEBE0BDDABF8694D74BC7BE9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E135BAF231C020516E3931967E3F3274</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7AA57B5C36FEDB318359D0BE6EB17645</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImage+ImageEffects.h</string>
+			<key>path</key>
+			<string>SCLAlertView/UIImage+ImageEffects.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7C04CFB5C33EC40448942DC63A56DBED</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>D417B7DCE2C8F907596DBDF1D8066D42</string>
+				<string>129531405B12A3500C6C7E0BAC658E2A</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>7D08886381D3562EF01D38C773DF08E3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8116AC9A293E68B5D763455F644DD030</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>7DB346D0F39D3F0E887471402A8071AB</key>
 		<dict>
 			<key>children</key>
 			<array>
 				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
-				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
-				<string>A000AFFD5004012C0B35CEF34DCF643F</string>
-				<string>B89B714161764E9587261B8F5EF252EB</string>
+				<string>20B56609144CE204DFA8221F742B2D76</string>
+				<string>A87FAC794803381D0C6BAD368D50D28B</string>
+				<string>502C58BB9D1149448AE5AFEAA22A9E4A</string>
 				<string>7DB6EDD01F00FE3EFC7E67E84B2941C3</string>
 			</array>
 			<key>isa</key>
@@ -333,50 +792,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>874B4301A4F974BFF474C1AC37B7924D</key>
+		<key>8116AC9A293E68B5D763455F644DD030</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLSwitchView.h</string>
 			<key>path</key>
-			<string>BEMCheckBox-dummy.m</string>
+			<string>SCLAlertView/SCLSwitchView.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88F2779C7F91EBD8064350FE32592B3F</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>BA367E24319F88C7684DD6E443E33DA4</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
 		</dict>
 		<key>8C80F913EE213FA1EE3801FF8CEF0DD4</key>
 		<dict>
@@ -399,11 +828,162 @@
 			<key>productName</key>
 			<string>BEMCheckBox</string>
 			<key>productReference</key>
-			<string>E895C9F5ACF9BE69AD17A1C4BE86D4E5</string>
+			<string>9B16082BE5E563AFA05FA58604D36165</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>8D1534490D941DCA47C62AC4314182AF</key>
+		<key>8DD6C798954824DADA37B2B47E3B941C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>AudioToolbox.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/AudioToolbox.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>913271E5F3E7D44D21CA971C6F02BC60</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLButton.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLButton.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>945BF5DF6571A0C7BDF35080A0A6F10A</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>E207C53FF43011B159C05E1C7EAAF73E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>1FFFCEF4D66ED5BC23F01EA9CE5ED04A</string>
+				<string>37D8EC8C6297761F8BB3A1ABE4699DF5</string>
+				<string>B367CA640E9DC3277928886AE640D4D4</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SCLAlertView-Objective-C</string>
+			<key>productName</key>
+			<string>SCLAlertView-Objective-C</string>
+			<key>productReference</key>
+			<string>6D0D1699C5BE96EC4377BE781540ECB6</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>955F5F0255011485D01CBE8E153B3757</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>B6B90510077B98D6FC87049343C2C8E3</string>
+				<string>FAE74E1FD186F4BB994D56821C7E172C</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>96332FAECB787C41651F2C64D4CE1956</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6F8FA945487B4126779791BAF0679432</string>
+				<string>8DD6C798954824DADA37B2B47E3B941C</string>
+				<string>D308E8D5A4E9E5194F7FFB9211854C9B</string>
+				<string>6A2657E6982B2E131DDF67A70E54AA70</string>
+				<string>CEE3372DC2B291AC8F9347BCFAE5CDA4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9AE13168267AE4C3786B97AFF3EF2E03</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLAlertViewResponder.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertViewResponder.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B16082BE5E563AFA05FA58604D36165</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libBEMCheckBox.a</string>
+			<key>path</key>
+			<string>libBEMCheckBox.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>9B2537DBE8C02DD41F2E36C7AEA2A046</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8DD6C798954824DADA37B2B47E3B941C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A2805C0188FE2EC26941C41D02F6CB8B</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>6C695A44B2F0B402B4D9ABEBCECEDFB6</string>
+				<string>1566A3BF6977BD666050CB55471A2676</string>
+				<string>A9D1DF131554FFF23F0C3B55FE73E948</string>
+				<string>F77FEB669B94C63E644D37831F5FFB79</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A515AB7111FB1810B20EAC8CFD11984D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>481D4730D21EE7421496305F55F16AE3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A70CDAD61F90AC503C7D04CC22DA2923</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -463,7 +1043,7 @@
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
+				<string>8.0</string>
 				<key>ONLY_ACTIVE_ARCH</key>
 				<string>YES</string>
 				<key>STRIP_INSTALLED_PRODUCT</key>
@@ -476,24 +1056,137 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>955F5F0255011485D01CBE8E153B3757</key>
+		<key>A87FAC794803381D0C6BAD368D50D28B</key>
 		<dict>
-			<key>buildConfigurations</key>
+			<key>children</key>
 			<array>
-				<string>D8BF78564401776CCCD7E4DD6CA14DB3</string>
-				<string>9EC96BD160ED6C4F3E8A34CBD2A7C4DD</string>
+				<string>FA7AD940BB1C17CED5020B855D87F935</string>
+				<string>53996D68B0AD556A0306C9A89E304D58</string>
 			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
 			<key>isa</key>
-			<string>XCConfigurationList</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9EC96BD160ED6C4F3E8A34CBD2A7C4DD</key>
+		<key>A9D1DF131554FFF23F0C3B55FE73E948</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E4FF4A3BE77D821D4A969C1A1C6315B0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A9DD452E86D184BFC4022E278754A8DF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLAlertView.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AB9493FEDB0B4668191246600A56A5C3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>613F4B017A1FFECD129AF26D35A68B41</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>ABA48D4B57BD2DFB76AF91436422FE9F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLTextView.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLTextView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B20A83132899A479C8FD10DEEB06E14A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6F76F5821F292BBB3CFC9658F7343D7A</string>
+				<string>E4CD3CC623656283747C8AA5E06B452C</string>
+				<string>B4E8309CE7D1F861EB63FE0CB9D917A9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/BEMCheckBox</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B367CA640E9DC3277928886AE640D4D4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>6D80CEF68D9EF3CE18E9CF12A4CE297C</string>
+				<string>79410FD4BEBE0BDDABF8694D74BC7BE9</string>
+				<string>BD8F057A07EA068B7F68083A25FE73B9</string>
+				<string>43F6140780BE5189FAB8E642AD6BBF60</string>
+				<string>CFCF9FC249623695FB3BE0C074DBCF04</string>
+				<string>7D08886381D3562EF01D38C773DF08E3</string>
+				<string>4D13D3D015D7E0C1D4E55024FEB7F77C</string>
+				<string>A515AB7111FB1810B20EAC8CFD11984D</string>
+				<string>092DFD287DE6065CCCCEAA4C0D4F803F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>B3A563565B16FD2DB2BE7939581BC1D2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SCLAlertView-Objective-C</string>
+			<key>target</key>
+			<string>945BF5DF6571A0C7BDF35080A0A6F10A</string>
+			<key>targetProxy</key>
+			<string>753235F45271C1D860F94E9E0C974718</string>
+		</dict>
+		<key>B4AB8C474488DA016DAAB6D128C6872D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EEA322AEDBEDFA731B8FE62AED4A3A05</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B4E8309CE7D1F861EB63FE0CB9D917A9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>BEMCheckBox-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B6B90510077B98D6FC87049343C2C8E3</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>7788A2E920DD15CF983EF0C25D7DFFEC</string>
+			<string>6F76F5821F292BBB3CFC9658F7343D7A</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -501,9 +1194,9 @@
 				<key>GCC_PREFIX_HEADER</key>
 				<string>Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
+				<string>8.0</string>
 				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
+				<string>YES</string>
 				<key>OTHER_LDFLAGS</key>
 				<string></string>
 				<key>OTHER_LIBTOOLFLAGS</key>
@@ -522,126 +1215,7 @@
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>A000AFFD5004012C0B35CEF34DCF643F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E58213EBD7F0306328CA414CB1498C6B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A2805C0188FE2EC26941C41D02F6CB8B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C695A44B2F0B402B4D9ABEBCECEDFB6</string>
-				<string>1566A3BF6977BD666050CB55471A2676</string>
-				<string>A9D1DF131554FFF23F0C3B55FE73E948</string>
-				<string>F77FEB669B94C63E644D37831F5FFB79</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A58691472DB2D5C6F1E36F2FB02167D4</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods-Maze.a</string>
-			<key>path</key>
-			<string>libPods-Maze.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>A9D1DF131554FFF23F0C3B55FE73E948</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E52E5B540CB3028FD6CC4519C0AEE21A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>ADDA1B5DF8FC54B4373651530D8E2B69</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>BEMCheckBox-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B4DB335F1CDA6DAE417B796A91AB0E3A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>BEMAnimationManager.m</string>
-			<key>path</key>
-			<string>Classes/BEMAnimationManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B53000DED9F855885C81242DDA4D0086</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>45EF84EEF5276601945E4E91D72E5DE2</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6A6AE3F3FB140B6F666FD89AFC08965C</string>
-				<string>1E3BDD487FD2DFB5D131A1DBA8AD3675</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5FA7ACE486ADE3AB5E6F226391FC35EE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Maze</string>
-			<key>productName</key>
-			<string>Pods-Maze</string>
-			<key>productReference</key>
-			<string>A58691472DB2D5C6F1E36F2FB02167D4</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>B89B714161764E9587261B8F5EF252EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E895C9F5ACF9BE69AD17A1C4BE86D4E5</string>
-				<string>A58691472DB2D5C6F1E36F2FB02167D4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>Debug</string>
 		</dict>
 		<key>BA367E24319F88C7684DD6E443E33DA4</key>
 		<dict>
@@ -673,33 +1247,537 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
+		<key>BAEB04DAB40C6D2B7C1E5A33DAA0AB8F</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>7C04CFB5C33EC40448942DC63A56DBED</string>
+			<key>buildPhases</key>
+			<array>
+				<string>E815F8C5C57BD8A997452AA46C665CD7</string>
+				<string>E0EA5C7EC687C562CC4EFBB413E81332</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>4671AB3227CA677091C3547F22609A27</string>
+				<string>B3A563565B16FD2DB2BE7939581BC1D2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-Maze</string>
+			<key>productName</key>
+			<string>Pods-Maze</string>
+			<key>productReference</key>
+			<string>574860194141DC315D55991F4557227B</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>BBF9DAFC82280B44DB1212093B60A336</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1B479E200C30304B1CC5328F1348752C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BD8F057A07EA068B7F68083A25FE73B9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C3ADE126B8B577234634724AF211E65F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C17B1F328C91D7EC078726DE540668CC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLMacros.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLMacros.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C2D6272F5B8E92587DDA8F9B213983DC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CEE3372DC2B291AC8F9347BCFAE5CDA4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C3ADE126B8B577234634724AF211E65F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLAlertViewStyleKit.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertViewStyleKit.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C7E3A51BE2FB24B90FF1D9038CC83C4E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D308E8D5A4E9E5194F7FFB9211854C9B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CC7CDC2C502A48159D7F184921F1D60D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6F8FA945487B4126779791BAF0679432</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CEE3372DC2B291AC8F9347BCFAE5CDA4</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>CEE9FF1F2D926ACD9F533F020A45266F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5320879BACCDBF2E2DC0795BA4300640</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CFCF9FC249623695FB3BE0C074DBCF04</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C17B1F328C91D7EC078726DE540668CC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D1D5393855D20F8BB0C1C2FDB0FF2292</key>
+		<dict>
+			<key>fileRef</key>
+			<string>78E31958FA254D89FE343DC53D7A0D92</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D308E8D5A4E9E5194F7FFB9211854C9B</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>D417B7DCE2C8F907596DBDF1D8066D42</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>BA367E24319F88C7684DD6E443E33DA4</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0700</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>502C58BB9D1149448AE5AFEAA22A9E4A</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>8C80F913EE213FA1EE3801FF8CEF0DD4</string>
+				<string>BAEB04DAB40C6D2B7C1E5A33DAA0AB8F</string>
+				<string>945BF5DF6571A0C7BDF35080A0A6F10A</string>
+			</array>
+		</dict>
+		<key>D52CDBA053CC7EC9C07CA3BD1577215E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6552A5B0039DB1B8740CF32C484E5F71</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DC911203328B3247D8B11F5ED49DED45</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0B7BE6BE80E8233593233BBA7DD423C1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>DD3F50853F8B2AA65D60A0BA817C9AE7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Maze-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E0AEEE21FB6CD84354E1E9F50F298DCA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>BEMAnimationManager.m</string>
+			<key>path</key>
+			<string>Classes/BEMAnimationManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E0EA5C7EC687C562CC4EFBB413E81332</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1948F6F5E066BA831A02625EC970B15C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>E135BAF231C020516E3931967E3F3274</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SCLAlertViewResponder.h</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLAlertViewResponder.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E207C53FF43011B159C05E1C7EAAF73E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>1AAD9A7248C95F5CD88B91E96064C17C</string>
+				<string>F56EF9F8D937825AC7DAB173B6B73DDB</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>E221C6DC19D3A3BB113754382B10F2B2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Maze-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E4CD3CC623656283747C8AA5E06B452C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>BEMCheckBox-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E4FF4A3BE77D821D4A969C1A1C6315B0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>BEMCheckBox.m</string>
+			<key>path</key>
+			<string>Classes/BEMCheckBox.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E815F8C5C57BD8A997452AA46C665CD7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>BBF9DAFC82280B44DB1212093B60A336</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>EC7DAF64BB5AA9D977F047E61A863ECD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9AE13168267AE4C3786B97AFF3EF2E03</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>EEA322AEDBEDFA731B8FE62AED4A3A05</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SCLSwitchView.m</string>
+			<key>path</key>
+			<string>SCLAlertView/SCLSwitchView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EFE0A84C4B39C396BA2654AB22EB2AA5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>BEMPathManager.m</string>
+			<key>path</key>
+			<string>Classes/BEMPathManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F3411A1FBC4AD8F274DCA12A02B1DBE5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SCLAlertView-Objective-C-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F56EF9F8D937825AC7DAB173B6B73DDB</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>25CC91B0AE2E771E752FCA42B0DEE924</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>F77FEB669B94C63E644D37831F5FFB79</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EFE0A84C4B39C396BA2654AB22EB2AA5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA7AD940BB1C17CED5020B855D87F935</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>BF6342C8B29F4CEEA088EFF7AB4DE362</string>
+				<string>0B7BE6BE80E8233593233BBA7DD423C1</string>
+				<string>E0AEEE21FB6CD84354E1E9F50F298DCA</string>
+				<string>78E31958FA254D89FE343DC53D7A0D92</string>
+				<string>E4FF4A3BE77D821D4A969C1A1C6315B0</string>
+				<string>5320879BACCDBF2E2DC0795BA4300640</string>
+				<string>EFE0A84C4B39C396BA2654AB22EB2AA5</string>
+				<string>B20A83132899A479C8FD10DEEB06E14A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Frameworks</string>
+			<string>BEMCheckBox</string>
+			<key>path</key>
+			<string>BEMCheckBox</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BF6342C8B29F4CEEA088EFF7AB4DE362</key>
+		<key>FAE74E1FD186F4BB994D56821C7E172C</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>3E4E89230EF59BC255123B67864ACF77</string>
-			</array>
+			<key>baseConfigurationReference</key>
+			<string>6F76F5821F292BBB3CFC9658F7343D7A</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>XCBuildConfiguration</string>
 			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>Release</string>
 		</dict>
-		<key>C5A18280E9321A9268D1C80B7DA43967</key>
+		<key>FB45FFD90572718D82AB9092B750F0CA</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -754,7 +1832,7 @@
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
+				<string>8.0</string>
 				<key>STRIP_INSTALLED_PRODUCT</key>
 				<string>NO</string>
 				<key>SYMROOT</key>
@@ -767,256 +1845,10 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>CEE9FF1F2D926ACD9F533F020A45266F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EF996D5146B79FF23633590FF4C41EAA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>D1D5393855D20F8BB0C1C2FDB0FF2292</key>
-		<dict>
-			<key>fileRef</key>
-			<string>43517132E0D5859CC0272B7F375B94C7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>D41D8CD98F00B204E9800998ECF8427E</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0700</string>
-				<key>LastUpgradeCheck</key>
-				<string>0700</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>7DB346D0F39D3F0E887471402A8071AB</string>
-			<key>productRefGroup</key>
-			<string>B89B714161764E9587261B8F5EF252EB</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>8C80F913EE213FA1EE3801FF8CEF0DD4</string>
-				<string>B53000DED9F855885C81242DDA4D0086</string>
-			</array>
-		</dict>
-		<key>D62DAADFCA1FF064AAE3088BBAD07DD9</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7788A2E920DD15CF983EF0C25D7DFFEC</string>
-				<string>874B4301A4F974BFF474C1AC37B7924D</string>
-				<string>ADDA1B5DF8FC54B4373651530D8E2B69</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/BEMCheckBox</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D8BF78564401776CCCD7E4DD6CA14DB3</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>7788A2E920DD15CF983EF0C25D7DFFEC</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.2</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>DC8A52C68DC41D65D8306C3E37FA2FDC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>BEMPathManager.m</string>
-			<key>path</key>
-			<string>Classes/BEMPathManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DC911203328B3247D8B11F5ED49DED45</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1627A6E81483E7308AB1FF8C27C20349</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>DD3F50853F8B2AA65D60A0BA817C9AE7</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-Maze-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E221C6DC19D3A3BB113754382B10F2B2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-Maze-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E52E5B540CB3028FD6CC4519C0AEE21A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>BEMCheckBox.m</string>
-			<key>path</key>
-			<string>Classes/BEMCheckBox.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E58213EBD7F0306328CA414CB1498C6B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>1627A6E81483E7308AB1FF8C27C20349</string>
-				<string>B4DB335F1CDA6DAE417B796A91AB0E3A</string>
-				<string>43517132E0D5859CC0272B7F375B94C7</string>
-				<string>E52E5B540CB3028FD6CC4519C0AEE21A</string>
-				<string>EF996D5146B79FF23633590FF4C41EAA</string>
-				<string>DC8A52C68DC41D65D8306C3E37FA2FDC</string>
-				<string>D62DAADFCA1FF064AAE3088BBAD07DD9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>BEMCheckBox</string>
-			<key>path</key>
-			<string>BEMCheckBox</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E895C9F5ACF9BE69AD17A1C4BE86D4E5</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libBEMCheckBox.a</string>
-			<key>path</key>
-			<string>libBEMCheckBox.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EF996D5146B79FF23633590FF4C41EAA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>BEMPathManager.h</string>
-			<key>path</key>
-			<string>Classes/BEMPathManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F77FEB669B94C63E644D37831F5FFB79</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DC8A52C68DC41D65D8306C3E37FA2FDC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>FDEED7A2F24FEF102F1277920A4AF709</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
+			<string>6A2657E6982B2E131DDF67A70E54AA70</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>

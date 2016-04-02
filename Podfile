@@ -3,16 +3,17 @@
 # Uncomment this line if you're using Swift
 # use_frameworks!
 
-target ‘Maze’ do
+target 'Maze' do
 
-pod ‘BEMCheckBox’
+pod 'BEMCheckBox'
+pod 'SCLAlertView-Objective-C'
 end
 
-target ‘MazeTests’ do
+target 'MazeTests' do
 
 end
 
-target ‘MazeUITests' do
+target 'MazeUITests' do
 
 end
 

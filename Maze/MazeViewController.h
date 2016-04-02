@@ -10,6 +10,7 @@
 #import "Maze.h"
 #import "AppDelegate.h"
 #import "BEMCheckBox.h"
+#import "SCLAlertView.h"
 
 @interface MazeViewController : UIViewController <UITextViewDelegate>
 

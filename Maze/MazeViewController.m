@@ -160,11 +160,20 @@
     
     if (--self.remainingCounts == 0) {
         [self.timer invalidate];
-        self.resultLabel.text = @"Times up";
         self.score = 0;
         self.timerView.hidden = YES;
         self.size = 2;
+        [self levelFailed];
     }
+}
+
+-(void)levelFailed {
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.backgroundType = Blur;
+    alert.showAnimationType = SlideInFromCenter;
+    alert.hideAnimationType = SlideOutFromCenter;
+    [alert addButton:@"Ok" target:self selector:@selector(recreateMaze)];
+    [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size] closeButtonTitle:nil duration:0];
 }
 
 #pragma mark - UITextViewDelegate
