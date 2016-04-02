@@ -95,10 +95,6 @@ double rads = DEGREES_TO_RADIANS(180);
         self.power = YES;
     }
     
-    if (self.n % 4 == 0) {
-        [self transformMaze];
-    }
-    
     if (self.n > 17) {
         self.complexityScale += 0.25;
         self.n -= 1;
@@ -214,6 +210,7 @@ double rads = DEGREES_TO_RADIANS(180);
         [self captureWalls];
         [self drawMazePaths];
         [self solve];
+        [self captureAttemptPath];
     }];
 }
 
@@ -417,14 +414,17 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)drawMazePaths {
     float size = (self.frame.size.width) / (self.m * 2 + 1);
 
-    [self removeSubviews:self.mazeViewRest];
+    [self removeSubviews:self.mazeViewPath];
+    [self removeSubviews:self.mazeViewPathMask];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 5;
-                [self.mazeViewRest addSubview:block];
+                [self.mazeViewPath addSubview:block];
+                block.backgroundColor = [UIColor whiteColor];
+                [self.mazeViewPathMask addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 if (r >= self.powerX && c >= self.powerY && !self.power) {
@@ -438,7 +438,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     block.backgroundColor = [UIColor clearColor];
                     block.tag = 2;
                 }
-                [self.mazeViewRest addSubview:block];
+                [self.mazeViewPath addSubview:block];
             }
         }
     }
