@@ -22,6 +22,8 @@
 @property (nonatomic) UIView* mazeViewWalls;
 @property (nonatomic) UIView* mazeViewMask;
 @property (nonatomic) UIView* mazeViewRest;
+@property (nonatomic) UIView* mazeViewPath;
+@property (nonatomic) UIView* mazeViewPathMask;
 
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
@@ -56,7 +58,14 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
         self.mazeViewRest.backgroundColor = [UIColor clearColor];
         [self addSubview:self.mazeViewRest];
-
+        
+        self.mazeViewPath = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewPath.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewPath];
+        
+        self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewPathMask.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewPathMask];
     }
     return self;
 }
@@ -121,6 +130,8 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewWalls];
     [self removeSubviews:self.mazeViewMask];
     [self removeSubviews:self.mazeViewRest];
+    [self removeSubviews:self.mazeViewPath];
+    [self removeSubviews:self.mazeViewPathMask];
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -353,23 +364,37 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)drawAttempt {
     float size = (self.frame.size.width) / (self.m * 2 + 1);
-    [self removeSubviews:self.mazeViewRest];
+    [self removeSubviews:self.mazeViewPath];
+    [self removeSubviews:self.mazeViewPathMask];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
-                block.tag = 4;
-                [self.mazeViewRest addSubview:block];
+                [self.mazeViewPath addSubview:block];
+                
+                block.backgroundColor = [UIColor whiteColor];
+                [self.mazeViewPathMask addSubview:block];
             } else if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
-                block.tag = 5;
-                [self.mazeViewRest addSubview:block];
+                [self.mazeViewPath addSubview:block];
+                
+                block.backgroundColor = [UIColor whiteColor];
+                [self.mazeViewPathMask addSubview:block];
             }
         }
     }
+    [self captureAttemptPath];
+}
+
+-(void)captureAttemptPath {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.bounds;
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor orangeColor].CGColor, (id)[UIColor greenColor].CGColor, nil];
+    gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+    gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+    [self.mazeViewPath.layer insertSublayer:gradientLayer atIndex:0];
+    self.mazeViewPath.maskView = self.mazeViewPathMask;
 }
 
 -(void)drawSolveLine {
