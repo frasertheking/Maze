@@ -105,6 +105,20 @@
     self.size++;
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
+    [self resetCountdown];
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.mazeViewCenterConstraint.constant = -600;
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.mazeViewCenterConstraint.constant = 600;
+        [self.view layoutIfNeeded];
+        [self recreateMaze];
+        [UIView animateWithDuration:1 animations:^{
+            self.mazeViewCenterConstraint.constant = 0;
+            [self.view layoutIfNeeded];
+        } completion:nil];
+    }];
 }
 
 

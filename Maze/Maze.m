@@ -37,6 +37,7 @@
 @property NSInteger powerY;
 @property BOOL power;
 @property BOOL animate;
+@property BOOL finished;
 @property double complexityScale;
 
 @end
@@ -104,8 +105,13 @@ double rads = DEGREES_TO_RADIANS(180);
         self.m -= 1;
     }
     
+    if (self.n == 5) {
+        self.animate = YES;
+    }
+    
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
     self.powerY = 1 + arc4random() % (self.m*2 - 1);
+    self.finished = NO;
     
     [self initialize];
 }
@@ -234,7 +240,10 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)animateWalls {
     NSArray *fromColors = self.gradientLayer.colors;
     NSArray *toColors = @[(id)[self getRandomColor].CGColor,
-                          (id)[self getRandomColor].CGColor];
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,];
     
     [self.gradientLayer setColors:toColors];
     
@@ -328,8 +337,12 @@ double rads = DEGREES_TO_RADIANS(180);
                         }
                         self.previousLoc = currentPoint;
                     } else if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
-                        [((MazeViewController*)self.delegate) finished];
-                        [((MazeViewController*)self.delegate) recreateMaze];
+                        if (!self.finished) {
+                            [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                            [self drawAttempt];
+                            [((MazeViewController*)self.delegate) finished];
+                            self.finished = YES;
+                        }
                     }
                 } else {
                     if (self.currentX - 1 > 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {

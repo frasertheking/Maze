@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIView *bottomBanner;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

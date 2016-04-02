@@ -191,6 +191,7 @@
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
+                        <outlet property="mazeViewCenterConstraint" destination="H7Q-u2-mZz" id="vy9-6z-fH3"/>
                         <outlet property="resultLabel" destination="7hS-hl-qgV" id="YcH-na-gzi"/>
                         <outlet property="sizeTextField" destination="mLM-zv-ilq" id="Sv3-3F-iE6"/>
                         <outlet property="timerView" destination="ITf-Q6-a5M" id="hso-Pk-3kd"/>
