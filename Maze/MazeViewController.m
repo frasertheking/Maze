@@ -162,8 +162,8 @@
         [self.timer invalidate];
         self.score = 0;
         self.timerView.hidden = YES;
-        self.size = 2;
         [self levelFailed];
+        self.size = 2;
     }
 }
 

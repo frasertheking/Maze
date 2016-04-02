@@ -105,8 +105,10 @@ double rads = DEGREES_TO_RADIANS(180);
         self.m -= 1;
     }
     
-    if (self.n == 5) {
+    if (self.n > 5) {
         self.animate = YES;
+    } else {
+        self.animate = NO;
     }
     
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
