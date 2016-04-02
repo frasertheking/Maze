@@ -19,6 +19,9 @@
 @property (nonatomic) NSMutableArray* attemptArray;
 @property (nonatomic) UIView* previousPreviousView;
 @property (nonatomic) UIView* previousView;
+@property (nonatomic) UIView* mazeViewWalls;
+@property (nonatomic) UIView* mazeViewMask;
+@property (nonatomic) UIView* mazeViewRest;
 
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
@@ -42,6 +45,18 @@ double rads = DEGREES_TO_RADIANS(180);
 - (id)initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
         self.backgroundColor = [UIColor clearColor];
+        self.mazeViewWalls = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewWalls.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewWalls];
+        
+        self.mazeViewMask = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewMask.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewMask];
+        
+        self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewRest.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewRest];
+
     }
     return self;
 }
@@ -103,12 +118,9 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - generation
 
 - (void)createMaze {
-    [self removeSubviews:1];
-    [self removeSubviews:2];
-    [self removeSubviews:3];
-    [self removeSubviews:4];
-    [self removeSubviews:5];
-    [self removeSubviews:6];
+    [self removeSubviews:self.mazeViewWalls];
+    [self removeSubviews:self.mazeViewMask];
+    [self removeSubviews:self.mazeViewRest];
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -160,10 +172,13 @@ double rads = DEGREES_TO_RADIANS(180);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).topColor)];
                     block.tag = 1;
                     block.alpha = 0.75;
-                    [self addSubview:block];
+                    [self.mazeViewWalls addSubview:block];
+                    
+                    block.backgroundColor = [UIColor whiteColor];
+                    block.tag = 1;
+                    [self.mazeViewMask addSubview:block];
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
                     if (dontDraw) {
@@ -185,9 +200,20 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         self.currentX = self.startRow;
         self.currentY = self.startCol;
+        [self captureWalls];
         [self drawMazePaths];
         [self solve];
     }];
+}
+
+-(void)captureWalls {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.bounds;
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor blueColor].CGColor, (id)[UIColor redColor].CGColor, nil];
+    gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+    gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+    [self.mazeViewWalls.layer insertSublayer:gradientLayer atIndex:0];
+    self.mazeViewWalls.maskView = self.mazeViewMask;
 }
 
 #pragma mark - Maze Solving
@@ -327,7 +353,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)drawAttempt {
     float size = (self.frame.size.width) / (self.m * 2 + 1);
-    [self removeSubviews:4];
+    [self removeSubviews:self.mazeViewRest];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
@@ -335,7 +361,12 @@ double rads = DEGREES_TO_RADIANS(180);
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 4;
-                [self addSubview:block];
+                [self.mazeViewRest addSubview:block];
+            } else if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1))) {
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
+                block.tag = 5;
+                [self.mazeViewRest addSubview:block];
             }
         }
     }
@@ -343,7 +374,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)drawSolveLine {
     float size = (self.frame.size.width) / (self.m * 2 + 1);
-    [self removeSubviews:3];
+    [self removeSubviews:self.mazeViewRest];
     
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
@@ -352,7 +383,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 block.alpha = 0.5;
                 block.backgroundColor = SOLVE;
                 block.tag = 3;
-                [self addSubview:block];
+                [self.mazeViewRest addSubview:block];
             }
         }
     }
@@ -361,16 +392,14 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)drawMazePaths {
     float size = (self.frame.size.width) / (self.m * 2 + 1);
 
-    [self removeSubviews:2];
-    [self removeSubviews:5];
-    [self removeSubviews:6];
+    [self removeSubviews:self.mazeViewRest];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
                 block.tag = 5;
-                [self addSubview:block];
+                [self.mazeViewRest addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 if (r >= self.powerX && c >= self.powerY && !self.power) {
@@ -384,7 +413,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     block.backgroundColor = [UIColor clearColor];
                     block.tag = 2;
                 }
-                [self addSubview:block];
+                [self.mazeViewRest addSubview:block];
             }
         }
     }
@@ -392,12 +421,10 @@ double rads = DEGREES_TO_RADIANS(180);
 
 #pragma mark - helpers
 
-- (void)removeSubviews:(NSInteger)tag {
-    NSArray *viewsToRemove = [self subviews];
+- (void)removeSubviews:(UIView*)view {
+    NSArray *viewsToRemove = [view subviews];
     for (UIView *v in viewsToRemove) {
-        if (v.tag == tag) {
-            [v removeFromSuperview];
-        }
+        [v removeFromSuperview];
     }
 }
 
