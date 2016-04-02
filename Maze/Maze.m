@@ -326,7 +326,8 @@ double rads = DEGREES_TO_RADIANS(180);
 - (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint vel = [gestureRecognizer velocityInView:self];
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
-    NSInteger size = (self.frame.size.width) / (self.m * 2);    
+    NSInteger size = (self.frame.size.width) / (self.m * 2);
+    if (!self.finished) {
         if (fabs(vel.x) > fabs(vel.y)) {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.x) * 150))) {
                 if (vel.x > 0) {
@@ -383,6 +384,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 }
             }
         }
+    }
     [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
 }
