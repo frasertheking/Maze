@@ -25,8 +25,10 @@
 @property (nonatomic) UIView* mazeViewPath;
 @property (nonatomic) UIView* mazeViewPathMask;
 
+@property (nonatomic) CAGradientLayer* gradientLayer;
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
+@property (nonatomic) NSTimer *gradientTimer;
 
 @property NSInteger currentX;
 @property NSInteger currentY;
@@ -34,6 +36,7 @@
 @property NSInteger powerX;
 @property NSInteger powerY;
 @property BOOL power;
+@property BOOL animate;
 @property double complexityScale;
 
 @end
@@ -213,13 +216,40 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)captureWalls {
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = self.bounds;
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
-    gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
-    gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
-    [self.mazeViewWalls.layer insertSublayer:gradientLayer atIndex:0];
+    [self.gradientTimer invalidate];
+    [self.mazeViewWalls.layer setSublayers:nil];
+    self.gradientLayer = [CAGradientLayer layer];
+    self.gradientLayer.frame = self.bounds;
+    self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
+    self.gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+    self.gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+    [self.mazeViewWalls.layer insertSublayer:self.gradientLayer atIndex:0];
     self.mazeViewWalls.maskView = self.mazeViewMask;
+    
+    if (self.animate) {
+        [self animateWalls];
+    }
+}
+
+-(void)animateWalls {
+    NSArray *fromColors = self.gradientLayer.colors;
+    NSArray *toColors = @[(id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor];
+    
+    [self.gradientLayer setColors:toColors];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
+    
+    animation.fromValue             = fromColors;
+    animation.toValue               = toColors;
+    animation.duration              = 1.00;
+    animation.removedOnCompletion   = YES;
+    animation.fillMode              = kCAFillModeForwards;
+    animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.delegate              = self;
+    
+    [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
+    self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Maze Solving
@@ -367,13 +397,11 @@ double rads = DEGREES_TO_RADIANS(180);
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 [self.mazeViewPath addSubview:block];
-                
                 block.backgroundColor = [UIColor whiteColor];
                 [self.mazeViewPathMask addSubview:block];
             } else if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 [self.mazeViewPath addSubview:block];
-                
                 block.backgroundColor = [UIColor whiteColor];
                 [self.mazeViewPathMask addSubview:block];
             }
