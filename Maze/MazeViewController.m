@@ -123,12 +123,11 @@
         self.mazeViewCenterConstraint.constant = 600;
         [self.view layoutIfNeeded];
         [self recreateMaze];
+        [self.checkbox setOn:NO animated:YES];
         [UIView animateWithDuration:1 animations:^{
             self.mazeViewCenterConstraint.constant = 0;
             [self.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [self.checkbox setOn:NO animated:YES];
-        }];
+        } completion:nil];
     }];
 }
 

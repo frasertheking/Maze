@@ -105,10 +105,16 @@ double rads = DEGREES_TO_RADIANS(180);
         self.m -= 1;
     }
     
-    if (self.n > 5) {
+    if (self.n > 6) {
         self.animate = YES;
     } else {
         self.animate = NO;
+    }
+    
+    if (self.n > 10) {
+        self.mazeViewWalls.alpha = 0.3;
+    } else {
+        self.mazeViewWalls.alpha = 1;
     }
     
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
@@ -139,6 +145,11 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewRest];
     [self removeSubviews:self.mazeViewPath];
     [self removeSubviews:self.mazeViewPathMask];
+    [self.gradientTimer invalidate];
+    self.gradientLayer = nil;
+    [self.mazeViewPath.layer setSublayers:nil];
+    [self.mazeViewWalls.layer setSublayers:nil];
+    [self.mazeViewRest.layer setSublayers:nil];
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
