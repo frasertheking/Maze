@@ -114,21 +114,33 @@
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
     [self resetCountdown];
-    [self.checkbox setOn:YES animated:YES];
-    
-    [UIView animateWithDuration:1 animations:^{
-        self.mazeViewCenterConstraint.constant = -600;
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        self.mazeViewCenterConstraint.constant = 600;
-        [self.view layoutIfNeeded];
-        [self recreateMaze];
-        [self.checkbox setOn:NO animated:YES];
-        [UIView animateWithDuration:1 animations:^{
-            self.mazeViewCenterConstraint.constant = 0;
-            [self.view layoutIfNeeded];
-        } completion:nil];
+
+    [UIView animateWithDuration:0.15 animations:^{
+        self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL f){
+        [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
+            self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
+            self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL f){
+            [self.checkbox setOn:YES animated:YES];
+            [UIView animateWithDuration:1 animations:^{
+                self.mazeViewCenterConstraint.constant = -600;
+                [self.view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.mazeViewCenterConstraint.constant = 600;
+                [self.view layoutIfNeeded];
+                [self recreateMaze];
+                [self.checkbox setOn:NO animated:YES];
+                [UIView animateWithDuration:1 animations:^{
+                    self.mazeViewCenterConstraint.constant = 0;
+                    [self.view layoutIfNeeded];
+                } completion:nil];
+            }];
+        }];
     }];
+    
+
 }
 
 #pragma mark - Countdown

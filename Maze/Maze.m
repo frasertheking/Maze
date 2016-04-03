@@ -17,13 +17,6 @@
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
 @property (nonatomic) NSMutableArray* attemptArray;
-@property (nonatomic) UIView* previousPreviousView;
-@property (nonatomic) UIView* previousView;
-@property (nonatomic) UIView* mazeViewWalls;
-@property (nonatomic) UIView* mazeViewMask;
-@property (nonatomic) UIView* mazeViewRest;
-@property (nonatomic) UIView* mazeViewPath;
-@property (nonatomic) UIView* mazeViewPathMask;
 
 @property (nonatomic) CAGradientLayer* gradientLayer;
 @property (nonatomic) int startRow;
