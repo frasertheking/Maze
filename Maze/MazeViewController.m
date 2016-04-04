@@ -43,6 +43,9 @@
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
     
+    self.timerView.layer.cornerRadius = 6;
+    self.timerView.layer.masksToBounds = YES;
+    
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
     self.checkbox.onFillColor = SEVERITY_GREEN;
@@ -110,43 +113,42 @@
 }
 
 -(void)finished {
+    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    
+    if (self.size > highScore) {
+        [[NSUserDefaults standardUserDefaults] setInteger:self.size forKey:@"highScore"];
+    }
+    
     self.size++;
     self.score++;
-    self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
+    self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
     [self resetCountdown];
 
-    [UIView animateWithDuration:0.15 animations:^{
-        self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1.1, 1.1);
-        self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
+        self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
+        self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
     } completion:^(BOOL f){
-        [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
-            self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
-            self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
-        } completion:^(BOOL f){
-            [self.checkbox setOn:YES animated:YES];
+        [self.checkbox setOn:YES animated:YES];
+        [UIView animateWithDuration:1 animations:^{
+            self.mazeViewCenterConstraint.constant = -600;
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            self.mazeViewCenterConstraint.constant = 600;
+            [self.view layoutIfNeeded];
+            [self recreateMaze];
+            [self.checkbox setOn:NO animated:YES];
             [UIView animateWithDuration:1 animations:^{
-                self.mazeViewCenterConstraint.constant = -600;
+                self.mazeViewCenterConstraint.constant = 0;
                 [self.view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self.mazeViewCenterConstraint.constant = 600;
-                [self.view layoutIfNeeded];
-                [self recreateMaze];
-                [self.checkbox setOn:NO animated:YES];
-                [UIView animateWithDuration:1 animations:^{
-                    self.mazeViewCenterConstraint.constant = 0;
-                    [self.view layoutIfNeeded];
-                } completion:nil];
-            }];
+            } completion:nil];
         }];
     }];
-    
-
 }
 
 #pragma mark - Countdown
 
 -(void)resetCountdown {
-    self.resultLabel.text = [NSString stringWithFormat:@"Score %d", self.score];
+    self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
     [self.timer invalidate];
     self.leadingTimerConstraint.constant = 40;
     self.trailingTimerConstraint.constant = 40;
@@ -184,7 +186,7 @@
     alert.showAnimationType = SlideInFromCenter;
     alert.hideAnimationType = SlideOutFromCenter;
     [alert addButton:@"Ok" target:self selector:@selector(recreateMaze)];
-    [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size] closeButtonTitle:nil duration:0];
+    [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size-1] closeButtonTitle:nil duration:0];
 }
 
 #pragma mark - UITextViewDelegate
