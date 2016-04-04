@@ -55,8 +55,8 @@
     [self resetCountdown];
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 -(void)setupParallaxEffect {

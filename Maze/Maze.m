@@ -8,6 +8,7 @@
 
 #import "Maze.h"
 #import "MazeViewController.h"
+#import "PowerUpView.h"
 
 @interface Maze ()
 
@@ -89,7 +90,7 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.n > 5) {
         self.power = NO;
     } else {
-        self.power = YES;
+        self.power = NO;
     }
     
     if (self.n > 17) {
@@ -471,15 +472,12 @@ double rads = DEGREES_TO_RADIANS(180);
                 block.backgroundColor = [UIColor whiteColor];
                 [self.mazeViewPathMask addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 if (r >= self.powerX && c >= self.powerY && !self.power) {
-                    block.layer.cornerRadius = size/2;
-                    block.layer.masksToBounds = YES;
-                    block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
-                    block.alpha = 0.4;
+                    PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:1];
                     self.power = YES;
-                    [self.mazeViewRest addSubview:block];
+                    [self.mazeViewRest addSubview:powerUp];
                 } else {
+                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                     block.backgroundColor = [UIColor clearColor];
                     [self.mazeViewPath addSubview:block];
                 }

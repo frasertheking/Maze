@@ -17,6 +17,7 @@
 		4368A29F1C83D2EA006E1779 /* MazeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A29E1C83D2EA006E1779 /* MazeUITests.m */; };
 		4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */; };
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
+		43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE8D01CB32EA80066097A /* PowerUpView.m */; };
 		FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFEF44CF66B679603AE0E32B /* libPods-Maze.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMazeGenerator.m; sourceTree = "<group>"; };
 		437B80A11C9CE9A30024F758 /* Maze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Maze.h; sourceTree = "<group>"; };
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
+		43EEE8CF1CB32EA80066097A /* PowerUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpView.h; sourceTree = "<group>"; };
+		43EEE8D01CB32EA80066097A /* PowerUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpView.m; sourceTree = "<group>"; };
 		6527CA6DDA978F2FD581E5BB /* Pods-Maze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.release.xcconfig"; sourceTree = "<group>"; };
 		86B44C96BDAD77C1A5E99A2B /* Pods-Maze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEF44CF66B679603AE0E32B /* libPods-Maze.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Maze.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +126,7 @@
 		4368A2781C83D2E9006E1779 /* Maze */ = {
 			isa = PBXGroup;
 			children = (
+				43EEE8CE1CB32E880066097A /* Items */,
 				437B80A41C9CEE6F0024F758 /* Maze */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
@@ -181,6 +185,15 @@
 				437B80A21C9CE9A30024F758 /* Maze.m */,
 			);
 			name = Maze;
+			sourceTree = "<group>";
+		};
+		43EEE8CE1CB32E880066097A /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				43EEE8CF1CB32EA80066097A /* PowerUpView.h */,
+				43EEE8D01CB32EA80066097A /* PowerUpView.m */,
+			);
+			name = Items;
 			sourceTree = "<group>";
 		};
 		511FC27D7177B7663E55CEED /* Pods */ = {
@@ -374,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
+				43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */,
 				4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */,
 				4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
