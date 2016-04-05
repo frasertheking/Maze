@@ -225,6 +225,7 @@ double rads = DEGREES_TO_RADIANS(180);
         [self drawMazePaths];
         [self solve];
         [self captureAttemptPath];
+        [self drawPowerups];
     }];
 }
 
@@ -289,11 +290,11 @@ double rads = DEGREES_TO_RADIANS(180);
     if ([[[self.blockArray objectAtIndex:row] objectAtIndex:column] integerValue] == 2) {
         [[self.solArray objectAtIndex:row] replaceObjectAtIndex:column withObject:[NSNumber numberWithInt:1]];
         if (self.complexity == 0) {
-            [self calculateComplexity];
-            if (self.complexity < self.n*self.complexityScale) {
-                [self createMaze];
-                return NO;
-            }
+        //    [self calculateComplexity];
+            //if (self.complexity < self.n*self.complexityScale) {
+            //    [self createMaze];
+            //    return NO;
+            //}
         } else {
             [self drawSolveLine];
         }
@@ -472,15 +473,22 @@ double rads = DEGREES_TO_RADIANS(180);
                 block.backgroundColor = [UIColor whiteColor];
                 [self.mazeViewPathMask addSubview:block];
             } else if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                if (r >= self.powerX && c >= self.powerY && !self.power) {
-                    PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:1];
-                    self.power = YES;
-                    [self.mazeViewRest addSubview:powerUp];
-                } else {
-                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.backgroundColor = [UIColor clearColor];
-                    [self.mazeViewPath addSubview:block];
-                }
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                block.backgroundColor = [UIColor clearColor];
+                [self.mazeViewPath addSubview:block];
+            }
+        }
+    }
+}
+
+-(void)drawPowerups {
+    float size = (self.frame.size.width) / (self.m * 2 + 1);
+    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:1];
+                self.power = YES;
+                [self.mazeViewRest addSubview:powerUp];
             }
         }
     }
@@ -529,11 +537,12 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)calculateComplexity {
+    NSMutableArray *solArrayCopy = [self.solArray mutableCopy];
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
-            if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+            if ([[[solArrayCopy objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 self.complexity++;
-                [[self.solArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
+                [[solArrayCopy objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
             }
         }
     }
