@@ -34,6 +34,7 @@
 @property BOOL power;
 @property BOOL animate;
 @property BOOL finished;
+@property BOOL totalRandomColors;
 @property double complexityScale;
 
 @end
@@ -66,6 +67,10 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
         self.mazeViewPathMask.backgroundColor = [UIColor clearColor];
         [self addSubview:self.mazeViewPathMask];
+        
+        self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewRandomColorWalls.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewRandomColorWalls];
     }
     return self;
 }
@@ -107,6 +112,16 @@ double rads = DEGREES_TO_RADIANS(180);
         self.animate = NO;
     }
     
+    if (self.n == 3) {
+        self.totalRandomColors = YES;
+    } else {
+        self.totalRandomColors = NO;
+    }
+    
+    if (self.n == 4 || self.n == 6) {
+        [self transformMaze];
+    }
+    
     if (self.n > 10) {
         self.mazeViewWalls.alpha = 0.3;
     } else {
@@ -143,6 +158,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewRest];
     [self removeSubviews:self.mazeViewPath];
     [self removeSubviews:self.mazeViewPathMask];
+    [self removeSubviews:self.mazeViewRandomColorWalls];
     [self.gradientTimer invalidate];
     self.gradientLayer = nil;
     [self.mazeViewPath.layer setSublayers:nil];
@@ -150,7 +166,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewRest.layer setSublayers:nil];
     
     self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = 6; // if you like rounded corners
+    self.layer.cornerRadius = 6;
     self.layer.shadowOffset = CGSizeMake(-2, 2);
     self.layer.shadowRadius = 2;
     self.layer.shadowOpacity = 0.1;
@@ -208,6 +224,12 @@ double rads = DEGREES_TO_RADIANS(180);
                     [self.mazeViewWalls addSubview:block];
                     block.backgroundColor = [UIColor whiteColor];
                     [self.mazeViewMask addSubview:block];
+                    
+                    if (self.totalRandomColors) {
+                        block.backgroundColor = [self getRandomColor];
+                        [self.mazeViewRandomColorWalls addSubview:block];
+                    }
+                    
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
                     if (dontDraw) {
@@ -522,7 +544,7 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)transformMaze {
-    [UIView animateWithDuration:5 delay:0 options:(UIViewAnimationOptionAllowUserInteraction) animations:^{
+    [UIView animateWithDuration:10 delay:0 options:(UIViewAnimationOptionAllowUserInteraction) animations:^{
         self.layer.transform = CATransform3DMakeRotation(rads, 0, 0, 1);
     } completion:^(BOOL finished) {
         rads += DEGREES_TO_RADIANS(180);

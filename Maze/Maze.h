@@ -22,6 +22,7 @@
 @property (nonatomic) UIView* mazeViewRest;
 @property (nonatomic) UIView* mazeViewPath;
 @property (nonatomic) UIView* mazeViewPathMask;
+@property (nonatomic) UIView* mazeViewRandomColorWalls;
 
 -(void)createMaze;
 -(void)solve;
