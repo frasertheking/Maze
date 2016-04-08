@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import SpriteKit;
 #import "Maze.h"
 #import "AppDelegate.h"
 #import "BEMCheckBox.h"
@@ -25,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
+@property (nonatomic, weak) IBOutlet SKView *particleView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

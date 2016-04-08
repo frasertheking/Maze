@@ -195,9 +195,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    block.alpha = 0.75;
                     [self.mazeViewWalls addSubview:block];
-                    
                     block.backgroundColor = [UIColor whiteColor];
                     [self.mazeViewMask addSubview:block];
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];

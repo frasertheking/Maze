@@ -9,6 +9,7 @@
 #import "MazeViewController.h"
 #import "DEMazeGenerator.h"
 #import "Maze.h"
+#import "StarBackgroundScene.h"
 
 @interface MazeViewController ()
 
@@ -51,12 +52,20 @@
     self.checkbox.onFillColor = SEVERITY_GREEN;
     self.checkbox.onTintColor = SOLVE;
     
+    [self setupParticles];
     [self setupParallaxEffect];
     [self resetCountdown];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
+}
+
+- (void)setupParticles {
+    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.particleView.allowsTransparency = YES;
+    [self.particleView presentScene:scene];
 }
 
 -(void)setupParallaxEffect {
