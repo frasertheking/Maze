@@ -35,16 +35,17 @@
     self.animatedImageView.animationImages = self.imageArray;
     self.animatedImageView.animationDuration = 1;
     self.animatedImageView.alpha = 0.65;
-    [self addSubview:self.animatedImageView];
+    //[self addSubview:self.animatedImageView];
     [self.animatedImageView startAnimating];
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.duration = 1;
     scaleAnimation.repeatCount = HUGE_VAL;
     scaleAnimation.autoreverses = YES;
-    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.1];
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.33];
     scaleAnimation.toValue = [NSNumber numberWithFloat:0.9];
     [self.backgroundImageView.layer addAnimation:scaleAnimation forKey:@"scale"];
+    [self runSpinAnimationOnView:self.backgroundImageView duration:25 rotations:0.1 repeat:1];
 }
 
 - (id)initWithCoder:(NSCoder *)aCoder{
@@ -67,6 +68,19 @@
         [self initialize];
     }
     return self;
+}
+
+#pragma mark - Helpers
+
+- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat {
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 /* full rotation*/ * rotations * duration ];
+    rotationAnimation.duration = duration;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = repeat;
+    
+    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 #pragma mark - Object Type
