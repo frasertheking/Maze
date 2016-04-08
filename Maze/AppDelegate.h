@@ -14,6 +14,7 @@
 #define GRAY_MED UIColorFromRGB(0x2A2C2B)
 #define GRAY_DARK UIColorFromRGB(0x1E1E20)
 #define SOLVE UIColorFromRGB(0x45BF55)
+#define GOLD UIColorFromRGB(0xFFD700)
 
 #define SEVERITY_GREEN UIColorFromRGB(0x349940)
 #define SEVERITY_YELLOW UIColorFromRGB(0xFFE15E)

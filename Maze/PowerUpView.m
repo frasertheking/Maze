@@ -25,11 +25,22 @@
     self.backgroundImageView.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:self.backgroundImageView];
 
-    [self createRedItem];
-    //[self createOrangeItem];
-    //[self createBlueItem];
-    //[self createPurpleItem];
-    //[self createGreenItem];
+    switch (self.type) {
+        case 0:
+            [self createRedItem];
+            break;
+        case 1:
+            [self createBlueItem];
+            break;
+        case 2:
+            [self createGreenItem];
+            break;
+        case 3:
+            [self createOrangeItem];
+        default:
+            [self createPurpleItem];
+            break;
+    }
     
     self.animatedImageView = [[UIImageView alloc] initWithFrame:self.bounds];
     self.animatedImageView.animationImages = self.imageArray;

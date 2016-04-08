@@ -29,6 +29,8 @@
 @property CGPoint previousLoc;
 @property NSInteger powerX;
 @property NSInteger powerY;
+@property NSInteger powerUpX;
+@property NSInteger powerUpY;
 @property BOOL power;
 @property BOOL animate;
 @property BOOL finished;
@@ -243,30 +245,6 @@ double rads = DEGREES_TO_RADIANS(180);
     }
 }
 
--(void)animateWalls {
-    NSArray *fromColors = self.gradientLayer.colors;
-    NSArray *toColors = @[(id)[self getRandomColor].CGColor,
-                          (id)[self getRandomColor].CGColor,
-                          (id)[self getRandomColor].CGColor,
-                          (id)[self getRandomColor].CGColor,
-                          (id)[self getRandomColor].CGColor,];
-    
-    [self.gradientLayer setColors:toColors];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
-    
-    animation.fromValue             = fromColors;
-    animation.toValue               = toColors;
-    animation.duration              = 1.00;
-    animation.removedOnCompletion   = YES;
-    animation.fillMode              = kCAFillModeForwards;
-    animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    animation.delegate              = self;
-    
-    [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
-    self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
-}
-
 #pragma mark - Maze Solving
 
 -(void)solve {
@@ -388,6 +366,12 @@ double rads = DEGREES_TO_RADIANS(180);
                 }
             }
         }
+        
+        if (self.currentX == self.powerUpX && self.currentY == self.powerUpY) {
+            self.powerUpY = -1;
+            self.powerUpX = -1;
+            [self removeSubviews:self.mazeViewRest];
+        }
     }
     [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
@@ -484,9 +468,12 @@ double rads = DEGREES_TO_RADIANS(180);
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:1];
+                NSInteger powerUpType = arc4random() % 4;
+                PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:powerUpType];
                 self.power = YES;
                 [self.mazeViewRest addSubview:powerUp];
+                self.powerUpX = r;
+                self.powerUpY = c;
             }
         }
     }
@@ -559,7 +546,7 @@ double rads = DEGREES_TO_RADIANS(180);
 -(UIColor*) inverseColor:(UIColor*)color {
     const CGFloat *componentColors = CGColorGetComponents(color.CGColor);
     
-    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.45) green:(componentColors[1] - 0.45) blue:(componentColors[2] - 0.45) alpha:componentColors[3] - 0.2];
+    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.25) green:(componentColors[1] - 0.25) blue:(componentColors[2] - 0.25) alpha:componentColors[3] - 0.25];
 }
 
 - (UIColor *) getRandomColor {
@@ -569,6 +556,30 @@ double rads = DEGREES_TO_RADIANS(180);
     h = fmodf(h, 1.0);
     UIColor *tempColor = [UIColor colorWithHue:h saturation:0.8 brightness:0.95 alpha:1];
     return tempColor;
+}
+
+-(void)animateWalls {
+    NSArray *fromColors = self.gradientLayer.colors;
+    NSArray *toColors = @[(id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,];
+    
+    [self.gradientLayer setColors:toColors];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
+    
+    animation.fromValue             = fromColors;
+    animation.toValue               = toColors;
+    animation.duration              = 1.00;
+    animation.removedOnCompletion   = YES;
+    animation.fillMode              = kCAFillModeForwards;
+    animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.delegate              = self;
+    
+    [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
+    self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
 }
 
 @end
