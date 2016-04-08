@@ -113,6 +113,8 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeViewWalls.alpha = 1;
     }
     
+    self.powerUpX = -1;
+    self.powerUpY = -1;
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
     self.powerY = 1 + arc4random() % (self.m*2 - 1);
     self.finished = NO;
@@ -146,6 +148,12 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewPath.layer setSublayers:nil];
     [self.mazeViewWalls.layer setSublayers:nil];
     [self.mazeViewRest.layer setSublayers:nil];
+    
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = 6; // if you like rounded corners
+    self.layer.shadowOffset = CGSizeMake(-2, 2);
+    self.layer.shadowRadius = 2;
+    self.layer.shadowOpacity = 0.1;
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -371,6 +379,13 @@ double rads = DEGREES_TO_RADIANS(180);
             self.powerUpY = -1;
             self.powerUpX = -1;
             [self removeSubviews:self.mazeViewRest];
+            CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            scaleAnimation.duration = 0.25;
+            scaleAnimation.repeatCount = 0;
+            scaleAnimation.autoreverses = YES;
+            scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+            scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
+            [self.layer addAnimation:scaleAnimation forKey:@"scale"];
         }
     }
     [self drawAttempt];
