@@ -18,6 +18,7 @@
 @property (nonatomic) NSTimer* timer;
 @property (nonatomic) int remainingCounts;
 @property (nonatomic) int score;
+@property (nonatomic) NSInteger itemType;
 
 @end
 
@@ -28,6 +29,7 @@
     
     self.size = 2;
     self.score = 0;
+    self.itemType = -1;
     
     [self setGradientBackground];
     [self setupTextField];
@@ -43,7 +45,13 @@
     self.checkbox.onAnimationType = BEMAnimationTypeFill;
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
-    self.itemImage.hidden = YES;
+    self.itemImage.alpha = 0;
+    
+    self.inventoryImage.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.itemImage addGestureRecognizer:tapGesture];
     
     self.timerView.layer.cornerRadius = 6;
     self.timerView.layer.masksToBounds = YES;
@@ -203,20 +211,41 @@
     switch (type) {
         case 0:
             self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
+            self.itemType = 0;
             break;
         case 1:
             self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
+            self.itemType = 1;
             break;
         case 2:
             self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
+            self.itemType = 2;
             break;
         case 3:
             self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
+            self.itemType = 3;
         default:
             self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
+            self.itemType = 4;
             break;
     }
-    self.itemImage.hidden = NO;
+    self.itemImage.alpha = 1;
+}
+
+- (void)useItem {
+    if (self.itemType >= 0) {
+        self.itemType = -1;
+        NSLog(@"USING ITEM");
+        [UIView animateWithDuration:0.35 animations:^{
+            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
+            self.itemImage.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.mazeView showSolvePath];
+            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+        }];
+    } else {
+        NSLog(@"NO ITEM");
+    }
 }
 
 #pragma mark - UITextViewDelegate
@@ -274,10 +303,6 @@
                              [self.view layoutIfNeeded];
                          } completion:nil];
     }
-}
-
-- (IBAction)useItem:(id)sender {
-    NSLog(@"USING ITEM");
 }
 
 #pragma mark - Helpers

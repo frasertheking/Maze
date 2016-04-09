@@ -201,6 +201,7 @@
                         <outlet property="bottomConstraint" destination="VHK-TI-ZR6" id="2lZ-Ij-HQ6"/>
                         <outlet property="checkbox" destination="oLs-hC-72s" id="hIf-as-Ih9"/>
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
+                        <outlet property="inventoryImage" destination="wER-8F-mIV" id="hBr-k5-bSN"/>
                         <outlet property="itemImage" destination="4vV-jE-3Lp" id="2s5-dm-5by"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>

@@ -23,11 +23,13 @@
 @property (nonatomic) UIView* mazeViewPath;
 @property (nonatomic) UIView* mazeViewPathMask;
 @property (nonatomic) UIView* mazeViewRandomColorWalls;
+@property (nonatomic) UIView* mazeSolveLine;
 
 -(void)createMaze;
 -(void)solve;
 -(void)transformMaze;
 -(void)setupGestureRecognizer:(UIView*)view;
 -(void)initMazeWithSize:(int)size;
+-(void)showSolvePath;
 
 @end
