@@ -43,6 +43,7 @@
     self.checkbox.onAnimationType = BEMAnimationTypeFill;
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
+    self.itemImage.hidden = YES;
     
     self.timerView.layer.cornerRadius = 6;
     self.timerView.layer.masksToBounds = YES;
@@ -115,7 +116,7 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
--(void)recreateMaze {    
+-(void)recreateMaze {
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
     [self resetCountdown];
@@ -198,6 +199,26 @@
     [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size-1] closeButtonTitle:nil duration:0];
 }
 
+-(void)itemFound:(NSInteger)type {
+    switch (type) {
+        case 0:
+            self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
+            break;
+        case 1:
+            self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
+            break;
+        case 2:
+            self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
+            break;
+        case 3:
+            self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
+        default:
+            self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
+            break;
+    }
+    self.itemImage.hidden = NO;
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textFieldDidChange:(UITextField *)textField {
@@ -253,6 +274,10 @@
                              [self.view layoutIfNeeded];
                          } completion:nil];
     }
+}
+
+- (IBAction)useItem:(id)sender {
+    NSLog(@"USING ITEM");
 }
 
 #pragma mark - Helpers

@@ -106,6 +106,28 @@
                                     <constraint firstAttribute="width" constant="150" id="Le8-Xr-OFq"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inventory_slot" translatesAutoresizingMaskIntoConstraints="NO" id="wER-8F-mIV">
+                                <rect key="frame" x="270" y="466" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="T9y-m2-9Yc"/>
+                                    <constraint firstAttribute="width" constant="60" id="ybk-op-UPi"/>
+                                </constraints>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purpleCrystal" translatesAutoresizingMaskIntoConstraints="NO" id="4vV-jE-3Lp">
+                                <rect key="frame" x="275" y="470" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="Jra-IF-WUq"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="eVM-Lh-UDm"/>
+                                    <constraint firstAttribute="height" constant="50" id="ov7-q0-fat"/>
+                                    <constraint firstAttribute="width" constant="50" id="y08-3L-JdB"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Jra-IF-WUq"/>
+                                        <exclude reference="eVM-Lh-UDm"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -123,6 +145,7 @@
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ExA-Qj-5N6"/>
                             <constraint firstItem="Edp-id-Za9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Fbw-IG-rdV"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="Ffo-vO-33d"/>
+                            <constraint firstItem="4vV-jE-3Lp" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="20" id="GdE-9A-nNz"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H7Q-u2-mZz"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="leading" secondItem="lpa-xI-gZl" secondAttribute="trailing" constant="22" id="Hka-cu-kLl"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="top" secondItem="ITf-Q6-a5M" secondAttribute="bottom" constant="25" id="JHG-2o-bmd"/>
@@ -137,11 +160,14 @@
                             <constraint firstAttribute="bottom" secondItem="Edp-id-Za9" secondAttribute="bottom" id="YYm-xa-aCG"/>
                             <constraint firstAttribute="trailing" secondItem="Edp-id-Za9" secondAttribute="trailing" id="bLE-x0-L6D"/>
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="cnP-XH-yOp"/>
+                            <constraint firstItem="4vV-jE-3Lp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d11-WT-yF8"/>
+                            <constraint firstItem="wER-8F-mIV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eKr-b0-teA"/>
                             <constraint firstItem="AxS-Vu-Ufp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fK4-9W-4pM"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3A-KK-o3W"/>
                             <constraint firstItem="72M-oM-AXh" firstAttribute="centerY" secondItem="lpa-xI-gZl" secondAttribute="centerY" id="jdM-HH-hm8"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="top" secondItem="72M-oM-AXh" secondAttribute="bottom" constant="8" id="jtG-SY-IE4"/>
                             <constraint firstItem="lpa-xI-gZl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kS9-2q-Vbs"/>
+                            <constraint firstItem="wER-8F-mIV" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="16" id="kSW-Pc-dpL"/>
                             <constraint firstItem="mLM-zv-ilq" firstAttribute="top" secondItem="lpa-xI-gZl" secondAttribute="bottom" constant="8" id="lke-Tw-oqO"/>
                             <constraint firstItem="BUm-wb-Rcn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n47-hP-aY1"/>
                             <constraint firstAttribute="bottom" secondItem="Edp-id-Za9" secondAttribute="bottom" id="o1f-uD-lBd"/>
@@ -175,6 +201,7 @@
                         <outlet property="bottomConstraint" destination="VHK-TI-ZR6" id="2lZ-Ij-HQ6"/>
                         <outlet property="checkbox" destination="oLs-hC-72s" id="hIf-as-Ih9"/>
                         <outlet property="complexityLabel" destination="BUm-wb-Rcn" id="dXy-wM-bhu"/>
+                        <outlet property="itemImage" destination="4vV-jE-3Lp" id="2s5-dm-5by"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="mazeView" destination="Ocf-we-m1Q" id="Vg0-jF-cLn"/>
                         <outlet property="mazeViewCenterConstraint" destination="H7Q-u2-mZz" id="vy9-6z-fH3"/>
@@ -191,4 +218,8 @@
             <point key="canvasLocation" x="431" y="330"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="inventory_slot" width="100" height="100"/>
+        <image name="purpleCrystal" width="128" height="128"/>
+    </resources>
 </document>

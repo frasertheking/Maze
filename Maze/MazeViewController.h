@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UIView *timerView;
 @property (nonatomic, weak) IBOutlet UIView *topBanner;
 @property (nonatomic, weak) IBOutlet UIView *bottomBanner;
+@property (nonatomic, weak) IBOutlet UIImageView *itemImage;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
@@ -41,5 +42,6 @@
 
 -(void)recreateMaze;
 -(void)finished;
+-(void)itemFound:(NSInteger)type;
 @end
 

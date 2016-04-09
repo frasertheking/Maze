@@ -31,6 +31,7 @@
 @property NSInteger powerY;
 @property NSInteger powerUpX;
 @property NSInteger powerUpY;
+@property NSInteger powerUpType;
 @property BOOL power;
 @property BOOL animate;
 @property BOOL finished;
@@ -408,6 +409,7 @@ double rads = DEGREES_TO_RADIANS(180);
             scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
             scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
             [self.layer addAnimation:scaleAnimation forKey:@"scale"];
+            [((MazeViewController*)self.delegate) itemFound:self.powerUpType];
         }
     }
     [self drawAttempt];
@@ -505,8 +507,8 @@ double rads = DEGREES_TO_RADIANS(180);
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                NSInteger powerUpType = arc4random() % 4;
-                PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:powerUpType];
+                self.powerUpType = arc4random() % 4;
+                PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
                 self.power = YES;
                 [self.mazeViewRest addSubview:powerUp];
                 self.powerUpX = r;
