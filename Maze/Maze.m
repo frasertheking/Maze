@@ -138,6 +138,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.powerX = 1 + arc4random() % (self.n*2 - 1);
     self.powerY = 1 + arc4random() % (self.m*2 - 1);
     self.finished = NO;
+    self.godMode = NO;
     
     [self initialize];
 }
@@ -345,7 +346,7 @@ double rads = DEGREES_TO_RADIANS(180);
         if (fabs(vel.x) > fabs(vel.y)) {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.x) * 150))) {
                 if (vel.x > 0) {
-                    if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    if (self.currentX + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
                         self.currentX++;
                         if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                             [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
@@ -353,7 +354,8 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                         }
                         self.previousLoc = currentPoint;
-                    } else if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
+                    }
+                    if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
                         if (!self.finished) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self drawAttempt];
@@ -362,7 +364,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         }
                     }
                 } else {
-                    if (self.currentX - 1 > 0 && [[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1) {
+                    if (self.currentX - 1 > 0 && ([[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
                         self.currentX--;
                         if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
@@ -376,7 +378,7 @@ double rads = DEGREES_TO_RADIANS(180);
         } else {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.y) * 150))) {
                 if (vel.y < 0) {
-                    if (self.currentY - 1 >= 0 && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1) {
+                    if (self.currentY - 1 >= 0 && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1 || self.godMode)) {
                         self.currentY--;
                         if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
@@ -386,7 +388,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         self.previousLoc = currentPoint;
                     }
                 } else {
-                    if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1) {
+                    if (self.currentY + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1 || self.godMode)) {
                         self.currentY++;
                         if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:0]];
@@ -622,5 +624,6 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
     self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
 }
+
 
 @end

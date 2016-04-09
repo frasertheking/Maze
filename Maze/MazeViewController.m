@@ -198,6 +198,10 @@
     }
 }
 
+-(void)freezeTime {
+    [self.timer invalidate];
+}
+
 -(void)levelFailed {
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.backgroundType = Blur;
@@ -239,13 +243,32 @@
 
 - (void)useItem {
     if (self.itemType >= 0) {
-        self.itemType = -1;
         [UIView animateWithDuration:0.35 animations:^{
             self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
             self.itemImage.alpha = 0;
         } completion:^(BOOL finished) {
-            [self.mazeView showSolvePath];
             self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+            
+            switch (self.itemType) {
+                case 0:
+                    [self.mazeView showSolvePath];
+                    break;
+                case 1:
+                    [self freezeTime];
+                    break;
+                case 2:
+                    self.size++;
+                    [self finished];
+                    break;
+                case 3:
+                    self.mazeView.godMode = YES;
+                    break;
+                default:
+                    break;
+            }
+            self.itemType = -1;
+            
+            self.mazeView.godMode = YES;
         }];
     }
 }

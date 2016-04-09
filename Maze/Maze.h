@@ -24,6 +24,7 @@
 @property (nonatomic) UIView* mazeViewPathMask;
 @property (nonatomic) UIView* mazeViewRandomColorWalls;
 @property (nonatomic) UIView* mazeSolveLine;
+@property (nonatomic) BOOL godMode;
 
 -(void)createMaze;
 -(void)solve;
