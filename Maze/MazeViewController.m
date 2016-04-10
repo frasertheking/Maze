@@ -257,18 +257,16 @@
                     [self freezeTime];
                     break;
                 case 2:
-                    self.size++;
                     [self finished];
                     break;
                 case 3:
                     self.mazeView.godMode = YES;
                     break;
                 default:
+                    [self.mazeView showWhiteWalls];
                     break;
             }
             self.itemType = -1;
-            
-            self.mazeView.godMode = YES;
         }];
     }
 }

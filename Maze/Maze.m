@@ -61,6 +61,10 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeViewRest.backgroundColor = [UIColor clearColor];
         [self addSubview:self.mazeViewRest];
         
+        self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
+        self.mazeViewRandomColorWalls.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.mazeViewRandomColorWalls];
+        
         self.mazeViewPath = [[UIView alloc] initWithFrame:self.bounds];
         self.mazeViewPath.backgroundColor = [UIColor clearColor];
         [self addSubview:self.mazeViewPath];
@@ -68,10 +72,6 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
         self.mazeViewPathMask.backgroundColor = [UIColor clearColor];
         [self addSubview:self.mazeViewPathMask];
-        
-        self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewRandomColorWalls.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewRandomColorWalls];
         
         self.mazeSolveLine = [[UIView alloc] initWithFrame:self.bounds];
         self.mazeSolveLine.backgroundColor = [UIColor clearColor];
@@ -236,7 +236,6 @@ double rads = DEGREES_TO_RADIANS(180);
                         block.backgroundColor = [self getRandomColor];
                         [self.mazeViewRandomColorWalls addSubview:block];
                     }
-                    
                     [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
                     if (dontDraw) {
@@ -258,7 +257,7 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         self.currentX = self.startRow;
         self.currentY = self.startCol;
-        [self captureWalls];
+        [self captureWalls:NO];
         [self drawMazePaths];
         [self solve];
         [self captureAttemptPath];
@@ -266,12 +265,16 @@ double rads = DEGREES_TO_RADIANS(180);
     }];
 }
 
--(void)captureWalls {
+-(void)captureWalls:(BOOL)white {
     [self.gradientTimer invalidate];
     [self.mazeViewWalls.layer setSublayers:nil];
     self.gradientLayer = [CAGradientLayer layer];
     self.gradientLayer.frame = self.bounds;
+    if (white) {
+        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+    } else {
     self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
+    }
     self.gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
     self.gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
     [self.mazeViewWalls.layer insertSublayer:self.gradientLayer atIndex:0];
@@ -346,15 +349,6 @@ double rads = DEGREES_TO_RADIANS(180);
         if (fabs(vel.x) > fabs(vel.y)) {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.x) * 150))) {
                 if (vel.x > 0) {
-                    if (self.currentX + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
-                        self.currentX++;
-                        if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                            [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
-                        } else {
-                            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
-                        }
-                        self.previousLoc = currentPoint;
-                    }
                     if (self.currentX + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 2) {
                         if (!self.finished) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -362,11 +356,19 @@ double rads = DEGREES_TO_RADIANS(180);
                             [((MazeViewController*)self.delegate) finished];
                             self.finished = YES;
                         }
+                    } else if (self.currentX + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX+1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
+                        self.currentX++;
+                        if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
+                            [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
+                        } else {
+                            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                        }
+                        self.previousLoc = currentPoint;
                     }
                 } else {
                     if (self.currentX - 1 > 0 && ([[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
                         self.currentX--;
-                        if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -377,20 +379,34 @@ double rads = DEGREES_TO_RADIANS(180);
             }
         } else {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.y) * 150))) {
-                if (vel.y < 0) {
-                    if (self.currentY - 1 >= 0 && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1 || self.godMode)) {
-                        self.currentY--;
-                        if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
-                            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
-                        } else {
-                            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                    if (vel.y < 0) {
+                        if (self.currentY - 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 2) {
+                            if (!self.finished) {
+                                [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:1]];
+                                [self drawAttempt];
+                                [((MazeViewController*)self.delegate) finished];
+                                self.finished = YES;
+                            }
+                        } else if (self.currentY - 1 >= 0 && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY-1] integerValue] == 1 || self.godMode)) {
+                            self.currentY--;
+                            if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
+                                [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
+                            } else {
+                                [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
+                            }
+                            self.previousLoc = currentPoint;
                         }
-                        self.previousLoc = currentPoint;
-                    }
                 } else {
-                    if (self.currentY + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1 || self.godMode)) {
+                    if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 2) {
+                        if (!self.finished) {
+                            [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:1]];
+                            [self drawAttempt];
+                            [((MazeViewController*)self.delegate) finished];
+                            self.finished = YES;
+                        }
+                    } else if (self.currentY + 1 < self.blockArray.count && ([[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 1 || self.godMode)) {
                         self.currentY++;
-                        if ([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) {
+                        if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:0]];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -625,5 +641,8 @@ double rads = DEGREES_TO_RADIANS(180);
     self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
 }
 
+-(void)showWhiteWalls {
+    [self captureWalls:YES];
+ }
 
 @end

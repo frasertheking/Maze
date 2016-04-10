@@ -32,5 +32,6 @@
 -(void)setupGestureRecognizer:(UIView*)view;
 -(void)initMazeWithSize:(int)size;
 -(void)showSolvePath;
+-(void)showWhiteWalls;
 
 @end
