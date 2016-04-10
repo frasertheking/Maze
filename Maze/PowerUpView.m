@@ -37,6 +37,7 @@
             break;
         case 3:
             [self createOrangeItem];
+            break;
         default:
             [self createPurpleItem];
             break;

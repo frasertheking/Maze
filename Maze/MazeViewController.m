@@ -47,7 +47,7 @@
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
     self.itemImage.alpha = 0;
-    self.inventoryView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
+    self.inventoryView.backgroundColor = [UIColor clearColor];
     
     self.inventoryImage.userInteractionEnabled = YES;
     
@@ -231,6 +231,7 @@
         case 3:
             self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
             self.itemType = 3;
+            break;
         default:
             self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
             self.itemType = 4;
