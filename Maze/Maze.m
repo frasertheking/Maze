@@ -274,15 +274,17 @@ double rads = DEGREES_TO_RADIANS(180);
     self.gradientLayer.frame = self.bounds;
     if (white) {
         self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+    } else if (self.godMode) {
+        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)GOLD.CGColor, (id)GOLD.CGColor, nil];
     } else {
-    self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
+        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
     }
     self.gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
     self.gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
     [self.mazeViewWalls.layer insertSublayer:self.gradientLayer atIndex:0];
     self.mazeViewWalls.maskView = self.mazeViewMask;
     
-    if (self.animate && !white) {
+    if (self.animate && !white && !self.godMode) {
         [self animateWalls];
     }
 }
@@ -648,6 +650,11 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)showWhiteWalls {
     [self captureWalls:YES];
+}
+
+-(void)activateGodMode {
+    self.godMode = YES;
+    [self captureWalls:NO];
 }
 
 @end

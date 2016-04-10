@@ -216,6 +216,7 @@
 }
 
 -(void)levelFailed {
+    self.itemType = -1;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.backgroundType = Blur;
     alert.showAnimationType = SlideInFromCenter;
@@ -274,7 +275,7 @@
                     [self finished];
                     break;
                 case 3:
-                    self.mazeView.godMode = YES;
+                    [self.mazeView activateGodMode];
                     break;
                 default:
                     [self.mazeView showWhiteWalls];

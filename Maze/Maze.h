@@ -33,5 +33,6 @@
 -(void)initMazeWithSize:(int)size;
 -(void)showSolvePath;
 -(void)showWhiteWalls;
+-(void)activateGodMode;
 
 @end
