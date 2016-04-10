@@ -280,7 +280,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewWalls.layer insertSublayer:self.gradientLayer atIndex:0];
     self.mazeViewWalls.maskView = self.mazeViewMask;
     
-    if (self.animate) {
+    if (self.animate && !white) {
         [self animateWalls];
     }
 }
