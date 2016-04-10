@@ -20,6 +20,7 @@
 @property (nonatomic) NSMutableArray* attemptArray;
 
 @property (nonatomic) CAGradientLayer* gradientLayer;
+@property (nonatomic) CAGradientLayer* gradientLayer2;
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
 @property (nonatomic) NSTimer *gradientTimer;
@@ -168,6 +169,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeSolveLine];
     [self.gradientTimer invalidate];
     self.gradientLayer = nil;
+    self.gradientLayer2 = nil;
     [self.mazeViewPath.layer setSublayers:nil];
     [self.mazeViewWalls.layer setSublayers:nil];
     [self.mazeViewRest.layer setSublayers:nil];
@@ -474,12 +476,15 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)captureAttemptPath {
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = self.bounds;
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
-    gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
-    gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
-    [self.mazeViewPath.layer insertSublayer:gradientLayer atIndex:0];
+    if (self.godMode) {
+        [self.mazeViewPath.layer setSublayers:nil];
+    }    
+    self.gradientLayer2 = [CAGradientLayer layer];
+    self.gradientLayer2.frame = self.bounds;
+    self.gradientLayer2.colors = [NSArray arrayWithObjects:(id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
+    self.gradientLayer2.startPoint = CGPointMake(0.0f, 0.0f);
+    self.gradientLayer2.endPoint = CGPointMake(1.0f, 1.0f);
+    [self.mazeViewPath.layer insertSublayer:self.gradientLayer2 atIndex:0];
     self.mazeViewPath.maskView = self.mazeViewPathMask;
 }
 
@@ -643,6 +648,6 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)showWhiteWalls {
     [self captureWalls:YES];
- }
+}
 
 @end

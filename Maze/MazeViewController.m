@@ -37,7 +37,7 @@
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size];
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
@@ -129,7 +129,7 @@
 -(void)recreateMaze {
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size];
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
     [self resetCountdown];
 }
 
@@ -203,6 +203,16 @@
 
 -(void)freezeTime {
     [self.timer invalidate];
+    
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.25;
+    scaleAnimation.repeatCount = 0;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
+    [self.timerView.layer addAnimation:scaleAnimation forKey:@"scale"];
+    
+    self.timerView.backgroundColor = [UIColor blueColor];
 }
 
 -(void)levelFailed {
