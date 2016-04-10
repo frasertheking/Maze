@@ -37,6 +37,7 @@
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size];
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
@@ -46,6 +47,7 @@
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
     self.itemImage.alpha = 0;
+    self.inventoryView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
     
     self.inventoryImage.userInteractionEnabled = YES;
     
@@ -127,6 +129,7 @@
 -(void)recreateMaze {
     [self.mazeView initMazeWithSize:self.size];
     self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size];
     [self resetCountdown];
 }
 
