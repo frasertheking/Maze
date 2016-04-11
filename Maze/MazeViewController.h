@@ -13,16 +13,12 @@
 #import "BEMCheckBox.h"
 #import "SCLAlertView.h"
 
-@interface MazeViewController : UIViewController <UITextViewDelegate>
+@interface MazeViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
-@property (nonatomic, weak) IBOutlet UITextField *sizeTextField;
-@property (nonatomic, weak) IBOutlet UILabel *complexityLabel;
 @property (nonatomic, weak) IBOutlet UILabel *resultLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
-@property (nonatomic, weak) IBOutlet UIView *topBanner;
-@property (nonatomic, weak) IBOutlet UIView *bottomBanner;
 @property (nonatomic, weak) IBOutlet UIView *inventoryView;
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
 @property (nonatomic, weak) IBOutlet UIImageView *inventoryImage;

@@ -32,11 +32,9 @@
     self.itemType = -1;
     
     [self setGradientBackground];
-    [self setupTextField];
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
-    self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
     self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
@@ -119,16 +117,8 @@
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
 }
 
--(void) setupTextField {
-    self.sizeTextField.keyboardType = UIKeyboardTypeNumberPad;
-    [self.sizeTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignTextField)];
-    [self.view addGestureRecognizer:tapGesture];
-}
-
 -(void)recreateMaze {
     [self.mazeView initMazeWithSize:self.size];
-    self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
     self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
     [self resetCountdown];
 }
@@ -217,6 +207,7 @@
 
 -(void)levelFailed {
     self.itemType = -1;
+    self.itemImage.image = nil;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.backgroundType = Blur;
     alert.showAnimationType = SlideInFromCenter;
@@ -286,23 +277,6 @@
     }
 }
 
-#pragma mark - UITextViewDelegate
-
-- (void)textFieldDidChange:(UITextField *)textField {
-    if ([textField.text intValue] < 76) {
-        self.size = [textField.text intValue];
-        [self.mazeView initMazeWithSize:self.size];
-        self.complexityLabel.text = [NSString stringWithFormat:@"Complexity: %.02f", self.mazeView.complexity];
-        [self resetCountdown];
-    } else {
-        textField.text = 0;
-    }
-}
-
-- (void)resignTextField {
-    [self.sizeTextField resignFirstResponder];
-}
-
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
@@ -321,25 +295,19 @@
 
 - (IBAction)showOptions:(id)sender {
     if (self.showingOptions) {
-        [UIView animateWithDuration:0.5
-                              delay:0.0
-                            options:0
-                         animations:^{
-                             self.topConstraint.constant = -150;
-                             self.bottomConstraint.constant = -150;
-                             self.showingOptions = NO;
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
+        [UIView animateWithDuration:0.5 delay:0.0  options:0 animations:^{
+             self.topConstraint.constant = -150;
+             self.bottomConstraint.constant = -150;
+             self.showingOptions = NO;
+             [self.view layoutIfNeeded];
+        } completion:nil];
     } else {
-        [UIView animateWithDuration:0.5
-                              delay:0.0
-                            options:0
-                         animations:^{
-                             self.topConstraint.constant = 36;
-                             self.bottomConstraint.constant = 16;
-                             self.showingOptions = YES;
-                             [self.view layoutIfNeeded];
-                         } completion:nil];
+        [UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
+             self.topConstraint.constant = 36;
+             self.bottomConstraint.constant = 16;
+             self.showingOptions = YES;
+             [self.view layoutIfNeeded];
+        } completion:nil];
     }
 }
 
