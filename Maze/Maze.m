@@ -125,7 +125,7 @@ double rads = DEGREES_TO_RADIANS(180);
     }
     
     if (self.n == 10) {
-        [self transformMaze];
+        //[self transformMaze];
     }
     
     if (self.n > 10) {
@@ -486,7 +486,7 @@ double rads = DEGREES_TO_RADIANS(180);
     for (int r = 0; r < self.n * 2 + 1 ; r++) {
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                self.powerUpType = arc4random() % 4;
+                self.powerUpType = arc4random() % 5;
                 PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
                 self.power = YES;
                 [self.mazeViewRest addSubview:powerUp];
