@@ -19,6 +19,7 @@
 @property (nonatomic) int remainingCounts;
 @property (nonatomic) int score;
 @property (nonatomic) NSInteger itemType;
+@property (nonatomic) int timeRemaining;
 
 @end
 
@@ -30,6 +31,7 @@
     self.size = 2;
     self.score = 0;
     self.itemType = -1;
+    self.timeRemaining = 10;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
@@ -53,8 +55,15 @@
     tapGesture.numberOfTapsRequired = 1;
     [self.itemImage addGestureRecognizer:tapGesture];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    
     self.timerView.layer.cornerRadius = 6;
     self.timerView.layer.masksToBounds = YES;
+    [self.timerView setNeedsUpdateConstraints];
+    [self.timerView setNeedsDisplay];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -64,6 +73,10 @@
     [self setupParticles];
     [self setupParallaxEffect];
     [self resetCountdown];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    [self timesUp];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -83,16 +96,16 @@
     [[UIInterpolatingMotionEffect alloc]
      initWithKeyPath:@"center.y"
      type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    verticalMotionEffect.minimumRelativeValue = @(-15);
-    verticalMotionEffect.maximumRelativeValue = @(15);
+    verticalMotionEffect.minimumRelativeValue = @(-8);
+    verticalMotionEffect.maximumRelativeValue = @(8);
     
     // Set horizontal effect
     UIInterpolatingMotionEffect *horizontalMotionEffect =
     [[UIInterpolatingMotionEffect alloc]
      initWithKeyPath:@"center.x"
      type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    horizontalMotionEffect.minimumRelativeValue = @(-15);
-    horizontalMotionEffect.maximumRelativeValue = @(15);
+    horizontalMotionEffect.minimumRelativeValue = @(-8);
+    horizontalMotionEffect.maximumRelativeValue = @(8);
     
     // Create group to combine both
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];
@@ -123,6 +136,11 @@
     [self resetCountdown];
 }
 
+- (void)recreateMazeWithTimer {
+    self.timerView.alpha = 1;
+    [self recreateMaze];
+}
+
 -(void)finished {
     NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
     
@@ -130,10 +148,11 @@
         [[NSUserDefaults standardUserDefaults] setInteger:self.size forKey:@"highScore"];
     }
     
+    self.timerView.alpha = 0;
+    self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
     self.size++;
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
-    [self resetCountdown];
 
     [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
         self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
@@ -150,6 +169,7 @@
             [self.checkbox setOn:NO animated:YES];
             [UIView animateWithDuration:1 animations:^{
                 self.mazeViewCenterConstraint.constant = 0;
+                self.timerView.alpha = 1;
                 [self.view layoutIfNeeded];
             } completion:nil];
         }];
@@ -161,58 +181,53 @@
 -(void)resetCountdown {
     self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
     [self.timer invalidate];
-    self.leadingTimerConstraint.constant = 40;
-    self.trailingTimerConstraint.constant = 40;
-    self.timerView.hidden = NO;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
-    self.remainingCounts = (self.view.frame.size.width - 80) / 2;
-}
-
--(void)countDown {
-    self.leadingTimerConstraint.constant += 1;
-    self.trailingTimerConstraint.constant += 1;
-    
-    if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.75) {
-        self.timerView.backgroundColor = SEVERITY_GREEN;
-    } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.5) {
-        self.timerView.backgroundColor = SEVERITY_YELLOW;
-    } else if (self.remainingCounts > ((self.view.frame.size.width - 80) / 2)*0.25){
-        self.timerView.backgroundColor = SEVERITY_ORANGE;
-    } else {
-        self.timerView.backgroundColor = SEVERITY_RED;
-    }
-    
-    if (--self.remainingCounts == 0) {
-        [self.timer invalidate];
-        self.score = 0;
-        self.timerView.hidden = YES;
-        [self levelFailed];
-        self.size = 2;
-    }
-}
-
--(void)freezeTime {
-    [self.timer invalidate];
-    
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    scaleAnimation.duration = 0.25;
+    [self.timerView.layer removeAllAnimations];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timeRemaining target:self selector:@selector(timesUp) userInfo:nil repeats:NO];
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.x"];
+    scaleAnimation.duration = self.timeRemaining + 0.25;
     scaleAnimation.repeatCount = 0;
     scaleAnimation.autoreverses = YES;
     scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0];
     [self.timerView.layer addAnimation:scaleAnimation forKey:@"scale"];
     
-    self.timerView.backgroundColor = [UIColor blueColor];
+    self.timerView.backgroundColor = SEVERITY_GREEN;
+    [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.timerView.backgroundColor = SEVERITY_YELLOW;
+    } completion:^(BOOL finished) {
+        if (!finished) return;
+        [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.timerView.backgroundColor = SEVERITY_ORANGE;
+        } completion:^(BOOL finished) {
+            if (!finished) return;
+            [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.timerView.backgroundColor = SEVERITY_RED;
+            } completion:nil];
+        }];
+    }];
+}
+
+-(void)timesUp {
+    [self.timer invalidate];
+    [self.timerView.layer removeAllAnimations];
+    self.score = 0;
+    self.timerView.alpha = 0;
+    [self levelFailed];
+    self.size = 2;
+}
+
+-(void)freezeTime {
+    [self resetCountdown];
 }
 
 -(void)levelFailed {
     self.itemType = -1;
+    self.timeRemaining = 10;
     self.itemImage.image = nil;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
-    alert.backgroundType = Blur;
     alert.showAnimationType = SlideInFromCenter;
     alert.hideAnimationType = SlideOutFromCenter;
-    [alert addButton:@"Ok" target:self selector:@selector(recreateMaze)];
+    [alert addButton:@"Ok" target:self selector:@selector(recreateMazeWithTimer)];
     [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size-1] closeButtonTitle:nil duration:0];
 }
 

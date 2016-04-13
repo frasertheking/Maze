@@ -25,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *timerWidthConstraint;
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 

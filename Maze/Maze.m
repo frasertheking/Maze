@@ -118,7 +118,7 @@ double rads = DEGREES_TO_RADIANS(180);
         self.animate = NO;
     }
     
-    if (self.n == 3) {
+    if (self.n == 3 || self.n == 13) {
         self.totalRandomColors = YES;
     } else {
         self.totalRandomColors = NO;
@@ -450,7 +450,7 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.m * 2 + 1 ; c++) {
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.alpha = 0.6;
+                block.alpha = 0.3;
                 block.backgroundColor = SOLVE;
                 [self.mazeSolveLine addSubview:block];
             }

@@ -94,6 +94,7 @@
                                 <rect key="frame" x="40" y="460" width="520" height="10"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="Yzv-h9-0bT"/>
                                     <constraint firstAttribute="height" constant="29" id="fgN-K6-BTl"/>
                                     <constraint firstAttribute="height" constant="10" id="nBj-pu-7AH"/>
                                 </constraints>
@@ -138,7 +139,9 @@
                             <constraint firstAttribute="bottom" secondItem="7hS-hl-qgV" secondAttribute="bottom" constant="14" id="VUp-XK-8w7"/>
                             <constraint firstAttribute="trailing" secondItem="7hS-hl-qgV" secondAttribute="trailing" constant="16" id="YXD-9q-MWV"/>
                             <constraint firstAttribute="bottom" secondItem="Edp-id-Za9" secondAttribute="bottom" id="YYm-xa-aCG"/>
+                            <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="10" id="ZW6-OE-pN3"/>
                             <constraint firstAttribute="trailing" secondItem="Edp-id-Za9" secondAttribute="trailing" id="bLE-x0-L6D"/>
+                            <constraint firstItem="ITf-Q6-a5M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="be8-i1-tHT"/>
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="cnP-XH-yOp"/>
                             <constraint firstAttribute="trailing" secondItem="iAh-r6-qwD" secondAttribute="trailing" constant="60" id="gp2-6L-FPp"/>
                             <constraint firstItem="iAh-r6-qwD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="jvc-99-StQ"/>
@@ -155,7 +158,10 @@
                                 <exclude reference="gp2-6L-FPp"/>
                                 <exclude reference="jvc-99-StQ"/>
                                 <exclude reference="JHG-2o-bmd"/>
+                                <exclude reference="ExA-Qj-5N6"/>
+                                <exclude reference="KiK-me-rtY"/>
                                 <exclude reference="cnP-XH-yOp"/>
+                                <exclude reference="xkW-2n-O4x"/>
                                 <exclude reference="15G-TD-EhJ"/>
                             </mask>
                         </variation>
@@ -172,6 +178,7 @@
                         <outlet property="particleView" destination="Edp-id-Za9" id="Ecm-BF-J68"/>
                         <outlet property="resultLabel" destination="7hS-hl-qgV" id="YcH-na-gzi"/>
                         <outlet property="timerView" destination="ITf-Q6-a5M" id="hso-Pk-3kd"/>
+                        <outlet property="timerWidthConstraint" destination="Yzv-h9-0bT" id="LbG-WQ-gft"/>
                         <outlet property="trailingTimerConstraint" destination="KiK-me-rtY" id="wQB-IK-Bit"/>
                     </connections>
                 </viewController>
