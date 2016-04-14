@@ -124,8 +124,8 @@ double rads = DEGREES_TO_RADIANS(180);
         self.totalRandomColors = NO;
     }
     
-    if (self.n == 10) {
-        //[self transformMaze];
+    if (self.n == 19) {
+        [self transformMaze];
     }
     
     if (self.n > 10 && self.n < 15) {
@@ -138,7 +138,12 @@ double rads = DEGREES_TO_RADIANS(180);
         self.fadeOverTime = YES;
     }
     
-    
+    if (self.n > 20) {
+        self.fadeOverTime = YES;
+        self.totalRandomColors = YES;
+        self.mazeViewWalls.alpha = 0.4;
+        self.animate = YES;
+    }
     
     self.powerUpX = -1;
     self.powerUpY = -1;
@@ -276,8 +281,16 @@ double rads = DEGREES_TO_RADIANS(180);
         [self drawPowerups];
         
         if (self.fadeOverTime) {
-            [UIView animateWithDuration:15 animations:^{
+            [UIView animateWithDuration:0.5 animations:^{
                 self.mazeViewMask.alpha = 0.005;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.mazeViewMask.alpha = 1;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:15 animations:^{
+                        self.mazeViewMask.alpha = 0.005;
+                    }];
+                }];
             }];
         }
     }];
