@@ -62,8 +62,6 @@
     
     self.timerView.layer.cornerRadius = 6;
     self.timerView.layer.masksToBounds = YES;
-    [self.timerView setNeedsUpdateConstraints];
-    [self.timerView setNeedsDisplay];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -150,6 +148,7 @@
     
     self.timerView.alpha = 0;
     self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
+    [self.timer invalidate];
     self.size++;
     self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
@@ -209,9 +208,9 @@
 
 -(void)timesUp {
     [self.timer invalidate];
+    self.timerView.alpha = 0;
     [self.timerView.layer removeAllAnimations];
     self.score = 0;
-    self.timerView.alpha = 0;
     [self levelFailed];
     self.size = 2;
 }

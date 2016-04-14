@@ -103,7 +103,7 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.n > 5) {
         self.power = NO;
     } else {
-        self.power = NO;
+        self.power = YES;
     }
     
     if (self.n > 17) {
@@ -128,11 +128,17 @@ double rads = DEGREES_TO_RADIANS(180);
         //[self transformMaze];
     }
     
-    if (self.n > 10) {
-        self.mazeViewWalls.alpha = 0.3;
+    if (self.n > 10 && self.n < 15) {
+        self.mazeViewWalls.alpha = 0.4;
     } else {
         self.mazeViewWalls.alpha = 1;
     }
+    
+    if (self.n == 15) {
+        self.fadeOverTime = YES;
+    }
+    
+    
     
     self.powerUpX = -1;
     self.powerUpY = -1;
@@ -182,6 +188,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.layer.shadowOffset = CGSizeMake(-2, 2);
     self.layer.shadowRadius = 2;
     self.layer.shadowOpacity = 0.1;
+    self.mazeViewMask.alpha = 1;
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
@@ -267,6 +274,12 @@ double rads = DEGREES_TO_RADIANS(180);
         [self solve];
         [self captureAttemptPath];
         [self drawPowerups];
+        
+        if (self.fadeOverTime) {
+            [UIView animateWithDuration:15 animations:^{
+                self.mazeViewMask.alpha = 0.005;
+            }];
+        }
     }];
 }
 
