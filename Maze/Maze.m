@@ -136,6 +136,8 @@ double rads = DEGREES_TO_RADIANS(180);
     
     if (self.n == 15) {
         self.fadeOverTime = YES;
+    } else {
+        self.fadeOverTime = NO;
     }
     
     if (self.n > 20) {
