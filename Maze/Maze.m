@@ -125,7 +125,7 @@ double rads = DEGREES_TO_RADIANS(180);
     }
     
     if (self.n == 19) {
-        [self transformMaze];
+        //[self transformMaze];
     }
     
     if (self.n > 10 && self.n < 15) {
@@ -550,6 +550,11 @@ double rads = DEGREES_TO_RADIANS(180);
     self.gradientLayer.frame = self.bounds;
     if (white) {
         self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+        if (self.totalRandomColors) {
+            for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
+                view.backgroundColor = [UIColor whiteColor];
+            }
+        }
     } else if (self.godMode) {
         self.gradientLayer.colors = [NSArray arrayWithObjects:(id)GOLD.CGColor, (id)GOLD.CGColor, nil];
     } else {

@@ -48,7 +48,6 @@
     self.checkbox.userInteractionEnabled = NO;
     self.itemImage.alpha = 0;
     self.inventoryView.backgroundColor = [UIColor clearColor];
-    
     self.inventoryImage.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
@@ -74,7 +73,7 @@
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
-    [self timesUp];
+    //[self timesUp];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
