@@ -37,6 +37,7 @@
 @property BOOL animate;
 @property BOOL finished;
 @property BOOL totalRandomColors;
+@property BOOL reRandomize;
 @property double complexityScale;
 
 @end
@@ -124,8 +125,10 @@ double rads = DEGREES_TO_RADIANS(180);
         self.totalRandomColors = NO;
     }
     
-    if (self.n == 19) {
-        //[self transformMaze];
+    if (self.n == 8 || self.n == 13 || self.n == 17) {
+        [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+    } else {
+        self.reRandomize = NO;
     }
     
     if (self.n > 10 && self.n < 15) {
@@ -159,6 +162,19 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (void)initialize {
     [self createMaze];
+}
+
+- (void)reRandomizeMaze {
+    self.reRandomize = YES;
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * 1 * 1 ];
+    rotationAnimation.duration = 0.5;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = 0;
+    
+    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self performSelector:@selector(initialize) withObject:self afterDelay:0.25];
 }
 
 -(void)setupGestureRecognizer:(UIView*)view {
@@ -274,8 +290,13 @@ double rads = DEGREES_TO_RADIANS(180);
                 [[self.attemptArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
             }
         }
-        self.currentX = self.startRow;
-        self.currentY = self.startCol;
+        if (self.reRandomize) {
+            self.currentX = self.currentX;
+            self.currentY = self.currentY;
+        } else {
+            self.currentX = self.startRow;
+            self.currentY = self.startCol;
+        }
         [self captureWalls:NO];
         [self drawMazePaths];
         [self solve];
