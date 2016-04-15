@@ -17,7 +17,6 @@
 @property (nonatomic) BOOL showingOptions;
 @property (nonatomic) NSTimer* timer;
 @property (nonatomic) int remainingCounts;
-@property (nonatomic) int score;
 @property (nonatomic) NSInteger itemType;
 @property (nonatomic) int timeRemaining;
 
@@ -29,7 +28,6 @@
     [super viewDidLoad];
     
     self.size = 2;
-    self.score = 0;
     self.itemType = -1;
     self.timeRemaining = 10;
     
@@ -37,7 +35,8 @@
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
+    self.mazeView.score = 0;
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d\nCurrent Score: %ld", self.size-1, (long)self.mazeView.score];
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
@@ -49,6 +48,7 @@
     self.itemImage.alpha = 0;
     self.inventoryView.backgroundColor = [UIColor clearColor];
     self.inventoryImage.userInteractionEnabled = YES;
+    self.timerView.userInteractionEnabled = NO;
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
@@ -128,8 +128,8 @@
 }
 
 -(void)recreateMaze {
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d\nCurrent Score: %ld", self.size-1, (long)self.mazeView.score];
     [self.mazeView initMazeWithSize:self.size];
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d", self.size-1];
     [self resetCountdown];
 }
 
@@ -139,17 +139,17 @@
 }
 
 -(void)finished {
-    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
+    self.mazeView.score += self.timeRemaining;
     
-    if (self.size > highScore) {
-        [[NSUserDefaults standardUserDefaults] setInteger:self.size forKey:@"highScore"];
+    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    if (self.mazeView.score > highScore) {
+        [[NSUserDefaults standardUserDefaults] setInteger:self.mazeView.score forKey:@"highScore"];
     }
     
     self.timerView.alpha = 0;
-    self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
     [self.timer invalidate];
     self.size++;
-    self.score++;
     self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
 
     [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
@@ -209,7 +209,6 @@
     [self.timer invalidate];
     self.timerView.alpha = 0;
     [self.timerView.layer removeAllAnimations];
-    self.score = 0;
     [self levelFailed];
     self.size = 2;
 }
@@ -222,6 +221,7 @@
     self.itemType = -1;
     self.timeRemaining = 10;
     self.itemImage.image = nil;
+    self.mazeView.score = 0;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.showAnimationType = SlideInFromCenter;
     alert.hideAnimationType = SlideOutFromCenter;
@@ -230,6 +230,7 @@
 }
 
 -(void)itemFound:(NSInteger)type {
+    self.mazeView.score += 1000;
     switch (type) {
         case 0:
             self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
@@ -294,7 +295,6 @@
 
 - (IBAction)randomizeMaze:(id)sender {
     self.size = 2;
-    self.score = 0;
     [self recreateMaze];
 }
 

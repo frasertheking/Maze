@@ -383,6 +383,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         if (!self.finished) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self drawAttempt];
+                            self.score += 2 * self.n;
                             [((MazeViewController*)self.delegate) finished];
                             self.finished = YES;
                         }
@@ -502,6 +503,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 block.alpha = 0.3;
                 block.backgroundColor = SOLVE;
                 [self.mazeSolveLine addSubview:block];
+                self.score += 10;
             }
         }
     }
