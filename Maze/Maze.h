@@ -15,7 +15,6 @@
 
 @interface Maze : UIView
 
-@property (nonatomic) double complexity;
 @property (nonatomic) UIViewController *delegate;
 @property (nonatomic) UIView* mazeViewWalls;
 @property (nonatomic) UIView* mazeViewMask;

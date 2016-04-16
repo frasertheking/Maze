@@ -29,12 +29,14 @@
 @property NSInteger powerUpX;
 @property NSInteger powerUpY;
 @property NSInteger powerUpType;
+@property BOOL powerOverwhelming;
 @property BOOL power;
 @property BOOL animate;
 @property BOOL finished;
 @property BOOL totalRandomColors;
 @property BOOL reRandomize;
 @property BOOL duality;
+@property BOOL kaleidoscope;
 
 @end
 
@@ -92,61 +94,14 @@ double rads = DEGREES_TO_RADIANS(180);
     } else {
         self.mazeSize = 2;
     }
-    self.complexity = 0;
     
-    if (self.mazeSize > 5) {
-        self.power = NO;
-    } else {
-        self.power = YES;
-    }
-    
+    // Stop growing maze size at this point
     if (self.mazeSize > 20) {
         self.mazeSize -= 1;
         self.mazeSize -= 1;
     }
-    
-    if (self.mazeSize > 6) {
-        self.animate = YES;
-    } else {
-        self.animate = NO;
-    }
-    
-    if (self.mazeSize == 3 || self.mazeSize == 13) {
-        self.totalRandomColors = YES;
-    } else {
-        self.totalRandomColors = NO;
-    }
-    
-    if (self.mazeSize == 8 || self.mazeSize == 13) {
-        [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-    } else {
-        self.reRandomize = NO;
-    }
-    
-    if (self.mazeSize > 10 && self.mazeSize < 15) {
-        self.mazeViewWalls.alpha = 0.4;
-    } else {
-        self.mazeViewWalls.alpha = 1;
-    }
-    
-    if (self.mazeSize == 15) {
-        self.fadeOverTime = YES;
-    } else {
-        self.fadeOverTime = NO;
-    }
-    
-    if (self.mazeSize > 20) {
-        self.fadeOverTime = YES;
-        self.totalRandomColors = YES;
-        self.mazeViewWalls.alpha = 0.4;
-        self.animate = YES;
-    }
-    
-    if (self.mazeSize == 2) {
-        self.duality = YES;
-    } else {
-        self.duality = NO;
-    }
+   
+    [self generateMazeDistractions];
     
     self.powerUpX = -1;
     self.powerUpY = -1;
@@ -156,6 +111,87 @@ double rads = DEGREES_TO_RADIANS(180);
     self.godMode = NO;
     
     [self createMaze];
+}
+
+- (void)generateMazeDistractions {
+    int randomNum = arc4random() % 100;
+    NSLog(@"random number: %d", randomNum);
+    
+    if (self.mazeSize > 6) {
+        self.power = NO;
+    
+        if (randomNum >= 0 && randomNum < 10) {
+            self.animate = YES;
+        } else {
+            self.animate = NO;
+        }
+        
+        if (randomNum >= 10 && randomNum < 20) {
+            self.totalRandomColors = YES;
+        } else {
+            self.totalRandomColors = NO;
+        }
+        
+        if (randomNum >= 20 && randomNum < 30) {
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+        } else {
+            self.reRandomize = NO;
+        }
+        
+        if (randomNum >= 30 && randomNum < 40) {
+            self.mazeViewWalls.alpha = 0.4;
+        } else {
+            self.mazeViewWalls.alpha = 1;
+        }
+        
+        if (randomNum >= 40 && randomNum < 50) {
+            self.fadeOverTime = YES;
+        } else {
+            self.fadeOverTime = NO;
+        }
+        
+        if (randomNum >= 50 && randomNum < 55) {
+            self.duality = YES;
+        } else {
+            self.duality = NO;
+        }
+        
+        if (randomNum >= 55 && randomNum < 60) {
+            self.kaleidoscope = YES;
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+        }
+        
+        if (randomNum >= 60 && randomNum < 65) {
+            self.animate = YES;
+            self.mazeViewWalls.alpha = 0.4;
+            self.fadeOverTime = YES;
+        }
+        
+        if (randomNum >= 65 && randomNum < 68) {
+            [self transform];
+        }
+        
+        if (randomNum >= 68 && randomNum < 70) {
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:8];
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:12];
+            self.fadeOverTime = YES;
+        }
+        
+        if (randomNum >= 70 && randomNum < 73) {
+            self.powerOverwhelming = YES;
+        } else {
+            self.powerOverwhelming = NO;
+        }
+        
+        if (randomNum >= 73 && randomNum < 78) {
+            self.kaleidoscope = YES;
+        } else {
+            self.kaleidoscope = NO;
+        }
+    } else {
+        self.power = YES;
+    }
 }
 
 #pragma mark - generation
@@ -241,7 +277,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     block.backgroundColor = [UIColor whiteColor];
                     [self.mazeViewMask addSubview:block];
                     
-                    if (self.totalRandomColors) {
+                    if (self.totalRandomColors || self.kaleidoscope) {
                         block.backgroundColor = [self getRandomColor];
                         [self.mazeViewRandomColorWalls addSubview:block];
                     }
@@ -267,6 +303,8 @@ double rads = DEGREES_TO_RADIANS(180);
         if (!self.reRandomize) {
             self.currentX = self.startRow;
             self.currentY = self.startCol;
+        } else {
+            self.reRandomize = NO;
         }
         [self captureWalls:NO];
         [self drawMazePaths];
@@ -276,6 +314,12 @@ double rads = DEGREES_TO_RADIANS(180);
         
         if (self.fadeOverTime) {
             [UIView animateWithDuration:15 animations:^{
+                self.mazeViewMask.alpha = 0.005;
+            }];
+        }
+        
+        if (self.powerOverwhelming) {
+            [UIView animateWithDuration:0.1 animations:^{
                 self.mazeViewMask.alpha = 0.005;
             }];
         }
@@ -453,6 +497,9 @@ double rads = DEGREES_TO_RADIANS(180);
         }
     }
     [self captureAttemptPath];
+    if (self.kaleidoscope) {
+        [self captureWalls:NO];
+    }
 }
 
 -(void)drawSolveLine {
@@ -499,13 +546,15 @@ double rads = DEGREES_TO_RADIANS(180);
     float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
     for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
         for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
-            if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+            if ((self.powerOverwhelming && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1)) {
                 self.powerUpType = arc4random() % 5;
                 PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
                 self.power = YES;
                 [self.mazeViewRest addSubview:powerUp];
-                self.powerUpX = r;
-                self.powerUpY = c;
+                if (!self.powerOverwhelming) {
+                    self.powerUpX = r;
+                    self.powerUpY = c;
+                }
             }
         }
     }
@@ -534,7 +583,11 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewWalls.layer setSublayers:nil];
     self.wallsGradientLayer = [CAGradientLayer layer];
     self.wallsGradientLayer.frame = self.bounds;
-    if (self.duality) {
+    if (self.kaleidoscope) {
+        for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
+            view.backgroundColor = [self getRandomColor];
+        }
+    } else if (self.duality) {
         self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         if (self.totalRandomColors) {
             for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
@@ -583,7 +636,7 @@ double rads = DEGREES_TO_RADIANS(180);
         [self.wallsGradientLayer addAnimation:animation forKey:@"animateGradient"];
     }
     
-    if (self.animate && !white && !self.godMode) {
+    if (self.animate && !white && !self.godMode && !self.kaleidoscope) {
         [self animateWalls];
     }
 }
@@ -656,12 +709,10 @@ double rads = DEGREES_TO_RADIANS(180);
     for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
         for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ([[[solArrayCopy objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                self.complexity++;
                 [[solArrayCopy objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
             }
         }
     }
-    self.complexity = self.complexity / self.mazeSize*2;
 }
 
 #pragma mark - Color methods
