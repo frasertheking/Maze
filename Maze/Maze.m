@@ -16,13 +16,11 @@
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
 @property (nonatomic) NSMutableArray* attemptArray;
-
-@property (nonatomic) CAGradientLayer* gradientLayer;
-@property (nonatomic) CAGradientLayer* gradientLayer2;
+@property (nonatomic) CAGradientLayer* wallsGradientLayer;
+@property (nonatomic) CAGradientLayer* attemptPathGradientLayer;
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
 @property (nonatomic) NSTimer *gradientTimer;
-
 @property NSInteger currentX;
 @property NSInteger currentY;
 @property CGPoint previousLoc;
@@ -37,7 +35,6 @@
 @property BOOL totalRandomColors;
 @property BOOL reRandomize;
 @property BOOL duality;
-@property double complexityScale;
 
 @end
 
@@ -49,40 +46,44 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (id)initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
-        self.mazeViewWalls = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewWalls];
-        
-        self.mazeViewMask = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewMask];
-        
-        self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewRest];
-        
-        self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewRandomColorWalls];
-       
-        self.mazeViewPath = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewPath];
-        
-        self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeViewPathMask];
-        
-        self.mazeSolveLine = [[UIView alloc] initWithFrame:self.bounds];
-        [self setupViews:self.mazeSolveLine];
+        [self initialize];
     }
     return self;
+}
+
+- (id)initWithFrame:(CGRect)rect{
+    if(self = [super initWithFrame:rect]){
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize {
+    self.mazeViewWalls = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewWalls];
+    
+    self.mazeViewMask = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewMask];
+    
+    self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewRest];
+    
+    self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewRandomColorWalls];
+    
+    self.mazeViewPath = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewPath];
+    
+    self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewPathMask];
+    
+    self.mazeSolveLine = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeSolveLine];
 }
 
 - (void)setupViews:(UIView*)view {
     view.backgroundColor = [UIColor clearColor];
     [self addSubview:view];
-}
-
-- (id)initWithFrame:(CGRect)rect{
-    if(self = [super initWithFrame:rect]){
-
-    }
-    return self;
 }
 
 -(void)initMazeWithSize:(int)size {
@@ -92,7 +93,6 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeSize = 2;
     }
     self.complexity = 0;
-    self.complexityScale = 0;
     
     if (self.mazeSize > 5) {
         self.power = NO;
@@ -100,8 +100,7 @@ double rads = DEGREES_TO_RADIANS(180);
         self.power = YES;
     }
     
-    if (self.mazeSize > 17) {
-        self.complexityScale += 0.25;
+    if (self.mazeSize > 20) {
         self.mazeSize -= 1;
         self.mazeSize -= 1;
     }
@@ -156,35 +155,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.finished = NO;
     self.godMode = NO;
     
-    [self initialize];
-}
-
-- (void)initialize {
     [self createMaze];
-}
-
-- (void)reRandomizeMaze {
-    self.reRandomize = YES;
-    self.powerUpX = -1;
-    self.powerUpY = -1;
-    CABasicAnimation* rotationAnimation;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * 1 * 1 ];
-    rotationAnimation.duration = 0.5;
-    rotationAnimation.cumulative = YES;
-    rotationAnimation.repeatCount = 0;
-    
-    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
-    [self performSelector:@selector(initialize) withObject:self afterDelay:0.25];
-}
-
--(void)setupGestureRecognizer:(UIView*)view {
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
-    [view addGestureRecognizer:panGesture];
-    
-    UITapGestureRecognizer *resetTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasDoubleTapped:)];
-    [resetTapGestureRecognizer setNumberOfTapsRequired:2];
-    [view addGestureRecognizer:resetTapGestureRecognizer];
 }
 
 #pragma mark - generation
@@ -198,14 +169,15 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewRandomColorWalls];
     [self removeSubviews:self.mazeSolveLine];
     [self.gradientTimer invalidate];
-    self.gradientLayer = nil;
-    self.gradientLayer2 = nil;
+    self.wallsGradientLayer = nil;
+    self.attemptPathGradientLayer = nil;
     [self.mazeViewPath.layer setSublayers:nil];
     [self.mazeViewWalls.layer setSublayers:nil];
     [self.mazeViewRest.layer setSublayers:nil];
     [self.mazeViewRandomColorWalls.layer setSublayers:nil];
     [self.mazeViewMask.layer setSublayers:nil];
     [self.mazeViewPathMask.layer setSublayers:nil];
+    [self.layer removeAllAnimations];
     self.backgroundColor = [UIColor clearColor];
 
     self.layer.masksToBounds = YES;
@@ -546,13 +518,13 @@ double rads = DEGREES_TO_RADIANS(180);
         [self.mazeViewPath.layer setSublayers:nil];
     }
     
-    if (self.gradientLayer2 == nil || self.godMode) {
-        self.gradientLayer2 = [CAGradientLayer layer];
-        self.gradientLayer2.frame = self.bounds;
-        self.gradientLayer2.colors = [NSArray arrayWithObjects:(id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
-        self.gradientLayer2.startPoint = CGPointMake(0.0f, 0.0f);
-        self.gradientLayer2.endPoint = CGPointMake(1.0f, 1.0f);
-        [self.mazeViewPath.layer insertSublayer:self.gradientLayer2 atIndex:0];
+    if (self.attemptPathGradientLayer == nil || self.godMode) {
+        self.attemptPathGradientLayer = [CAGradientLayer layer];
+        self.attemptPathGradientLayer.frame = self.bounds;
+        self.attemptPathGradientLayer.colors = [NSArray arrayWithObjects:(id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
+        self.attemptPathGradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+        self.attemptPathGradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+        [self.mazeViewPath.layer insertSublayer:self.attemptPathGradientLayer atIndex:0];
         self.mazeViewPath.maskView = self.mazeViewPathMask;
     }
 }
@@ -560,10 +532,10 @@ double rads = DEGREES_TO_RADIANS(180);
 -(void)captureWalls:(BOOL)white {
     [self.gradientTimer invalidate];
     [self.mazeViewWalls.layer setSublayers:nil];
-    self.gradientLayer = [CAGradientLayer layer];
-    self.gradientLayer.frame = self.bounds;
+    self.wallsGradientLayer = [CAGradientLayer layer];
+    self.wallsGradientLayer.frame = self.bounds;
     if (self.duality) {
-        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+        self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         if (self.totalRandomColors) {
             for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
                 view.backgroundColor = [UIColor whiteColor];
@@ -571,33 +543,33 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         self.backgroundColor = [UIColor blackColor];
     } else if (white) {
-        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+        self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         if (self.totalRandomColors) {
             for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
                 view.backgroundColor = [UIColor whiteColor];
             }
         }
     } else if (self.godMode) {
-        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)GOLD.CGColor, (id)GOLD.CGColor, nil];
+        self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)GOLD.CGColor, (id)GOLD.CGColor, nil];
     } else {
-        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
+        self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[self inverseColor:(((MazeViewController*)self.delegate).mazeTopColor)].CGColor, (id)[self inverseColor:(((MazeViewController*)self.delegate).mazeBottomColor)].CGColor, nil];
     }
-    self.gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
-    self.gradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
-    [self.mazeViewWalls.layer insertSublayer:self.gradientLayer atIndex:0];
+    self.wallsGradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+    self.wallsGradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+    [self.mazeViewWalls.layer insertSublayer:self.wallsGradientLayer atIndex:0];
     self.mazeViewWalls.maskView = self.mazeViewMask;
     
     if (self.duality) {
         [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor whiteColor];
         } completion:nil];
-        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+        self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         
-        NSArray *fromColors = self.gradientLayer.colors;
+        NSArray *fromColors = self.wallsGradientLayer.colors;
         NSArray *toColors = @[(id)[UIColor blackColor].CGColor,
                               (id)[UIColor blackColor].CGColor];
         
-        [self.gradientLayer setColors:toColors];
+        [self.wallsGradientLayer setColors:toColors];
         
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
         
@@ -608,7 +580,7 @@ double rads = DEGREES_TO_RADIANS(180);
         animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         animation.delegate              = self;
         
-        [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
+        [self.wallsGradientLayer addAnimation:animation forKey:@"animateGradient"];
     }
     
     if (self.animate && !white && !self.godMode) {
@@ -710,14 +682,14 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)animateWalls {
-    NSArray *fromColors = self.gradientLayer.colors;
+    NSArray *fromColors = self.wallsGradientLayer.colors;
     NSArray *toColors = @[(id)[self getRandomColor].CGColor,
                           (id)[self getRandomColor].CGColor,
                           (id)[self getRandomColor].CGColor,
                           (id)[self getRandomColor].CGColor,
                           (id)[self getRandomColor].CGColor,];
     
-    [self.gradientLayer setColors:toColors];
+    [self.wallsGradientLayer setColors:toColors];
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
     
@@ -729,8 +701,33 @@ double rads = DEGREES_TO_RADIANS(180);
     animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     animation.delegate              = self;
     
-    [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
+    [self.wallsGradientLayer addAnimation:animation forKey:@"animateGradient"];
     self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
 }
+
+-(void)setupGestureRecognizer:(UIView*)view {
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panPiece:)];
+    [view addGestureRecognizer:panGesture];
+    
+    UITapGestureRecognizer *resetTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasDoubleTapped:)];
+    [resetTapGestureRecognizer setNumberOfTapsRequired:2];
+    [view addGestureRecognizer:resetTapGestureRecognizer];
+}
+
+- (void)reRandomizeMaze {
+    self.reRandomize = YES;
+    self.powerUpX = -1;
+    self.powerUpY = -1;
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * 1 * 1 ];
+    rotationAnimation.duration = 0.5;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = 0;
+    
+    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self performSelector:@selector(createMaze) withObject:self afterDelay:0.25];
+}
+
 
 @end
