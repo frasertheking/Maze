@@ -25,6 +25,7 @@
 @property (nonatomic) UIView* mazeSolveLine;
 @property (nonatomic) BOOL godMode;
 @property (nonatomic) BOOL fadeOverTime;
+@property (nonatomic) BOOL noTime;
 @property NSInteger score;
 
 -(void)createMaze;

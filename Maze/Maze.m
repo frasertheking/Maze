@@ -89,19 +89,26 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)initMazeWithSize:(int)size {
-    if (size > 2) {
-        self.mazeSize = size;
+    int randomNum = arc4random() % 100;
+    if (randomNum == 1 || randomNum == 99) {
+        self.mazeSize = 30;
+        self.noTime = YES;
     } else {
-        self.mazeSize = 2;
+        if (size > 2) {
+            self.mazeSize = size;
+        } else {
+            self.mazeSize = 2;
+        }
+        
+        // Stop growing maze size at this point
+        if (self.mazeSize > 20) {
+            self.mazeSize -= 1;
+            self.mazeSize -= 1;
+        }
+        
+        self.noTime = NO;
+        [self generateMazeDistractions];
     }
-    
-    // Stop growing maze size at this point
-    if (self.mazeSize > 20) {
-        self.mazeSize -= 1;
-        self.mazeSize -= 1;
-    }
-   
-    [self generateMazeDistractions];
     
     self.powerUpX = -1;
     self.powerUpY = -1;
@@ -115,7 +122,6 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (void)generateMazeDistractions {
     int randomNum = arc4random() % 100;
-    NSLog(@"random number: %d", randomNum);
     
     if (self.mazeSize > 6) {
         self.power = NO;

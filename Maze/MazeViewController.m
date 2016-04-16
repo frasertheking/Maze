@@ -142,8 +142,10 @@
 
 -(void)finished {
     if (!self.assertFailed) {
-        self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
-        self.mazeView.score += self.timeRemaining;
+        if (!self.mazeView.noTime) {
+            self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
+            self.mazeView.score += self.timeRemaining;
+        }
         
         NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
         if (self.mazeView.score > highScore) {
@@ -184,29 +186,31 @@
     self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
     [self.timer invalidate];
     [self.timerView.layer removeAllAnimations];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timeRemaining target:self selector:@selector(timesUp) userInfo:nil repeats:NO];
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.x"];
-    scaleAnimation.duration = self.timeRemaining + 0.25;
-    scaleAnimation.repeatCount = 0;
-    scaleAnimation.autoreverses = YES;
-    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    scaleAnimation.toValue = [NSNumber numberWithFloat:0];
-    [self.timerView.layer addAnimation:scaleAnimation forKey:@"scale"];
-    
-    self.timerView.backgroundColor = SEVERITY_GREEN;
-    [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.timerView.backgroundColor = SEVERITY_YELLOW;
-    } completion:^(BOOL finished) {
-        if (!finished) return;
+    if (!self.mazeView.noTime) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timeRemaining target:self selector:@selector(timesUp) userInfo:nil repeats:NO];
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.x"];
+        scaleAnimation.duration = self.timeRemaining + 0.25;
+        scaleAnimation.repeatCount = 0;
+        scaleAnimation.autoreverses = YES;
+        scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+        scaleAnimation.toValue = [NSNumber numberWithFloat:0];
+        [self.timerView.layer addAnimation:scaleAnimation forKey:@"scale"];
+        
+        self.timerView.backgroundColor = SEVERITY_GREEN;
         [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            self.timerView.backgroundColor = SEVERITY_ORANGE;
+            self.timerView.backgroundColor = SEVERITY_YELLOW;
         } completion:^(BOOL finished) {
             if (!finished) return;
             [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                self.timerView.backgroundColor = SEVERITY_RED;
-            } completion:nil];
+                self.timerView.backgroundColor = SEVERITY_ORANGE;
+            } completion:^(BOOL finished) {
+                if (!finished) return;
+                [UIView animateWithDuration:self.timeRemaining/3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                    self.timerView.backgroundColor = SEVERITY_RED;
+                } completion:nil];
+            }];
         }];
-    }];
+    }
 }
 
 -(void)timesUp {
