@@ -90,7 +90,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)initMazeWithSize:(int)size {
     int randomNum = arc4random() % 100;
-    if (randomNum == 1 || randomNum == 99) {
+    if ((randomNum == 1 || randomNum == 99) && size > 6) {
         self.mazeSize = 30;
         self.noTime = YES;
     } else {
