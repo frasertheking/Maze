@@ -122,44 +122,40 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (void)generateMazeDistractions {
     int randomNum = arc4random() % 100;
+    self.animate = NO;
+    self.totalRandomColors = NO;
+    self.reRandomize = NO;
+    self.mazeViewWalls.alpha = 1;
+    self.fadeOverTime = NO;
+    self.duality = NO;
+    self.kaleidoscope = NO;
+    self.powerOverwhelming = NO;
     
     if (self.mazeSize > 6) {
         self.power = NO;
     
         if (randomNum >= 0 && randomNum < 10) {
             self.animate = YES;
-        } else {
-            self.animate = NO;
         }
         
         if (randomNum >= 10 && randomNum < 20) {
             self.totalRandomColors = YES;
-        } else {
-            self.totalRandomColors = NO;
         }
         
         if (randomNum >= 20 && randomNum < 30) {
             [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-        } else {
-            self.reRandomize = NO;
         }
         
         if (randomNum >= 30 && randomNum < 40) {
             self.mazeViewWalls.alpha = 0.4;
-        } else {
-            self.mazeViewWalls.alpha = 1;
         }
         
         if (randomNum >= 40 && randomNum < 50) {
             self.fadeOverTime = YES;
-        } else {
-            self.fadeOverTime = NO;
         }
         
         if (randomNum >= 50 && randomNum < 55) {
             self.duality = YES;
-        } else {
-            self.duality = NO;
         }
         
         if (randomNum >= 55 && randomNum < 60) {
@@ -186,14 +182,10 @@ double rads = DEGREES_TO_RADIANS(180);
         
         if (randomNum >= 70 && randomNum < 73) {
             self.powerOverwhelming = YES;
-        } else {
-            self.powerOverwhelming = NO;
         }
         
         if (randomNum >= 73 && randomNum < 78) {
             self.kaleidoscope = YES;
-        } else {
-            self.kaleidoscope = NO;
         }
     } else {
         self.power = YES;
@@ -224,9 +216,9 @@ double rads = DEGREES_TO_RADIANS(180);
 
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 6;
-    self.layer.shadowOffset = CGSizeMake(-2, 2);
-    self.layer.shadowRadius = 2;
-    self.layer.shadowOpacity = 0.1;
+    //self.layer.shadowOffset = CGSizeMake(-2, 2);
+    //self.layer.shadowRadius = 2;
+    //self.layer.shadowOpacity = 0.1;
     self.mazeViewMask.alpha = 1;
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
@@ -552,7 +544,7 @@ double rads = DEGREES_TO_RADIANS(180);
     float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
     for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
         for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
-            if ((self.powerOverwhelming && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) || (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1)) {
+            if ((self.powerOverwhelming && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2)) || (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1)) {
                 self.powerUpType = arc4random() % 5;
                 PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
                 self.power = YES;
