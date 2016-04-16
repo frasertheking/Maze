@@ -264,11 +264,8 @@
 - (void)useItem {
     if (self.itemType >= 0) {
         [UIView animateWithDuration:0.35 animations:^{
-            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
             self.itemImage.alpha = 0;
         } completion:^(BOOL finished) {
-            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
-            
             switch (self.itemType) {
                 case 0:
                     [self.mazeView showSolvePath];

@@ -31,14 +31,14 @@
                                             <constraint firstAttribute="width" constant="50" id="ybk-op-UPi"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Mz-oy1">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Mz-oy1">
                                         <rect key="frame" x="97" y="21" width="143" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purpleCrystal" translatesAutoresizingMaskIntoConstraints="NO" id="4vV-jE-3Lp">
-                                        <rect key="frame" x="35" y="9" width="40" height="40"/>
+                                        <rect key="frame" x="40" y="9" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="Jra-IF-WUq"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="eVM-Lh-UDm"/>
@@ -63,7 +63,7 @@
                                     <constraint firstItem="4vV-jE-3Lp" firstAttribute="leading" secondItem="iAh-r6-qwD" secondAttribute="leading" constant="28" id="Jwj-64-DRm"/>
                                     <constraint firstItem="wER-8F-mIV" firstAttribute="top" secondItem="iAh-r6-qwD" secondAttribute="top" constant="5" id="Kr5-wg-8HW"/>
                                     <constraint firstItem="z88-Mz-oy1" firstAttribute="centerY" secondItem="iAh-r6-qwD" secondAttribute="centerY" id="Qbl-AH-Dba"/>
-                                    <constraint firstItem="4vV-jE-3Lp" firstAttribute="leading" secondItem="iAh-r6-qwD" secondAttribute="leading" constant="35" id="SCv-Rh-T7v"/>
+                                    <constraint firstItem="4vV-jE-3Lp" firstAttribute="leading" secondItem="iAh-r6-qwD" secondAttribute="leading" constant="40" id="SCv-Rh-T7v"/>
                                     <constraint firstItem="4vV-jE-3Lp" firstAttribute="centerY" secondItem="iAh-r6-qwD" secondAttribute="centerY" id="Ya9-5j-xGZ"/>
                                     <constraint firstAttribute="trailing" secondItem="z88-Mz-oy1" secondAttribute="trailing" id="ac7-jH-hod"/>
                                     <constraint firstAttribute="width" constant="240" id="fG3-Wd-KEf"/>
