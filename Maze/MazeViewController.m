@@ -15,6 +15,7 @@
 
 @property (nonatomic) int size;
 @property (nonatomic) BOOL showingOptions;
+@property (nonatomic) BOOL assertFailed;
 @property (nonatomic) NSTimer* timer;
 @property (nonatomic) int remainingCounts;
 @property (nonatomic) NSInteger itemType;
@@ -131,6 +132,7 @@
     self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d\nCurrent Score: %ld", self.size-1, (long)self.mazeView.score];
     [self.mazeView initMazeWithSize:self.size];
     [self resetCountdown];
+    self.assertFailed = NO;
 }
 
 - (void)recreateMazeWithTimer {
@@ -139,39 +141,41 @@
 }
 
 -(void)finished {
-    self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
-    self.mazeView.score += self.timeRemaining;
-    
-    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
-    if (self.mazeView.score > highScore) {
-        [[NSUserDefaults standardUserDefaults] setInteger:self.mazeView.score forKey:@"highScore"];
-    }
-    
-    self.timerView.alpha = 0;
-    [self.timer invalidate];
-    self.size++;
-    self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
+    if (!self.assertFailed) {
+        self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
+        self.mazeView.score += self.timeRemaining;
+        
+        NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+        if (self.mazeView.score > highScore) {
+            [[NSUserDefaults standardUserDefaults] setInteger:self.mazeView.score forKey:@"highScore"];
+        }
+        
+        self.timerView.alpha = 0;
+        [self.timer invalidate];
+        self.size++;
+        self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
 
-    [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
-        self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
-        self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
-    } completion:^(BOOL f){
-        [self.checkbox setOn:YES animated:YES];
-        [UIView animateWithDuration:1 animations:^{
-            self.mazeViewCenterConstraint.constant = -600;
-            [self.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            self.mazeViewCenterConstraint.constant = 600;
-            [self.view layoutIfNeeded];
-            [self recreateMaze];
-            [self.checkbox setOn:NO animated:YES];
+        [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
+            self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
+            self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL f){
+            [self.checkbox setOn:YES animated:YES];
             [UIView animateWithDuration:1 animations:^{
-                self.mazeViewCenterConstraint.constant = 0;
-                self.timerView.alpha = 1;
+                self.mazeViewCenterConstraint.constant = -600;
                 [self.view layoutIfNeeded];
-            } completion:nil];
+            } completion:^(BOOL finished) {
+                self.mazeViewCenterConstraint.constant = 600;
+                [self.view layoutIfNeeded];
+                [self recreateMaze];
+                [self.checkbox setOn:NO animated:YES];
+                [UIView animateWithDuration:1 animations:^{
+                    self.mazeViewCenterConstraint.constant = 0;
+                    self.timerView.alpha = 1;
+                    [self.view layoutIfNeeded];
+                } completion:nil];
+            }];
         }];
-    }];
+    }
 }
 
 #pragma mark - Countdown
@@ -206,6 +210,7 @@
 }
 
 -(void)timesUp {
+    self.assertFailed = YES;
     [self.timer invalidate];
     self.timerView.alpha = 0;
     [self.timerView.layer removeAllAnimations];

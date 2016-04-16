@@ -12,9 +12,7 @@
 
 @interface Maze ()
 
-@property (nonatomic) int n;
-@property (nonatomic) int m;
-@property (nonatomic) int blocks;
+@property (nonatomic) int mazeSize;
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
 @property (nonatomic) NSMutableArray* attemptArray;
@@ -51,36 +49,33 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (id)initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
-        self.backgroundColor = [UIColor clearColor];
         self.mazeViewWalls = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewWalls.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewWalls];
+        [self setupViews:self.mazeViewWalls];
         
         self.mazeViewMask = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewMask.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewMask];
+        [self setupViews:self.mazeViewMask];
         
         self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewRest.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewRest];
+        [self setupViews:self.mazeViewRest];
         
         self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewRandomColorWalls.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewRandomColorWalls];
-        
+        [self setupViews:self.mazeViewRandomColorWalls];
+       
         self.mazeViewPath = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewPath.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewPath];
+        [self setupViews:self.mazeViewPath];
         
         self.mazeViewPathMask= [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeViewPathMask.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeViewPathMask];
+        [self setupViews:self.mazeViewPathMask];
         
         self.mazeSolveLine = [[UIView alloc] initWithFrame:self.bounds];
-        self.mazeSolveLine.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.mazeSolveLine];
+        [self setupViews:self.mazeSolveLine];
     }
     return self;
+}
+
+- (void)setupViews:(UIView*)view {
+    view.backgroundColor = [UIColor clearColor];
+    [self addSubview:view];
 }
 
 - (id)initWithFrame:(CGRect)rect{
@@ -92,66 +87,63 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)initMazeWithSize:(int)size {
     if (size > 2) {
-        self.n = size;
-        self.m = size;
-        self.blocks = size;
+        self.mazeSize = size;
     } else {
-        self.n = 2;
-        self.m = self.n;
-        self.blocks = self.m;
+        self.mazeSize = 2;
     }
     self.complexity = 0;
     self.complexityScale = 0;
-    if (self.n > 5) {
+    
+    if (self.mazeSize > 5) {
         self.power = NO;
     } else {
         self.power = YES;
     }
     
-    if (self.n > 17) {
+    if (self.mazeSize > 17) {
         self.complexityScale += 0.25;
-        self.n -= 1;
-        self.m -= 1;
+        self.mazeSize -= 1;
+        self.mazeSize -= 1;
     }
     
-    if (self.n > 6) {
+    if (self.mazeSize > 6) {
         self.animate = YES;
     } else {
         self.animate = NO;
     }
     
-    if (self.n == 3 || self.n == 13) {
+    if (self.mazeSize == 3 || self.mazeSize == 13) {
         self.totalRandomColors = YES;
     } else {
         self.totalRandomColors = NO;
     }
     
-    if (self.n == 8 || self.n == 13) {
+    if (self.mazeSize == 8 || self.mazeSize == 13) {
         [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
     } else {
         self.reRandomize = NO;
     }
     
-    if (self.n > 10 && self.n < 15) {
+    if (self.mazeSize > 10 && self.mazeSize < 15) {
         self.mazeViewWalls.alpha = 0.4;
     } else {
         self.mazeViewWalls.alpha = 1;
     }
     
-    if (self.n == 15) {
+    if (self.mazeSize == 15) {
         self.fadeOverTime = YES;
     } else {
         self.fadeOverTime = NO;
     }
     
-    if (self.n > 20) {
+    if (self.mazeSize > 20) {
         self.fadeOverTime = YES;
         self.totalRandomColors = YES;
         self.mazeViewWalls.alpha = 0.4;
         self.animate = YES;
     }
     
-    if (self.n == 2) {
+    if (self.mazeSize == 2) {
         self.duality = YES;
     } else {
         self.duality = NO;
@@ -159,8 +151,8 @@ double rads = DEGREES_TO_RADIANS(180);
     
     self.powerUpX = -1;
     self.powerUpY = -1;
-    self.powerX = 1 + arc4random() % (self.n*2 - 1);
-    self.powerY = 1 + arc4random() % (self.m*2 - 1);
+    self.powerX = 1 + arc4random() % (self.mazeSize*2 - 1);
+    self.powerY = 1 + arc4random() % (self.mazeSize*2 - 1);
     self.finished = NO;
     self.godMode = NO;
     
@@ -214,7 +206,8 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewRandomColorWalls.layer setSublayers:nil];
     [self.mazeViewMask.layer setSublayers:nil];
     [self.mazeViewPathMask.layer setSublayers:nil];
-    
+    self.backgroundColor = [UIColor clearColor];
+
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 6;
     self.layer.shadowOffset = CGSizeMake(-2, 2);
@@ -222,21 +215,21 @@ double rads = DEGREES_TO_RADIANS(180);
     self.layer.shadowOpacity = 0.1;
     self.mazeViewMask.alpha = 1;
     
-    self.blockArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
-    self.solArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
-    self.attemptArray = [NSMutableArray arrayWithCapacity:self.blocks*2+1];
-    for(int i=0; i<self.blocks*2+1; i++) {
-        [self.blockArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
+    self.blockArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
+    self.solArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
+    self.attemptArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
+    for(int i=0; i<self.mazeSize*2+1; i++) {
+        [self.blockArray addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
     }
-    for(int i=0; i<self.blocks*2+1; i++) {
-        [self.solArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
+    for(int i=0; i<self.mazeSize*2+1; i++) {
+        [self.solArray addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
     }
-    for(int i=0; i<self.blocks*2+1; i++) {
-        [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:self.blocks*2+1]];
+    for(int i=0; i<self.mazeSize*2+1; i++) {
+        [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
     }
     
-    DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.n
-                                                          andCol:self.m
+    DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.mazeSize
+                                                          andCol:self.mazeSize
                                                withStartingPoint:DEIntegerPointMake(1, 1)];
     
     [maze arrayMaze:^(bool **item) {
@@ -244,11 +237,11 @@ double rads = DEGREES_TO_RADIANS(180);
         BOOL start = NO;
         BOOL end = NO;
         int min = 1;
-        int max = self.n*2;
+        int max = self.mazeSize*2;
         
-        for (int r = 0; r < self.n * 2 + 1 ; r++) {
+        for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
             int rndValue = min + arc4random() % (max - min);
-            for (int c = 0; c < self.m * 2 + 1 ; c++) {
+            for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
                 
                 BOOL dontDraw = NO;
                 if (r == 0 && !start && c == rndValue) {
@@ -259,7 +252,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     } else {
                         rndValue++;
                     }
-                } else if (r == self.n*2 && !end && c == rndValue) {
+                } else if (r == self.mazeSize*2 && !end && c == rndValue) {
                     if (item[r-1][c] != 1) {
                         dontDraw = YES;
                         end = YES;
@@ -268,7 +261,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                 }
                 
-                float size = (self.frame.size.width) / (self.m * 2+1);
+                float size = (self.frame.size.width) / (self.mazeSize * 2+1);
                 BOOL first = YES;
                 if (item[r][c] == 1 && !dontDraw) {
                     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
@@ -324,7 +317,7 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(BOOL)isSafe:(NSInteger)x y:(NSInteger)y {
-    if (x >= 0 && x < self.n*2 && y >= 0 && y < self.m*2 &&
+    if (x >= 0 && x < self.mazeSize*2 && y >= 0 && y < self.mazeSize*2 &&
         [[[self.solArray objectAtIndex:x] objectAtIndex:y] integerValue] != 1 &&
         [[[self.blockArray objectAtIndex:x] objectAtIndex:y] integerValue] == 1) {
         return YES;
@@ -372,7 +365,7 @@ double rads = DEGREES_TO_RADIANS(180);
 - (void)panPiece:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint vel = [gestureRecognizer velocityInView:self];
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
-    NSInteger size = (self.frame.size.width) / (self.m * 2);
+    NSInteger size = (self.frame.size.width) / (self.mazeSize * 2);
     if (!self.finished) {
         if (fabs(vel.x) > fabs(vel.y)) {
             if ([self distanceFrom:currentPoint to:self.previousLoc] >= (size / 1.5 + (1 / fabs(vel.x) * 150))) {
@@ -381,7 +374,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         if (!self.finished) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self drawAttempt];
-                            self.score += 2 * self.n;
+                            self.score += 2 * self.mazeSize;
                             [((MazeViewController*)self.delegate) finished];
                             self.finished = YES;
                         }
@@ -468,12 +461,12 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - Maze Drawing
 
 -(void)drawAttempt {
-    float size = (self.frame.size.width) / (self.m * 2 + 1);
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
     [self removeSubviews:self.mazeViewPath];
     [self removeSubviews:self.mazeViewPathMask];
     
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 [self.mazeViewPath addSubview:block];
@@ -491,11 +484,11 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawSolveLine {
-    float size = (self.frame.size.width) / (self.m * 2 + 1);
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
     [self removeSubviews:self.mazeSolveLine];
     
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ([[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.alpha = 0.3;
@@ -509,12 +502,12 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawMazePaths {
-    float size = (self.frame.size.width) / (self.m * 2 + 1);
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
 
     [self removeSubviews:self.mazeViewPath];
     [self removeSubviews:self.mazeViewPathMask];
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ((r == 0 && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2))) {
                 UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                 block.backgroundColor = [self inverseColor:(((MazeViewController*)self.delegate).bottomColor)];
@@ -531,9 +524,9 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)drawPowerups {
-    float size = (self.frame.size.width) / (self.m * 2 + 1);
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if (r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 self.powerUpType = arc4random() % 5;
                 PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
@@ -595,27 +588,27 @@ double rads = DEGREES_TO_RADIANS(180);
     self.mazeViewWalls.maskView = self.mazeViewMask;
     
     if (self.duality) {
-        [UIView animateWithDuration:10 animations:^{
+        [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor whiteColor];
-            self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
-            
-            NSArray *fromColors = self.gradientLayer.colors;
-            NSArray *toColors = @[(id)[UIColor blackColor].CGColor,
-                                  (id)[UIColor blackColor].CGColor];
-            
-            [self.gradientLayer setColors:toColors];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
-            
-            animation.fromValue             = fromColors;
-            animation.toValue               = toColors;
-            animation.duration              = 10.00;
-            animation.fillMode              = kCAFillModeForwards;
-            animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-            animation.delegate              = self;
-            
-            [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
-        }];
+        } completion:nil];
+        self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
+        
+        NSArray *fromColors = self.gradientLayer.colors;
+        NSArray *toColors = @[(id)[UIColor blackColor].CGColor,
+                              (id)[UIColor blackColor].CGColor];
+        
+        [self.gradientLayer setColors:toColors];
+        
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
+        
+        animation.fromValue             = fromColors;
+        animation.toValue               = toColors;
+        animation.duration              = 10.00;
+        animation.fillMode              = kCAFillModeForwards;
+        animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        animation.delegate              = self;
+        
+        [self.gradientLayer addAnimation:animation forKey:@"animateGradient"];
     }
     
     if (self.animate && !white && !self.godMode) {
@@ -648,8 +641,8 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)viewWasDoubleTapped:(UITapGestureRecognizer *)gestureRecognizer {
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ([[[self.attemptArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 [[self.attemptArray objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
             }
@@ -662,10 +655,10 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)printArrayPretty:(NSMutableArray*)array {
     NSMutableString *rowString = [NSMutableString string];
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
         [rowString setString:[NSString stringWithFormat:@"%d: ", r]];
         
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             [rowString appendFormat:@"%@ ", [[[array objectAtIndex:c] objectAtIndex:r] integerValue] == 1 ? @"*" : @" "];
         }
         NSLog(@"%@", rowString);
@@ -688,15 +681,15 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(void)calculateComplexity {
     NSMutableArray *solArrayCopy = [self.solArray mutableCopy];
-    for (int r = 0; r < self.n * 2 + 1 ; r++) {
-        for (int c = 0; c < self.m * 2 + 1 ; c++) {
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ([[[solArrayCopy objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
                 self.complexity++;
                 [[solArrayCopy objectAtIndex:r] replaceObjectAtIndex:c withObject:[NSNumber numberWithInt:0]];
             }
         }
     }
-    self.complexity = self.complexity / self.blocks*2;
+    self.complexity = self.complexity / self.mazeSize*2;
 }
 
 #pragma mark - Color methods
