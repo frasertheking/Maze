@@ -37,6 +37,7 @@
 @property BOOL reRandomize;
 @property BOOL duality;
 @property BOOL kaleidoscope;
+@property BOOL pulse;
 
 @end
 
@@ -130,6 +131,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.duality = NO;
     self.kaleidoscope = NO;
     self.powerOverwhelming = NO;
+    self.pulse = NO;
     
     if (self.mazeSize > 6) {
         self.power = NO;
@@ -187,6 +189,11 @@ double rads = DEGREES_TO_RADIANS(180);
         if (randomNum >= 73 && randomNum < 78) {
             self.kaleidoscope = YES;
         }
+        
+        if (randomNum >= 78 && randomNum < 85) {
+            self.pulse = YES;
+        }
+        
     } else {
         self.power = YES;
     }
@@ -195,6 +202,7 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - generation
 
 - (void)createMaze {
+    [self.mazeViewMask.layer removeAllAnimations];
     [self removeSubviews:self.mazeViewWalls];
     [self removeSubviews:self.mazeViewMask];
     [self removeSubviews:self.mazeViewRest];
@@ -213,12 +221,9 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewPathMask.layer setSublayers:nil];
     [self.layer removeAllAnimations];
     self.backgroundColor = [UIColor clearColor];
-
+    
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 6;
-    //self.layer.shadowOffset = CGSizeMake(-2, 2);
-    //self.layer.shadowRadius = 2;
-    //self.layer.shadowOpacity = 0.1;
     self.mazeViewMask.alpha = 1;
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
@@ -314,6 +319,10 @@ double rads = DEGREES_TO_RADIANS(180);
             [UIView animateWithDuration:15 animations:^{
                 self.mazeViewMask.alpha = 0.005;
             }];
+        }
+        
+        if (self.pulse) {
+            [self pulseAnimation];
         }
         
         if (self.powerOverwhelming) {
@@ -778,5 +787,17 @@ double rads = DEGREES_TO_RADIANS(180);
     [self performSelector:@selector(createMaze) withObject:self afterDelay:0.25];
 }
 
+- (void)pulseAnimation {
+    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.mazeViewMask.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.mazeViewMask.alpha = 1;
+        } completion:^(BOOL finished) {
+            if (!finished) return;
+            [self pulseAnimation];
+        }];
+    }];
+}
 
 @end
