@@ -37,7 +37,6 @@
     [self.mazeView setupGestureRecognizer:self.view];
     [self.mazeView initMazeWithSize:self.size];
     self.mazeView.score = 0;
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d\nCurrent Score: %ld", self.size-1, (long)self.mazeView.score];
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
     self.showingOptions = NO;
@@ -48,12 +47,15 @@
     self.checkbox.userInteractionEnabled = NO;
     self.itemImage.alpha = 0;
     self.inventoryView.backgroundColor = [UIColor clearColor];
-    self.inventoryImage.userInteractionEnabled = YES;
+    self.inventoryView.userInteractionEnabled = YES;
     self.timerView.userInteractionEnabled = NO;
+    self.inventoryView.backgroundColor = [self getRandomColor];
+    self.inventoryView.alpha = 0;    
+    [self setCurrentLevelLabel];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
-    [self.itemImage addGestureRecognizer:tapGesture];
+    [self.inventoryView addGestureRecognizer:tapGesture];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive:)
@@ -129,10 +131,10 @@
 }
 
 -(void)recreateMaze {
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %d\nCurrent Score: %ld", self.size-1, (long)self.mazeView.score];
     [self.mazeView initMazeWithSize:self.size];
     [self resetCountdown];
     self.assertFailed = NO;
+    [self setCurrentLevelLabel];
 }
 
 - (void)recreateMazeWithTimer {
@@ -230,6 +232,7 @@
     self.itemType = -1;
     self.timeRemaining = 10;
     self.itemImage.image = nil;
+    self.inventoryView.alpha = 0;
     self.mazeView.score = 0;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.showAnimationType = SlideInFromCenter;
@@ -243,37 +246,49 @@
     switch (type) {
         case 0:
             self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
+            self.usePowerupLabel.text = @"Show Correct Path";
             self.itemType = 0;
             break;
         case 1:
             self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
+            self.usePowerupLabel.text = @"Reset Remaining Time";
             self.itemType = 1;
             break;
         case 2:
             self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
+            self.usePowerupLabel.text = @"Skip This Level";
             self.itemType = 2;
             break;
         case 3:
             self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
+            self.usePowerupLabel.text = @"Activate God Mode";
             self.itemType = 3;
             break;
         default:
             self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
+            self.usePowerupLabel.text = @"Improve Visibility";
             self.itemType = 4;
             break;
     }
     
     self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
     [UIView animateWithDuration:0.35 animations:^{
-        self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+        self.inventoryView.alpha = 1;
         self.itemImage.alpha = 1;
-    } completion:nil];
+        self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+    } completion:^(BOOL finished) {
+         [self runSpinAnimationOnView:self.itemImage duration:25 rotations:0.1 repeat:1];
+         [self pulseView:self.itemImage];
+     }];
 }
 
 - (void)useItem {
     if (self.itemType >= 0) {
+        [self.itemImage.layer removeAllAnimations];
         [UIView animateWithDuration:0.35 animations:^{
+            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 5, 5);
             self.itemImage.alpha = 0;
+            self.inventoryView.alpha = 0;
         } completion:^(BOOL finished) {
             switch (self.itemType) {
                 case 0:
@@ -339,6 +354,36 @@
     h = fmodf(h, 1.0);
     UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
     return tempColor;
+}
+
+-(UIColor*) inverseColor:(UIColor*)color {
+    const CGFloat *componentColors = CGColorGetComponents(color.CGColor);
+    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.25) green:(componentColors[1] - 0.25) blue:(componentColors[2] - 0.25) alpha:componentColors[3] - 0.25];
+}
+
+- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat {
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * rotations * duration ];
+    rotationAnimation.duration = duration;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = repeat;
+    
+    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (void)pulseView:(UIView*)view {
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 1;
+    scaleAnimation.repeatCount = HUGE_VAL;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.33];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0.9];
+    [view.layer addAnimation:scaleAnimation forKey:@"scale"];
+}
+
+- (void)setCurrentLevelLabel {
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
 }
 
 @end

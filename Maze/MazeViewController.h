@@ -17,11 +17,11 @@
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UILabel *resultLabel;
-@property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
 @property (nonatomic, weak) IBOutlet UIView *inventoryView;
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
-@property (nonatomic, weak) IBOutlet UIImageView *inventoryImage;
+@property (nonatomic, weak) IBOutlet UILabel *usePowerupLabel;
+@property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
