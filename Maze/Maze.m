@@ -41,6 +41,7 @@
 @property BOOL kaleidoscope;
 @property BOOL pulse;
 @property BOOL timeTreasureLevel;
+@property BOOL showWhiteWall;
 
 @end
 
@@ -136,10 +137,11 @@ double rads = DEGREES_TO_RADIANS(180);
     self.mazeViewWalls.alpha = 1;
     self.fadeOverTime = NO;
     self.duality = NO;
-    self.kaleidoscope = NO;
+    self.kaleidoscope = YES;
     self.powerOverwhelming = NO;
     self.pulse = NO;
     self.timeTreasureLevel = NO;
+    self.showWhiteWall = NO;
     
     if (self.mazeSize > 6) {
         self.power = NO;
@@ -605,9 +607,9 @@ double rads = DEGREES_TO_RADIANS(180);
         }
     }
     [self captureAttemptPath];
-    if (self.kaleidoscope) {
+    if (self.kaleidoscope && !self.showWhiteWall) {
         [self captureWalls:NO];
-    }
+    } 
 }
 
 -(void)drawSolveLine {
@@ -707,7 +709,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewWalls.layer setSublayers:nil];
     self.wallsGradientLayer = [CAGradientLayer layer];
     self.wallsGradientLayer.frame = self.bounds;
-    if (self.kaleidoscope) {
+    if (self.kaleidoscope && !white) {
         for (UIView *view in [self.mazeViewRandomColorWalls subviews]) {
             view.backgroundColor = [self getRandomColor];
         }
@@ -768,6 +770,7 @@ double rads = DEGREES_TO_RADIANS(180);
 #pragma mark - Ability helpers
 
 -(void)showWhiteWalls {
+    self.showWhiteWall = YES;
     [self captureWalls:YES];
 }
 
