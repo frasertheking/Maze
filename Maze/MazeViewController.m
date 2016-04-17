@@ -20,6 +20,7 @@
 @property (nonatomic) int remainingCounts;
 @property (nonatomic) NSInteger itemType;
 @property (nonatomic) int timeRemaining;
+@property (nonatomic) int bonusTimesCollected;
 
 @end
 
@@ -31,6 +32,7 @@
     self.size = 2;
     self.itemType = -1;
     self.timeRemaining = 10;
+    self.bonusTimesCollected = 0;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
@@ -46,11 +48,9 @@
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
     self.itemImage.alpha = 0;
-    self.inventoryView.backgroundColor = [UIColor clearColor];
     self.inventoryView.userInteractionEnabled = YES;
     self.timerView.userInteractionEnabled = NO;
-    self.inventoryView.backgroundColor = [self getRandomColor];
-    self.inventoryView.alpha = 0;    
+    self.inventoryView.alpha = 0;
     [self setCurrentLevelLabel];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
@@ -145,7 +145,7 @@
 -(void)finished {
     if (!self.assertFailed) {
         if (!self.mazeView.noTime) {
-            self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow);
+            self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
             self.mazeView.score += self.timeRemaining;
         }
         
@@ -155,6 +155,7 @@
         }
         
         self.timerView.alpha = 0;
+        self.bonusTimesCollected = 0;
         [self.timer invalidate];
         self.size++;
         self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
@@ -234,11 +235,16 @@
     self.itemImage.image = nil;
     self.inventoryView.alpha = 0;
     self.mazeView.score = 0;
+    self.bonusTimesCollected = 0;
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.showAnimationType = SlideInFromCenter;
     alert.hideAnimationType = SlideOutFromCenter;
     [alert addButton:@"Ok" target:self selector:@selector(recreateMazeWithTimer)];
     [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size-1] closeButtonTitle:nil duration:0];
+}
+
+-(void)bonusTimeFound {
+    self.bonusTimesCollected++;
 }
 
 -(void)itemFound:(NSInteger)type {
@@ -247,26 +253,31 @@
         case 0:
             self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
             self.usePowerupLabel.text = @"Show Correct Path";
+            self.inventoryView.backgroundColor = INVENTORY_RED;
             self.itemType = 0;
             break;
         case 1:
             self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
             self.usePowerupLabel.text = @"Reset Remaining Time";
+            self.inventoryView.backgroundColor = INVENTORY_BLUE;
             self.itemType = 1;
             break;
         case 2:
             self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
             self.usePowerupLabel.text = @"Skip This Level";
+            self.inventoryView.backgroundColor = INVENTORY_GREEN;
             self.itemType = 2;
             break;
         case 3:
             self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
             self.usePowerupLabel.text = @"Activate God Mode";
+            self.inventoryView.backgroundColor = INVENTORY_ORANGE;
             self.itemType = 3;
             break;
         default:
             self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
             self.usePowerupLabel.text = @"Improve Visibility";
+            self.inventoryView.backgroundColor = INVENTORY_PURPLE;
             self.itemType = 4;
             break;
     }

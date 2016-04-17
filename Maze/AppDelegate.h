@@ -21,6 +21,13 @@
 #define SEVERITY_ORANGE UIColorFromRGB(0xFF912D)
 #define SEVERITY_RED UIColorFromRGB(0xB6340D)
 
+#define INVENTORY_PURPLE UIColorFromRGB(0xba54ff)
+#define INVENTORY_RED UIColorFromRGB(0xe76154)
+#define INVENTORY_BLUE UIColorFromRGB(0x0dccf3)
+#define INVENTORY_GREEN UIColorFromRGB(0x9fdb36)
+#define INVENTORY_ORANGE UIColorFromRGB(0xf4c04c)
+
+
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

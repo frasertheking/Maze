@@ -9,6 +9,7 @@
 #import "Maze.h"
 #import "MazeViewController.h"
 #import "PowerUpView.h"
+#import "BonusTimeView.h"
 
 @interface Maze ()
 
@@ -21,6 +22,7 @@
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
 @property (nonatomic) NSTimer *gradientTimer;
+@property (nonatomic) NSMutableArray *timeBonusArray;
 @property NSInteger currentX;
 @property NSInteger currentY;
 @property CGPoint previousLoc;
@@ -71,6 +73,9 @@ double rads = DEGREES_TO_RADIANS(180);
     self.mazeViewRest = [[UIView alloc] initWithFrame:self.bounds];
     [self setupViews:self.mazeViewRest];
     
+    self.mazeViewBonusTime = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewBonusTime];
+    
     self.mazeViewRandomColorWalls = [[UIView alloc] initWithFrame:self.bounds];
     [self setupViews:self.mazeViewRandomColorWalls];
     
@@ -109,6 +114,7 @@ double rads = DEGREES_TO_RADIANS(180);
         
         self.noTime = NO;
         [self generateMazeDistractions];
+        if (self.mazeSize > 3) [self generateTimeBonuses];
     }
     
     self.powerUpX = -1;
@@ -199,6 +205,41 @@ double rads = DEGREES_TO_RADIANS(180);
     }
 }
 
+- (void)generateTimeBonuses {
+    if (!self.timeBonusArray) {
+        self.timeBonusArray = [[NSMutableArray alloc] init];
+    } else {
+        [self.timeBonusArray removeAllObjects];
+    }
+    
+    int randomNum = arc4random() % 100;
+    int pointX = arc4random() % (self.mazeSize*2 - 1);
+    int pointY = arc4random() % (self.mazeSize*2 - 1);
+    [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
+    
+    pointX = arc4random() % (self.mazeSize*2 - 1);
+    pointY = arc4random() % (self.mazeSize*2 - 1);
+    [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
+    
+    if (randomNum > 75) {
+        pointX = arc4random() % (self.mazeSize*2 - 1);
+        pointY = arc4random() % (self.mazeSize*2 - 1);
+        CGPoint newPoint = CGPointMake(pointX, pointY);
+        if (![self.timeBonusArray containsObject:[NSValue valueWithCGPoint:newPoint]]) {
+            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(arc4random() % (self.mazeSize*2 - 1), arc4random() % (self.mazeSize*2 - 1))]];
+        }
+    }
+    
+    if (randomNum > 95) {
+        pointX = arc4random() % (self.mazeSize*2 - 1);
+        pointY = arc4random() % (self.mazeSize*2 - 1);
+        CGPoint newPoint = CGPointMake(pointX, pointY);
+        if (![self.timeBonusArray containsObject:[NSValue valueWithCGPoint:newPoint]]) {
+            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(arc4random() % (self.mazeSize*2 - 1), arc4random() % (self.mazeSize*2 - 1))]];
+        }
+    }
+}
+
 #pragma mark - generation
 
 - (void)createMaze {
@@ -206,6 +247,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewWalls];
     [self removeSubviews:self.mazeViewMask];
     [self removeSubviews:self.mazeViewRest];
+    [self removeSubviews:self.mazeViewBonusTime];
     [self removeSubviews:self.mazeViewPath];
     [self removeSubviews:self.mazeViewPathMask];
     [self removeSubviews:self.mazeViewRandomColorWalls];
@@ -216,6 +258,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self.mazeViewPath.layer setSublayers:nil];
     [self.mazeViewWalls.layer setSublayers:nil];
     [self.mazeViewRest.layer setSublayers:nil];
+    [self.mazeViewBonusTime.layer setSublayers:nil];
     [self.mazeViewRandomColorWalls.layer setSublayers:nil];
     [self.mazeViewMask.layer setSublayers:nil];
     [self.mazeViewPathMask.layer setSublayers:nil];
@@ -314,7 +357,8 @@ double rads = DEGREES_TO_RADIANS(180);
         [self solve];
         [self captureAttemptPath];
         [self drawPowerups];
-        
+        [self drawTimeBonuses];
+            
         if (self.fadeOverTime) {
             [UIView animateWithDuration:15 animations:^{
                 self.mazeViewMask.alpha = 0.005;
@@ -476,6 +520,49 @@ double rads = DEGREES_TO_RADIANS(180);
             [self.layer addAnimation:scaleAnimation forKey:@"scale"];
             [((MazeViewController*)self.delegate) itemFound:self.powerUpType];
         }
+        
+        // Check to see if we pickup more time
+        NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
+        for (NSValue *v in self.timeBonusArray) {
+            CGPoint point = v.CGPointValue;
+            if (self.currentX == point.x && self.currentY == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 0) {
+                [discardedItems addObject:v];
+                
+                CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+                scaleAnimation.duration = 0.25;
+                scaleAnimation.repeatCount = 0;
+                scaleAnimation.autoreverses = YES;
+                scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+                scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
+                [self.layer addAnimation:scaleAnimation forKey:@"scale"];
+                [((MazeViewController*)self.delegate) bonusTimeFound];
+                
+                float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
+                UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size, self.currentY*size, size, size)];
+                bonusLabel.font = [UIFont systemFontOfSize:6];
+                bonusLabel.text = @"+ time";
+                bonusLabel.alpha = 0;
+                bonusLabel.textAlignment = NSTextAlignmentCenter;
+                [self addSubview:bonusLabel];
+                bonusLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
+                [UIView animateWithDuration:0.25 animations:^{
+                    bonusLabel.alpha = 1;
+                    bonusLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                        bonusLabel.alpha = 0;
+                        bonusLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2.5, 2.5);
+                    } completion:^(BOOL finished) {
+                        [bonusLabel removeFromSuperview];
+                    }];
+                }];
+            }
+        }
+        if ([discardedItems count] > 0) {
+            [self.timeBonusArray removeObjectsInArray:discardedItems];
+            [self drawTimeBonuses];
+        }
+        
     }
     [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
@@ -561,6 +648,22 @@ double rads = DEGREES_TO_RADIANS(180);
                 if (!self.powerOverwhelming) {
                     self.powerUpX = r;
                     self.powerUpY = c;
+                }
+            }
+        }
+    }
+}
+
+-(void)drawTimeBonuses {
+    [self removeSubviews:self.mazeViewBonusTime];
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
+    for (NSValue* v in self.timeBonusArray) {
+        CGPoint point = v.CGPointValue;
+        for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+            for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
+                if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 && (r == point.x && c == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0)) {
+                    BonusTimeView* bonusTime = [[BonusTimeView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                    [self.mazeViewBonusTime addSubview:bonusTime];
                 }
             }
         }
@@ -693,7 +796,6 @@ double rads = DEGREES_TO_RADIANS(180);
         for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             [rowString appendFormat:@"%@ ", [[[array objectAtIndex:c] objectAtIndex:r] integerValue] == 1 ? @"*" : @" "];
         }
-        NSLog(@"%@", rowString);
     }
 }
 
@@ -776,6 +878,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.reRandomize = YES;
     self.powerUpX = -1;
     self.powerUpY = -1;
+    [self.timeBonusArray removeAllObjects];
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * 1 * 1 ];

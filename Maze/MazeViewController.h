@@ -43,5 +43,6 @@
 -(void)recreateMaze;
 -(void)finished;
 -(void)itemFound:(NSInteger)type;
+-(void)bonusTimeFound;
 @end
 

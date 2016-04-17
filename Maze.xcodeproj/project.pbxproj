@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		433FAD751CB7F064004341AE /* StarBackgroundScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 433FAD741CB7F064004341AE /* StarBackgroundScene.m */; };
+		43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */; };
 		4368A27B1C83D2E9006E1779 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27A1C83D2E9006E1779 /* main.m */; };
 		4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27D1C83D2E9006E1779 /* AppDelegate.m */; };
 		4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2801C83D2E9006E1779 /* MazeViewController.m */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		433FAD731CB7F064004341AE /* StarBackgroundScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarBackgroundScene.h; sourceTree = "<group>"; };
 		433FAD741CB7F064004341AE /* StarBackgroundScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarBackgroundScene.m; sourceTree = "<group>"; };
+		43426C9C1CC3F6EE001E6830 /* BonusTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTimeView.h; sourceTree = "<group>"; };
+		43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTimeView.m; sourceTree = "<group>"; };
 		4368A2761C83D2E9006E1779 /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368A27A1C83D2E9006E1779 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4368A27C1C83D2E9006E1779 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 			children = (
 				43EEE8CF1CB32EA80066097A /* PowerUpView.h */,
 				43EEE8D01CB32EA80066097A /* PowerUpView.m */,
+				43426C9C1CC3F6EE001E6830 /* BonusTimeView.h */,
+				43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
 				43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */,
 				4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */,
+				43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */,
 				4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
