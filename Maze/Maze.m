@@ -40,6 +40,7 @@
 @property BOOL duality;
 @property BOOL kaleidoscope;
 @property BOOL pulse;
+@property BOOL timeTreasureLevel;
 
 @end
 
@@ -138,6 +139,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.kaleidoscope = NO;
     self.powerOverwhelming = NO;
     self.pulse = NO;
+    self.timeTreasureLevel = NO;
     
     if (self.mazeSize > 6) {
         self.power = NO;
@@ -200,6 +202,10 @@ double rads = DEGREES_TO_RADIANS(180);
             self.pulse = YES;
         }
         
+        if (randomNum == 85) {
+            self.timeTreasureLevel = YES;
+        }
+        
     } else {
         self.power = YES;
     }
@@ -236,6 +242,14 @@ double rads = DEGREES_TO_RADIANS(180);
         CGPoint newPoint = CGPointMake(pointX, pointY);
         if (![self.timeBonusArray containsObject:[NSValue valueWithCGPoint:newPoint]]) {
             [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(arc4random() % (self.mazeSize*2 - 1), arc4random() % (self.mazeSize*2 - 1))]];
+        }
+    }
+    
+    if (self.timeTreasureLevel) {
+        for (int i = 0; i < 15; i++) {
+            pointX = arc4random() % (self.mazeSize*2);
+            pointY = arc4random() % (self.mazeSize*2);
+            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
         }
     }
 }
@@ -538,7 +552,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 [((MazeViewController*)self.delegate) bonusTimeFound];
                 
                 float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
-                UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size, self.currentY*size, size, size)];
+                UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size, self.currentY*size, 50, size)];
                 bonusLabel.font = [UIFont systemFontOfSize:6];
                 bonusLabel.text = @"+ time";
                 bonusLabel.alpha = 0;
