@@ -254,25 +254,25 @@
             self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
             self.usePowerupLabel.text = @"Show Correct Path";
             self.inventoryView.backgroundColor = INVENTORY_RED;
-            self.itemType = 4;
+            self.itemType = 0;
             break;
         case 1:
             self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
             self.usePowerupLabel.text = @"Reset Remaining Time";
             self.inventoryView.backgroundColor = INVENTORY_BLUE;
-            self.itemType = 4;
+            self.itemType = 1;
             break;
         case 2:
             self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
             self.usePowerupLabel.text = @"Skip This Level";
             self.inventoryView.backgroundColor = INVENTORY_GREEN;
-            self.itemType = 4;
+            self.itemType = 2;
             break;
         case 3:
             self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
             self.usePowerupLabel.text = @"Activate God Mode";
             self.inventoryView.backgroundColor = INVENTORY_ORANGE;
-            self.itemType = 4;
+            self.itemType = 3;
             break;
         default:
             self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
