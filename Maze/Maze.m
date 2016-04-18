@@ -101,6 +101,7 @@ double rads = DEGREES_TO_RADIANS(180);
     if ((randomNum == 1 || randomNum == 99) && size > 6) {
         self.mazeSize = 30;
         self.noTime = YES;
+        [self disableAllMazeDistractions];
     } else {
         if (size > 2) {
             self.mazeSize = size;
@@ -131,6 +132,79 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (void)generateMazeDistractions {
     int randomNum = arc4random() % 100;
+    [self disableAllMazeDistractions];
+    
+    if (self.mazeSize > 6) {
+        self.power = NO;
+    
+        if (randomNum >= 0 && randomNum < 15) {
+            self.animate = YES;
+        }
+        
+        if (randomNum >= 15 && randomNum < 20) {
+            self.totalRandomColors = YES;
+        }
+        
+        if (randomNum >= 20 && randomNum < 25) {
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+        }
+        
+        if (randomNum >= 25 && randomNum < 40) {
+            self.mazeViewWalls.alpha = 0.4;
+        }
+        
+        if (randomNum >= 40 && randomNum < 45) {
+            self.fadeOverTime = YES;
+        }
+        
+        if (randomNum >= 45 && randomNum < 55) {
+            self.duality = YES;
+        }
+        
+        if (randomNum >= 55 && randomNum < 58) {
+            self.kaleidoscope = YES;
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+        }
+        
+        if (randomNum >= 58 && randomNum < 63) {
+            self.animate = YES;
+            self.mazeViewWalls.alpha = 0.4;
+            self.fadeOverTime = YES;
+        }
+        
+        if (randomNum >= 63 && randomNum < 65) {
+            [self transform];
+        }
+        
+        if (randomNum >= 65 && randomNum < 68) {
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:8];
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:12];
+            self.fadeOverTime = YES;
+        }
+        
+        if (randomNum >= 68 && randomNum < 73) {
+            self.powerOverwhelming = YES;
+        }
+        
+        if (randomNum >= 73 && randomNum < 75) {
+            self.kaleidoscope = YES;
+        }
+        
+        if (randomNum >= 75 && randomNum < 85) {
+            self.pulse = YES;
+        }
+        
+        if (randomNum >= 85 && randomNum < 88) {
+            self.timeTreasureLevel = YES;
+        }
+        
+    } else {
+        self.power = YES;
+    }
+}
+
+- (void)disableAllMazeDistractions {
     self.animate = NO;
     self.totalRandomColors = NO;
     self.reRandomize = NO;
@@ -142,75 +216,6 @@ double rads = DEGREES_TO_RADIANS(180);
     self.pulse = NO;
     self.timeTreasureLevel = NO;
     self.showWhiteWall = NO;
-    
-    if (self.mazeSize > 6) {
-        self.power = NO;
-    
-        if (randomNum >= 0 && randomNum < 10) {
-            self.animate = YES;
-        }
-        
-        if (randomNum >= 10 && randomNum < 20) {
-            self.totalRandomColors = YES;
-        }
-        
-        if (randomNum >= 20 && randomNum < 30) {
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-        }
-        
-        if (randomNum >= 30 && randomNum < 40) {
-            self.mazeViewWalls.alpha = 0.4;
-        }
-        
-        if (randomNum >= 40 && randomNum < 50) {
-            self.fadeOverTime = YES;
-        }
-        
-        if (randomNum >= 50 && randomNum < 55) {
-            self.duality = YES;
-        }
-        
-        if (randomNum >= 55 && randomNum < 60) {
-            self.kaleidoscope = YES;
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-        }
-        
-        if (randomNum >= 60 && randomNum < 65) {
-            self.animate = YES;
-            self.mazeViewWalls.alpha = 0.4;
-            self.fadeOverTime = YES;
-        }
-        
-        if (randomNum >= 65 && randomNum < 68) {
-            [self transform];
-        }
-        
-        if (randomNum >= 68 && randomNum < 70) {
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:8];
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:12];
-            self.fadeOverTime = YES;
-        }
-        
-        if (randomNum >= 70 && randomNum < 73) {
-            self.powerOverwhelming = YES;
-        }
-        
-        if (randomNum >= 73 && randomNum < 78) {
-            self.kaleidoscope = YES;
-        }
-        
-        if (randomNum >= 78 && randomNum < 85) {
-            self.pulse = YES;
-        }
-        
-        if (randomNum == 85) {
-            self.timeTreasureLevel = YES;
-        }
-        
-    } else {
-        self.power = YES;
-    }
 }
 
 - (void)generateTimeBonuses {
