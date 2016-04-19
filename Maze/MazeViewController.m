@@ -50,8 +50,19 @@
     self.itemImage.alpha = 0;
     self.inventoryView.userInteractionEnabled = YES;
     self.timerView.userInteractionEnabled = NO;
+    self.timerView.layer.borderWidth = 1.0f;
+    self.timerView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.3].CGColor;
     self.inventoryView.alpha = 0;
     [self setCurrentLevelLabel];
+    [self.retryButton setTitle:@"Retry" forState:UIControlStateNormal];
+    [self.retryButton setTitleColor:ORANGE forState:UIControlStateNormal];
+    self.retryButton.layer.borderColor = ORANGE.CGColor;
+    self.retryButton.layer.borderWidth = 1.0f;
+    self.retryButton.layer.cornerRadius = 3.0;
+    self.retryButton.layer.masksToBounds = YES;
+    self.retryButton.alpha = 0;
+    self.levelFailedLabel.alpha = 0;
+    self.levelAchievedLabel.alpha = 0;
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
@@ -134,8 +145,7 @@
     [self.mazeView initMazeWithSize:self.size];
     [self resetCountdown];
     self.assertFailed = NO;
-    [self setCurrentLevelLabel];
-}
+    [self setCurrentLevelLabel];}
 
 - (void)recreateMazeWithTimer {
     self.timerView.alpha = 1;
@@ -236,11 +246,16 @@
     self.inventoryView.alpha = 0;
     self.mazeView.score = 0;
     self.bonusTimesCollected = 0;
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    alert.showAnimationType = SlideInFromCenter;
-    alert.hideAnimationType = SlideOutFromCenter;
-    [alert addButton:@"Ok" target:self selector:@selector(recreateMazeWithTimer)];
-    [alert showError:self title:@"Times Up!" subTitle:[NSString stringWithFormat:@"You got to level: %d", self.size-1] closeButtonTitle:nil duration:0];
+    self.currentLevelLabel.alpha = 0;
+    self.mazeView.userInteractionEnabled = NO;
+    [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
+    self.levelAchievedLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
+    [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.mazeView.alpha = 0;
+        self.levelFailedLabel.alpha = 1;
+        self.retryButton.alpha = 1;
+        self.levelAchievedLabel.alpha = 1;
+    } completion:nil];
 }
 
 -(void)bonusTimeFound {
@@ -354,6 +369,21 @@
              [self.view layoutIfNeeded];
         } completion:nil];
     }
+}
+
+- (IBAction)retryButtonClick:(id)sender {
+    [self recreateMazeWithTimer];
+    self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
+    self.mazeView.userInteractionEnabled = YES;
+    [self.mazeView.layer removeAllAnimations];
+    [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+        self.mazeView.alpha = 1;
+        self.currentLevelLabel.alpha = 1;
+        self.levelFailedLabel.alpha = 0;
+        self.retryButton.alpha = 0;
+        self.levelAchievedLabel.alpha = 0;
+    } completion:nil];
 }
 
 #pragma mark - Helpers
