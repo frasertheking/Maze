@@ -97,12 +97,12 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 -(void)initMazeWithSize:(int)size {
-    int randomNum = arc4random() % 100;
-    if ((randomNum == 1 || randomNum == 99) && size > 6) {
-        self.mazeSize = 30;
-        self.noTime = YES;
-        [self disableAllMazeDistractions];
-    } else {
+//    int randomNum = arc4random() % 100;
+//    if ((randomNum == 1 || randomNum == 99) && size > 6) {
+//        self.mazeSize = 30;
+//        self.noTime = YES;
+//        [self disableAllMazeDistractions];
+//    } else {
         if (size > 2) {
             self.mazeSize = size;
         } else {
@@ -110,7 +110,7 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         
         // Stop growing maze size at this point
-        if (self.mazeSize > 20) {
+        if (self.mazeSize > 17) {
             self.mazeSize -= 1;
             self.mazeSize -= 1;
         }
@@ -118,7 +118,7 @@ double rads = DEGREES_TO_RADIANS(180);
         self.noTime = NO;
         [self generateMazeDistractions];
         if (self.mazeSize > 3) [self generateTimeBonuses];
-    }
+//    }
     
     self.powerUpX = -1;
     self.powerUpY = -1;
@@ -161,7 +161,7 @@ double rads = DEGREES_TO_RADIANS(180);
             self.duality = YES;
         }
         
-        if (randomNum >= 55 && randomNum < 58) {
+        if (randomNum >= 55 && randomNum < 57) {
             self.kaleidoscope = YES;
             [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
         }
@@ -173,7 +173,7 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         
         if (randomNum >= 63 && randomNum < 65) {
-            [self transform];
+            //[self transform];
         }
         
         if (randomNum >= 65 && randomNum < 68) {

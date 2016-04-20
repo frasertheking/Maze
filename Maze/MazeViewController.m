@@ -168,7 +168,6 @@
         self.bonusTimesCollected = 0;
         [self.timer invalidate];
         self.size++;
-        self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
 
         [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
             self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
@@ -196,7 +195,6 @@
 #pragma mark - Countdown
 
 -(void)resetCountdown {
-    self.resultLabel.text = [NSString stringWithFormat:@"Highscore: %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]];
     [self.timer invalidate];
     [self.timerView.layer removeAllAnimations];
     if (!self.mazeView.noTime) {
@@ -351,6 +349,10 @@
 
 - (IBAction)animateMaze:(id)sender {
     [self.mazeView transformMaze];
+}
+
+- (IBAction)back:(id)sender {
+    NSLog(@"Back button pressed");
 }
 
 - (IBAction)showOptions:(id)sender {

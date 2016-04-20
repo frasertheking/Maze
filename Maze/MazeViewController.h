@@ -16,7 +16,6 @@
 @interface MazeViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
-@property (nonatomic, weak) IBOutlet UILabel *resultLabel;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
 @property (nonatomic, weak) IBOutlet UIView *inventoryView;
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
