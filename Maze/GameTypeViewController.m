@@ -36,5 +36,8 @@
     [self performSegueWithIdentifier:@"timedSegue" sender:self];
 }
 
+- (IBAction)casualTapped:(id)sender {
+    [self performSegueWithIdentifier:@"casualSegue" sender:self];
+}
 
 @end

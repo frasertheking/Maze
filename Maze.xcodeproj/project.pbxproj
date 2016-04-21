@@ -23,6 +23,7 @@
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
 		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
 		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
+		43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */; };
 		43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE8D01CB32EA80066097A /* PowerUpView.m */; };
 		FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFEF44CF66B679603AE0E32B /* libPods-Maze.a */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,8 @@
 		43BAABBD1CC86166009F4C50 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeViewController.h; sourceTree = "<group>"; };
 		43BAABC01CC86756009F4C50 /* GameTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTypeViewController.m; sourceTree = "<group>"; };
+		43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CasualMazeViewController.h; sourceTree = "<group>"; };
+		43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CasualMazeViewController.m; sourceTree = "<group>"; };
 		43EEE8CF1CB32EA80066097A /* PowerUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpView.h; sourceTree = "<group>"; };
 		43EEE8D01CB32EA80066097A /* PowerUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpView.m; sourceTree = "<group>"; };
 		6527CA6DDA978F2FD581E5BB /* Pods-Maze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.release.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
 				4368A27F1C83D2E9006E1779 /* MazeViewController.h */,
 				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
+				43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */,
+				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
 				4368A2821C83D2E9006E1779 /* Main.storyboard */,
 				4368A2851C83D2E9006E1779 /* Assets.xcassets */,
 				4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */,
@@ -431,6 +436,7 @@
 				43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
+				43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */,
 				433FAD751CB7F064004341AE /* StarBackgroundScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

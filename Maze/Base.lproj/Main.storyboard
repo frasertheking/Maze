@@ -348,7 +348,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="fN7-yU-US0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="330"/>
+            <point key="canvasLocation" x="1142" y="7"/>
         </scene>
         <!--Game Type View Controller-->
         <scene sceneID="XgH-4K-Ogq">
@@ -378,6 +378,9 @@
                                 <state key="normal" title="Casual">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="casualTapped:" destination="To7-x9-SGd" eventType="touchDown" id="GPA-93-oa1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,11 +395,113 @@
                         <outlet property="casualButton" destination="rDN-ot-tV4" id="1Pz-SY-5kL"/>
                         <outlet property="timedButton" destination="gbU-y0-cdj" id="VBw-1D-6hV"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="timedSegue" id="EJ3-b3-cPw"/>
+                        <segue destination="7o7-hE-kU8" kind="show" identifier="casualSegue" id="ENq-pM-eTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RMh-2x-6O9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="426" y="330"/>
+        </scene>
+        <!--Casual Maze View Controller-->
+        <scene sceneID="56D-6k-cKK">
+            <objects>
+                <viewController id="7o7-hE-kU8" customClass="CasualMazeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fKq-m7-D1E"/>
+                        <viewControllerLayoutGuide type="bottom" id="REf-Sy-LXv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="agN-Px-2b5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pv-Vb-5gq" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" alpha="0.33000001311302185" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAP-ty-Mob">
+                                        <rect key="frame" x="555" y="32" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="ckU-Et-FrC"/>
+                                            <constraint firstAttribute="height" constant="35" id="tXj-6Q-e3U"/>
+                                        </constraints>
+                                        <state key="normal" image="Delete-50"/>
+                                        <connections>
+                                            <action selector="back:" destination="7o7-hE-kU8" eventType="touchDown" id="i0P-s5-Jik"/>
+                                            <segue destination="V86-G7-FwU" kind="unwind" unwindAction="unwindToThisViewController:" id="5yx-jV-jFK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KAP-ty-Mob" firstAttribute="top" secondItem="6pv-Vb-5gq" secondAttribute="top" constant="32" id="5NG-dA-FOV"/>
+                                    <constraint firstAttribute="trailing" secondItem="KAP-ty-Mob" secondAttribute="trailing" constant="10" id="ma6-YR-hJS"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igY-Js-dhb">
+                                <rect key="frame" x="150" y="500" width="300" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="mpv-Vy-exQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzJ-7B-zG9" customClass="Maze">
+                                <rect key="frame" x="150" y="165" width="300" height="300"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="ery-aa-lJn"/>
+                                    <constraint firstAttribute="width" constant="300" id="f5S-iH-lig"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J8C-Kd-KkF" userLabel="Checkbox" customClass="BEMCheckBox">
+                                <rect key="frame" x="225" y="240" width="150" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="6hh-pJ-pGp"/>
+                                    <constraint firstAttribute="height" constant="150" id="jfS-28-dfr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6pv-Vb-5gq" secondAttribute="bottom" id="0CB-wp-NxI"/>
+                            <constraint firstItem="J8C-Kd-KkF" firstAttribute="centerX" secondItem="agN-Px-2b5" secondAttribute="centerX" id="18S-qB-WfQ"/>
+                            <constraint firstItem="ZzJ-7B-zG9" firstAttribute="centerY" secondItem="agN-Px-2b5" secondAttribute="centerY" multiplier="1.05" id="2CG-n2-gdd"/>
+                            <constraint firstAttribute="bottom" secondItem="6pv-Vb-5gq" secondAttribute="bottom" id="2Wt-Vo-U9e"/>
+                            <constraint firstItem="6pv-Vb-5gq" firstAttribute="leading" secondItem="agN-Px-2b5" secondAttribute="leading" id="3Wa-nD-Cka"/>
+                            <constraint firstItem="J8C-Kd-KkF" firstAttribute="centerY" secondItem="agN-Px-2b5" secondAttribute="centerY" multiplier="1.05" id="4hz-OY-pLC"/>
+                            <constraint firstItem="ZzJ-7B-zG9" firstAttribute="centerX" secondItem="agN-Px-2b5" secondAttribute="centerX" id="9n9-vi-NBx"/>
+                            <constraint firstAttribute="trailing" secondItem="6pv-Vb-5gq" secondAttribute="trailing" id="ByS-tw-ykP"/>
+                            <constraint firstAttribute="trailing" secondItem="6pv-Vb-5gq" secondAttribute="trailing" id="CTB-Md-rdF"/>
+                            <constraint firstItem="6pv-Vb-5gq" firstAttribute="top" secondItem="agN-Px-2b5" secondAttribute="top" id="S4O-X4-oS3"/>
+                            <constraint firstItem="igY-Js-dhb" firstAttribute="centerX" secondItem="agN-Px-2b5" secondAttribute="centerX" id="Ugw-mt-Asz"/>
+                            <constraint firstItem="ZzJ-7B-zG9" firstAttribute="leading" secondItem="igY-Js-dhb" secondAttribute="leading" id="cE4-Qw-b0f"/>
+                            <constraint firstItem="6pv-Vb-5gq" firstAttribute="top" secondItem="agN-Px-2b5" secondAttribute="top" id="mHf-6g-SOW"/>
+                            <constraint firstItem="igY-Js-dhb" firstAttribute="top" secondItem="ZzJ-7B-zG9" secondAttribute="bottom" constant="8" id="s1Z-FB-zGz"/>
+                            <constraint firstItem="6pv-Vb-5gq" firstAttribute="leading" secondItem="agN-Px-2b5" secondAttribute="leading" id="zQl-yC-wT1"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Wa-nD-Cka"/>
+                                <exclude reference="S4O-X4-oS3"/>
+                                <exclude reference="ByS-tw-ykP"/>
+                                <exclude reference="2Wt-Vo-U9e"/>
+                                <exclude reference="cE4-Qw-b0f"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="checkbox" destination="J8C-Kd-KkF" id="nB8-1v-Pdy"/>
+                        <outlet property="currentLevelLabel" destination="igY-Js-dhb" id="P4n-oH-VxC"/>
+                        <outlet property="mazeView" destination="ZzJ-7B-zG9" id="Z3v-Cu-41I"/>
+                        <outlet property="mazeViewCenterConstraint" destination="9n9-vi-NBx" id="Nw8-69-TAz"/>
+                        <outlet property="particleView" destination="6pv-Vb-5gq" id="hvU-rW-syr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIm-8p-omI" sceneMemberID="firstResponder"/>
+                <exit id="V86-G7-FwU" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1142" y="709"/>
         </scene>
     </scenes>
     <resources>

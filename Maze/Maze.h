@@ -27,6 +27,7 @@
 @property (nonatomic) BOOL godMode;
 @property (nonatomic) BOOL fadeOverTime;
 @property (nonatomic) BOOL noTime;
+@property (nonatomic) BOOL isCasualMode;
 @property NSInteger score;
 
 -(void)createMaze;
