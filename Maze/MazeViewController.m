@@ -94,6 +94,10 @@
     return UIStatusBarStyleDefault;
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void)setupParticles {
     StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -155,7 +159,11 @@
 -(void)finished {
     if (!self.assertFailed) {
         if (!self.mazeView.noTime) {
-            self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
+            if (self.size > 15) {
+                self.timeRemaining = 15 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
+            } else {
+                self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
+            }
             self.mazeView.score += self.timeRemaining;
         }
         
