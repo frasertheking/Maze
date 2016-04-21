@@ -21,6 +21,8 @@
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
 		439F8D711CB7E9E7003F98F7 /* MazeBackgroundParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */; };
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
+		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
+		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
 		43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE8D01CB32EA80066097A /* PowerUpView.m */; };
 		FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFEF44CF66B679603AE0E32B /* libPods-Maze.a */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,10 @@
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
 		439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeBackgroundParticle.sks; sourceTree = "<group>"; };
 		439F8D701CB7E9E7003F98F7 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		43BAABBC1CC86166009F4C50 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		43BAABBD1CC86166009F4C50 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeViewController.h; sourceTree = "<group>"; };
+		43BAABC01CC86756009F4C50 /* GameTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTypeViewController.m; sourceTree = "<group>"; };
 		43EEE8CF1CB32EA80066097A /* PowerUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpView.h; sourceTree = "<group>"; };
 		43EEE8D01CB32EA80066097A /* PowerUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpView.m; sourceTree = "<group>"; };
 		6527CA6DDA978F2FD581E5BB /* Pods-Maze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +147,10 @@
 				437B80A41C9CEE6F0024F758 /* Maze */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
+				43BAABBC1CC86166009F4C50 /* HomeViewController.h */,
+				43BAABBD1CC86166009F4C50 /* HomeViewController.m */,
+				43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */,
+				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
 				4368A27F1C83D2E9006E1779 /* MazeViewController.h */,
 				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
 				4368A2821C83D2E9006E1779 /* Main.storyboard */,
@@ -414,9 +424,11 @@
 			files = (
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
 				43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */,
+				43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */,
 				4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */,
 				43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */,
 				4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */,
+				43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				433FAD751CB7F064004341AE /* StarBackgroundScene.m in Sources */,
