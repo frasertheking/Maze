@@ -24,6 +24,7 @@
 		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
 		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
 		43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */; };
+		43BAABCA1CC9B84F009F4C50 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BAABC91CC9B84F009F4C50 /* FBSDKCoreKit.framework */; };
 		43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE8D01CB32EA80066097A /* PowerUpView.m */; };
 		FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFEF44CF66B679603AE0E32B /* libPods-Maze.a */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		43BAABC01CC86756009F4C50 /* GameTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTypeViewController.m; sourceTree = "<group>"; };
 		43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CasualMazeViewController.h; sourceTree = "<group>"; };
 		43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CasualMazeViewController.m; sourceTree = "<group>"; };
+		43BAABC91CC9B84F009F4C50 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		43EEE8CF1CB32EA80066097A /* PowerUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpView.h; sourceTree = "<group>"; };
 		43EEE8D01CB32EA80066097A /* PowerUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpView.m; sourceTree = "<group>"; };
 		6527CA6DDA978F2FD581E5BB /* Pods-Maze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */,
+				43BAABCA1CC9B84F009F4C50 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +118,7 @@
 		0D1876CD177D433E5444B30A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43BAABC91CC9B84F009F4C50 /* FBSDKCoreKit.framework */,
 				FFEF44CF66B679603AE0E32B /* libPods-Maze.a */,
 			);
 			name = Frameworks;
@@ -579,6 +583,10 @@
 			baseConfigurationReference = 86B44C96BDAD77C1A5E99A2B /* Pods-Maze.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Maze/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -592,6 +600,10 @@
 			baseConfigurationReference = 6527CA6DDA978F2FD581E5BB /* Pods-Maze.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Maze/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
