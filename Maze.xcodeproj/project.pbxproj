@@ -165,18 +165,12 @@
 				43A65B321CCBBD6E001431FC /* Model */,
 				439F8D6E1CB7E8FC003F98F7 /* SpriteKit */,
 				43EEE8CE1CB32E880066097A /* Items */,
-				437B80A41C9CEE6F0024F758 /* Maze */,
+				437B80A41C9CEE6F0024F758 /* MazeGeneration */,
+				43A65B361CCBFF81001431FC /* Navigation */,
+				43A65B2E1CCAFB91001431FC /* Leaderboard */,
+				43A65B371CCBFFA8001431FC /* MazeViewControllers */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
-				43BAABBC1CC86166009F4C50 /* HomeViewController.h */,
-				43BAABBD1CC86166009F4C50 /* HomeViewController.m */,
-				43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */,
-				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
-				4368A27F1C83D2E9006E1779 /* MazeViewController.h */,
-				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
-				43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */,
-				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
-				43A65B2E1CCAFB91001431FC /* Leaderboard */,
 				4368A2821C83D2E9006E1779 /* Main.storyboard */,
 				4368A2851C83D2E9006E1779 /* Assets.xcassets */,
 				4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */,
@@ -222,14 +216,14 @@
 			name = MazeGenerator;
 			sourceTree = "<group>";
 		};
-		437B80A41C9CEE6F0024F758 /* Maze */ = {
+		437B80A41C9CEE6F0024F758 /* MazeGeneration */ = {
 			isa = PBXGroup;
 			children = (
 				4368A2B01C83D691006E1779 /* MazeGenerator */,
 				437B80A11C9CE9A30024F758 /* Maze.h */,
 				437B80A21C9CE9A30024F758 /* Maze.m */,
 			);
-			name = Maze;
+			name = MazeGeneration;
 			sourceTree = "<group>";
 		};
 		439F8D6E1CB7E8FC003F98F7 /* SpriteKit */ = {
@@ -261,6 +255,28 @@
 				43A65B341CCBBD80001431FC /* User.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		43A65B361CCBFF81001431FC /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				43BAABBC1CC86166009F4C50 /* HomeViewController.h */,
+				43BAABBD1CC86166009F4C50 /* HomeViewController.m */,
+				43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */,
+				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		43A65B371CCBFFA8001431FC /* MazeViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4368A27F1C83D2E9006E1779 /* MazeViewController.h */,
+				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
+				43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */,
+				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
+			);
+			name = MazeViewControllers;
 			sourceTree = "<group>";
 		};
 		43EEE8CE1CB32E880066097A /* Items */ = {

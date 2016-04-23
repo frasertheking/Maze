@@ -17,6 +17,9 @@
 @interface LeaderboardViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIView *errorView;
+@property (nonatomic, weak) IBOutlet UIButton *refreshButton;
+@property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) NSMutableArray<User *> *users;
 
 @end
@@ -27,10 +30,12 @@
     [super viewDidLoad];
 
     self.users = [[NSMutableArray alloc] init];
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        [self getLeaderboardData];
-        [self setupViews];
-    }
+    [self setupViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshViews];
 }
 
 - (void)setupViews {
@@ -55,11 +60,33 @@
             }
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
-            [self.tableView reloadData];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [AppDelegate hideHUD:self.tableView];
         } else {
             NSLog(@"ERROR GETTING LEADERBOARD DATA");
         }
     }];
+}
+
+- (void)setupErrorView {
+    self.errorView.hidden = NO;
+    self.refreshButton.hidden = YES;
+    self.errorView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+}
+
+- (void)hideErrorView {
+    self.errorView.hidden = YES;
+    self.refreshButton.hidden = NO;
+}
+
+- (void)refreshViews {
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        [self getLeaderboardData];
+        [AppDelegate showHUD:self.tableView];
+        [self hideErrorView];
+    } else {
+        [self setupErrorView];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -90,13 +117,30 @@
 #pragma mark - IBActions
 
 - (IBAction)backPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIView animateWithDuration:0.15 animations:^{
+        self.backButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.backButton.alpha = 1;
+        } completion:^(BOOL finished) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }];
 }
 
 - (IBAction)refreshPressed:(id)sender {
-    [self.users removeAllObjects];
-    [self.tableView reloadData];
-    [self getLeaderboardData];
+    [UIView animateWithDuration:0.15 animations:^{
+        self.refreshButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.refreshButton.alpha = 1;
+        } completion:^(BOOL finished) {
+            [self.users removeAllObjects];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [self getLeaderboardData];
+            [AppDelegate showHUD:self.tableView];
+        }];
+    }];
 }
 
 @end

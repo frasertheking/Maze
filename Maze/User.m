@@ -20,7 +20,11 @@
 }
 
 - (void)decodeData:(NSDictionary*)dict {
-    self.name = [[dict objectForKey:@"user"] valueForKey:@"name"];
+    if ([[FBSDKAccessToken currentAccessToken].userID isEqualToString:[[dict objectForKey:@"user"] valueForKey:@"id"]]) {
+        self.name= @"Me";
+    } else {
+        self.name = [[dict objectForKey:@"user"] valueForKey:@"name"];
+    }
     self.identifier = [[dict objectForKey:@"user"] valueForKey:@"id"];
     self.score = [[dict valueForKey:@"score"] intValue];
     self.pictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", self.identifier];

@@ -163,10 +163,6 @@
     [self.mazeView transformMaze];
 }
 
-- (IBAction)back:(id)sender {
-    NSLog(@"Back button pressed");
-}
-
 - (IBAction)showOptions:(id)sender {
     if (self.showingOptions) {
         [UIView animateWithDuration:0.5 delay:0.0  options:0 animations:^{

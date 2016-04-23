@@ -27,6 +27,8 @@
 #define INVENTORY_GREEN UIColorFromRGB(0x9fdb36)
 #define INVENTORY_ORANGE UIColorFromRGB(0xf4c04c)
 
+#define SECONDARY_GRAY_COLOR UIColorFromRGB(0xd9d9d9)
+
 #define FB_APP_ID 1688157554771031
 
 #import <UIKit/UIKit.h>
@@ -36,6 +38,8 @@
 @property (strong, nonatomic) UIWindow *window;
 
 +(UIColor*)getRandomColor;
++ (void)showHUD:(UIView*)view;
++ (void)hideHUD:(UIView*)view;
 
 @end
 

@@ -11,6 +11,8 @@
 #import "Maze.h"
 #import "StarBackgroundScene.h"
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface MazeViewController ()
 
@@ -263,6 +265,18 @@
         self.retryButton.alpha = 1;
         self.levelAchievedLabel.alpha = 1;
     } completion:nil];
+    
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.size-1],};
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                      initWithGraphPath:@"/me/scores"
+                                      parameters:params
+                                      HTTPMethod:@"POST"];
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+        }];
+    }
 }
 
 -(void)bonusTimeFound {
@@ -358,10 +372,6 @@
 
 - (IBAction)animateMaze:(id)sender {
     [self.mazeView transformMaze];
-}
-
-- (IBAction)back:(id)sender {
-    NSLog(@"Back button pressed");
 }
 
 - (IBAction)showOptions:(id)sender {

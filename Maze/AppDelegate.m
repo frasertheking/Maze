@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "MBProgressHUD.h"
 
 @interface AppDelegate ()
 
@@ -64,6 +65,23 @@
     h = fmodf(h, 1.0);
     UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
     return tempColor;
+}
+
++(void) showHUD:(UIView*)view {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        hud.color = SECONDARY_GRAY_COLOR;
+        hud.minShowTime = 0.35f;
+        hud.activityIndicatorColor = [UIColor blackColor];
+        hud.labelText = @"Loading...";
+        hud.labelColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    });
+}
+
++(void) hideHUD:(UIView*)view {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    });
 }
 
 @end
