@@ -17,6 +17,7 @@
 @interface MazeViewController ()
 
 @property (nonatomic) int size;
+@property (nonatomic) int levelAchieved;
 @property (nonatomic) BOOL showingOptions;
 @property (nonatomic) BOOL assertFailed;
 @property (nonatomic) NSTimer* timer;
@@ -240,6 +241,7 @@
     [self.timer invalidate];
     self.timerView.alpha = 0;
     [self.timerView.layer removeAllAnimations];
+    self.levelAchieved = self.size;
     [self levelFailed];
     self.size = 2;
 }
@@ -267,15 +269,29 @@
     } completion:nil];
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.size-1],};
-        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                      initWithGraphPath:@"/me/scores"
-                                      parameters:params
-                                      HTTPMethod:@"POST"];
+        NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/scores" parameters:params  HTTPMethod:@"GET"];
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
                                               NSError *error) {
+            if (result) {
+                NSLog(@"THis: %d vs %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue], self.levelAchieved-1);
+                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.size-1) {
+                    NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.size-1],};
+                    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                                  initWithGraphPath:@"/me/scores"
+                                                  parameters:params
+                                                  HTTPMethod:@"POST"];
+                    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                          id result,
+                                                          NSError *error) {
+                        NSLog(@"New High score: %@ %@", result, error);
+                    }];
+                }
+            }
         }];
+
+        
     }
 }
 

@@ -56,7 +56,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAZE CRAZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuD-Wr-rlP">
-                                <rect key="frame" x="16" y="96" width="568" height="48"/>
+                                <rect key="frame" x="16" y="75" width="568" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEL-fw-qxY" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="200" y="505" width="200" height="35"/>
+                                <rect key="frame" x="200" y="521" width="200" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="GQ9-gp-Uia"/>
@@ -95,9 +95,9 @@
                             <constraint firstItem="QeM-sL-xdX" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" id="2ZB-uO-qZx"/>
                             <constraint firstItem="TT1-RL-Fsc" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="524-5Y-aM6"/>
                             <constraint firstItem="TfE-dA-oeP" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="ERq-13-FAi"/>
-                            <constraint firstItem="hDC-Se-pV6" firstAttribute="top" secondItem="eEL-fw-qxY" secondAttribute="bottom" constant="60" id="QTh-6F-nBh"/>
+                            <constraint firstItem="hDC-Se-pV6" firstAttribute="top" secondItem="eEL-fw-qxY" secondAttribute="bottom" constant="44" id="QTh-6F-nBh"/>
                             <constraint firstItem="VuD-Wr-rlP" firstAttribute="top" secondItem="lJ6-l4-RUQ" secondAttribute="bottom" constant="80" id="QXo-do-eO2"/>
-                            <constraint firstItem="VuD-Wr-rlP" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" multiplier="0.4" id="aV9-7r-VT9"/>
+                            <constraint firstItem="VuD-Wr-rlP" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" multiplier="0.33" id="aV9-7r-VT9"/>
                             <constraint firstItem="BH2-yX-rxo" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="f9J-HV-4DA"/>
                             <constraint firstItem="eEL-fw-qxY" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="foI-qE-SCa"/>
                             <constraint firstItem="BH2-yX-rxo" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" constant="1" id="mrB-Dh-Jwg"/>
@@ -399,7 +399,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Mz0-ck-92W" secondAttribute="trailing" constant="10" id="PkT-vv-d9v"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ml-mE-50U">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ml-mE-50U">
                                 <rect key="frame" x="150" y="500" width="300" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="azV-fQ-VIu"/>
@@ -704,7 +704,7 @@
                                     <constraint firstAttribute="trailing" secondItem="KAP-ty-Mob" secondAttribute="trailing" constant="10" id="ma6-YR-hJS"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igY-Js-dhb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igY-Js-dhb">
                                 <rect key="frame" x="150" y="500" width="300" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="mpv-Vy-exQ"/>
