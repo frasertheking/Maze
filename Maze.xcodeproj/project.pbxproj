@@ -21,6 +21,7 @@
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
 		439F8D711CB7E9E7003F98F7 /* MazeBackgroundParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */; };
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
+		43A65B2A1CCAEE97001431FC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A65B291CCAEE97001431FC /* FBSDKLoginKit.framework */; };
 		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
 		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
 		43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */; };
@@ -74,6 +75,7 @@
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
 		439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeBackgroundParticle.sks; sourceTree = "<group>"; };
 		439F8D701CB7E9E7003F98F7 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		43A65B291CCAEE97001431FC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		43BAABBC1CC86166009F4C50 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		43BAABBD1CC86166009F4C50 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeViewController.h; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			files = (
 				FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */,
 				43BAABCA1CC9B84F009F4C50 /* FBSDKCoreKit.framework in Frameworks */,
+				43A65B2A1CCAEE97001431FC /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +121,7 @@
 		0D1876CD177D433E5444B30A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43A65B291CCAEE97001431FC /* FBSDKLoginKit.framework */,
 				43BAABC91CC9B84F009F4C50 /* FBSDKCoreKit.framework */,
 				FFEF44CF66B679603AE0E32B /* libPods-Maze.a */,
 			);
