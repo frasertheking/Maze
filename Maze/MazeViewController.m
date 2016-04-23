@@ -270,14 +270,13 @@
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
         NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
-        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/scores" parameters:params  HTTPMethod:@"GET"];
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/scores", [FBSDKAccessToken currentAccessToken].userID] parameters:params  HTTPMethod:@"GET"];
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
                                               NSError *error) {
             if (result) {
-                NSLog(@"THis: %d vs %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue], self.levelAchieved-1);
-                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.size-1) {
-                    NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.size-1],};
+                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.levelAchieved-1) {
+                    NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.levelAchieved-1],};
                     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                                   initWithGraphPath:@"/me/scores"
                                                   parameters:params
@@ -290,8 +289,6 @@
                 }
             }
         }];
-
-        
     }
 }
 
