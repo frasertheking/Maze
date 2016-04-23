@@ -10,4 +10,10 @@
 
 @interface LeaderboardEntryCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UIImageView *profilePicture;
+@property (nonatomic, weak) IBOutlet UILabel *name;
+@property (nonatomic, weak) IBOutlet UILabel *score;
+@property (nonatomic, weak) IBOutlet UILabel *rankLabel;
+@property (nonatomic, weak) IBOutlet UIView *imageCover;
+
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface LeaderboardViewController : UIViewController
+@interface LeaderboardViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

@@ -6,7 +6,8 @@
 target 'Maze' do
 
 pod 'BEMCheckBox'
-pod 'SCLAlertView-Objective-C'
+pod 'SDWebImage', '~>3.7'
+
 end
 
 target 'MazeTests' do

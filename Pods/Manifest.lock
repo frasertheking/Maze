@@ -1,13 +1,15 @@
 PODS:
-  - BEMCheckBox (1.2.0)
-  - SCLAlertView-Objective-C (1.0.2)
+  - BEMCheckBox (1.2.1)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
   - BEMCheckBox
-  - SCLAlertView-Objective-C
+  - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
-  BEMCheckBox: fcfbbf42cf23d38fbb605c72f63db9ae82d6acd3
-  SCLAlertView-Objective-C: 25f7ea3a3526dde177d8b8056a0b88fe4187651e
+  BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
 COCOAPODS: 0.39.0

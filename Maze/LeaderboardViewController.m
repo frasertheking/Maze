@@ -9,7 +9,9 @@
 #import "LeaderboardViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "LeaderboardEntryCell.h"
 #import "User.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LeaderboardViewController ()
 
@@ -25,14 +27,12 @@
     // Do any additional setup after loading the view.
 
     self.users = [[NSMutableArray alloc] init];
-    NSDictionary *params = @{
-                             @"access_token": [[FBSDKAccessToken currentAccessToken] tokenString],
-                             @"fields": @"user, score",
-                             };
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                  initWithGraphPath:@"/1688157554771031/scores"
-                                  parameters:params
-                                  HTTPMethod:@"GET"];
+    [self getLeaderboardData];
+}
+
+- (void)getLeaderboardData {
+    NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%ld/scores", FB_APP_ID] parameters:params  HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                           id result,
                                           NSError *error) {
@@ -40,7 +40,9 @@
             for (id userData in [((NSDictionary*)result) objectForKey:@"data"]) {
                 [self.users addObject:[[User alloc] initWithData:userData]];
             }
-            NSLog(@"Users: %@", self.users);
+            self.tableView.delegate = self;
+            self.tableView.dataSource = self;
+            [self.tableView reloadData];
         } else {
             NSLog(@"ERROR GETTING LEADERBOARD DATA");
         }
@@ -53,20 +55,21 @@
     return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [self.users count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    return 80;
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+    LeaderboardEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"leaderboardCell"];
+    [cell.profilePicture sd_setImageWithURL:[NSURL URLWithString:self.users[indexPath.row].pictureUrl]
+                      placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
+    cell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
+    cell.name.text = self.users[indexPath.row].name;
+    cell.score.text = [NSString stringWithFormat:@"%d pts", self.users[indexPath.row].score];
     return cell;
 }
 

@@ -27,6 +27,7 @@
 #define INVENTORY_GREEN UIColorFromRGB(0x9fdb36)
 #define INVENTORY_ORANGE UIColorFromRGB(0xf4c04c)
 
+#define FB_APP_ID 1688157554771031
 
 #import <UIKit/UIKit.h>
 

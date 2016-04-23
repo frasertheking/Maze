@@ -23,22 +23,7 @@
     self.name = [[dict objectForKey:@"user"] valueForKey:@"name"];
     self.identifier = [[dict objectForKey:@"user"] valueForKey:@"id"];
     self.score = [[dict valueForKey:@"score"] intValue];
-    
-//    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-//                                    initWithGraphPath:[NSString stringWithFormat:@"/%@/picture?type=large&redirect=false", self.identifier]
-//                                    parameters:@{@"fields": @"data"}
-//                                    HTTPMethod:@"GET"];
-//      [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-//                                            id result,
-//                                            NSError *error) {
-//          if (result) {
-//              self.picture = result;
-//          } else {
-//              NSLog(@"ERROR GETTING PICTURE FOR %@ %@", self.name, error);
-//          }
-//      }];
-    NSLog(@"user id: %@", self.identifier);
-
+    self.pictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", self.identifier];
 }
 
 @end

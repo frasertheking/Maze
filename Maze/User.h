@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic) NSString* identifier;
 @property (nonatomic) int score;
-@property (nonatomic) NSString* picture;
+@property (nonatomic) NSString* pictureUrl;
 
 - (id)initWithData:(NSDictionary*)data;
 
