@@ -12,6 +12,7 @@
 #import "LeaderboardEntryCell.h"
 #import "User.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "AppDelegate.h"
 
 @interface LeaderboardViewController ()
 
@@ -24,10 +25,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     self.users = [[NSMutableArray alloc] init];
-    [self getLeaderboardData];
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        [self getLeaderboardData];
+        [self setupViews];
+    }
+}
+
+- (void)setupViews {
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)[AppDelegate getRandomColor].CGColor, (id)[AppDelegate getRandomColor].CGColor, nil];
+    theViewGradient.frame = self.view.bounds;
+    [self.view.layer insertSublayer:theViewGradient atIndex:0];
+    [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
 }
 
 - (void)getLeaderboardData {
@@ -60,7 +73,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,8 +82,21 @@
                       placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
     cell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     cell.name.text = self.users[indexPath.row].name;
-    cell.score.text = [NSString stringWithFormat:@"%d pts", self.users[indexPath.row].score];
+    cell.score.text = [NSString stringWithFormat:@"%d", self.users[indexPath.row].score];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
+}
+
+#pragma mark - IBActions
+
+- (IBAction)backPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)refreshPressed:(id)sender {
+    [self.users removeAllObjects];
+    [self.tableView reloadData];
+    [self getLeaderboardData];
 }
 
 @end

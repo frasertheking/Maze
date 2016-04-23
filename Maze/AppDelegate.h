@@ -35,6 +35,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++(UIColor*)getRandomColor;
 
 @end
 

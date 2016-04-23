@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "AppDelegate.h"
 
 @interface HomeViewController ()
 
@@ -22,11 +23,12 @@
     [super viewDidLoad];
 
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)[AppDelegate getRandomColor].CGColor, (id)[AppDelegate getRandomColor].CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     
     self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    self.loginButton.publishPermissions = @[@"publish_actions"];
     self.loginButton.backgroundColor = [UIColor clearColor];
     
 //    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
@@ -55,17 +57,12 @@
 
 }
 
-- (UIColor *) getRandomColor {
-    float golden_ratio_conjugate = 0.618033988749895;
-    float h = (float)arc4random() / RAND_MAX;
-    h += golden_ratio_conjugate;
-    h = fmodf(h, 1.0);
-    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
-    return tempColor;
-}
-
 - (IBAction)playTapped:(id)sender {
     [self performSegueWithIdentifier:@"playSegue" sender:self];
+}
+
+- (IBAction)leaderboardTapped:(id)sender {
+    [self performSegueWithIdentifier:@"leaderboardSegue" sender:self];
 }
 
 - (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue {

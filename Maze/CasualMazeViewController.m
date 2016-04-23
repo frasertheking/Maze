@@ -10,6 +10,7 @@
 #import "DEMazeGenerator.h"
 #import "Maze.h"
 #import "StarBackgroundScene.h"
+#import "AppDelegate.h"
 
 @interface CasualMazeViewController ()
 
@@ -101,12 +102,12 @@
 }
 
 -(void)setGradientBackground {
-    self.topColor = [self getRandomColor];
-    self.bottomColor = [self getRandomColor];
-    self.mazeTopColor = [self getRandomColor];
-    self.mazeBottomColor = [self getRandomColor];
-    self.lineTopColor = [self getRandomColor];
-    self.lineBottomColor = [self getRandomColor];
+    self.topColor = [AppDelegate getRandomColor];
+    self.bottomColor = [AppDelegate getRandomColor];
+    self.mazeTopColor = [AppDelegate getRandomColor];
+    self.mazeBottomColor = [AppDelegate getRandomColor];
+    self.lineTopColor = [AppDelegate getRandomColor];
+    self.lineBottomColor = [AppDelegate getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)self.topColor.CGColor, (id)self.bottomColor.CGColor, nil];
@@ -185,15 +186,6 @@
 }
 
 #pragma mark - Helpers
-
-- (UIColor *) getRandomColor {
-    float golden_ratio_conjugate = 0.618033988749895;
-    float h = (float)arc4random() / RAND_MAX;
-    h += golden_ratio_conjugate;
-    h = fmodf(h, 1.0);
-    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
-    return tempColor;
-}
 
 -(UIColor*) inverseColor:(UIColor*)color {
     const CGFloat *componentColors = CGColorGetComponents(color.CGColor);

@@ -55,4 +55,15 @@
     return handled;
 }
 
+#pragma mark - Global Helpers
+
++ (UIColor *) getRandomColor {
+    float golden_ratio_conjugate = 0.618033988749895;
+    float h = (float)arc4random() / RAND_MAX;
+    h += golden_ratio_conjugate;
+    h = fmodf(h, 1.0);
+    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
+    return tempColor;
+}
+
 @end

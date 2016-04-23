@@ -7,6 +7,7 @@
 //
 
 #import "GameTypeViewController.h"
+#import "AppDelegate.h"
 
 @interface GameTypeViewController ()
 
@@ -18,18 +19,9 @@
     [super viewDidLoad];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)[self getRandomColor].CGColor, (id)[self getRandomColor].CGColor, nil];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)[AppDelegate getRandomColor].CGColor, (id)[AppDelegate getRandomColor].CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
-}
-
-- (UIColor *) getRandomColor {
-    float golden_ratio_conjugate = 0.618033988749895;
-    float h = (float)arc4random() / RAND_MAX;
-    h += golden_ratio_conjugate;
-    h = fmodf(h, 1.0);
-    UIColor *tempColor = [UIColor colorWithHue:h saturation:0.5 brightness:0.95 alpha:1];
-    return tempColor;
 }
 
 - (IBAction)timedTapped:(id)sender {
