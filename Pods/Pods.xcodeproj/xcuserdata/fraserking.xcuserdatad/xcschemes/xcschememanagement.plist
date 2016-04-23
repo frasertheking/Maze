@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HTPressableButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,17 +32,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FB30422DB98F6AB7097CC6974F64488</key>
+		<key>17D25E202F7806A8C488DD9254B2C946</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6BDE6646720A43B74F6D833251D8E84D</key>
+		<key>5A4E2E2DBEDD31715EAB601D80617FFC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8C80F913EE213FA1EE3801FF8CEF0DD4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A946999A5BFB446069D1DE70DF117358</key>
 		<dict>
 			<key>primary</key>
 			<true/>

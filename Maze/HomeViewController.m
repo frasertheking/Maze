@@ -10,10 +10,22 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "AppDelegate.h"
+#import "DEMazeGenerator.h"
+#import "Maze.h"
+#import "StarBackgroundScene.h"
+#import "HTPressableButton.h"
+#import "UIColor+HTColor.h"
 
 @interface HomeViewController ()
 
 @property (nonatomic, weak) IBOutlet FBSDKLoginButton *loginButton;
+@property (nonatomic) HTPressableButton *playButton;
+@property (nonatomic) HTPressableButton *leaderboardButton;
+@property (nonatomic) HTPressableButton *settingsButton;
+@property (nonatomic, weak) IBOutlet Maze *mazeView;
+@property (nonatomic, weak) IBOutlet Maze *mazeView2;
+@property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic, weak) NSTimer* timer;
 
 @end
 
@@ -30,32 +42,79 @@
     self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.loginButton.publishPermissions = @[@"publish_actions"];
     self.loginButton.backgroundColor = [UIColor clearColor];
+    self.topColor = [AppDelegate getRandomColor];
+    self.bottomColor = [AppDelegate getRandomColor];
+    self.mazeTopColor = [AppDelegate getRandomColor];
+    self.mazeBottomColor = [AppDelegate getRandomColor];
+    self.lineTopColor = [AppDelegate getRandomColor];
+    self.lineBottomColor = [AppDelegate getRandomColor];
+    self.mazeView.delegate = self;
+    self.mazeView.isCasualMode = YES;
+    [self.mazeView initMazeWithSize:25];
+    self.mazeView2.delegate = self;
+    self.mazeView2.isCasualMode = YES;
+    [self.mazeView2 initMazeWithSize:25];
+    [self setupParticles];
+    self.mazeView.alpha = 0.25f;
+    self.mazeView2.alpha = 0.0f;
+   
+    self.playButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
+    self.playButton.center =  CGPointMake(self.view.center.x, self.view.center.y - 70);
+    [self.playButton addTarget:self action:@selector(playTapped:)forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:self.playButton];
     
-//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-//        // For more complex open graph stories, use `FBSDKShareAPI`
-//        // with `FBSDKShareOpenGraphContent`
-//        NSDictionary *params = @{ @"score": @"1234",};
-//        /* make the API call */
-//        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-//                                      initWithGraphPath:@"/me/scores"
-//                                      parameters:params
-//                                      HTTPMethod:@"POST"];
-//        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-//                                              id result,
-//                                              NSError *error) {
-//            NSLog(@"SCORE %@", result);
-//        }];
-//    } else {
-//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-//        [loginManager logInWithPublishPermissions:@[@"publish_actions"]
-//                               fromViewController:self
-//                                          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//                                              //TODO: process error or result.
-//                                          }];
-//    }
+    self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.leaderboardButton setTitle:@"Leaderboard" forState:UIControlStateNormal];
+    self.leaderboardButton.center = self.view.center;
+    self.leaderboardButton.buttonColor = [UIColor ht_grapeFruitColor];
+    self.leaderboardButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
+    [self.leaderboardButton addTarget:self action:@selector(leaderboardTapped:)forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:self.leaderboardButton];
     
-
+    self.settingsButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    self.settingsButton.center =  CGPointMake(self.view.center.x, self.view.center.y + 70);
+    self.settingsButton.buttonColor = [UIColor ht_mintColor];
+    self.settingsButton.shadowColor = [UIColor ht_mintDarkColor];
+    [self.settingsButton addTarget:self action:@selector(settingsTapped:)forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:self.settingsButton];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.timer invalidate];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(redrawMaze) userInfo:nil repeats:YES];
+}
+
+#pragma mark - Maze 
+
+- (void)setupParticles {
+    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.particleView.allowsTransparency = YES;
+    [self.particleView presentScene:scene];
+}
+
+- (void)redrawMaze {
+    if (self.mazeView.alpha == 0.25f) {
+        [UIView animateWithDuration:0.75f animations:^{
+            self.mazeView.alpha = 0.0f;
+            self.mazeView2.alpha = 0.25f;
+        } completion:^(BOOL finished) {
+            [self.mazeView initMazeWithSize:25];
+        }];
+    } else {
+        [UIView animateWithDuration:0.75f animations:^{
+            self.mazeView.alpha = 0.25f;
+            self.mazeView2.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [self.mazeView2 initMazeWithSize:25];
+        }];
+    }
+}
+
+#pragma mark - IBActions
 
 - (IBAction)playTapped:(id)sender {
     [self performSegueWithIdentifier:@"playSegue" sender:self];
@@ -63,6 +122,10 @@
 
 - (IBAction)leaderboardTapped:(id)sender {
     [self performSegueWithIdentifier:@"leaderboardSegue" sender:self];
+}
+
+- (IBAction)settingsTapped:(id)sender {
+    NSLog(@"SETTINGS TAPPED");
 }
 
 - (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue {

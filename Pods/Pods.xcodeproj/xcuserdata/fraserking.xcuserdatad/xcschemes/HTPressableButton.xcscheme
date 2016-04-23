@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D374779603B60A14DD22C682'
-               BlueprintName = 'BEMCheckBox'
+               BlueprintIdentifier = 'F5247F89E63AA6A286BA1F4F'
+               BlueprintName = 'HTPressableButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libBEMCheckBox.a'>
+               BuildableName = 'libHTPressableButton.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
