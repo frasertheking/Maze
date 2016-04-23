@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tq9-M0-wBj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5tG-ex-CPo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -89,6 +89,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XdH-RA-SMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-282" y="330"/>
+        </scene>
+        <!--Leaderboard View Controller-->
+        <scene sceneID="Wib-sq-brq">
+            <objects>
+                <viewController id="5tG-ex-CPo" customClass="LeaderboardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cgo-9q-9he"/>
+                        <viewControllerLayoutGuide type="bottom" id="MLG-Ko-nlC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gvy-3T-8vn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2U8-qf-6NH">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaderboardCell" rowHeight="128" id="oC1-Jc-NMP" customClass="LeaderboardEntryCell">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oC1-Jc-NMP" id="NbK-0f-12g">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2U8-qf-6NH" secondAttribute="trailing" id="89o-Vf-9zT"/>
+                            <constraint firstItem="MLG-Ko-nlC" firstAttribute="top" secondItem="2U8-qf-6NH" secondAttribute="bottom" id="BGL-sT-PVI"/>
+                            <constraint firstItem="2U8-qf-6NH" firstAttribute="leading" secondItem="Gvy-3T-8vn" secondAttribute="leading" id="TBD-5S-nU0"/>
+                            <constraint firstItem="2U8-qf-6NH" firstAttribute="top" secondItem="Cgo-9q-9he" secondAttribute="bottom" id="haH-h3-e6Y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="2U8-qf-6NH" id="7Sh-Jv-0Tz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7lK-Ys-hyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-282" y="1034"/>
         </scene>
         <!--Maze View Controller-->
         <scene sceneID="tne-QT-ifu">

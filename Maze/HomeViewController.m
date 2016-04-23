@@ -29,44 +29,30 @@
     self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     self.loginButton.backgroundColor = [UIColor clearColor];
     
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        // For more complex open graph stories, use `FBSDKShareAPI`
-        // with `FBSDKShareOpenGraphContent`
-        NSDictionary *params = @{ @"score": @"3444",};
-        /* make the API call */
-        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                      initWithGraphPath:@"/me/scores"
-                                      parameters:params
-                                      HTTPMethod:@"POST"];
-        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                              id result,
-                                              NSError *error) {
-            NSLog(@"SCORE %@", result);
-        }];
-    } else {
-        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-        [loginManager logInWithPublishPermissions:@[@"publish_actions"]
-                               fromViewController:self
-                                          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                              //TODO: process error or result.
-                                          }];
-    }
+//    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+//        // For more complex open graph stories, use `FBSDKShareAPI`
+//        // with `FBSDKShareOpenGraphContent`
+//        NSDictionary *params = @{ @"score": @"1234",};
+//        /* make the API call */
+//        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+//                                      initWithGraphPath:@"/me/scores"
+//                                      parameters:params
+//                                      HTTPMethod:@"POST"];
+//        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+//                                              id result,
+//                                              NSError *error) {
+//            NSLog(@"SCORE %@", result);
+//        }];
+//    } else {
+//        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+//        [loginManager logInWithPublishPermissions:@[@"publish_actions"]
+//                               fromViewController:self
+//                                          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+//                                              //TODO: process error or result.
+//                                          }];
+//    }
     
-    // For more complex open graph stories, use `FBSDKShareAPI`
-    // with `FBSDKShareOpenGraphContent`
-    /* make the API call */
-    NSDictionary *params = @{
-                             @"access_token": [[FBSDKAccessToken currentAccessToken] tokenString],
-                             };
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                  initWithGraphPath:@"/me/scores"
-                                  parameters:params
-                                  HTTPMethod:@"GET"];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                          id result,
-                                          NSError *error) {
-        NSLog(@"%@", result);
-    }];
+
 }
 
 - (UIColor *) getRandomColor {
