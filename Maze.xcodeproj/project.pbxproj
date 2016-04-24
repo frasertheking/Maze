@@ -18,6 +18,7 @@
 		4368A2941C83D2EA006E1779 /* MazeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2931C83D2EA006E1779 /* MazeTests.m */; };
 		4368A29F1C83D2EA006E1779 /* MazeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A29E1C83D2EA006E1779 /* MazeUITests.m */; };
 		4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */; };
+		437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437368A21CCD4B2C005D3132 /* SettingsViewController.m */; };
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
 		439F8D711CB7E9E7003F98F7 /* MazeBackgroundParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */; };
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
@@ -74,6 +75,8 @@
 		4368A2AC1C83D688006E1779 /* DEIntegerPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEIntegerPoint.h; sourceTree = "<group>"; };
 		4368A2AD1C83D688006E1779 /* DEMazeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMazeGenerator.h; sourceTree = "<group>"; };
 		4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMazeGenerator.m; sourceTree = "<group>"; };
+		437368A11CCD4B2C005D3132 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		437368A21CCD4B2C005D3132 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		437B80A11C9CE9A30024F758 /* Maze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Maze.h; sourceTree = "<group>"; };
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
 		439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeBackgroundParticle.sks; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 				437B80A41C9CEE6F0024F758 /* MazeGeneration */,
 				43A65B361CCBFF81001431FC /* Navigation */,
 				43A65B2E1CCAFB91001431FC /* Leaderboard */,
+				437368A01CCD4B10005D3132 /* Settings */,
 				43A65B371CCBFFA8001431FC /* MazeViewControllers */,
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
@@ -214,6 +218,15 @@
 				4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */,
 			);
 			name = MazeGenerator;
+			sourceTree = "<group>";
+		};
+		437368A01CCD4B10005D3132 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				437368A11CCD4B2C005D3132 /* SettingsViewController.h */,
+				437368A21CCD4B2C005D3132 /* SettingsViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		437B80A41C9CEE6F0024F758 /* MazeGeneration */ = {
@@ -494,6 +507,7 @@
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */,
+				437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */,
 				43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */,
 				433FAD751CB7F064004341AE /* StarBackgroundScene.m in Sources */,
 			);

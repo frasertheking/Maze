@@ -125,7 +125,7 @@
 }
 
 - (IBAction)settingsTapped:(id)sender {
-    NSLog(@"SETTINGS TAPPED");
+    [self performSegueWithIdentifier:@"settingsSegue" sender:self];
 }
 
 - (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue {
