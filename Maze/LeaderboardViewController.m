@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UIView *errorView;
 @property (nonatomic, weak) IBOutlet UIButton *refreshButton;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
+@property (nonatomic, weak) IBOutlet UILabel *errorGettingLeaderboard;
 @property (nonatomic, strong) NSMutableArray<User *> *users;
 
 @end
@@ -36,6 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refreshViews];
+    self.errorGettingLeaderboard.hidden = YES;
 }
 
 - (void)setupViews {
@@ -64,6 +66,8 @@
             [AppDelegate hideHUD:self.tableView];
         } else {
             NSLog(@"ERROR GETTING LEADERBOARD DATA");
+            [AppDelegate hideHUD:self.tableView];
+            self.errorGettingLeaderboard.hidden = NO;
         }
     }];
 }
