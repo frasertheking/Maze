@@ -295,6 +295,14 @@
                 } completion:nil];
             }
         }];
+    } else {
+        self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
+        self.highScoreLabel.text = [NSString stringWithFormat:@"To see your high score, log in with facebook"];
+        [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.mazeView.alpha = 0;
+            self.levelFailedView.alpha = 1;
+            self.pictureCoverView.alpha = 1;
+        } completion:nil];
     }
 }
 
