@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MazeViewController ()
 
@@ -58,15 +59,20 @@
     self.timerView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.3].CGColor;
     self.inventoryView.alpha = 0;
     [self setCurrentLevelLabel];
-    [self.retryButton setTitle:@"Retry" forState:UIControlStateNormal];
+    [self.retryButton setTitle:@"Restart" forState:UIControlStateNormal];
     [self.retryButton setTitleColor:ORANGE forState:UIControlStateNormal];
     self.retryButton.layer.borderColor = ORANGE.CGColor;
     self.retryButton.layer.borderWidth = 1.0f;
     self.retryButton.layer.cornerRadius = 3.0;
     self.retryButton.layer.masksToBounds = YES;
-    self.retryButton.alpha = 0;
-    self.levelFailedLabel.alpha = 0;
-    self.levelAchievedLabel.alpha = 0;
+    self.levelFailedView.alpha = 0;
+    self.levelFailedView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    self.levelFailedView.layer.cornerRadius = 6;
+    self.levelFailedView.layer.masksToBounds = YES;
+    self.pictureCoverView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.pictureCoverView.layer.borderWidth = 1.0f;
+    self.pictureCoverView.alpha = 0;
+    [self.profilePictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBSDKAccessToken currentAccessToken].userID]] placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
@@ -260,14 +266,7 @@
     self.currentLevelLabel.alpha = 0;
     self.mazeView.userInteractionEnabled = NO;
     [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
-    self.levelAchievedLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
-    [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.mazeView.alpha = 0;
-        self.levelFailedLabel.alpha = 1;
-        self.retryButton.alpha = 1;
-        self.levelAchievedLabel.alpha = 1;
-    } completion:nil];
-    
+   
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
         NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/scores", [FBSDKAccessToken currentAccessToken].userID] parameters:params  HTTPMethod:@"GET"];
@@ -287,6 +286,13 @@
                         NSLog(@"New High score: %@ %@", result, error);
                     }];
                 }
+                self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
+                self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
+                [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                    self.mazeView.alpha = 0;
+                    self.levelFailedView.alpha = 1;
+                    self.pictureCoverView.alpha = 1;
+                } completion:nil];
             }
         }];
     }
@@ -413,10 +419,8 @@
     [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
         self.mazeView.alpha = 1;
-        self.currentLevelLabel.alpha = 1;
-        self.levelFailedLabel.alpha = 0;
-        self.retryButton.alpha = 0;
-        self.levelAchievedLabel.alpha = 0;
+        self.levelFailedView.alpha = 0;
+        self.pictureCoverView.alpha = 0;
     } completion:nil];
 }
 
