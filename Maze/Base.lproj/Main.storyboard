@@ -35,8 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IaX-ug-nvM" customClass="SKView">
-                                <rect key="frame" x="-56" y="-59" width="36" height="26"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaX-ug-nvM" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BH2-yX-rxo" customClass="Maze">
@@ -76,15 +76,21 @@
                             <constraint firstItem="QeM-sL-xdX" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" id="2ZB-uO-qZx"/>
                             <constraint firstItem="Ud3-sl-7b5" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" multiplier="0.43" id="6VS-a1-JKF"/>
                             <constraint firstItem="Ud3-sl-7b5" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="8Ta-nu-Rif"/>
+                            <constraint firstAttribute="trailing" secondItem="IaX-ug-nvM" secondAttribute="trailing" id="DlL-7D-JU8"/>
                             <constraint firstItem="hDC-Se-pV6" firstAttribute="top" secondItem="eEL-fw-qxY" secondAttribute="bottom" constant="24" id="QTh-6F-nBh"/>
+                            <constraint firstItem="IaX-ug-nvM" firstAttribute="top" secondItem="bCp-41-LTm" secondAttribute="top" id="cbB-Bf-tfj"/>
                             <constraint firstItem="BH2-yX-rxo" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="f9J-HV-4DA"/>
                             <constraint firstItem="eEL-fw-qxY" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="foI-qE-SCa"/>
+                            <constraint firstItem="Ud3-sl-7b5" firstAttribute="leading" secondItem="IaX-ug-nvM" secondAttribute="trailing" id="kTG-jf-S4C"/>
                             <constraint firstItem="BH2-yX-rxo" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" constant="1" id="mrB-Dh-Jwg"/>
                             <constraint firstItem="QeM-sL-xdX" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="phv-d2-Hzn"/>
+                            <constraint firstItem="IaX-ug-nvM" firstAttribute="leading" secondItem="bCp-41-LTm" secondAttribute="leading" id="vDT-ZE-ShV"/>
+                            <constraint firstItem="hDC-Se-pV6" firstAttribute="top" secondItem="IaX-ug-nvM" secondAttribute="bottom" id="yUP-H7-Qum"/>
                             <constraint firstItem="eEL-fw-qxY" firstAttribute="top" secondItem="lJ6-l4-RUQ" secondAttribute="bottom" constant="49" id="zQt-EV-n9K"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="kTG-jf-S4C"/>
                                 <exclude reference="zQt-EV-n9K"/>
                             </mask>
                         </variation>
@@ -115,6 +121,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRN-c2-svX" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2U8-qf-6NH">
                                 <rect key="frame" x="0.0" y="98" width="600" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -309,8 +319,10 @@
                         <constraints>
                             <constraint firstItem="xlM-Q2-v5t" firstAttribute="top" secondItem="Cgo-9q-9he" secondAttribute="bottom" constant="24" id="2DX-3z-cw5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fc7-2O-FXn" secondAttribute="trailing" constant="24" id="5fG-kd-pTx"/>
+                            <constraint firstAttribute="trailing" secondItem="QRN-c2-svX" secondAttribute="trailing" id="7Aa-dQ-0dZ"/>
                             <constraint firstAttribute="trailing" secondItem="2U8-qf-6NH" secondAttribute="trailing" id="89o-Vf-9zT"/>
                             <constraint firstItem="MLG-Ko-nlC" firstAttribute="top" secondItem="2U8-qf-6NH" secondAttribute="bottom" id="BGL-sT-PVI"/>
+                            <constraint firstItem="MLG-Ko-nlC" firstAttribute="top" secondItem="QRN-c2-svX" secondAttribute="bottom" id="BND-NE-3En"/>
                             <constraint firstItem="xlM-Q2-v5t" firstAttribute="leading" secondItem="Gvy-3T-8vn" secondAttribute="leadingMargin" constant="24" id="DnR-4S-1yA"/>
                             <constraint firstItem="2U8-qf-6NH" firstAttribute="top" secondItem="Fc7-2O-FXn" secondAttribute="bottom" constant="24" id="Kdc-xE-mWx"/>
                             <constraint firstItem="8ay-Iz-lt5" firstAttribute="centerX" secondItem="Gvy-3T-8vn" secondAttribute="centerX" id="R2U-J2-E7k"/>
@@ -319,12 +331,14 @@
                             <constraint firstAttribute="trailing" secondItem="YCL-os-NaV" secondAttribute="trailing" constant="16" id="TvL-BA-QIb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YCL-os-NaV" secondAttribute="trailing" constant="24" id="Zt4-Xi-gnF"/>
                             <constraint firstItem="YCL-os-NaV" firstAttribute="top" secondItem="Cgo-9q-9he" secondAttribute="bottom" constant="24" id="b73-kJ-BRn"/>
+                            <constraint firstItem="QRN-c2-svX" firstAttribute="top" secondItem="Gvy-3T-8vn" secondAttribute="top" id="bpg-7H-Alu"/>
                             <constraint firstItem="Fc7-2O-FXn" firstAttribute="leading" secondItem="Gvy-3T-8vn" secondAttribute="leadingMargin" constant="24" id="eRz-Ax-tFo"/>
                             <constraint firstItem="8ay-Iz-lt5" firstAttribute="centerY" secondItem="Gvy-3T-8vn" secondAttribute="centerY" id="fYz-xv-pWX"/>
                             <constraint firstItem="rXQ-s6-08H" firstAttribute="centerX" secondItem="Gvy-3T-8vn" secondAttribute="centerX" id="fq0-BB-1QG"/>
                             <constraint firstItem="Fc7-2O-FXn" firstAttribute="top" secondItem="Cgo-9q-9he" secondAttribute="bottom" constant="20" id="ghx-cd-JQ7"/>
                             <constraint firstItem="rXQ-s6-08H" firstAttribute="centerY" secondItem="Gvy-3T-8vn" secondAttribute="centerY" id="hPv-FQ-7wf"/>
                             <constraint firstItem="2U8-qf-6NH" firstAttribute="top" secondItem="Cgo-9q-9he" secondAttribute="bottom" id="haH-h3-e6Y"/>
+                            <constraint firstItem="QRN-c2-svX" firstAttribute="leading" secondItem="Gvy-3T-8vn" secondAttribute="leading" id="jbh-Yi-isV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -338,6 +352,7 @@
                         <outlet property="backButton" destination="xlM-Q2-v5t" id="nkw-Xx-yhy"/>
                         <outlet property="errorGettingLeaderboard" destination="8ay-Iz-lt5" id="8zB-Bi-hlL"/>
                         <outlet property="errorView" destination="rXQ-s6-08H" id="GUG-bz-wfH"/>
+                        <outlet property="particleView" destination="QRN-c2-svX" id="3dy-eV-QGH"/>
                         <outlet property="refreshButton" destination="YCL-os-NaV" id="yAu-n7-hDh"/>
                         <outlet property="tableView" destination="2U8-qf-6NH" id="7Sh-Jv-0Tz"/>
                     </connections>
@@ -642,6 +657,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouT-5L-SPh" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I94-Et-kBK">
                                 <rect key="frame" x="224" y="40" width="152" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
@@ -663,11 +682,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ouT-5L-SPh" secondAttribute="trailing" id="7VF-WT-o3Z"/>
                             <constraint firstItem="z9B-dR-2Wb" firstAttribute="top" secondItem="ChV-1M-LNA" secondAttribute="top" constant="24" id="DxZ-DB-2vK"/>
                             <constraint firstItem="z9B-dR-2Wb" firstAttribute="leading" secondItem="ChV-1M-LNA" secondAttribute="leading" constant="16" id="JSx-yU-X6w"/>
                             <constraint firstItem="I94-Et-kBK" firstAttribute="centerX" secondItem="ChV-1M-LNA" secondAttribute="centerX" id="L81-rv-B16"/>
                             <constraint firstItem="z9B-dR-2Wb" firstAttribute="top" secondItem="MDK-Tg-Cfd" secondAttribute="bottom" constant="24" id="WL3-CE-vBM"/>
+                            <constraint firstAttribute="bottom" secondItem="ouT-5L-SPh" secondAttribute="bottom" id="ZmG-5j-HIc"/>
                             <constraint firstItem="I94-Et-kBK" firstAttribute="top" secondItem="MDK-Tg-Cfd" secondAttribute="bottom" constant="20" id="da7-IF-ksF"/>
+                            <constraint firstItem="ouT-5L-SPh" firstAttribute="top" secondItem="ChV-1M-LNA" secondAttribute="top" id="inX-Zw-Wmi"/>
+                            <constraint firstItem="ouT-5L-SPh" firstAttribute="leading" secondItem="ChV-1M-LNA" secondAttribute="leading" id="nbm-3I-cKg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -677,6 +700,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="z9B-dR-2Wb" id="ZDM-lY-hyT"/>
+                        <outlet property="particleView" destination="ouT-5L-SPh" id="IkU-sQ-NCd"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="timedSegue" id="EJ3-b3-cPw"/>
                         <segue destination="7o7-hE-kU8" kind="show" identifier="casualSegue" id="ENq-pM-eTF"/>
                     </connections>

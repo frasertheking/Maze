@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "HTPressableButton.h"
 #import "UIColor+HTColor.h"
+#import "StarBackgroundScene.h"
 
 @interface GameTypeViewController ()
 
@@ -17,6 +18,7 @@
 @property (nonatomic) HTPressableButton *casualModeButton;
 @property (nonatomic) HTPressableButton *tutorialModeButton;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
+@property (nonatomic, weak) IBOutlet SKView *particleView;
 
 @end
 
@@ -53,6 +55,14 @@
     self.tutorialModeButton.shadowColor = [UIColor ht_lemonDarkColor];
     [self.tutorialModeButton addTarget:self action:@selector(tutorialTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.tutorialModeButton];
+    [self setupParticles];
+}
+
+- (void)setupParticles {
+    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.particleView.allowsTransparency = YES;
+    [self.particleView presentScene:scene];
 }
 
 #pragma mark - IBActions

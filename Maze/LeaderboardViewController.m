@@ -13,6 +13,7 @@
 #import "User.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppDelegate.h"
+#import "StarBackgroundScene.h"
 
 @interface LeaderboardViewController ()
 
@@ -22,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet UILabel *errorGettingLeaderboard;
 @property (nonatomic, strong) NSMutableArray<User *> *users;
+@property (nonatomic, weak) IBOutlet SKView *particleView;
 
 @end
 
@@ -48,6 +50,7 @@
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
+    [self setupParticles];
 }
 
 - (void)getLeaderboardData {
@@ -91,6 +94,13 @@
     } else {
         [self setupErrorView];
     }
+}
+
+- (void)setupParticles {
+    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.particleView.allowsTransparency = YES;
+    [self.particleView presentScene:scene];
 }
 
 #pragma mark - UITableViewDelegate
