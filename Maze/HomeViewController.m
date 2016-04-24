@@ -55,7 +55,7 @@
     self.mazeView2.isCasualMode = YES;
     [self.mazeView2 initMazeWithSize:25];
     [self setupParticles];
-    self.mazeView.alpha = 0.2f;
+    self.mazeView.alpha = 0.15f;
     self.mazeView2.alpha = 0.0f;
    
     self.playButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
@@ -97,16 +97,16 @@
 }
 
 - (void)redrawMaze {
-    if (self.mazeView.alpha == 0.2f) {
+    if (self.mazeView.alpha == 0.15f) {
         [UIView animateWithDuration:0.75f animations:^{
             self.mazeView.alpha = 0.0f;
-            self.mazeView2.alpha = 0.2f;
+            self.mazeView2.alpha = 0.15f;
         } completion:^(BOOL finished) {
             [self.mazeView initMazeWithSize:25];
         }];
     } else {
         [UIView animateWithDuration:0.75f animations:^{
-            self.mazeView.alpha = 0.2f;
+            self.mazeView.alpha = 0.15f;
             self.mazeView2.alpha = 0.0f;
         } completion:^(BOOL finished) {
             [self.mazeView2 initMazeWithSize:25];
