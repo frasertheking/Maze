@@ -14,6 +14,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "HTPressableButton.h"
+#import "UIColor+HTColor.h"
 
 @interface MazeViewController ()
 
@@ -26,6 +28,7 @@
 @property (nonatomic) NSInteger itemType;
 @property (nonatomic) int timeRemaining;
 @property (nonatomic) int bonusTimesCollected;
+@property (nonatomic) HTPressableButton *restartButton;
 
 @end
 
@@ -59,12 +62,6 @@
     self.timerView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.3].CGColor;
     self.inventoryView.alpha = 0;
     [self setCurrentLevelLabel];
-    [self.retryButton setTitle:@"Restart" forState:UIControlStateNormal];
-    [self.retryButton setTitleColor:ORANGE forState:UIControlStateNormal];
-    self.retryButton.layer.borderColor = ORANGE.CGColor;
-    self.retryButton.layer.borderWidth = 1.0f;
-    self.retryButton.layer.cornerRadius = 3.0;
-    self.retryButton.layer.masksToBounds = YES;
     self.levelFailedView.alpha = 0;
     self.levelFailedView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     self.levelFailedView.layer.cornerRadius = 6;
@@ -73,6 +70,13 @@
     self.pictureCoverView.layer.borderWidth = 1.0f;
     self.pictureCoverView.alpha = 0;
     [self.profilePictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBSDKAccessToken currentAccessToken].userID]] placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
+    self.restartButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.restartButton setTitle:@"Restart" forState:UIControlStateNormal];
+    self.restartButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 35);
+    self.restartButton.buttonColor = [UIColor ht_grapeFruitColor];
+    self.restartButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
+    [self.restartButton addTarget:self action:@selector(retryButtonClick:)forControlEvents:UIControlEventTouchUpInside];
+    [self.levelFailedView addSubview:self.restartButton];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;

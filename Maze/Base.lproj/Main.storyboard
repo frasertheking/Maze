@@ -291,10 +291,10 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="4gH-ds-Jhd"/>
                                         <exclude reference="63g-4V-Jw4"/>
                                         <exclude reference="s3H-c6-Bpx"/>
                                         <exclude reference="wQ1-lI-DXr"/>
+                                        <exclude reference="4gH-ds-Jhd"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -466,57 +466,44 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96Q-fX-U5M">
-                                <rect key="frame" x="163" y="208" width="275" height="185"/>
+                                <rect key="frame" x="150" y="201" width="300" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Level: 5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18p-81-zrW">
-                                        <rect key="frame" x="16" y="77" width="243" height="21"/>
+                                        <rect key="frame" x="16" y="77" width="268" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score: 10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Qgg-tw-Zad">
-                                        <rect key="frame" x="16" y="106" width="243" height="21"/>
+                                        <rect key="frame" x="16" y="106" width="268" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixY-2r-DK7">
-                                        <rect key="frame" x="16" y="32" width="243" height="29"/>
+                                        <rect key="frame" x="16" y="32" width="268" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.86274509799999999" green="0.20784313730000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="609-zB-c0q">
-                                        <rect key="frame" x="99" y="143" width="75" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="PrH-vQ-2LT"/>
-                                            <constraint firstAttribute="width" constant="75" id="W1y-ip-C1V"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="retryButtonClick:" destination="BYZ-38-t0r" eventType="touchDown" id="o4u-ZJ-CJI"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.71282051282051284" green="0.71282051282051284" blue="0.71282051282051284" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="275" id="0Xz-nj-Iyr"/>
+                                    <constraint firstAttribute="width" constant="300" id="0Xz-nj-Iyr"/>
                                     <constraint firstItem="18p-81-zrW" firstAttribute="leading" secondItem="96Q-fX-U5M" secondAttribute="leading" constant="16" id="5KP-Tz-HEo"/>
                                     <constraint firstItem="ixY-2r-DK7" firstAttribute="leading" secondItem="96Q-fX-U5M" secondAttribute="leading" constant="16" id="Jeh-CQ-daY"/>
                                     <constraint firstItem="Qgg-tw-Zad" firstAttribute="top" secondItem="18p-81-zrW" secondAttribute="bottom" constant="8" id="Pd5-ta-KbZ"/>
-                                    <constraint firstItem="609-zB-c0q" firstAttribute="centerX" secondItem="96Q-fX-U5M" secondAttribute="centerX" id="X60-pL-G5M"/>
                                     <constraint firstItem="18p-81-zrW" firstAttribute="top" secondItem="ixY-2r-DK7" secondAttribute="bottom" constant="16" id="bVF-aq-RxY"/>
-                                    <constraint firstItem="609-zB-c0q" firstAttribute="top" secondItem="Qgg-tw-Zad" secondAttribute="bottom" constant="16" id="dNv-Wc-gaF"/>
                                     <constraint firstAttribute="trailing" secondItem="Qgg-tw-Zad" secondAttribute="trailing" constant="16" id="gSi-b8-UOk"/>
                                     <constraint firstItem="Qgg-tw-Zad" firstAttribute="leading" secondItem="96Q-fX-U5M" secondAttribute="leading" constant="16" id="gZ4-JR-mCz"/>
-                                    <constraint firstAttribute="height" constant="185" id="kCk-pZ-dfy"/>
+                                    <constraint firstAttribute="height" constant="200" id="kCk-pZ-dfy"/>
                                     <constraint firstAttribute="trailing" secondItem="ixY-2r-DK7" secondAttribute="trailing" constant="16" id="mPX-NF-ZO3"/>
                                     <constraint firstItem="ixY-2r-DK7" firstAttribute="top" secondItem="96Q-fX-U5M" secondAttribute="top" constant="32" id="ogg-gY-V7N"/>
                                     <constraint firstAttribute="trailing" secondItem="18p-81-zrW" secondAttribute="trailing" constant="16" id="w6t-LJ-bpJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ib-ec-Viw">
-                                <rect key="frame" x="275" y="183" width="50" height="50"/>
+                                <rect key="frame" x="275" y="176" width="50" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DCK-2l-t2u">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -617,7 +604,6 @@
                         <outlet property="particleView" destination="Edp-id-Za9" id="Ecm-BF-J68"/>
                         <outlet property="pictureCoverView" destination="2Ib-ec-Viw" id="nS3-XB-bac"/>
                         <outlet property="profilePictureImageView" destination="DCK-2l-t2u" id="gmy-0N-XLY"/>
-                        <outlet property="retryButton" destination="609-zB-c0q" id="FFz-qe-9YM"/>
                         <outlet property="timerView" destination="ITf-Q6-a5M" id="hso-Pk-3kd"/>
                         <outlet property="timerWidthConstraint" destination="Yzv-h9-0bT" id="LbG-WQ-gft"/>
                         <outlet property="trailingTimerConstraint" destination="KiK-me-rtY" id="wQB-IK-Bit"/>
