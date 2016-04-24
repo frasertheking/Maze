@@ -60,13 +60,13 @@
    
     self.playButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
-    self.playButton.center =  CGPointMake(self.view.center.x, self.view.center.y - 70);
+    self.playButton.center =  CGPointMake(self.view.center.x, self.view.center.y - 20);
     [self.playButton addTarget:self action:@selector(playTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.playButton];
     
     self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.leaderboardButton setTitle:@"Leaderboard" forState:UIControlStateNormal];
-    self.leaderboardButton.center = self.view.center;
+    self.leaderboardButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
     self.leaderboardButton.buttonColor = [UIColor ht_grapeFruitColor];
     self.leaderboardButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
     [self.leaderboardButton addTarget:self action:@selector(leaderboardTapped:)forControlEvents:UIControlEventTouchUpInside];
@@ -74,7 +74,7 @@
     
     self.settingsButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
-    self.settingsButton.center =  CGPointMake(self.view.center.x, self.view.center.y + 70);
+    self.settingsButton.center =  CGPointMake(self.view.center.x, self.view.center.y + 120);
     self.settingsButton.buttonColor = [UIColor ht_mintColor];
     self.settingsButton.shadowColor = [UIColor ht_mintDarkColor];
     [self.settingsButton addTarget:self action:@selector(settingsTapped:)forControlEvents:UIControlEventTouchUpInside];
