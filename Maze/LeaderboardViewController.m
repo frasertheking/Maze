@@ -111,6 +111,7 @@
     cell.name.text = self.users[indexPath.row].name;
     cell.score.text = [NSString stringWithFormat:@"%d", self.users[indexPath.row].score];
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

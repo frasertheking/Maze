@@ -602,38 +602,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbU-y0-cdj">
-                                <rect key="frame" x="275" y="208" width="51" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Timed">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I94-Et-kBK">
+                                <rect key="frame" x="224" y="40" width="152" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9B-dR-2Wb">
+                                <rect key="frame" x="16" y="44" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="5mB-03-ukH"/>
+                                    <constraint firstAttribute="height" constant="25" id="qeB-W5-mjn"/>
+                                </constraints>
+                                <state key="normal" image="Back"/>
                                 <connections>
-                                    <action selector="timedTapped:" destination="To7-x9-SGd" eventType="touchDown" id="hHd-Tl-FSd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDN-ot-tV4">
-                                <rect key="frame" x="273" y="358" width="55" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Casual">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="casualTapped:" destination="To7-x9-SGd" eventType="touchDown" id="GPA-93-oa1"/>
+                                    <action selector="backPressed:" destination="5tG-ex-CPo" eventType="touchDown" id="2ul-oZ-giP"/>
+                                    <action selector="backPressed:" destination="To7-x9-SGd" eventType="touchDown" id="PSq-j0-v5N"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rDN-ot-tV4" firstAttribute="centerX" secondItem="ChV-1M-LNA" secondAttribute="centerX" id="533-af-vtm"/>
-                            <constraint firstItem="gbU-y0-cdj" firstAttribute="centerX" secondItem="ChV-1M-LNA" secondAttribute="centerX" id="NUb-q2-5Eb"/>
-                            <constraint firstItem="rDN-ot-tV4" firstAttribute="centerY" secondItem="ChV-1M-LNA" secondAttribute="centerY" multiplier="1.25" id="U8Y-10-CHC"/>
-                            <constraint firstItem="gbU-y0-cdj" firstAttribute="centerY" secondItem="ChV-1M-LNA" secondAttribute="centerY" multiplier="0.75" id="n8A-8j-Jdl"/>
+                            <constraint firstItem="z9B-dR-2Wb" firstAttribute="top" secondItem="ChV-1M-LNA" secondAttribute="top" constant="24" id="DxZ-DB-2vK"/>
+                            <constraint firstItem="z9B-dR-2Wb" firstAttribute="leading" secondItem="ChV-1M-LNA" secondAttribute="leading" constant="16" id="JSx-yU-X6w"/>
+                            <constraint firstItem="I94-Et-kBK" firstAttribute="centerX" secondItem="ChV-1M-LNA" secondAttribute="centerX" id="L81-rv-B16"/>
+                            <constraint firstItem="z9B-dR-2Wb" firstAttribute="top" secondItem="MDK-Tg-Cfd" secondAttribute="bottom" constant="24" id="WL3-CE-vBM"/>
+                            <constraint firstItem="I94-Et-kBK" firstAttribute="top" secondItem="MDK-Tg-Cfd" secondAttribute="bottom" constant="20" id="da7-IF-ksF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DxZ-DB-2vK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="casualButton" destination="rDN-ot-tV4" id="1Pz-SY-5kL"/>
-                        <outlet property="timedButton" destination="gbU-y0-cdj" id="VBw-1D-6hV"/>
+                        <outlet property="backButton" destination="z9B-dR-2Wb" id="ZDM-lY-hyT"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="timedSegue" id="EJ3-b3-cPw"/>
                         <segue destination="7o7-hE-kU8" kind="show" identifier="casualSegue" id="ENq-pM-eTF"/>
                     </connections>

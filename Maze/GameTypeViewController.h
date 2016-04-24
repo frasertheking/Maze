@@ -10,7 +10,4 @@
 
 @interface GameTypeViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton *timedButton;
-@property (nonatomic, weak) IBOutlet UIButton *casualButton;
-
 @end
