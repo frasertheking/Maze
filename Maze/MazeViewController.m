@@ -163,7 +163,8 @@
     [self.mazeView initMazeWithSize:self.size];
     [self resetCountdown];
     self.assertFailed = NO;
-    [self setCurrentLevelLabel];}
+    [self setCurrentLevelLabel];
+}
 
 - (void)recreateMazeWithTimer {
     self.timerView.alpha = 1;
@@ -277,8 +278,10 @@
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
                                               NSError *error) {
+            BOOL newHighScore = NO;
             if (result) {
                 if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.levelAchieved-1) {
+                    newHighScore = YES;
                     NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.levelAchieved-1],};
                     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                                   initWithGraphPath:@"/me/scores"
@@ -290,8 +293,14 @@
                         NSLog(@"New High score: %@ %@", result, error);
                     }];
                 }
-                self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
-                self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
+                
+                if (newHighScore) {
+                    self.levelAchievedLabel.text = @"Congratulations";
+                    self.highScoreLabel.text = [NSString stringWithFormat:@"New High Score: %d", self.levelAchieved-1];
+                } else {
+                    self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
+                    self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
+                }
                 [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                     self.mazeView.alpha = 0;
                     self.levelFailedView.alpha = 1;
@@ -465,6 +474,7 @@
 }
 
 - (void)setCurrentLevelLabel {
+    self.currentLevelLabel.alpha = 1;
     self.currentLevelLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
 }
 
