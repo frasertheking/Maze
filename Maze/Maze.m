@@ -19,9 +19,11 @@
 @property (nonatomic) NSMutableArray* attemptArray;
 @property (nonatomic) CAGradientLayer* wallsGradientLayer;
 @property (nonatomic) CAGradientLayer* attemptPathGradientLayer;
+@property (nonatomic) CAGradientLayer* backgroundGradientLayer;
 @property (nonatomic) int startRow;
 @property (nonatomic) int startCol;
 @property (nonatomic) NSTimer *gradientTimer;
+@property (nonatomic) NSTimer *gradientTimer2;
 @property (nonatomic) NSMutableArray *timeBonusArray;
 @property NSInteger currentX;
 @property NSInteger currentY;
@@ -42,6 +44,7 @@
 @property BOOL pulse;
 @property BOOL timeTreasureLevel;
 @property BOOL showWhiteWall;
+@property BOOL backgroundFlash;
 
 @end
 
@@ -107,7 +110,6 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeSize -= 1;
         self.mazeSize -= 1;
     }
-    
     self.noTime = NO;
     if (!self.isCasualMode) {
         [self generateMazeDistractions];
@@ -130,7 +132,7 @@ double rads = DEGREES_TO_RADIANS(180);
     
     if (self.mazeSize > 6) {
         self.power = NO;
-    
+
         if (randomNum >= 0 && randomNum < 15) {
             self.animate = YES;
         }
@@ -193,6 +195,10 @@ double rads = DEGREES_TO_RADIANS(180);
             self.timeTreasureLevel = YES;
         }
         
+        if (randomNum >= 88 && randomNum < 90) {
+            self.backgroundFlash = YES;
+        }
+        
     } else {
         self.power = YES;
     }
@@ -210,6 +216,7 @@ double rads = DEGREES_TO_RADIANS(180);
     self.pulse = NO;
     self.timeTreasureLevel = NO;
     self.showWhiteWall = NO;
+    self.backgroundFlash = NO;
 }
 
 - (void)generateTimeBonuses {
@@ -268,8 +275,10 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewRandomColorWalls];
     [self removeSubviews:self.mazeSolveLine];
     [self.gradientTimer invalidate];
+    [self.gradientTimer2 invalidate];
     self.wallsGradientLayer = nil;
     self.attemptPathGradientLayer = nil;
+    self.backgroundGradientLayer = nil;
     [self.mazeViewPath.layer setSublayers:nil];
     [self.mazeViewWalls.layer setSublayers:nil];
     [self.mazeViewRest.layer setSublayers:nil];
@@ -283,6 +292,17 @@ double rads = DEGREES_TO_RADIANS(180);
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 6;
     self.mazeViewMask.alpha = 1;
+    
+    if ([self.delegate isKindOfClass:[MazeViewController class]]) {
+        if (self.backgroundFlash) {
+            self.backgroundGradientLayer = [CAGradientLayer layer];
+            self.backgroundGradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+            self.backgroundGradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
+            self.backgroundGradientLayer.frame = ((MazeViewController*)self.delegate).view.frame;
+            [((MazeViewController*)self.delegate).view.layer insertSublayer:self.backgroundGradientLayer atIndex:1];
+            [self animateBackground];
+        }
+    }
     
     self.blockArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
     self.solArray = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
@@ -375,7 +395,7 @@ double rads = DEGREES_TO_RADIANS(180);
         [self drawTimeBonuses];
             
         if (self.fadeOverTime) {
-            [UIView animateWithDuration:15 animations:^{
+            [UIView animateWithDuration:(((MazeViewController*)self.delegate).timeRemaining*0.85) animations:^{
                 self.mazeViewMask.alpha = 0.005;
             }];
         }
@@ -740,7 +760,16 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.duality) {
         [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor whiteColor];
-        } completion:nil];
+        } completion: ^(BOOL finished) {
+            [UIView animateWithDuration:10.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.backgroundColor = [UIColor blackColor];
+            } completion:^(BOOL finished) {
+                NSArray *toColors = @[(id)[UIColor whiteColor].CGColor,
+                                      (id)[UIColor whiteColor].CGColor];
+                
+                [self.wallsGradientLayer setColors:toColors];
+            }];
+        }];
         self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         
         NSArray *fromColors = self.wallsGradientLayer.colors;
@@ -755,6 +784,7 @@ double rads = DEGREES_TO_RADIANS(180);
         animation.toValue               = toColors;
         animation.duration              = 10.00;
         animation.fillMode              = kCAFillModeForwards;
+        animation.autoreverses          = YES;
         animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         animation.delegate              = self;
         
@@ -879,6 +909,31 @@ double rads = DEGREES_TO_RADIANS(180);
     
     [self.wallsGradientLayer addAnimation:animation forKey:@"animateGradient"];
     self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
+}
+
+-(void)animateBackground {
+    NSArray *fromColors = @[(id)[self getRandomColor].CGColor,
+                            (id)[self getRandomColor].CGColor];
+    NSArray *toColors = @[(id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,];
+    
+    [self.backgroundGradientLayer setColors:toColors];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
+    
+    animation.fromValue             = fromColors;
+    animation.toValue               = toColors;
+    animation.duration              = 1.00;
+    animation.removedOnCompletion   = YES;
+    animation.fillMode              = kCAFillModeForwards;
+    animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.delegate              = self;
+    
+    [self.backgroundGradientLayer addAnimation:animation forKey:@"animateGradient"];
+    self.gradientTimer2 = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateBackground) userInfo:nil repeats:NO];
 }
 
 -(void)setupGestureRecognizer:(UIView*)view {

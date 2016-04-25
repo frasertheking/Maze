@@ -26,7 +26,6 @@
 @property (nonatomic) NSTimer* timer;
 @property (nonatomic) int remainingCounts;
 @property (nonatomic) NSInteger itemType;
-@property (nonatomic) int timeRemaining;
 @property (nonatomic) int bonusTimesCollected;
 @property (nonatomic) HTPressableButton *restartButton;
 

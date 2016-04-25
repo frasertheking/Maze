@@ -41,11 +41,12 @@
 @property (nonatomic) UIColor* mazeBottomColor;
 @property (nonatomic) UIColor* lineTopColor;
 @property (nonatomic) UIColor* lineBottomColor;
-
+@property (nonatomic) int timeRemaining;
 
 -(void)recreateMaze;
 -(void)finished;
 -(void)itemFound:(NSInteger)type;
 -(void)bonusTimeFound;
+-(void)setGradientBackground;
 @end
 
