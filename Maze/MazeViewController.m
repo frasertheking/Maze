@@ -82,11 +82,6 @@
     tapGesture.numberOfTapsRequired = 1;
     [self.inventoryView addGestureRecognizer:tapGesture];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
-    
     self.timerView.layer.cornerRadius = 6;
     self.timerView.layer.masksToBounds = YES;
     
@@ -98,10 +93,6 @@
     [self setupParticles];
     [self setupParallaxEffect];
     [self resetCountdown];
-}
-
-- (void)applicationWillResignActive:(NSNotification *)notification {
-    //[self timesUp];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -443,6 +434,12 @@
         self.levelFailedView.alpha = 0;
         self.pictureCoverView.alpha = 0;
     } completion:nil];
+}
+
+- (IBAction)exitGamePressed:(id)sender {
+    [self.timer invalidate];
+    self.mazeView.delegate = nil;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Helpers

@@ -461,7 +461,7 @@
                                         </constraints>
                                         <state key="normal" image="Delete-50"/>
                                         <connections>
-                                            <segue destination="fN7-yU-US0" kind="unwind" unwindAction="unwindToThisViewController:" id="XDj-Ga-jN4"/>
+                                            <action selector="exitGamePressed:" destination="BYZ-38-t0r" eventType="touchDown" id="oJo-Qa-B9r"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -680,15 +680,15 @@
                                 <exclude reference="Fbw-IG-rdV"/>
                                 <exclude reference="bLE-x0-L6D"/>
                                 <exclude reference="o1f-uD-lBd"/>
-                                <exclude reference="Zrl-JY-cJq"/>
-                                <exclude reference="aL0-ki-Yxz"/>
-                                <exclude reference="gp2-6L-FPp"/>
-                                <exclude reference="jvc-99-StQ"/>
                                 <exclude reference="ExA-Qj-5N6"/>
                                 <exclude reference="KiK-me-rtY"/>
                                 <exclude reference="ZW6-OE-pN3"/>
                                 <exclude reference="cnP-XH-yOp"/>
                                 <exclude reference="xkW-2n-O4x"/>
+                                <exclude reference="Zrl-JY-cJq"/>
+                                <exclude reference="aL0-ki-Yxz"/>
+                                <exclude reference="gp2-6L-FPp"/>
+                                <exclude reference="jvc-99-StQ"/>
                                 <exclude reference="JHG-2o-bmd"/>
                                 <exclude reference="OcR-Xv-9KT"/>
                                 <exclude reference="bAW-iO-ifF"/>
@@ -718,7 +718,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="fN7-yU-US0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1142" y="7"/>
         </scene>
