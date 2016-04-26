@@ -761,14 +761,14 @@ double rads = DEGREES_TO_RADIANS(180);
         [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor whiteColor];
         } completion: ^(BOOL finished) {
-            [UIView animateWithDuration:10.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                self.backgroundColor = [UIColor blackColor];
-            } completion:^(BOOL finished) {
-                NSArray *toColors = @[(id)[UIColor whiteColor].CGColor,
-                                      (id)[UIColor whiteColor].CGColor];
-                
-                [self.wallsGradientLayer setColors:toColors];
-            }];
+//            [UIView animateWithDuration:10.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+//                self.backgroundColor = [UIColor blackColor];
+//            } completion:^(BOOL finished) {
+//                NSArray *toColors = @[(id)[UIColor whiteColor].CGColor,
+//                                      (id)[UIColor whiteColor].CGColor];
+//                
+//                [self.wallsGradientLayer setColors:toColors];
+//            }];
         }];
         self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         
@@ -784,7 +784,7 @@ double rads = DEGREES_TO_RADIANS(180);
         animation.toValue               = toColors;
         animation.duration              = 10.00;
         animation.fillMode              = kCAFillModeForwards;
-        animation.autoreverses          = YES;
+        //animation.autoreverses          = YES;
         animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         animation.delegate              = self;
         

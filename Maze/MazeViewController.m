@@ -514,4 +514,9 @@
     }
 }
 
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
+    [self levelFailed];
+    return YES;
+}
+
 @end
