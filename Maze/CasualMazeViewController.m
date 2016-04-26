@@ -232,8 +232,10 @@
 #pragma mark - iAd Delegates
 
 - (void)setupAds {
-    self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
-    self.adBanner.delegate = self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adState"]) {
+        self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
+        self.adBanner.delegate = self;
+    }
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner {

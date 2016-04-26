@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.settingNameArray = [[NSMutableArray alloc] initWithObjects:@"Ads Enabled", @"Sounds Enabled", @"Color Blind Mode", @"About", @"Feedback", @"Share", nil];
+    self.settingNameArray = [[NSMutableArray alloc] initWithObjects:@"Ads Enabled", @"Sounds Enabled", @"About", @"Feedback", @"Share", nil];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)[AppDelegate getRandomColor].CGColor, (id)[AppDelegate getRandomColor].CGColor, nil];
@@ -33,6 +33,13 @@
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self setupParticles];
+}
+
+- (void)setupParticles {
+    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.particleView.allowsTransparency = YES;
+    [self.particleView presentScene:scene];
 }
 
 #pragma mark - UITableViewDelegate
@@ -54,19 +61,26 @@
     cell.textLabel.text = self.settingNameArray[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row < 3) {
-        UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
-        switchview.tintColor = [UIColor blackColor];
-        cell.accessoryView = switchview;
+    UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+    switchview.tintColor = [UIColor blackColor];
+    
+    switch (indexPath.row) {
+        case 0:
+            [switchview addTarget:self action:@selector(setAdState:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = switchview;
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adState"]) [switchview setOn:YES];
+            break;
+        case 1:
+            [switchview addTarget:self action:@selector(setSoundState:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = switchview;
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"]) [switchview setOn:YES];
+            break;
+        default:
+            cell.accessoryView = nil;
+            break;
     }
+    
     return cell;
-}
-
-- (void)setupParticles {
-    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    self.particleView.allowsTransparency = YES;
-    [self.particleView presentScene:scene];
 }
 
 #pragma mark - IBActions
@@ -81,6 +95,20 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
+}
+
+#pragma mark - Helpers 
+
+- (void)setAdState:(id)sender {
+    BOOL state = [sender isOn];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:state] forKey:@"adState"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setSoundState:(id)sender {
+    BOOL state = [sender isOn];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:state] forKey:@"soundState"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

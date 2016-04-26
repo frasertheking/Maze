@@ -488,8 +488,10 @@
 #pragma mark - iAd Delegates
 
 - (void)setupAds {
-    self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
-    self.adBanner.delegate = self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adState"] == 1) {
+        self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
+        self.adBanner.delegate = self;
+    }
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner {
@@ -505,7 +507,6 @@
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    NSLog(@"Failed to retrieve ad");
     if (self.bannerIsVisible) {
         [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
         banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
