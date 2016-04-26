@@ -17,6 +17,8 @@
 @property (nonatomic) int size;
 @property (nonatomic) BOOL showingOptions;
 @property (nonatomic) BOOL assertFailed;
+@property (nonatomic) BOOL bannerIsVisible;
+@property (nonatomic) ADBannerView *adBanner;
 
 @end
 
@@ -55,6 +57,7 @@
     
     [self setupParticles];
     [self setupParallaxEffect];
+    [self setupAds];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -181,6 +184,19 @@
     }
 }
 
+- (IBAction)exitGamePressed:(id)sender {
+    [UIView animateWithDuration:0.15 animations:^{
+        self.exitButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.exitButton.alpha = 1;
+        } completion:^(BOOL finished) {
+            self.mazeView.delegate = nil;
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }];
+}
+
 #pragma mark - Helpers
 
 -(UIColor*) inverseColor:(UIColor*)color {
@@ -211,6 +227,35 @@
 
 - (void)setCurrentLevelLabel {
     self.currentLevelLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
+}
+
+#pragma mark - iAd Delegates
+
+- (void)setupAds {
+    self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
+    self.adBanner.delegate = self;
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!self.bannerIsVisible) {
+        if (self.adBanner.superview == nil) {
+            [self.view addSubview:self.adBanner];
+        }
+        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+        banner.frame = CGRectOffset(banner.frame, 0, -50);
+        [UIView commitAnimations];
+        self.bannerIsVisible = YES;
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    NSLog(@"Failed to retrieve ad");
+    if (self.bannerIsVisible) {
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+        [UIView commitAnimations];
+        self.bannerIsVisible = NO;
+    }
 }
 
 @end

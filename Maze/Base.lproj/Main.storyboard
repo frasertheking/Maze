@@ -478,11 +478,11 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ml-mE-50U">
-                                <rect key="frame" x="150" y="473" width="300" height="36"/>
+                                <rect key="frame" x="150" y="471" width="300" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="azV-fQ-VIu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -665,7 +665,7 @@
                             <constraint firstItem="96Q-fX-U5M" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="clm-cI-fUg"/>
                             <constraint firstItem="ITf-Q6-a5M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="cnP-XH-yOp"/>
                             <constraint firstItem="Ocf-we-m1Q" firstAttribute="top" secondItem="ITf-Q6-a5M" secondAttribute="bottom" constant="8" id="dH2-cd-mbz"/>
-                            <constraint firstItem="1Ml-mE-50U" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="8" id="eaG-Db-nqN"/>
+                            <constraint firstItem="1Ml-mE-50U" firstAttribute="top" secondItem="Ocf-we-m1Q" secondAttribute="bottom" constant="6" id="eaG-Db-nqN"/>
                             <constraint firstAttribute="trailing" secondItem="iAh-r6-qwD" secondAttribute="trailing" constant="60" id="gp2-6L-FPp"/>
                             <constraint firstItem="iAh-r6-qwD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="jvc-99-StQ"/>
                             <constraint firstAttribute="bottom" secondItem="Edp-id-Za9" secondAttribute="bottom" id="o1f-uD-lBd"/>
@@ -700,6 +700,7 @@
                     <connections>
                         <outlet property="checkbox" destination="oLs-hC-72s" id="hIf-as-Ih9"/>
                         <outlet property="currentLevelLabel" destination="1Ml-mE-50U" id="rgQ-nK-foh"/>
+                        <outlet property="exitButton" destination="Mz0-ck-92W" id="nES-cl-wEZ"/>
                         <outlet property="highScoreLabel" destination="Qgg-tw-Zad" id="l6k-8p-iJS"/>
                         <outlet property="inventoryView" destination="iAh-r6-qwD" id="aly-ic-4Lr"/>
                         <outlet property="itemImage" destination="4vV-jE-3Lp" id="2s5-dm-5by"/>
@@ -719,7 +720,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="7"/>
+            <point key="canvasLocation" x="1142" y="4"/>
         </scene>
         <!--Game Type View Controller-->
         <scene sceneID="XgH-4K-Ogq">
@@ -808,7 +809,7 @@
                                         </constraints>
                                         <state key="normal" image="Delete-50"/>
                                         <connections>
-                                            <segue destination="V86-G7-FwU" kind="unwind" unwindAction="unwindToThisViewController:" id="5yx-jV-jFK"/>
+                                            <action selector="exitGamePressed:" destination="7o7-hE-kU8" eventType="touchDown" id="ffy-Op-Hod"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -881,13 +882,13 @@
                     <connections>
                         <outlet property="checkbox" destination="J8C-Kd-KkF" id="nB8-1v-Pdy"/>
                         <outlet property="currentLevelLabel" destination="igY-Js-dhb" id="P4n-oH-VxC"/>
+                        <outlet property="exitButton" destination="KAP-ty-Mob" id="so8-Tt-kG9"/>
                         <outlet property="mazeView" destination="ZzJ-7B-zG9" id="Z3v-Cu-41I"/>
                         <outlet property="mazeViewCenterConstraint" destination="9n9-vi-NBx" id="Nw8-69-TAz"/>
                         <outlet property="particleView" destination="6pv-Vb-5gq" id="hvU-rW-syr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UIm-8p-omI" sceneMemberID="firstResponder"/>
-                <exit id="V86-G7-FwU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1142" y="709"/>
         </scene>

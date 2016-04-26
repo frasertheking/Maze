@@ -11,14 +11,16 @@
 #import "Maze.h"
 #import "AppDelegate.h"
 #import "BEMCheckBox.h"
+#import <iAd/iAd.h>
 
-@interface MazeViewController : UIViewController
+@interface MazeViewController : UIViewController <ADBannerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
 @property (nonatomic, weak) IBOutlet UIView *inventoryView;
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
 @property (nonatomic, weak) IBOutlet UILabel *usePowerupLabel;
+@property (nonatomic, weak) IBOutlet UIButton *exitButton;
 @property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;

@@ -19,6 +19,7 @@
 		4368A29F1C83D2EA006E1779 /* MazeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A29E1C83D2EA006E1779 /* MazeUITests.m */; };
 		4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */; };
 		437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437368A21CCD4B2C005D3132 /* SettingsViewController.m */; };
+		437368A51CCEE909005D3132 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437368A41CCEE909005D3132 /* iAd.framework */; };
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
 		439F8D711CB7E9E7003F98F7 /* MazeBackgroundParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */; };
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
@@ -77,6 +78,7 @@
 		4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMazeGenerator.m; sourceTree = "<group>"; };
 		437368A11CCD4B2C005D3132 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		437368A21CCD4B2C005D3132 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		437368A41CCEE909005D3132 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		437B80A11C9CE9A30024F758 /* Maze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Maze.h; sourceTree = "<group>"; };
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
 		439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeBackgroundParticle.sks; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				437368A51CCEE909005D3132 /* iAd.framework in Frameworks */,
 				FFAA341344C2A4C6C1FCA50C /* libPods-Maze.a in Frameworks */,
 				43BAABCA1CC9B84F009F4C50 /* FBSDKCoreKit.framework in Frameworks */,
 				43A65B2A1CCAEE97001431FC /* FBSDKLoginKit.framework in Frameworks */,
@@ -133,6 +136,7 @@
 		0D1876CD177D433E5444B30A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				437368A41CCEE909005D3132 /* iAd.framework */,
 				43A65B291CCAEE97001431FC /* FBSDKLoginKit.framework */,
 				43BAABC91CC9B84F009F4C50 /* FBSDKCoreKit.framework */,
 				FFEF44CF66B679603AE0E32B /* libPods-Maze.a */,

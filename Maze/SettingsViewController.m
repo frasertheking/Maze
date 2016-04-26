@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.settingNameArray = [[NSMutableArray alloc] initWithObjects:@"Adds Enabled", @"Sounds Enabled", @"Color Blind Mode", @"About", @"Feedback", @"Share", nil];
+    self.settingNameArray = [[NSMutableArray alloc] initWithObjects:@"Ads Enabled", @"Sounds Enabled", @"Color Blind Mode", @"About", @"Feedback", @"Share", nil];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)[AppDelegate getRandomColor].CGColor, (id)[AppDelegate getRandomColor].CGColor, nil];

@@ -11,8 +11,9 @@
 #import "Maze.h"
 #import "AppDelegate.h"
 #import "BEMCheckBox.h"
+#import <iAd/iAd.h>
 
-@interface CasualMazeViewController : UIViewController
+@interface CasualMazeViewController : UIViewController <ADBannerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
@@ -21,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic, weak) IBOutlet UIButton *exitButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
