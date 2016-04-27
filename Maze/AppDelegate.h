@@ -32,12 +32,14 @@
 #define FB_APP_ID 1688157554771031
 
 #import <UIKit/UIKit.h>
+#import "MCManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIColor *topColor;
 @property (strong, nonatomic) UIColor *bottomColor;
+@property (nonatomic, strong) MCManager *mcManager;
 
 +(UIColor*)getRandomColor;
 + (void)showHUD:(UIView*)view;

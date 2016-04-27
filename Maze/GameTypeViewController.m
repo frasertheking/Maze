@@ -103,8 +103,7 @@
 }
 
 - (IBAction)challengeTapped:(id)sender {
-    //[self performSegueWithIdentifier:@"tutorialSegue" sender:self];
-    NSLog(@"CHALLENGE TAPPED");
+    [self performSegueWithIdentifier:@"headToHeadSegue" sender:self];
 }
 
 @end

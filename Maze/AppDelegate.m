@@ -28,6 +28,7 @@
     
     self.topColor = [self getRandomColor];
     self.bottomColor = [self getRandomColor];
+    self.mcManager = [[MCManager alloc] init];
     
     return YES;
 }

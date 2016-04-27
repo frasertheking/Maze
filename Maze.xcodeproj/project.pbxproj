@@ -29,6 +29,9 @@
 		43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A65B301CCAFBB6001431FC /* LeaderboardEntryCell.m */; };
 		43A65B351CCBBD80001431FC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A65B341CCBBD80001431FC /* User.m */; };
 		43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B96F671CD0568400B3D7C2 /* AboutViewController.m */; };
+		43B96F6C1CD16F1600B3D7C2 /* ConnectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B96F6B1CD16F1600B3D7C2 /* ConnectionsViewController.m */; };
+		43B96F6F1CD170CB00B3D7C2 /* MCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B96F6E1CD170CB00B3D7C2 /* MCManager.m */; };
+		43B96F721CD172BF00B3D7C2 /* ChallengeMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B96F711CD172BF00B3D7C2 /* ChallengeMazeViewController.m */; };
 		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
 		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
 		43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */; };
@@ -95,6 +98,12 @@
 		43A65B341CCBBD80001431FC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		43B96F661CD0568400B3D7C2 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		43B96F671CD0568400B3D7C2 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		43B96F6A1CD16F1600B3D7C2 /* ConnectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionsViewController.h; sourceTree = "<group>"; };
+		43B96F6B1CD16F1600B3D7C2 /* ConnectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionsViewController.m; sourceTree = "<group>"; };
+		43B96F6D1CD170CB00B3D7C2 /* MCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCManager.h; sourceTree = "<group>"; };
+		43B96F6E1CD170CB00B3D7C2 /* MCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCManager.m; sourceTree = "<group>"; };
+		43B96F701CD172BF00B3D7C2 /* ChallengeMazeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeMazeViewController.h; sourceTree = "<group>"; };
+		43B96F711CD172BF00B3D7C2 /* ChallengeMazeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeMazeViewController.m; sourceTree = "<group>"; };
 		43BAABBC1CC86166009F4C50 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		43BAABBD1CC86166009F4C50 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeViewController.h; sourceTree = "<group>"; };
@@ -176,6 +185,7 @@
 		4368A2781C83D2E9006E1779 /* Maze */ = {
 			isa = PBXGroup;
 			children = (
+				43B96F691CD16F0000B3D7C2 /* MC */,
 				43A65B321CCBBD6E001431FC /* Model */,
 				439F8D6E1CB7E8FC003F98F7 /* SpriteKit */,
 				43EEE8CE1CB32E880066097A /* Items */,
@@ -300,6 +310,8 @@
 				4368A2801C83D2E9006E1779 /* MazeViewController.m */,
 				43BAABC21CC9962A009F4C50 /* CasualMazeViewController.h */,
 				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
+				43B96F701CD172BF00B3D7C2 /* ChallengeMazeViewController.h */,
+				43B96F711CD172BF00B3D7C2 /* ChallengeMazeViewController.m */,
 			);
 			name = MazeViewControllers;
 			sourceTree = "<group>";
@@ -311,6 +323,17 @@
 				43B96F671CD0568400B3D7C2 /* AboutViewController.m */,
 			);
 			name = About;
+			sourceTree = "<group>";
+		};
+		43B96F691CD16F0000B3D7C2 /* MC */ = {
+			isa = PBXGroup;
+			children = (
+				43B96F6D1CD170CB00B3D7C2 /* MCManager.h */,
+				43B96F6E1CD170CB00B3D7C2 /* MCManager.m */,
+				43B96F6A1CD16F1600B3D7C2 /* ConnectionsViewController.h */,
+				43B96F6B1CD16F1600B3D7C2 /* ConnectionsViewController.m */,
+			);
+			name = MC;
 			sourceTree = "<group>";
 		};
 		43EEE8CE1CB32E880066097A /* Items */ = {
@@ -518,6 +541,8 @@
 			files = (
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
 				43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */,
+				43B96F6C1CD16F1600B3D7C2 /* ConnectionsViewController.m in Sources */,
+				43B96F721CD172BF00B3D7C2 /* ChallengeMazeViewController.m in Sources */,
 				43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */,
 				4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */,
 				43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */,
@@ -528,6 +553,7 @@
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
+				43B96F6F1CD170CB00B3D7C2 /* MCManager.m in Sources */,
 				43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */,
 				437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */,
 				43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */,
