@@ -28,6 +28,7 @@
 		43A65B2D1CCAFB61001431FC /* LeaderboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A65B2C1CCAFB61001431FC /* LeaderboardViewController.m */; };
 		43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A65B301CCAFBB6001431FC /* LeaderboardEntryCell.m */; };
 		43A65B351CCBBD80001431FC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A65B341CCBBD80001431FC /* User.m */; };
+		43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B96F671CD0568400B3D7C2 /* AboutViewController.m */; };
 		43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABBD1CC86166009F4C50 /* HomeViewController.m */; };
 		43BAABC11CC86756009F4C50 /* GameTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC01CC86756009F4C50 /* GameTypeViewController.m */; };
 		43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */; };
@@ -92,6 +93,8 @@
 		43A65B301CCAFBB6001431FC /* LeaderboardEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardEntryCell.m; sourceTree = "<group>"; };
 		43A65B331CCBBD80001431FC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		43A65B341CCBBD80001431FC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		43B96F661CD0568400B3D7C2 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		43B96F671CD0568400B3D7C2 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		43BAABBC1CC86166009F4C50 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		43BAABBD1CC86166009F4C50 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTypeViewController.h; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 		437368A01CCD4B10005D3132 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				43B96F651CD0567300B3D7C2 /* About */,
 				437368A11CCD4B2C005D3132 /* SettingsViewController.h */,
 				437368A21CCD4B2C005D3132 /* SettingsViewController.m */,
 			);
@@ -298,6 +302,15 @@
 				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
 			);
 			name = MazeViewControllers;
+			sourceTree = "<group>";
+		};
+		43B96F651CD0567300B3D7C2 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				43B96F661CD0568400B3D7C2 /* AboutViewController.h */,
+				43B96F671CD0568400B3D7C2 /* AboutViewController.m */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		43EEE8CE1CB32E880066097A /* Items */ = {
@@ -513,6 +526,7 @@
 				43BAABBE1CC86166009F4C50 /* HomeViewController.m in Sources */,
 				43A65B351CCBBD80001431FC /* User.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
+				43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */,
 				437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */,

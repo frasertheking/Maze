@@ -36,6 +36,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIColor *topColor;
+@property (strong, nonatomic) UIColor *bottomColor;
 
 +(UIColor*)getRandomColor;
 + (void)showHUD:(UIView*)view;
