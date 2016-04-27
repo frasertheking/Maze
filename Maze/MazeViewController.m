@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "HTPressableButton.h"
 #import "UIColor+HTColor.h"
@@ -28,9 +29,10 @@
 @property (nonatomic) NSInteger itemType;
 @property (nonatomic) int bonusTimesCollected;
 @property (nonatomic) HTPressableButton *restartButton;
+@property (nonatomic) HTPressableButton *leaderboardButton;
+@property (nonatomic) FBSDKShareButton *shareButton;
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
-
 @end
 
 @implementation MazeViewController
@@ -73,11 +75,21 @@
     [self.profilePictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBSDKAccessToken currentAccessToken].userID]] placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
     self.restartButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.restartButton setTitle:@"Restart" forState:UIControlStateNormal];
-    self.restartButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 35);
+    self.restartButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 145);
     self.restartButton.buttonColor = [UIColor ht_grapeFruitColor];
     self.restartButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
     [self.restartButton addTarget:self action:@selector(retryButtonClick:)forControlEvents:UIControlEventTouchUpInside];
     [self.levelFailedView addSubview:self.restartButton];
+    
+    self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.leaderboardButton setTitle:@"Leaderboard" forState:UIControlStateNormal];
+    self.leaderboardButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 85);
+    [self.leaderboardButton addTarget:self action:@selector(leaderboardButtonClick:)forControlEvents:UIControlEventTouchUpInside];
+    [self.levelFailedView addSubview:self.leaderboardButton];
+    
+    self.shareButton = [[FBSDKShareButton alloc] init];
+    self.shareButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 35);
+    [self.levelFailedView addSubview:self.shareButton];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
@@ -265,6 +277,13 @@
     self.mazeView.userInteractionEnabled = NO;
     [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
    
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:@"https://frasertheking.com"];
+    content.contentTitle = @"Check Out My CrazeMaze Score!";
+    content.contentDescription = [NSString stringWithFormat:@"I just got to level %d on CrazeMaze! Think you can beat me?", self.levelAchieved-1];
+    content.imageURL = [NSURL URLWithString:@"http://frasertheking.com/images/crazemazelogo.png"];
+    self.shareButton.shareContent = content;
+    
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
         NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/scores", [FBSDKAccessToken currentAccessToken].userID] parameters:params  HTTPMethod:@"GET"];
@@ -438,6 +457,10 @@
     } completion:nil];
 }
 
+- (IBAction)leaderboardButtonClick:(id)sender {
+    [self performSegueWithIdentifier:@"showLeaderboardSegue" sender:self];
+}
+
 - (IBAction)exitGamePressed:(id)sender {
     [UIView animateWithDuration:0.15 animations:^{
         self.exitButton.alpha = 0;
@@ -516,7 +539,7 @@
 }
 
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
-    [self levelFailed];
+    [self timesUp];
     return YES;
 }
 
