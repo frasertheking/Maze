@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.size = 2;
+    self.size = 20;
     self.mazeView.isCasualMode = YES;
     
     [self setGradientBackground];
@@ -66,7 +66,6 @@
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self sendMyMessage];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -272,8 +271,8 @@
 
 #pragma mark - Private method implementation
 
--(void)sendMyMessage{
-    NSData *dataToSend = [@"asdasdasd" dataUsingEncoding:NSUTF8StringEncoding];
+-(void)sendMazeData{
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: self.mazeView.attemptArray];
     NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
     NSError *error;
     
@@ -285,7 +284,7 @@
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
     } else {
-        NSLog(@"Sent text!!");
+        NSLog(@"Sent data!!");
     }
     
 }
@@ -293,13 +292,11 @@
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
-    NSString *peerDisplayName = peerID.displayName;
-    
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    NSString *receivedText = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    
-    self.messageLabel.text = [NSString stringWithFormat:@"Received text: %@ from %@", receivedText, peerDisplayName];
-    [self.messageLabel layoutIfNeeded];
+    NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.mazeView drawOpponentAttempt:array];
+    });
 }
 
 

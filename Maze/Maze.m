@@ -10,13 +10,13 @@
 #import "MazeViewController.h"
 #import "PowerUpView.h"
 #import "BonusTimeView.h"
+#import "ChallengeMazeViewController.h"
 
 @interface Maze ()
 
 @property (nonatomic) int mazeSize;
 @property (nonatomic) NSMutableArray* blockArray;
 @property (nonatomic) NSMutableArray* solArray;
-@property (nonatomic) NSMutableArray* attemptArray;
 @property (nonatomic) CAGradientLayer* wallsGradientLayer;
 @property (nonatomic) CAGradientLayer* attemptPathGradientLayer;
 @property (nonatomic) CAGradientLayer* backgroundGradientLayer;
@@ -92,6 +92,9 @@ double rads = DEGREES_TO_RADIANS(180);
     
     self.mazeSolveLine = [[UIView alloc] initWithFrame:self.bounds];
     [self setupViews:self.mazeSolveLine];
+    
+    self.mazeViewEnemyPath = [[UIView alloc] initWithFrame:self.bounds];
+    [self setupViews:self.mazeViewEnemyPath];
 }
 
 - (void)setupViews:(UIView*)view {
@@ -274,6 +277,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewPathMask];
     [self removeSubviews:self.mazeViewRandomColorWalls];
     [self removeSubviews:self.mazeSolveLine];
+    [self removeSubviews:self.mazeViewEnemyPath];
     [self.gradientTimer invalidate];
     [self.gradientTimer2 invalidate];
     self.wallsGradientLayer = nil;
@@ -598,6 +602,9 @@ double rads = DEGREES_TO_RADIANS(180);
             [self drawTimeBonuses];
         }
         
+        if ([self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
+            [((ChallengeMazeViewController*)self.delegate) sendMazeData];
+        }
     }
     [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
@@ -629,6 +636,22 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.kaleidoscope && !self.showWhiteWall) {
         [self captureWalls:NO];
     } 
+}
+
+-(void)drawOpponentAttempt:(NSArray*)array {
+    float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
+    [self removeSubviews:self.mazeViewEnemyPath];
+    
+    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
+            if ([[[array objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                block.backgroundColor = [UIColor orangeColor];
+                block.alpha = 0.5;
+                [self.mazeViewEnemyPath addSubview:block];
+            }
+        }
+    }
 }
 
 -(void)drawSolveLine {

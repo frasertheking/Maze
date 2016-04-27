@@ -24,11 +24,13 @@
 @property (nonatomic) UIView* mazeViewPathMask;
 @property (nonatomic) UIView* mazeViewRandomColorWalls;
 @property (nonatomic) UIView* mazeSolveLine;
+@property (nonatomic) UIView* mazeViewEnemyPath;
 @property (nonatomic) BOOL godMode;
 @property (nonatomic) BOOL fadeOverTime;
 @property (nonatomic) BOOL noTime;
 @property (nonatomic) BOOL isCasualMode;
 @property NSInteger score;
+@property (nonatomic) NSMutableArray* attemptArray;
 
 -(void)createMaze;
 -(void)solve;
@@ -38,5 +40,6 @@
 -(void)showSolvePath;
 -(void)showWhiteWalls;
 -(void)activateGodMode;
+-(void)drawOpponentAttempt:(NSArray*)array;
 
 @end

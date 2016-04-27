@@ -35,7 +35,7 @@
 @property (nonatomic) UIColor* lineTopColor;
 @property (nonatomic) UIColor* lineBottomColor;
 
-
+-(void)sendMazeData;
 -(void)finished;
 @end
 
