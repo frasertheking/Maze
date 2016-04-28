@@ -339,7 +339,7 @@ double rads = DEGREES_TO_RADIANS(180);
         int max = self.mazeSize*2;
         
         for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
-            int rndValue = min + arc4random() % (max - min);
+            int rndValue = 5;
             for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
                 
                 BOOL dontDraw = NO;

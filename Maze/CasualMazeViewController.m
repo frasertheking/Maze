@@ -45,10 +45,6 @@
     self.checkbox.userInteractionEnabled = NO;
    
     [self setCurrentLevelLabel];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;

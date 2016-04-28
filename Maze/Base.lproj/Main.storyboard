@@ -944,8 +944,11 @@
                                 <rect key="frame" x="0.0" y="161" width="600" height="393"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The device name displayed to others..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-Z5-0pl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The device name displayed to others..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-Z5-0pl">
                                 <rect key="frame" x="165" y="48" width="271" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="gjw-lk-PDx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -1159,8 +1162,8 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-qy-bWd">
-                                <rect key="frame" x="236" y="550" width="127" height="30"/>
-                                <state key="normal" title="Game Over Button">
+                                <rect key="frame" x="285" y="550" width="30" height="30"/>
+                                <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
@@ -1176,15 +1179,19 @@
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="leading" secondItem="Qen-78-RIo" secondAttribute="leading" id="UcE-gz-9Eg"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
                             <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="Y13-iy-R3r"/>
+                            <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="npC-kJ-n6b"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="top" secondItem="Qen-78-RIo" secondAttribute="bottom" constant="24" id="oP0-5f-man"/>
                             <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="oh6-30-eHE"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="oyv-wR-vju"/>
                             <constraint firstItem="Qen-78-RIo" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="8" id="taI-uR-oUW"/>
+                            <constraint firstItem="qZD-Pv-W1K" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="wd7-tb-jxG"/>
                             <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="xsv-9d-VvR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="UcE-gz-9Eg"/>
+                                <exclude reference="npC-kJ-n6b"/>
+                                <exclude reference="wd7-tb-jxG"/>
                                 <exclude reference="MbC-Rh-ARc"/>
                                 <exclude reference="Y13-iy-R3r"/>
                                 <exclude reference="oP0-5f-man"/>

@@ -55,10 +55,6 @@
     self.checkbox.userInteractionEnabled = NO;
     
     [self setCurrentLevelLabel];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -150,8 +146,9 @@
                 self.mazeViewCenterConstraint.constant = -600;
                 [self.view layoutIfNeeded];
             } completion:^(BOOL finished) {
-                self.gameOverButton.hidden = NO;
                 [self.gameOverButton setTitle:@"You Won!" forState:UIControlStateNormal];
+                self.gameOverButton.hidden = NO;
+                self.mazeView.hidden = YES;
             }];
         }];
     }
@@ -332,14 +329,17 @@
                     self.mazeViewCenterConstraint.constant = -600;
                     [self.view layoutIfNeeded];
                 } completion:^(BOOL finished) {
-                    self.gameOverButton.hidden = NO;
                     [self.gameOverButton setTitle:@"You Lost!" forState:UIControlStateNormal];
+                    self.gameOverButton.hidden = NO;
+                    self.mazeView.hidden = YES;
                 }];
             }];
         });
     }
 }
 
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end
