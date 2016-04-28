@@ -55,7 +55,8 @@
     self.mazeView2.delegate = self;
     self.mazeView2.isCasualMode = YES;
     [self.mazeView2 initMazeWithSize:25];
-    [self setupParticles];
+//    [self setupParticles];
+    self.particleView.hidden = YES;
     self.mazeView.alpha = 0.15f;
     self.mazeView2.alpha = 0.0f;
    
@@ -86,6 +87,15 @@
     [super viewWillAppear:animated];
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(redrawMaze) userInfo:nil repeats:YES];
+    self.mazeView.hidden = NO;
+    self.mazeView2.hidden = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
+    self.mazeView.hidden = YES;
+    self.mazeView2.hidden = YES;
 }
 
 #pragma mark - Maze 
