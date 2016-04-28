@@ -22,7 +22,9 @@ typedef void (^block)(bool **);
     block _response;
 }
 
-- (id)initWithRow:(int)row andCol:(int)col withStartingPoint:(struct DEIntegerPoint)position;
+@property (nonatomic) NSNumber *seed;
+
+- (id)initWithRow:(int)row andCol:(int)col andSeed:(NSNumber*)seed withStartingPoint:(struct DEIntegerPoint)position;
 - (void)initMaze;
 - (void)createMaze;
 - (int)randIntMin:(int)min andMax:(int)max;

@@ -21,6 +21,7 @@
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) BOOL waitingOnMaze;
+@property (nonatomic) NSNumber *seed;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
 @end
@@ -40,9 +41,10 @@
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
     if (!self.appDelegate.mcManager.peer) {
+        self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+        self.mazeView.seed = self.seed;
+        [self sendSeed];
         [self.mazeView initMazeWithSize:self.size];
-    } else {
-        self.waitingOnMaze = YES;
     }
     self.mazeView.score = 0;
     self.topConstraint.constant = -150;
@@ -53,8 +55,6 @@
     self.checkbox.onAnimationType = BEMAnimationTypeFill;
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
-    
-    [self setCurrentLevelLabel];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -131,7 +131,6 @@
 -(void)recreateMaze {
     [self.mazeView initMazeWithSize:self.size];
     self.assertFailed = NO;
-    [self setCurrentLevelLabel];
 }
 
 -(void)finished {
@@ -228,10 +227,6 @@
     [view.layer addAnimation:scaleAnimation forKey:@"scale"];
 }
 
-- (void)setCurrentLevelLabel {
-    self.currentLevelLabel.text = [NSString stringWithFormat:@"%d", self.size-1];
-}
-
 #pragma mark - iAd Delegates
 
 - (void)setupAds {
@@ -265,6 +260,23 @@
 
 #pragma mark - Private method implementation
 
+-(void)sendSeed{
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: self.seed];
+    NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mcManager.session sendData:dataToSend
+                                     toPeers:allPeers
+                                    withMode:MCSessionSendDataReliable
+                                       error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+       // NSLog(@"Sent data!!");
+    }
+}
+
 -(void)sendMazeData:(NSMutableArray*)array{
     NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: array];
     NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
@@ -278,7 +290,7 @@
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
     } else {
-       // NSLog(@"Sent data!!");
+        // NSLog(@"Sent data!!");
     }
 }
 
@@ -306,17 +318,13 @@
 
     if ([dataType isKindOfClass:[NSMutableArray class]]) {
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.waitingOnMaze) {
-                self.mazeView.receivedMaze = [array mutableCopy];
-                self.mazeView.waitingOnMaze = self.waitingOnMaze;
-                [self.mazeView initMazeWithSize:20];
-                self.waitingOnMaze = NO;
-                self.mazeView.waitingOnMaze = self.waitingOnMaze;
-            } else {
-                [self.mazeView drawOpponentAttempt:array];
-            }
+            [self.mazeView drawOpponentAttempt:array];
+        });
+    } else if ([dataType isKindOfClass:[NSNumber class]]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+            [self.mazeView initMazeWithSize:self.size];
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{

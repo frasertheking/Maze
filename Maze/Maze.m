@@ -113,16 +113,21 @@ double rads = DEGREES_TO_RADIANS(180);
         self.mazeSize -= 1;
         self.mazeSize -= 1;
     }
+    
+    if (self.seed) {
+        srand([self.seed intValue]);
+    }
+    
     self.noTime = NO;
     if (!self.isCasualMode) {
         [self generateMazeDistractions];
         if (self.mazeSize > 3) [self generateTimeBonuses];
     }
-    
+
     self.powerUpX = -1;
     self.powerUpY = -1;
-    self.powerX = 1 + arc4random() % (self.mazeSize*2 - 1);
-    self.powerY = 1 + arc4random() % (self.mazeSize*2 - 1);
+    self.powerX = 1 + (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
+    self.powerY = 1 + (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
     self.finished = NO;
     self.godMode = NO;
     
@@ -130,7 +135,7 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)generateMazeDistractions {
-    int randomNum = arc4random() % 100;
+    int randomNum = (self.seed ? rand() : arc4random()) % 100;
     [self disableAllMazeDistractions];
     
     if (self.mazeSize > 6) {
@@ -229,37 +234,37 @@ double rads = DEGREES_TO_RADIANS(180);
         [self.timeBonusArray removeAllObjects];
     }
     
-    int randomNum = arc4random() % 100;
-    int pointX = arc4random() % (self.mazeSize*2 - 1);
-    int pointY = arc4random() % (self.mazeSize*2 - 1);
+    int randomNum = (self.seed ? rand() : arc4random()) % 100;
+    int pointX = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
+    int pointY = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
     [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
     
-    pointX = arc4random() % (self.mazeSize*2 - 1);
-    pointY = arc4random() % (self.mazeSize*2 - 1);
+    pointX = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
+    pointY = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
     [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
     
     if (randomNum > 75) {
-        pointX = arc4random() % (self.mazeSize*2 - 1);
-        pointY = arc4random() % (self.mazeSize*2 - 1);
+        pointX = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
+        pointY = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
         CGPoint newPoint = CGPointMake(pointX, pointY);
         if (![self.timeBonusArray containsObject:[NSValue valueWithCGPoint:newPoint]]) {
-            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(arc4random() % (self.mazeSize*2 - 1), arc4random() % (self.mazeSize*2 - 1))]];
+            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake((self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1), (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1))]];
         }
     }
     
     if (randomNum > 95) {
-        pointX = arc4random() % (self.mazeSize*2 - 1);
-        pointY = arc4random() % (self.mazeSize*2 - 1);
+        pointX = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
+        pointY = (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1);
         CGPoint newPoint = CGPointMake(pointX, pointY);
         if (![self.timeBonusArray containsObject:[NSValue valueWithCGPoint:newPoint]]) {
-            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(arc4random() % (self.mazeSize*2 - 1), arc4random() % (self.mazeSize*2 - 1))]];
+            [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake((self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1), (self.seed ? rand() : arc4random()) % (self.mazeSize*2 - 1))]];
         }
     }
     
     if (self.timeTreasureLevel) {
         for (int i = 0; i < 15; i++) {
-            pointX = arc4random() % (self.mazeSize*2);
-            pointY = arc4random() % (self.mazeSize*2);
+            pointX = (self.seed ? rand() : arc4random()) % (self.mazeSize*2);
+            pointY = (self.seed ? rand() : arc4random()) % (self.mazeSize*2);
             [self.timeBonusArray addObject:[NSValue valueWithCGPoint:CGPointMake(pointX, pointY)]];
         }
     }
@@ -320,15 +325,10 @@ double rads = DEGREES_TO_RADIANS(180);
     for(int i=0; i<self.mazeSize*2+1; i++) {
         [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
     }
-    if (!self.waitingOnMaze && [self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
-        self.receivedMaze = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
-        for(int i=0; i<self.mazeSize*2+1; i++) {
-            [self.receivedMaze addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
-        }
-    }
     
     DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.mazeSize
                                                           andCol:self.mazeSize
+                                                         andSeed:self.seed
                                                withStartingPoint:DEIntegerPointMake(1, 1)];
     
     [maze arrayMaze:^(bool **item) {
@@ -339,7 +339,7 @@ double rads = DEGREES_TO_RADIANS(180);
         int max = self.mazeSize*2;
         
         for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
-            int rndValue = 5;
+            int rndValue = min + (self.seed ? rand() : arc4random()) % (max - min);;
             for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
                 
                 BOOL dontDraw = NO;
@@ -347,7 +347,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     if (item[r+1][c] != 1) {
                         dontDraw = YES;
                         start = YES;
-                        rndValue = min + arc4random() % (max - min);
+                        rndValue = min + (self.seed ? rand() : arc4random()) % (max - min);
                     } else {
                         rndValue++;
                     }
@@ -362,60 +362,32 @@ double rads = DEGREES_TO_RADIANS(180);
                 
                 float size = (self.frame.size.width) / (self.mazeSize * 2+1);
                 BOOL first = YES;
-                if (self.waitingOnMaze) {
-                    if ([[[self.receivedMaze objectAtIndex:r] objectAtIndex:c] integerValue] == 1 && !dontDraw) {
-                        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                        [self.mazeViewWalls addSubview:block];
-                        block.backgroundColor = [UIColor whiteColor];
-                        [self.mazeViewMask addSubview:block];
-                        
-                        if (self.totalRandomColors || self.kaleidoscope) {
-                            block.backgroundColor = [self getRandomColor];
-                            [self.mazeViewRandomColorWalls addSubview:block];
-                        }
-                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
-                    } else {
-                        if (dontDraw) {
-                            if (end) {
-                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
-                            } else if (start) {
-                                self.startRow = r;
-                                self.startCol = c;
-                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
-                                first = NO;
-                            }
-                        } else {
-                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
-                        }
+                if (item[r][c] == 1 && !dontDraw) {
+                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                    [self.mazeViewWalls addSubview:block];
+                    block.backgroundColor = [UIColor whiteColor];
+                    [self.mazeViewMask addSubview:block];
+                    
+                    if (self.totalRandomColors || self.kaleidoscope) {
+                        block.backgroundColor = [self getRandomColor];
+                        [self.mazeViewRandomColorWalls addSubview:block];
                     }
+                    [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 } else {
-                    [[self.receivedMaze objectAtIndex:r] insertObject:[NSNumber numberWithInt:item[r][c]] atIndex:c];
-                    if (item[r][c] == 1 && !dontDraw) {
-                        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                        [self.mazeViewWalls addSubview:block];
-                        block.backgroundColor = [UIColor whiteColor];
-                        [self.mazeViewMask addSubview:block];
-                        
-                        if (self.totalRandomColors || self.kaleidoscope) {
-                            block.backgroundColor = [self getRandomColor];
-                            [self.mazeViewRandomColorWalls addSubview:block];
-                        }
-                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
-                    } else {
-                        if (dontDraw) {
-                            if (end) {
-                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
-                            } else if (start) {
-                                self.startRow = r;
-                                self.startCol = c;
-                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
-                                first = NO;
-                            }
-                        } else {
+                    if (dontDraw) {
+                        if (end) {
+                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
+                        } else if (start) {
+                            self.startRow = r;
+                            self.startCol = c;
                             [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                            first = NO;
                         }
+                    } else {
+                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
                     }
                 }
+
                 [[self.solArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                 [[self.attemptArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
             }
@@ -447,10 +419,6 @@ double rads = DEGREES_TO_RADIANS(180);
             [UIView animateWithDuration:0.1 animations:^{
                 self.mazeViewMask.alpha = 0.005;
             }];
-        }
-        
-        if (!self.waitingOnMaze && [self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
-            [((ChallengeMazeViewController*)self.delegate) sendMazeData:self.receivedMaze];
         }
     }];
 }
@@ -748,7 +716,7 @@ double rads = DEGREES_TO_RADIANS(180);
     for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
         for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
             if ((self.powerOverwhelming && ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 || [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 2)) || ((r >= self.powerX && c >= self.powerY && !self.power && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0 && [[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1) && !self.isCasualMode)) {
-                self.powerUpType = arc4random() % 5;
+                self.powerUpType = (self.seed ? rand() : arc4random()) % 5;
                 PowerUpView* powerUp = [[PowerUpView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size) type:self.powerUpType];
                 self.power = YES;
                 [self.mazeViewRest addSubview:powerUp];
@@ -952,7 +920,7 @@ double rads = DEGREES_TO_RADIANS(180);
 
 - (UIColor *) getRandomColor {
     float golden_ratio_conjugate = 0.618033988749895;
-    float h = (float)arc4random() / RAND_MAX;
+    float h = (float)(self.seed ? rand() : arc4random()) / RAND_MAX;
     h += golden_ratio_conjugate;
     h = fmodf(h, 1.0);
     UIColor *tempColor = [UIColor colorWithHue:h saturation:0.8 brightness:0.95 alpha:1];

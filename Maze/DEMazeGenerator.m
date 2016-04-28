@@ -48,13 +48,14 @@
     return retValue;
 }
 
-- (id)initWithRow:(int)row andCol:(int)col withStartingPoint:(struct DEIntegerPoint)position
+- (id)initWithRow:(int)row andCol:(int)col andSeed:(NSNumber*)seed withStartingPoint:(struct DEIntegerPoint)position
 {
     if ((self = [super init]))
     {
         _width	= col * 2 + 1;
         _height	= row * 2 + 1;
         _start = position;
+        _seed = seed;
         
         [self initMaze];
     }
@@ -75,6 +76,8 @@
             _maze[r][c] = true;
         }
     }
+    
+    if (self.seed) srand([self.seed intValue]);
     
     _maze[_start.x][_start.y] = false;
 }
@@ -184,7 +187,7 @@
 
 - (int)randIntMin:(int)min andMax:(int)max
 {
-    return ((arc4random() % (max - min +1)) + min);
+    return (((self.seed ? rand() : arc4random()) % (max - min +1)) + min);
 }
     
 //- (void)dealloc

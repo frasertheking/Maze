@@ -16,7 +16,6 @@
 @interface ChallengeMazeViewController : UIViewController <ADBannerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
-@property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *mazeViewCenterConstraint;
