@@ -40,12 +40,10 @@
     [self setGradientBackground];
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
-    if (!self.appDelegate.mcManager.peer) {
-        self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
-        self.mazeView.seed = self.seed;
-        [self sendSeed];
-        [self.mazeView initMazeWithSize:self.size];
-    }
+    self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+    self.mazeView.seed = self.seed;
+    [self sendSeed];
+    [self.mazeView initMazeWithSize:self.size];
     self.mazeView.score = 0;
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
@@ -55,6 +53,7 @@
     self.checkbox.onAnimationType = BEMAnimationTypeFill;
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
+    [self.gameOverButton addTarget:self action:@selector(rematch) forControlEvents:UIControlEventTouchUpInside];
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -137,19 +136,9 @@
     [self sendGameOver];
     self.mazeView.userInteractionEnabled = NO;
     if (!self.assertFailed) {
-        [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
-            self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
-            self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
-        } completion:^(BOOL f){
-            [UIView animateWithDuration:1 animations:^{
-                self.mazeViewCenterConstraint.constant = -600;
-                [self.view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                [self.gameOverButton setTitle:@"You Won!" forState:UIControlStateNormal];
-                self.gameOverButton.hidden = NO;
-                self.mazeView.hidden = YES;
-            }];
-        }];
+        [self.gameOverButton setTitle:@"You Won! Rematch?" forState:UIControlStateNormal];
+        self.gameOverButton.hidden = NO;
+        self.mazeView.hidden = YES;
     }
 }
 
@@ -323,31 +312,34 @@
         });
     } else if ([dataType isKindOfClass:[NSNumber class]]) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.gameOverButton.hidden = YES;
+            self.mazeView.hidden = NO;
+            self.mazeView.userInteractionEnabled = YES;
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
             [self.mazeView initMazeWithSize:self.size];
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.mazeView.userInteractionEnabled = NO;
-            [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
-                self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
-                self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
-            } completion:^(BOOL f){
-                [UIView animateWithDuration:1 animations:^{
-                    self.mazeViewCenterConstraint.constant = -600;
-                    [self.view layoutIfNeeded];
-                } completion:^(BOOL finished) {
-                    [self.gameOverButton setTitle:@"You Lost!" forState:UIControlStateNormal];
-                    self.gameOverButton.hidden = NO;
-                    self.mazeView.hidden = YES;
-                }];
-            }];
+            [self.gameOverButton setTitle:@"You Lost! Rematch?" forState:UIControlStateNormal];
+            self.gameOverButton.hidden = NO;
+            self.mazeView.hidden = YES;
         });
     }
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)rematch {
+    self.gameOverButton.hidden = YES;
+    self.mazeView.userInteractionEnabled = YES;
+    self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+    self.mazeView.seed = self.seed;
+    [self sendSeed];
+    [self.mazeView initMazeWithSize:self.size];
+    self.mazeView.hidden = NO;
 }
 
 @end
