@@ -65,7 +65,6 @@
     self.checkbox.onFillColor = SEVERITY_GREEN;
     self.checkbox.onTintColor = SOLVE;
     
-    [self setupParticles];
     [self setupParallaxEffect];
     [self setupAds];
     
@@ -90,13 +89,6 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
-}
-
-- (void)setupParticles {
-    StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    self.particleView.allowsTransparency = YES;
-    [self.particleView presentScene:scene];
 }
 
 -(void)setupParallaxEffect {

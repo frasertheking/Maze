@@ -532,6 +532,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         }
                         self.previousLoc = currentPoint;
                         [self sendOpponentArray];
+                        [self drawAttempt];
                     }
                 } else {
                     if (self.currentX - 1 > 0 && ([[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
@@ -544,6 +545,7 @@ double rads = DEGREES_TO_RADIANS(180);
                     }
                     self.previousLoc = currentPoint;
                     [self sendOpponentArray];
+                    [self drawAttempt];
                 }
             }
         } else {
@@ -565,6 +567,7 @@ double rads = DEGREES_TO_RADIANS(180);
                             }
                             self.previousLoc = currentPoint;
                             [self sendOpponentArray];
+                            [self drawAttempt];
                         }
                 } else {
                     if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 2) {
@@ -583,6 +586,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         }
                         self.previousLoc = currentPoint;
                         [self sendOpponentArray];
+                        [self drawAttempt];
                     }
                 }
             }
@@ -645,7 +649,6 @@ double rads = DEGREES_TO_RADIANS(180);
             [self drawTimeBonuses];
         }
     }
-    [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
 }
 

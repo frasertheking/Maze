@@ -1122,33 +1122,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5J3-aQ-HOI" customClass="SKView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <button opaque="NO" alpha="0.33000001311302185" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZD-Pv-W1K">
-                                        <rect key="frame" x="523" y="30" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="Ixf-fa-mUz"/>
-                                            <constraint firstAttribute="width" constant="35" id="aQg-tC-0id"/>
-                                        </constraints>
-                                        <state key="normal" image="Delete-50"/>
-                                        <connections>
-                                            <action selector="exitGamePressed:" destination="PJH-Cf-2Y6" eventType="touchDown" id="8xY-bs-gEB"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" alpha="0.33000001311302185" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZD-Pv-W1K">
+                                <rect key="frame" x="282" y="283" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="5J3-aQ-HOI" secondAttribute="top" constant="30" id="Uxh-Bl-YUi"/>
-                                    <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="10" id="t7t-fL-Hp7"/>
-                                    <constraint firstItem="qZD-Pv-W1K" firstAttribute="centerX" secondItem="5J3-aQ-HOI" secondAttribute="centerX" multiplier="1.8" id="xOv-p0-sC3"/>
+                                    <constraint firstAttribute="height" constant="35" id="Ixf-fa-mUz"/>
+                                    <constraint firstAttribute="width" constant="35" id="aQg-tC-0id"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="t7t-fL-Hp7"/>
-                                    </mask>
-                                </variation>
-                            </view>
+                                <state key="normal" image="Delete-50"/>
+                                <connections>
+                                    <action selector="exitGamePressed:" destination="PJH-Cf-2Y6" eventType="touchDown" id="8xY-bs-gEB"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qen-78-RIo">
                                 <rect key="frame" x="150" y="473" width="300" height="36"/>
                                 <constraints>
@@ -1185,7 +1169,6 @@
                         <constraints>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="0O4-Jx-yR9"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="5qH-9e-TXc"/>
-                            <constraint firstItem="5J3-aQ-HOI" firstAttribute="top" secondItem="BXo-Zg-ZMH" secondAttribute="top" id="G3h-tt-sYe"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
                             <constraint firstItem="Qen-78-RIo" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="Lon-Il-4T0"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
@@ -1193,23 +1176,14 @@
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="leading" secondItem="Qen-78-RIo" secondAttribute="leading" id="UcE-gz-9Eg"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
                             <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="Y13-iy-R3r"/>
-                            <constraint firstAttribute="trailing" secondItem="5J3-aQ-HOI" secondAttribute="trailing" id="ZgF-RP-066"/>
-                            <constraint firstItem="5J3-aQ-HOI" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" id="c2l-GU-h91"/>
-                            <constraint firstAttribute="trailing" secondItem="5J3-aQ-HOI" secondAttribute="trailing" id="h4q-Fv-a1M"/>
-                            <constraint firstItem="5J3-aQ-HOI" firstAttribute="top" secondItem="BXo-Zg-ZMH" secondAttribute="top" id="jhi-0T-3Dm"/>
-                            <constraint firstAttribute="bottom" secondItem="5J3-aQ-HOI" secondAttribute="bottom" id="lWp-xs-Ihq"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="top" secondItem="Qen-78-RIo" secondAttribute="bottom" constant="24" id="oP0-5f-man"/>
+                            <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="oh6-30-eHE"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="oyv-wR-vju"/>
                             <constraint firstItem="Qen-78-RIo" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="8" id="taI-uR-oUW"/>
-                            <constraint firstItem="5J3-aQ-HOI" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" id="yUH-Sz-3ae"/>
-                            <constraint firstAttribute="bottom" secondItem="5J3-aQ-HOI" secondAttribute="bottom" id="zFf-sQ-Vou"/>
+                            <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="xsv-9d-VvR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="c2l-GU-h91"/>
-                                <exclude reference="h4q-Fv-a1M"/>
-                                <exclude reference="jhi-0T-3Dm"/>
-                                <exclude reference="lWp-xs-Ihq"/>
                                 <exclude reference="UcE-gz-9Eg"/>
                                 <exclude reference="MbC-Rh-ARc"/>
                                 <exclude reference="Y13-iy-R3r"/>
@@ -1224,7 +1198,6 @@
                         <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
-                        <outlet property="particleView" destination="5J3-aQ-HOI" id="ZZn-Wa-UhP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUa-qu-UDo" sceneMemberID="firstResponder"/>
