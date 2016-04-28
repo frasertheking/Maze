@@ -960,9 +960,9 @@
                                     <action selector="backPressed:" destination="kPk-m2-wlC" eventType="touchDown" id="M4n-mu-j8F"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbI-b9-8iR">
-                                <rect key="frame" x="538" y="44" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbI-b9-8iR">
+                                <rect key="frame" x="546" y="44" width="30" height="30"/>
+                                <state key="normal" title="GO"/>
                                 <connections>
                                     <action selector="goNext:" destination="kPk-m2-wlC" eventType="touchDown" id="ncJ-dB-sgA"/>
                                 </connections>

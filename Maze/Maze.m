@@ -531,6 +531,7 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                         }
                         self.previousLoc = currentPoint;
+                        [self sendOpponentArray];
                     }
                 } else {
                     if (self.currentX - 1 > 0 && ([[[self.blockArray objectAtIndex:self.currentX-1] objectAtIndex:self.currentY] integerValue] == 1 || self.godMode)) {
@@ -542,6 +543,7 @@ double rads = DEGREES_TO_RADIANS(180);
                         }
                     }
                     self.previousLoc = currentPoint;
+                    [self sendOpponentArray];
                 }
             }
         } else {
@@ -562,6 +564,7 @@ double rads = DEGREES_TO_RADIANS(180);
                                 [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             }
                             self.previousLoc = currentPoint;
+                            [self sendOpponentArray];
                         }
                 } else {
                     if (self.currentY + 1 < self.blockArray.count && [[[self.blockArray objectAtIndex:self.currentX] objectAtIndex:self.currentY+1] integerValue] == 2) {
@@ -579,6 +582,7 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                         }
                         self.previousLoc = currentPoint;
+                        [self sendOpponentArray];
                     }
                 }
             }
@@ -640,10 +644,6 @@ double rads = DEGREES_TO_RADIANS(180);
             [self.timeBonusArray removeObjectsInArray:discardedItems];
             [self drawTimeBonuses];
         }
-        
-        if ([self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
-            [((ChallengeMazeViewController*)self.delegate) sendMazeData:self.attemptArray];
-        }
     }
     [self drawAttempt];
     //[self printArrayPretty:self.attemptArray];
@@ -675,6 +675,13 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.kaleidoscope && !self.showWhiteWall) {
         [self captureWalls:NO];
     } 
+}
+
+
+- (void)sendOpponentArray {
+    if ([self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
+        [((ChallengeMazeViewController*)self.delegate) sendMazeData:self.attemptArray];
+    }
 }
 
 -(void)drawOpponentAttempt:(NSArray*)array {
