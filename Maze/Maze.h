@@ -29,8 +29,10 @@
 @property (nonatomic) BOOL fadeOverTime;
 @property (nonatomic) BOOL noTime;
 @property (nonatomic) BOOL isCasualMode;
+@property (nonatomic) BOOL waitingOnMaze;
 @property NSInteger score;
 @property (nonatomic) NSMutableArray* attemptArray;
+@property (nonatomic) NSMutableArray* receivedMaze;
 
 -(void)createMaze;
 -(void)solve;

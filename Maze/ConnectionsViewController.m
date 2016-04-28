@@ -87,6 +87,7 @@
     [[_appDelegate mcManager] setupMCBrowser];
     [[[_appDelegate mcManager] browser] setDelegate:self];
     [self presentViewController:[[_appDelegate mcManager] browser] animated:YES completion:nil];
+    self.appDelegate.mcManager.peer = YES;
 }
 
 

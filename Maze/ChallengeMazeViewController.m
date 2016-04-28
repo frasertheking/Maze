@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) AppDelegate *appDelegate;
+@property (nonatomic) BOOL waitingOnMaze;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
 @end
@@ -29,13 +30,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     self.size = 20;
     self.mazeView.isCasualMode = YES;
+    self.gameOverButton.hidden = YES;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
-    [self.mazeView initMazeWithSize:self.size];
+    if (!self.appDelegate.mcManager.peer) {
+        [self.mazeView initMazeWithSize:self.size];
+    } else {
+        self.waitingOnMaze = YES;
+    }
     self.mazeView.score = 0;
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
@@ -65,7 +73,11 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.waitingOnMaze = YES;
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -135,26 +147,19 @@
 }
 
 -(void)finished {
+    [self sendGameOver];
+    self.mazeView.userInteractionEnabled = NO;
     if (!self.assertFailed) {
-        self.size++;
-        
         [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
             self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
             self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
         } completion:^(BOOL f){
-            [self.checkbox setOn:YES animated:YES];
             [UIView animateWithDuration:1 animations:^{
                 self.mazeViewCenterConstraint.constant = -600;
                 [self.view layoutIfNeeded];
             } completion:^(BOOL finished) {
-                self.mazeViewCenterConstraint.constant = 600;
-                [self.view layoutIfNeeded];
-                [self recreateMaze];
-                [self.checkbox setOn:NO animated:YES];
-                [UIView animateWithDuration:1 animations:^{
-                    self.mazeViewCenterConstraint.constant = 0;
-                    [self.view layoutIfNeeded];
-                } completion:nil];
+                self.gameOverButton.hidden = NO;
+                [self.gameOverButton setTitle:@"You Won!" forState:UIControlStateNormal];
             }];
         }];
     }
@@ -271,8 +276,8 @@
 
 #pragma mark - Private method implementation
 
--(void)sendMazeData{
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: self.mazeView.attemptArray];
+-(void)sendMazeData:(NSMutableArray*)array{
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: array];
     NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
     NSError *error;
     
@@ -284,19 +289,63 @@
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
     } else {
-        NSLog(@"Sent data!!");
+       // NSLog(@"Sent data!!");
     }
+}
+
+-(void)sendGameOver {
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: @"Game Over"];
+    NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
+    NSError *error;
     
+    [_appDelegate.mcManager.session sendData:dataToSend
+                                     toPeers:allPeers
+                                    withMode:MCSessionSendDataReliable
+                                       error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+        // NSLog(@"Sent data!!");
+    }
 }
 
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
-    MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
-    NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.mazeView drawOpponentAttempt:array];
-    });
+    id dataType = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+
+    if ([dataType isKindOfClass:[NSMutableArray class]]) {
+        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.waitingOnMaze) {
+                self.mazeView.receivedMaze = [array mutableCopy];
+                self.mazeView.waitingOnMaze = self.waitingOnMaze;
+                [self.mazeView initMazeWithSize:20];
+                self.waitingOnMaze = NO;
+                self.mazeView.waitingOnMaze = self.waitingOnMaze;
+            } else {
+                [self.mazeView drawOpponentAttempt:array];
+            }
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.mazeView.userInteractionEnabled = NO;
+            [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
+                self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
+                self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL f){
+                [UIView animateWithDuration:1 animations:^{
+                    self.mazeViewCenterConstraint.constant = -600;
+                    [self.view layoutIfNeeded];
+                } completion:^(BOOL finished) {
+                    self.gameOverButton.hidden = NO;
+                    [self.gameOverButton setTitle:@"You Lost!" forState:UIControlStateNormal];
+                }];
+            }];
+        });
+    }
 }
 
 

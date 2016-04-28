@@ -1136,19 +1136,10 @@
                                             <action selector="exitGamePressed:" destination="PJH-Cf-2Y6" eventType="touchDown" id="8xY-bs-gEB"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ey7-wk-XLr">
-                                        <rect key="frame" x="279" y="537" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ey7-wk-XLr" secondAttribute="bottom" constant="16" id="6pC-vK-86c"/>
-                                    <constraint firstItem="ey7-wk-XLr" firstAttribute="leading" secondItem="5J3-aQ-HOI" secondAttribute="leading" constant="16" id="9wj-iZ-9mU"/>
                                     <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="5J3-aQ-HOI" secondAttribute="top" constant="30" id="Uxh-Bl-YUi"/>
-                                    <constraint firstAttribute="trailing" secondItem="ey7-wk-XLr" secondAttribute="trailing" constant="16" id="ctK-Lm-Sob"/>
                                     <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="10" id="t7t-fL-Hp7"/>
                                     <constraint firstItem="qZD-Pv-W1K" firstAttribute="centerX" secondItem="5J3-aQ-HOI" secondAttribute="centerX" multiplier="1.8" id="xOv-p0-sC3"/>
                                 </constraints>
@@ -1183,20 +1174,31 @@
                                     <constraint firstAttribute="height" constant="150" id="w5a-mU-IdW"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-qy-bWd">
+                                <rect key="frame" x="236" y="550" width="127" height="30"/>
+                                <state key="normal" title="Game Over Button">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="0O4-Jx-yR9"/>
+                            <constraint firstItem="w5d-qy-bWd" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="5qH-9e-TXc"/>
                             <constraint firstItem="5J3-aQ-HOI" firstAttribute="top" secondItem="BXo-Zg-ZMH" secondAttribute="top" id="G3h-tt-sYe"/>
+                            <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
                             <constraint firstItem="Qen-78-RIo" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="Lon-Il-4T0"/>
+                            <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="SPq-9t-dc2"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="leading" secondItem="Qen-78-RIo" secondAttribute="leading" id="UcE-gz-9Eg"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
+                            <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="Y13-iy-R3r"/>
                             <constraint firstAttribute="trailing" secondItem="5J3-aQ-HOI" secondAttribute="trailing" id="ZgF-RP-066"/>
                             <constraint firstItem="5J3-aQ-HOI" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" id="c2l-GU-h91"/>
                             <constraint firstAttribute="trailing" secondItem="5J3-aQ-HOI" secondAttribute="trailing" id="h4q-Fv-a1M"/>
                             <constraint firstItem="5J3-aQ-HOI" firstAttribute="top" secondItem="BXo-Zg-ZMH" secondAttribute="top" id="jhi-0T-3Dm"/>
                             <constraint firstAttribute="bottom" secondItem="5J3-aQ-HOI" secondAttribute="bottom" id="lWp-xs-Ihq"/>
+                            <constraint firstItem="w5d-qy-bWd" firstAttribute="top" secondItem="Qen-78-RIo" secondAttribute="bottom" constant="24" id="oP0-5f-man"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="oyv-wR-vju"/>
                             <constraint firstItem="Qen-78-RIo" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="8" id="taI-uR-oUW"/>
                             <constraint firstItem="5J3-aQ-HOI" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" id="yUH-Sz-3ae"/>
@@ -1204,11 +1206,14 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="lWp-xs-Ihq"/>
                                 <exclude reference="c2l-GU-h91"/>
                                 <exclude reference="h4q-Fv-a1M"/>
                                 <exclude reference="jhi-0T-3Dm"/>
+                                <exclude reference="lWp-xs-Ihq"/>
                                 <exclude reference="UcE-gz-9Eg"/>
+                                <exclude reference="MbC-Rh-ARc"/>
+                                <exclude reference="Y13-iy-R3r"/>
+                                <exclude reference="oP0-5f-man"/>
                             </mask>
                         </variation>
                     </view>
@@ -1216,9 +1221,9 @@
                         <outlet property="checkbox" destination="My6-fC-VKV" id="aNy-NQ-6Px"/>
                         <outlet property="currentLevelLabel" destination="Qen-78-RIo" id="4yg-ho-4vW"/>
                         <outlet property="exitButton" destination="qZD-Pv-W1K" id="6ib-Ub-W6o"/>
+                        <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
-                        <outlet property="messageLabel" destination="ey7-wk-XLr" id="Ayt-Uw-6JM"/>
                         <outlet property="particleView" destination="5J3-aQ-HOI" id="ZZn-Wa-UhP"/>
                     </connections>
                 </viewController>

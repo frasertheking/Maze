@@ -320,6 +320,12 @@ double rads = DEGREES_TO_RADIANS(180);
     for(int i=0; i<self.mazeSize*2+1; i++) {
         [self.attemptArray addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
     }
+    if (!self.waitingOnMaze && [self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
+        self.receivedMaze = [NSMutableArray arrayWithCapacity:self.mazeSize*2+1];
+        for(int i=0; i<self.mazeSize*2+1; i++) {
+            [self.receivedMaze addObject:[NSMutableArray arrayWithCapacity:self.mazeSize*2+1]];
+        }
+    }
     
     DEMazeGenerator *maze = [[DEMazeGenerator alloc] initWithRow:self.mazeSize
                                                           andCol:self.mazeSize
@@ -356,29 +362,58 @@ double rads = DEGREES_TO_RADIANS(180);
                 
                 float size = (self.frame.size.width) / (self.mazeSize * 2+1);
                 BOOL first = YES;
-                if (item[r][c] == 1 && !dontDraw) {
-                    UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                    [self.mazeViewWalls addSubview:block];
-                    block.backgroundColor = [UIColor whiteColor];
-                    [self.mazeViewMask addSubview:block];
-                    
-                    if (self.totalRandomColors || self.kaleidoscope) {
-                        block.backgroundColor = [self getRandomColor];
-                        [self.mazeViewRandomColorWalls addSubview:block];
-                    }
-                    [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
-                } else {
-                    if (dontDraw) {
-                        if (end) {
-                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
-                        } else if (start) {
-                            self.startRow = r;
-                            self.startCol = c;
-                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
-                            first = NO;
+                if (self.waitingOnMaze) {
+                    if ([[[self.receivedMaze objectAtIndex:r] objectAtIndex:c] integerValue] == 1 && !dontDraw) {
+                        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                        [self.mazeViewWalls addSubview:block];
+                        block.backgroundColor = [UIColor whiteColor];
+                        [self.mazeViewMask addSubview:block];
+                        
+                        if (self.totalRandomColors || self.kaleidoscope) {
+                            block.backgroundColor = [self getRandomColor];
+                            [self.mazeViewRandomColorWalls addSubview:block];
                         }
+                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
                     } else {
-                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                        if (dontDraw) {
+                            if (end) {
+                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
+                            } else if (start) {
+                                self.startRow = r;
+                                self.startCol = c;
+                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                                first = NO;
+                            }
+                        } else {
+                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                        }
+                    }
+                } else {
+                    [[self.receivedMaze objectAtIndex:r] insertObject:[NSNumber numberWithInt:item[r][c]] atIndex:c];
+                    if (item[r][c] == 1 && !dontDraw) {
+                        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                        [self.mazeViewWalls addSubview:block];
+                        block.backgroundColor = [UIColor whiteColor];
+                        [self.mazeViewMask addSubview:block];
+                        
+                        if (self.totalRandomColors || self.kaleidoscope) {
+                            block.backgroundColor = [self getRandomColor];
+                            [self.mazeViewRandomColorWalls addSubview:block];
+                        }
+                        [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
+                    } else {
+                        if (dontDraw) {
+                            if (end) {
+                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:2] atIndex:c];
+                            } else if (start) {
+                                self.startRow = r;
+                                self.startCol = c;
+                                [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                                first = NO;
+                            }
+                        } else {
+                            [[self.blockArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:1] atIndex:c];
+                        }
                     }
                 }
                 [[self.solArray objectAtIndex:r] insertObject:[NSNumber numberWithInt:0] atIndex:c];
@@ -412,6 +447,10 @@ double rads = DEGREES_TO_RADIANS(180);
             [UIView animateWithDuration:0.1 animations:^{
                 self.mazeViewMask.alpha = 0.005;
             }];
+        }
+        
+        if (!self.waitingOnMaze && [self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
+            [((ChallengeMazeViewController*)self.delegate) sendMazeData:self.receivedMaze];
         }
     }];
 }
@@ -603,7 +642,7 @@ double rads = DEGREES_TO_RADIANS(180);
         }
         
         if ([self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
-            [((ChallengeMazeViewController*)self.delegate) sendMazeData];
+            [((ChallengeMazeViewController*)self.delegate) sendMazeData:self.attemptArray];
         }
     }
     [self drawAttempt];

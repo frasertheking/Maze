@@ -23,7 +23,7 @@
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
+@property (nonatomic, weak) IBOutlet UIButton *gameOverButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
@@ -35,7 +35,7 @@
 @property (nonatomic) UIColor* lineTopColor;
 @property (nonatomic) UIColor* lineBottomColor;
 
--(void)sendMazeData;
+-(void)sendMazeData:(NSMutableArray*)array;
 -(void)finished;
 @end
 
