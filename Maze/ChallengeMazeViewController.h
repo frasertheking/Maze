@@ -12,8 +12,9 @@
 #import "AppDelegate.h"
 #import "BEMCheckBox.h"
 #import <iAd/iAd.h>
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ChallengeMazeViewController : UIViewController <ADBannerViewDelegate>
+@interface ChallengeMazeViewController : UIViewController <ADBannerViewDelegate, MCBrowserViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
@@ -22,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
 @property (nonatomic, weak) IBOutlet UIButton *gameOverButton;
+@property (weak, nonatomic) IBOutlet UIButton *findPlayers;
+@property (weak, nonatomic) IBOutlet UILabel *connectedLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

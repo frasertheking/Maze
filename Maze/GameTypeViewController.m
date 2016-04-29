@@ -103,7 +103,7 @@
 }
 
 - (IBAction)challengeTapped:(id)sender {
-    [self performSegueWithIdentifier:@"headToHeadSegue" sender:self];
+    [self performSegueWithIdentifier:@"challengeSegue" sender:self];
 }
 
 @end

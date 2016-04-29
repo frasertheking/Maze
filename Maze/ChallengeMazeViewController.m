@@ -59,6 +59,7 @@
     self.checkbox.onCheckColor = SOLVE;
     self.checkbox.onFillColor = SEVERITY_GREEN;
     self.checkbox.onTintColor = SOLVE;
+    self.connectedLabel.text = @"Not Connected";
     
     [self setupParallaxEffect];
     [self setupAds];
@@ -67,11 +68,22 @@
                                              selector:@selector(didReceiveDataWithNotification:)
                                                  name:@"MCDidReceiveDataNotification"
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(peerDidChangeStateWithNotification:)
+                                                 name:@"MCDidChangeStateNotification"
+                                               object:nil];
+    
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
+    [[_appDelegate mcManager] advertiseSelf:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.waitingOnMaze = YES;
+    [[_appDelegate mcManager] advertiseSelf:NO];
+    [_appDelegate.mcManager.session disconnect];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -341,5 +353,50 @@
     [self.mazeView initMazeWithSize:self.size];
     self.mazeView.hidden = NO;
 }
+
+- (IBAction)browseForDevices:(id)sender {
+    [[_appDelegate mcManager] setupMCBrowser];
+    [[[_appDelegate mcManager] browser] setDelegate:self];
+    [self presentViewController:[[_appDelegate mcManager] browser] animated:YES completion:nil];
+    self.appDelegate.mcManager.peer = YES;
+}
+
+#pragma mark - MCBrowserViewControllerDelegate method implementation
+
+-(void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
+    [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+-(void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController{
+    [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Private method implementation
+
+-(void)peerDidChangeStateWithNotification:(NSNotification *)notification{
+    MCSessionState state = [[[notification userInfo] objectForKey:@"state"] intValue];
+    
+    if (state != MCSessionStateConnecting) {
+        if (state == MCSessionStateConnected) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.gameOverButton.hidden = YES;
+                self.mazeView.userInteractionEnabled = YES;
+                self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+                self.mazeView.seed = self.seed;
+                [self sendSeed];
+                [self.mazeView initMazeWithSize:self.size];
+                self.mazeView.hidden = NO;
+                self.connectedLabel.text = @"Connected";
+            });
+        }
+        else if (state == MCSessionStateNotConnected) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.connectedLabel.text = @"Not Connected";
+            });
+        }
+    }
+}
+
 
 @end
