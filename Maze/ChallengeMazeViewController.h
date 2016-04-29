@@ -24,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
 @property (nonatomic, weak) IBOutlet UIButton *gameOverButton;
 @property (weak, nonatomic) IBOutlet UIButton *findPlayers;
+@property (weak, nonatomic) IBOutlet UIButton *hideEnemyMazeButton;
 @property (weak, nonatomic) IBOutlet UILabel *connectedLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;

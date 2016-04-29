@@ -1074,11 +1074,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDB-ch-j7u">
+                                <rect key="frame" x="267" y="82" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="jrL-8p-uRk"/>
+                                    <constraint firstAttribute="width" constant="35" id="rdl-hE-mlt"/>
+                                </constraints>
+                                <state key="normal" image="Ignore-50"/>
+                                <connections>
+                                    <action selector="setHideEnemyMaze:" destination="PJH-Cf-2Y6" eventType="touchDown" id="NhL-vi-HcH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="0O4-Jx-yR9"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="5qH-9e-TXc"/>
+                            <constraint firstItem="BDs-yt-YI4" firstAttribute="top" secondItem="dDB-ch-j7u" secondAttribute="bottom" constant="12" id="KGM-iH-jCA"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
                             <constraint firstItem="AH9-nF-Yvd" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="MEc-8C-J6w"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
@@ -1092,16 +1104,17 @@
                             <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="npC-kJ-n6b"/>
                             <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="oh6-30-eHE"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="oyv-wR-vju"/>
+                            <constraint firstItem="dDB-ch-j7u" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="rv7-q8-VBL"/>
                             <constraint firstItem="qZD-Pv-W1K" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="wd7-tb-jxG"/>
                             <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="xsv-9d-VvR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="npC-kJ-n6b"/>
-                                <exclude reference="wd7-tb-jxG"/>
                                 <exclude reference="gCN-mt-BsB"/>
                                 <exclude reference="MbC-Rh-ARc"/>
                                 <exclude reference="Y13-iy-R3r"/>
+                                <exclude reference="npC-kJ-n6b"/>
+                                <exclude reference="wd7-tb-jxG"/>
                             </mask>
                         </variation>
                     </view>
@@ -1111,6 +1124,7 @@
                         <outlet property="exitButton" destination="qZD-Pv-W1K" id="6ib-Ub-W6o"/>
                         <outlet property="findPlayers" destination="AH9-nF-Yvd" id="5Xi-CM-xwd"/>
                         <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
+                        <outlet property="hideEnemyMazeButton" destination="dDB-ch-j7u" id="0IT-Xz-f7N"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
                     </connections>
@@ -1123,6 +1137,7 @@
     <resources>
         <image name="Back" width="50" height="50"/>
         <image name="Delete-50" width="50" height="50"/>
+        <image name="Ignore-50" width="50" height="50"/>
         <image name="ReloadThin" width="50" height="50"/>
         <image name="crazemaze" width="292" height="116"/>
         <image name="find-user" width="50" height="50"/>

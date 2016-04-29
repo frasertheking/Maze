@@ -54,6 +54,7 @@
     self.checkbox.userInteractionEnabled = NO;
     [self.gameOverButton addTarget:self action:@selector(rematch) forControlEvents:UIControlEventTouchUpInside];
     self.mazeView.hidden = YES;
+    self.hideEnemyMazeButton.enabled = NO;
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -311,6 +312,22 @@
     }
 }
 
+-(void)sendHideMaze {
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: @"hide"];
+    NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mcManager.session sendData:dataToSend
+                                     toPeers:allPeers
+                                    withMode:MCSessionSendDataReliable
+                                       error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+        // NSLog(@"Sent data!!");
+    }
+}
 
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
@@ -325,18 +342,33 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.gameOverButton.hidden = YES;
             self.mazeView.hidden = NO;
+            self.hideEnemyMazeButton.enabled = YES;
+            self.mazeView.mazeViewMask.alpha = 1;
             self.mazeView.userInteractionEnabled = YES;
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
             [self.mazeView initMazeWithSize:self.size];
             self.connectedLabel.text = @"Connected";
         });
     } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.mazeView.userInteractionEnabled = NO;
-            [self.gameOverButton setTitle:@"You Lost! Rematch?" forState:UIControlStateNormal];
-            self.gameOverButton.hidden = NO;
-            self.mazeView.hidden = YES;
-        });
+        if ([[NSKeyedUnarchiver unarchiveObjectWithData:receivedData] isEqualToString:@"hide"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:2 animations:^{
+                    self.mazeView.mazeViewMask.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:4 animations:^{
+                        self.mazeView.mazeViewMask.alpha = 1;
+                    }];
+                }];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.mazeView.userInteractionEnabled = NO;
+                self.hideEnemyMazeButton.enabled = NO;
+                [self.gameOverButton setTitle:@"You Lost! Rematch?" forState:UIControlStateNormal];
+                self.gameOverButton.hidden = NO;
+                self.mazeView.hidden = YES;
+            });
+        }
     }
 }
 
@@ -352,6 +384,13 @@
     [self sendSeed];
     [self.mazeView initMazeWithSize:self.size];
     self.mazeView.hidden = NO;
+    self.hideEnemyMazeButton.enabled = YES;
+    self.mazeView.mazeViewMask.alpha = 1;
+}
+
+- (IBAction)setHideEnemyMaze:(id)sender {
+    self.hideEnemyMazeButton.enabled = NO;
+    [self sendHideMaze];
 }
 
 - (IBAction)browseForDevices:(id)sender {
@@ -387,6 +426,8 @@
                 [self sendSeed];
                 [self.mazeView initMazeWithSize:self.size];
                 self.mazeView.hidden = NO;
+                self.hideEnemyMazeButton.enabled = YES;
+                self.mazeView.mazeViewMask.alpha = 1;
                 self.connectedLabel.text = @"Connected";
             });
         }
