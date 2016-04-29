@@ -20,7 +20,6 @@
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) AppDelegate *appDelegate;
-@property (nonatomic) BOOL waitingOnMaze;
 @property (nonatomic) NSNumber *seed;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
@@ -34,11 +33,11 @@
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     self.size = 20;
-    self.mazeView.isCasualMode = YES;
     self.gameOverButton.hidden = YES;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
+    self.mazeView.isCasualMode = YES;
     [self.mazeView setupGestureRecognizer:self.view];
     self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     self.mazeView.seed = self.seed;
@@ -54,6 +53,7 @@
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
     [self.gameOverButton addTarget:self action:@selector(rematch) forControlEvents:UIControlEventTouchUpInside];
+    self.mazeView.hidden = YES;
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
@@ -81,9 +81,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.waitingOnMaze = YES;
-    [[_appDelegate mcManager] advertiseSelf:NO];
-    [_appDelegate.mcManager.session disconnect];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
@@ -192,9 +189,11 @@
         self.exitButton.alpha = 0;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.15 animations:^{
-            self.exitButton.alpha = 1;
+            self.exitButton.alpha = 0.33;
         } completion:^(BOOL finished) {
             self.mazeView.delegate = nil;
+            [[_appDelegate mcManager] advertiseSelf:NO];
+            [_appDelegate.mcManager.session disconnect];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
@@ -329,6 +328,7 @@
             self.mazeView.userInteractionEnabled = YES;
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
             [self.mazeView initMazeWithSize:self.size];
+            self.connectedLabel.text = @"Connected";
         });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
