@@ -329,6 +329,23 @@
     }
 }
 
+-(void)sendOpponentPoint:(CGPoint)point {
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: [NSValue valueWithCGPoint:point]];
+    NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mcManager.session sendData:dataToSend
+                                     toPeers:allPeers
+                                    withMode:MCSessionSendDataReliable
+                                       error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+        // NSLog(@"Sent data!!");
+    }
+}
+
 -(void)didReceiveDataWithNotification:(NSNotification *)notification{
     NSData *receivedData = [[notification userInfo] objectForKey:@"data"];
     id dataType = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
@@ -349,7 +366,13 @@
             [self.mazeView initMazeWithSize:self.size];
             self.connectedLabel.text = @"Connected";
         });
-    } else {
+    } else if ([dataType isKindOfClass:[NSValue class]]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSValue* value = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+            [self.mazeView drawOpponentMove:value.CGPointValue];
+        });
+    }
+    else {
         if ([[NSKeyedUnarchiver unarchiveObjectWithData:receivedData] isEqualToString:@"hide"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [UIView animateWithDuration:2 animations:^{

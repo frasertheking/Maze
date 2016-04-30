@@ -38,6 +38,7 @@
 @property (nonatomic) UIColor* lineBottomColor;
 
 -(void)sendMazeData:(NSMutableArray*)array;
+-(void)sendOpponentPoint:(CGPoint)point;
 -(void)finished;
 @end
 

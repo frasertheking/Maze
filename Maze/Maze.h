@@ -42,5 +42,6 @@
 -(void)showWhiteWalls;
 -(void)activateGodMode;
 -(void)drawOpponentAttempt:(NSArray*)array;
+- (void)drawOpponentMove:(CGPoint)point;
 
 @end

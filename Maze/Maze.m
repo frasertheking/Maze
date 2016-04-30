@@ -498,12 +498,14 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                             [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX-1, self.currentY] integerValue]] removeFromSuperview];
                             [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX-1, self.currentY] integerValue]] removeFromSuperview];
+                            [self sendOpponentPoint:CGPointMake(self.currentX-1, self.currentY)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self draw:self.currentX y:self.currentY];
+                            [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY)];
                         }
                         self.previousLoc = currentPoint;
-                        [self sendOpponentArray];
+                        //[self sendOpponentArray];
                         [self drawAttempt];
                     }
                 } else {
@@ -513,13 +515,15 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
                             [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX+1, self.currentY] integerValue]] removeFromSuperview];
                             [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX+1, self.currentY] integerValue]] removeFromSuperview];
+                            [self sendOpponentPoint:CGPointMake(self.currentX+1, self.currentY)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self draw:self.currentX y:self.currentY];
+                            [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY)];
                         }
                     }
                     self.previousLoc = currentPoint;
-                    [self sendOpponentArray];
+                   // [self sendOpponentArray];
                     [self drawAttempt];
                 }
             }
@@ -540,12 +544,14 @@ double rads = DEGREES_TO_RADIANS(180);
                                 [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
                                 [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
                                 [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
+                                [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY+1)];
                             } else {
                                 [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                                 [self draw:self.currentX y:self.currentY];
+                                [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY)];
                             }
                             self.previousLoc = currentPoint;
-                            [self sendOpponentArray];
+                            //[self sendOpponentArray];
                             [self drawAttempt];
                         }
                 } else {
@@ -563,12 +569,14 @@ double rads = DEGREES_TO_RADIANS(180);
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:0]];
                             [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
                             [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
+                            [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY-1)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
                             [self draw:self.currentX y:self.currentY];
+                            [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY)];
                         }
                         self.previousLoc = currentPoint;
-                        [self sendOpponentArray];
+                        //[self sendOpponentArray];
                         [self drawAttempt];
                     }
                 }
@@ -680,19 +688,43 @@ double rads = DEGREES_TO_RADIANS(180);
     }
 }
 
+- (void)sendOpponentPoint:(CGPoint)point {
+    if ([self.delegate isKindOfClass:[ChallengeMazeViewController class]]) {
+        [((ChallengeMazeViewController*)self.delegate) sendOpponentPoint:point];
+    }
+}
+
+
 -(void)drawOpponentAttempt:(NSArray*)array {
     float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
-    [self removeSubviews:self.mazeViewEnemyPath];
     
-    for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
-        for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
-            if ([[[array objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
-                UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
-                block.backgroundColor = [UIColor orangeColor];
-                block.alpha = 0.5;
-                [self.mazeViewEnemyPath addSubview:block];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
+            for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
+                if ([[[array objectAtIndex:r] objectAtIndex:c] integerValue] == 1) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self removeSubviews:self.mazeViewEnemyPath];
+                        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
+                        block.backgroundColor = [UIColor orangeColor];
+                        block.alpha = 0.5;
+                        [self.mazeViewEnemyPath addSubview:block];
+                    });
+                }
             }
         }
+    });
+}
+
+- (void)drawOpponentMove:(CGPoint)point {
+    if ([self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue]] != nil) {
+        [[self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue]] removeFromSuperview];
+    } else {
+        float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
+        UIView *block = [[UIView alloc] initWithFrame:CGRectMake(point.x*size, point.y*size, size, size)];
+        block.backgroundColor = [UIColor orangeColor];
+        block.alpha = 0.5;
+        block.tag = [[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue];
+        [self.mazeViewEnemyPath addSubview:block];
     }
 }
 
