@@ -29,6 +29,7 @@
 @property (nonatomic) BOOL fadeOverTime;
 @property (nonatomic) BOOL noTime;
 @property (nonatomic) BOOL isCasualMode;
+@property (nonatomic) BOOL isChallengeMode;
 @property (nonatomic) NSNumber* seed;
 @property NSInteger score;
 @property (nonatomic) NSMutableArray* attemptArray;

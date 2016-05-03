@@ -25,6 +25,7 @@
 @property (nonatomic) int myScore;
 @property (nonatomic) int enemyScore;
 @property (nonatomic) NSString* messageString;
+@property (nonatomic) NSInteger itemType;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
 @end
@@ -43,7 +44,7 @@
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
-    self.mazeView.isCasualMode = YES;
+    self.mazeView.isChallengeMode = YES;
     [self.mazeView setupGestureRecognizer:self.view];
     self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     self.mazeView.seed = self.seed;
@@ -59,6 +60,9 @@
     self.checkbox.userInteractionEnabled = NO;
     self.mazeView.hidden = YES;
     self.messageString = [[NSString alloc] init];
+    self.itemImage.alpha = 0;
+    self.inventoryView.userInteractionEnabled = YES;
+    self.inventoryView.alpha = 0;
 
     self.setupView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     self.setupView.layer.cornerRadius = 6;
@@ -85,6 +89,10 @@
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MCDidChangeStateNotification"
                                                object:nil];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.inventoryView addGestureRecognizer:tapGesture];
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
@@ -161,6 +169,86 @@
         self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
         self.gameOverButton.hidden = NO;
         self.mazeView.hidden = YES;
+        self.inventoryView.userInteractionEnabled = NO;
+    }
+}
+
+#pragma mark - Items
+
+
+-(void)itemFound:(NSInteger)type {
+    self.mazeView.score += 1000;
+    switch (type) {
+        case 0:
+            self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
+            self.usePowerupLabel.text = @"Show Correct Path";
+            self.inventoryView.backgroundColor = INVENTORY_RED;
+            self.itemType = 0;
+            break;
+        case 1:
+            self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
+            self.usePowerupLabel.text = @"Slow Opponent";
+            self.inventoryView.backgroundColor = INVENTORY_BLUE;
+            self.itemType = 1;
+            break;
+        case 2:
+            self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
+            self.usePowerupLabel.text = @"Skip This Level";
+            self.inventoryView.backgroundColor = INVENTORY_GREEN;
+            self.itemType = 2;
+            break;
+        case 3:
+            self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
+            self.usePowerupLabel.text = @"Activate God Mode";
+            self.inventoryView.backgroundColor = INVENTORY_ORANGE;
+            self.itemType = 3;
+            break;
+        default:
+            self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
+            self.usePowerupLabel.text = @"Improve Visibility";
+            self.inventoryView.backgroundColor = INVENTORY_PURPLE;
+            self.itemType = 4;
+            break;
+    }
+    
+    self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
+    [UIView animateWithDuration:0.35 animations:^{
+        self.inventoryView.alpha = 1;
+        self.itemImage.alpha = 1;
+        self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+    } completion:^(BOOL finished) {
+        [self runSpinAnimationOnView:self.itemImage duration:25 rotations:0.1 repeat:1];
+        [self pulseView:self.itemImage];
+    }];
+}
+
+- (void)useItem {
+    if (self.itemType >= 0) {
+        [self.itemImage.layer removeAllAnimations];
+        [UIView animateWithDuration:0.35 animations:^{
+            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 5, 5);
+            self.itemImage.alpha = 0;
+            self.inventoryView.alpha = 0;
+        } completion:^(BOOL finished) {
+            switch (self.itemType) {
+                case 0:
+                    [self.mazeView showSolvePath];
+                    break;
+                case 1:
+                    [self sendHideMaze];
+                    break;
+                case 2:
+                    [self finished];
+                    break;
+                case 3:
+                    [self.mazeView activateGodMode];
+                    break;
+                default:
+                    [self.mazeView showWhiteWalls];
+                    break;
+            }
+            self.itemType = -1;
+        }];
     }
 }
 
@@ -398,6 +486,7 @@
             self.gameOverButton.hidden = YES;
             self.mazeView.hidden = NO;
             self.mazeView.mazeViewMask.alpha = 1;
+            self.inventoryView.userInteractionEnabled = YES;
             self.mazeView.userInteractionEnabled = YES;
             self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
@@ -429,6 +518,7 @@
                 self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
                 self.gameOverButton.hidden = NO;
                 self.mazeView.hidden = YES;
+                self.inventoryView.userInteractionEnabled = NO;
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -472,6 +562,7 @@
         self.size++;
         [self.mazeView initMazeWithSize:self.size];
         self.mazeView.hidden = NO;
+        self.inventoryView.userInteractionEnabled = YES;
         self.mazeView.mazeViewMask.alpha = 1;
     }
 }
@@ -510,6 +601,7 @@
                 [self sendName];
                 [self.mazeView initMazeWithSize:self.size];
                 self.mazeView.hidden = NO;
+                self.inventoryView.userInteractionEnabled = YES;
                 self.mazeView.mazeViewMask.alpha = 1;
                 [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
                 [[_appDelegate mcManager] advertiseSelf:NO];
@@ -519,7 +611,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.playerNameLabel.text = @"No connection...";
                 [[_appDelegate mcManager] advertiseSelf:YES];
-
+                self.inventoryView.userInteractionEnabled = NO;
             });
         }
     }

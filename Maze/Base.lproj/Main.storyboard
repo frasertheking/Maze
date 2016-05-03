@@ -1105,10 +1105,67 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2c-fp-0ev" userLabel="InventoryView">
+                                <rect key="frame" x="154" y="34" width="200" height="60"/>
+                                <subviews>
+                                    <imageView alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purpleCrystal" translatesAutoresizingMaskIntoConstraints="NO" id="ngJ-j2-3Hp">
+                                        <rect key="frame" x="6" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="HR2-Zj-Lya"/>
+                                            <constraint firstAttribute="width" constant="60" id="L6e-Cr-3mM"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="XUl-XH-nIJ"/>
+                                            <constraint firstAttribute="height" constant="60" id="a2T-db-25e"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="XUl-XH-nIJ"/>
+                                                <exclude reference="HR2-Zj-Lya"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Powerup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Q85-jY-TqC">
+                                        <rect key="frame" x="66" y="20" width="122" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="centerX" secondItem="f2c-fp-0ev" secondAttribute="centerX" id="07U-Nq-Ue3"/>
+                                    <constraint firstItem="Q85-jY-TqC" firstAttribute="centerY" secondItem="ngJ-j2-3Hp" secondAttribute="centerY" id="3T1-YQ-3Lc"/>
+                                    <constraint firstAttribute="height" constant="60" id="78w-er-Or4"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="centerY" secondItem="f2c-fp-0ev" secondAttribute="centerY" id="9sm-gy-Ehc"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="top" secondItem="f2c-fp-0ev" secondAttribute="top" constant="9" id="EoF-xC-H6b"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="leading" secondItem="f2c-fp-0ev" secondAttribute="leading" constant="6" id="L4J-hm-xf0"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="centerY" secondItem="f2c-fp-0ev" secondAttribute="centerY" id="Svc-0G-Wjr"/>
+                                    <constraint firstItem="Q85-jY-TqC" firstAttribute="leading" secondItem="ngJ-j2-3Hp" secondAttribute="trailing" id="cNG-0g-FwW"/>
+                                    <constraint firstAttribute="width" constant="200" id="lTs-Jh-wdx"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="leading" secondItem="f2c-fp-0ev" secondAttribute="leading" constant="40" id="uJi-HD-EV3"/>
+                                    <constraint firstItem="ngJ-j2-3Hp" firstAttribute="leading" secondItem="f2c-fp-0ev" secondAttribute="leading" constant="28" id="wlP-fF-0ZI"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q85-jY-TqC" secondAttribute="trailing" constant="12" id="zRo-Rf-smU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EoF-xC-H6b"/>
+                                        <exclude reference="wlP-fF-0ZI"/>
+                                        <exclude reference="uJi-HD-EV3"/>
+                                        <exclude reference="9sm-gy-Ehc"/>
+                                        <exclude reference="07U-Nq-Ue3"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="0O4-Jx-yR9"/>
+                            <constraint firstItem="BDs-yt-YI4" firstAttribute="top" secondItem="f2c-fp-0ev" secondAttribute="bottom" constant="8" id="5PY-Fu-DFf"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="5qH-9e-TXc"/>
                             <constraint firstItem="dlV-wl-Lgx" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="D0k-Zb-cfr"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
@@ -1119,6 +1176,7 @@
                             <constraint firstItem="u7d-wn-QFQ" firstAttribute="top" secondItem="n2w-G6-NOb" secondAttribute="bottom" constant="60" id="Vsv-De-QSn"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
                             <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="Y13-iy-R3r"/>
+                            <constraint firstItem="f2c-fp-0ev" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="b8n-el-gQF"/>
                             <constraint firstItem="dlV-wl-Lgx" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="fRi-lx-byq"/>
                             <constraint firstItem="n2w-G6-NOb" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="jf6-gT-I8K"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="mE5-Ot-As8"/>
@@ -1144,11 +1202,14 @@
                         <outlet property="exitButton" destination="qZD-Pv-W1K" id="6ib-Ub-W6o"/>
                         <outlet property="findFriends" destination="5Lf-xB-bCd" id="xA2-hz-60v"/>
                         <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
+                        <outlet property="inventoryView" destination="f2c-fp-0ev" id="y0V-yb-k9r"/>
+                        <outlet property="itemImage" destination="ngJ-j2-3Hp" id="R7l-BC-8eN"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
                         <outlet property="nameTextField" destination="T27-1W-T4k" id="VQo-Zf-liK"/>
                         <outlet property="playerNameLabel" destination="n2w-G6-NOb" id="oyW-0D-N5X"/>
                         <outlet property="setupView" destination="dlV-wl-Lgx" id="hM0-TL-mUu"/>
+                        <outlet property="usePowerupLabel" destination="Q85-jY-TqC" id="mX0-JW-16B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUa-qu-UDo" sceneMemberID="firstResponder"/>

@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *findFriends;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *playerNameLabel;
+@property (nonatomic, weak) IBOutlet UIView *inventoryView;
+@property (nonatomic, weak) IBOutlet UIImageView *itemImage;
+@property (nonatomic, weak) IBOutlet UILabel *usePowerupLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
@@ -41,5 +44,7 @@
 -(void)sendMazeData:(NSMutableArray*)array;
 -(void)sendOpponentPoint:(CGPoint)point;
 -(void)finished;
+-(void)itemFound:(NSInteger)type;
+
 @end
 
