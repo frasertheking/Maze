@@ -47,14 +47,6 @@
                                     <constraint firstAttribute="width" constant="700" id="QVR-D2-gOp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeM-sL-xdX" customClass="Maze">
-                                <rect key="frame" x="-50" y="-50" width="700" height="700"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="700" id="fPn-Fk-CTa"/>
-                                    <constraint firstAttribute="height" constant="700" id="kxP-MC-EzE"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEL-fw-qxY" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="200" y="541" width="200" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,7 +65,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QeM-sL-xdX" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" id="2ZB-uO-qZx"/>
                             <constraint firstItem="Ud3-sl-7b5" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" multiplier="0.43" id="6VS-a1-JKF"/>
                             <constraint firstItem="Ud3-sl-7b5" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="8Ta-nu-Rif"/>
                             <constraint firstAttribute="trailing" secondItem="IaX-ug-nvM" secondAttribute="trailing" id="DlL-7D-JU8"/>
@@ -83,7 +74,6 @@
                             <constraint firstItem="eEL-fw-qxY" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="foI-qE-SCa"/>
                             <constraint firstItem="Ud3-sl-7b5" firstAttribute="leading" secondItem="IaX-ug-nvM" secondAttribute="trailing" id="kTG-jf-S4C"/>
                             <constraint firstItem="BH2-yX-rxo" firstAttribute="centerY" secondItem="bCp-41-LTm" secondAttribute="centerY" constant="1" id="mrB-Dh-Jwg"/>
-                            <constraint firstItem="QeM-sL-xdX" firstAttribute="centerX" secondItem="bCp-41-LTm" secondAttribute="centerX" id="phv-d2-Hzn"/>
                             <constraint firstItem="IaX-ug-nvM" firstAttribute="leading" secondItem="bCp-41-LTm" secondAttribute="leading" id="vDT-ZE-ShV"/>
                             <constraint firstItem="hDC-Se-pV6" firstAttribute="top" secondItem="IaX-ug-nvM" secondAttribute="bottom" id="yUP-H7-Qum"/>
                             <constraint firstItem="eEL-fw-qxY" firstAttribute="top" secondItem="lJ6-l4-RUQ" secondAttribute="bottom" constant="49" id="zQt-EV-n9K"/>
@@ -99,7 +89,6 @@
                     <connections>
                         <outlet property="loginButton" destination="eEL-fw-qxY" id="RXp-qW-BUp"/>
                         <outlet property="mazeView" destination="BH2-yX-rxo" id="pWr-Ce-Akd"/>
-                        <outlet property="mazeView2" destination="QeM-sL-xdX" id="asX-XL-h0D"/>
                         <outlet property="particleView" destination="IaX-ug-nvM" id="RpV-2D-3Go"/>
                         <segue destination="To7-x9-SGd" kind="show" identifier="playSegue" id="5mO-50-0Yd"/>
                         <segue destination="5tG-ex-CPo" kind="show" identifier="leaderboardSegue" id="a0C-vz-DUy"/>
@@ -1116,8 +1105,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="XUl-XH-nIJ"/>
                                                 <exclude reference="HR2-Zj-Lya"/>
+                                                <exclude reference="XUl-XH-nIJ"/>
                                             </mask>
                                         </variation>
                                     </imageView>
@@ -1151,11 +1140,11 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="EoF-xC-H6b"/>
-                                        <exclude reference="wlP-fF-0ZI"/>
-                                        <exclude reference="uJi-HD-EV3"/>
-                                        <exclude reference="9sm-gy-Ehc"/>
                                         <exclude reference="07U-Nq-Ue3"/>
+                                        <exclude reference="9sm-gy-Ehc"/>
+                                        <exclude reference="EoF-xC-H6b"/>
+                                        <exclude reference="uJi-HD-EV3"/>
+                                        <exclude reference="wlP-fF-0ZI"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1355,6 +1344,6 @@
         <image name="purpleCrystal" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6y8-dX-ff2"/>
+        <segue reference="a0C-vz-DUy"/>
     </inferredMetricsTieBreakers>
 </document>

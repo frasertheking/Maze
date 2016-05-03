@@ -23,9 +23,7 @@
 @property (nonatomic) HTPressableButton *leaderboardButton;
 @property (nonatomic) HTPressableButton *settingsButton;
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
-@property (nonatomic, weak) IBOutlet Maze *mazeView2;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
-@property (nonatomic, weak) NSTimer* timer;
 
 @end
 
@@ -52,13 +50,9 @@
     self.mazeView.delegate = self;
     self.mazeView.isCasualMode = YES;
     [self.mazeView initMazeWithSize:25];
-    self.mazeView2.delegate = self;
-    self.mazeView2.isCasualMode = YES;
-    [self.mazeView2 initMazeWithSize:25];
-//    [self setupParticles];
+    [self setupParticles];
     self.particleView.hidden = YES;
     self.mazeView.alpha = 0.15f;
-    self.mazeView2.alpha = 0.0f;
    
     self.playButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
@@ -85,17 +79,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(redrawMaze) userInfo:nil repeats:YES];
     self.mazeView.hidden = NO;
-    self.mazeView2.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.timer invalidate];
     self.mazeView.hidden = YES;
-    self.mazeView2.hidden = YES;
 }
 
 #pragma mark - Maze 
@@ -105,24 +94,6 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     self.particleView.allowsTransparency = YES;
     [self.particleView presentScene:scene];
-}
-
-- (void)redrawMaze {
-    if (self.mazeView.alpha == 0.15f) {
-        [UIView animateWithDuration:0.75f animations:^{
-            self.mazeView.alpha = 0.0f;
-            self.mazeView2.alpha = 0.15f;
-        } completion:^(BOOL finished) {
-            [self.mazeView initMazeWithSize:25];
-        }];
-    } else {
-        [UIView animateWithDuration:0.75f animations:^{
-            self.mazeView.alpha = 0.15f;
-            self.mazeView2.alpha = 0.0f;
-        } completion:^(BOOL finished) {
-            [self.mazeView2 initMazeWithSize:25];
-        }];
-    }
 }
 
 #pragma mark - IBActions
