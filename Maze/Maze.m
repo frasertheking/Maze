@@ -498,8 +498,8 @@ double rads = DEGREES_TO_RADIANS(180);
                         self.currentX++;
                         if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                             [[self.attemptArray objectAtIndex:self.currentX-1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
-                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX-1, self.currentY] integerValue]] removeFromSuperview];
-                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX-1, self.currentY] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", self.currentX-1, (long)self.currentY] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", self.currentX-1, (long)self.currentY] integerValue]] removeFromSuperview];
                             [self sendOpponentPoint:CGPointMake(self.currentX-1, self.currentY)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -515,8 +515,8 @@ double rads = DEGREES_TO_RADIANS(180);
                         self.currentX--;
                         if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                             [[self.attemptArray objectAtIndex:self.currentX+1] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:0]];
-                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX+1, self.currentY] integerValue]] removeFromSuperview];
-                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX+1, self.currentY] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", self.currentX+1, (long)self.currentY] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", self.currentX+1, (long)self.currentY] integerValue]] removeFromSuperview];
                             [self sendOpponentPoint:CGPointMake(self.currentX+1, self.currentY)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -544,8 +544,8 @@ double rads = DEGREES_TO_RADIANS(180);
                             self.currentY--;
                             if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                                 [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY+1 withObject:[NSNumber numberWithInt:0]];
-                                [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
-                                [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
+                                [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", (long)self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
+                                [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", (long)self.currentX, self.currentY+1] integerValue]] removeFromSuperview];
                                 [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY+1)];
                             } else {
                                 [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -569,8 +569,8 @@ double rads = DEGREES_TO_RADIANS(180);
                         self.currentY++;
                         if (([[[self.attemptArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 1) && !self.godMode) {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY-1 withObject:[NSNumber numberWithInt:0]];
-                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
-                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%d%d", self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPath viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", (long)self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
+                            [[self.mazeViewPathMask viewWithTag:[[NSString stringWithFormat:@"%ld999%ld", (long)self.currentX, self.currentY-1] integerValue]] removeFromSuperview];
                             [self sendOpponentPoint:CGPointMake(self.currentX, self.currentY-1)];
                         } else {
                             [[self.attemptArray objectAtIndex:self.currentX] replaceObjectAtIndex:self.currentY withObject:[NSNumber numberWithInt:1]];
@@ -651,10 +651,10 @@ double rads = DEGREES_TO_RADIANS(180);
 
 #pragma mark - Maze Drawing
 
--(void)draw:(int)x y:(int)y {
+-(void)draw:(NSInteger)x y:(NSInteger)y {
     float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
     UIView *block = [[UIView alloc] initWithFrame:CGRectMake(x*size, y*size, size, size)];
-    block.tag = [[NSString stringWithFormat:@"%d%d", x, y] integerValue];
+    block.tag = [[NSString stringWithFormat:@"%ld999%ld", (long)x, (long)y] integerValue];
     [self.mazeViewPath addSubview:block];
     block.backgroundColor = [UIColor whiteColor];
     [self.mazeViewPathMask addSubview:block];
@@ -722,14 +722,14 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)drawOpponentMove:(CGPoint)point {
-    if ([self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue]] != nil) {
-        [[self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue]] removeFromSuperview];
+    if ([self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d999%d", (int)point.x, (int)point.y] integerValue]] != nil) {
+        [[self.mazeViewEnemyPath viewWithTag:[[NSString stringWithFormat:@"%d999%d", (int)point.x, (int)point.y] integerValue]] removeFromSuperview];
     } else {
         float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
         UIView *block = [[UIView alloc] initWithFrame:CGRectMake(point.x*size, point.y*size, size, size)];
         block.backgroundColor = [UIColor orangeColor];
         block.alpha = 0.5;
-        block.tag = [[NSString stringWithFormat:@"%d%d", (int)point.x, (int)point.y] integerValue];
+        block.tag = [[NSString stringWithFormat:@"%d999%d", (int)point.x, (int)point.y] integerValue];
         [self.mazeViewEnemyPath addSubview:block];
     }
 }
