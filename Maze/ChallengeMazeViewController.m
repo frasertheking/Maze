@@ -512,11 +512,14 @@
                 self.mazeView.hidden = NO;
                 self.mazeView.mazeViewMask.alpha = 1;
                 [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
+                [[_appDelegate mcManager] advertiseSelf:NO];
             });
         }
         else if (state == MCSessionStateNotConnected) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.playerNameLabel.text = @"No connection...";
+                [[_appDelegate mcManager] advertiseSelf:YES];
+
             });
         }
     }

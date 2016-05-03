@@ -1050,14 +1050,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-qy-bWd">
-                                <rect key="frame" x="285" y="285" width="30" height="30"/>
+                                <rect key="frame" x="16" y="281" width="568" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2w-G6-NOb">
-                                <rect key="frame" x="279" y="519" width="42" height="21"/>
+                                <rect key="frame" x="300" y="470" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1114,7 +1114,7 @@
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="SPq-9t-dc2"/>
-                            <constraint firstItem="n2w-G6-NOb" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="8" id="TXL-3x-ueg"/>
+                            <constraint firstItem="n2w-G6-NOb" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="5" id="TXL-3x-ueg"/>
                             <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="TZa-66-whk"/>
                             <constraint firstItem="u7d-wn-QFQ" firstAttribute="top" secondItem="n2w-G6-NOb" secondAttribute="bottom" constant="60" id="Vsv-De-QSn"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
