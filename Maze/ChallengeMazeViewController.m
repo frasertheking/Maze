@@ -55,15 +55,14 @@
     self.showingOptions = NO;
     self.mazeView.layer.cornerRadius = 10;
     self.mazeView.layer.masksToBounds = YES;
-    self.checkbox.onAnimationType = BEMAnimationTypeFill;
-    self.checkbox.offAnimationType = BEMAnimationTypeFill;
-    self.checkbox.userInteractionEnabled = NO;
     self.mazeView.hidden = YES;
     self.messageString = [[NSString alloc] init];
     self.itemImage.alpha = 0;
     self.inventoryView.userInteractionEnabled = YES;
     self.inventoryView.alpha = 0;
 
+    [self setupColors];
+    [self hideScores];
     self.setupView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     self.setupView.layer.cornerRadius = 6;
     self.setupView.layer.masksToBounds = YES;
@@ -71,12 +70,6 @@
     [self.nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    
-    self.checkbox.tintColor = [UIColor clearColor];
-    self.checkbox.onCheckColor = SOLVE;
-    self.checkbox.onFillColor = SEVERITY_GREEN;
-    self.checkbox.onTintColor = SOLVE;
-    
     [self setupParallaxEffect];
     [self setupAds];
     
@@ -139,6 +132,92 @@
     [self.mazeView addMotionEffect:group];
 }
 
+- (void)hideScores {
+    self.playerScore1.hidden = YES;
+    self.playerScore2.hidden = YES;
+    self.playerScore3.hidden = YES;
+    self.playerScore4.hidden = YES;
+    self.playerScore5.hidden = YES;
+    self.enemyScore1.hidden = YES;
+    self.enemyScore2.hidden = YES;
+    self.enemyScore3.hidden = YES;
+    self.enemyScore4.hidden = YES;
+    self.enemyScore5.hidden = YES;
+    self.playerNameLabel.hidden = YES;
+    self.enemyNameLabel.hidden = YES;
+}
+
+- (void)showScores {
+    self.playerScore1.hidden = NO;
+    self.playerScore2.hidden = NO;
+    self.playerScore3.hidden = NO;
+    self.playerScore4.hidden = NO;
+    self.playerScore5.hidden = NO;
+    self.enemyScore1.hidden = NO;
+    self.enemyScore2.hidden = NO;
+    self.enemyScore3.hidden = NO;
+    self.enemyScore4.hidden = NO;
+    self.enemyScore5.hidden = NO;
+    self.playerNameLabel.hidden = NO;
+    self.enemyNameLabel.hidden = NO;
+}
+
+- (void)setupColors {
+    self.playerScore1.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.playerScore2.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.playerScore3.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.playerScore4.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.playerScore5.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    
+    self.enemyScore1.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.enemyScore2.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.enemyScore3.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.enemyScore4.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.enemyScore5.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+}
+
+- (void)updateScores {
+    switch (self.myScore) {
+        case 1:
+            self.playerScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 2:
+            self.playerScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 3:
+            self.playerScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 4:
+            self.playerScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 5:
+            self.playerScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        default:
+            break;
+    }
+    
+    switch (self.enemyScore) {
+        case 1:
+            self.enemyScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 2:
+            self.enemyScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 3:
+            self.enemyScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 4:
+            self.enemyScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        case 5:
+            self.enemyScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)setGradientBackground {
     self.topColor = [AppDelegate getRandomColor];
     self.bottomColor = [AppDelegate getRandomColor];
@@ -166,7 +245,9 @@
     if (!self.assertFailed) {
         [self goInThree:@"Round won! Next level in:"];
         self.myScore++;
-        self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
+        self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
+        self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
+        [self updateScores];
         self.gameOverButton.hidden = NO;
         self.mazeView.hidden = YES;
         self.inventoryView.userInteractionEnabled = NO;
@@ -488,7 +569,9 @@
             self.mazeView.mazeViewMask.alpha = 1;
             self.inventoryView.userInteractionEnabled = YES;
             self.mazeView.userInteractionEnabled = YES;
-            self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
+            self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
+            self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
+            [self updateScores];
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
             self.size++;
             [self.mazeView initMazeWithSize:self.size];
@@ -515,7 +598,9 @@
                 self.mazeView.userInteractionEnabled = NO;
                 [self goInThree:@"Round Lost! Next level in:"];
                 self.enemyScore++;
-                self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
+                self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
+                self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
+                [self updateScores];
                 self.gameOverButton.hidden = NO;
                 self.mazeView.hidden = YES;
                 self.inventoryView.userInteractionEnabled = NO;
@@ -601,6 +686,7 @@
                 [self sendName];
                 [self.mazeView initMazeWithSize:self.size];
                 self.mazeView.hidden = NO;
+                [self showScores];
                 self.inventoryView.userInteractionEnabled = YES;
                 self.mazeView.mazeViewMask.alpha = 1;
                 [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
@@ -609,7 +695,6 @@
         }
         else if (state == MCSessionStateNotConnected) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.playerNameLabel.text = @"No connection...";
                 [[_appDelegate mcManager] advertiseSelf:YES];
                 self.inventoryView.userInteractionEnabled = NO;
             });
