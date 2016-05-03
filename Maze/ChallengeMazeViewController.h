@@ -14,7 +14,7 @@
 #import <iAd/iAd.h>
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ChallengeMazeViewController : UIViewController <ADBannerViewDelegate, MCBrowserViewControllerDelegate>
+@interface ChallengeMazeViewController : UIViewController <ADBannerViewDelegate, MCBrowserViewControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;

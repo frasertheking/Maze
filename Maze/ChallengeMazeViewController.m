@@ -60,6 +60,7 @@
     self.itemImage.alpha = 0;
     self.inventoryView.userInteractionEnabled = YES;
     self.inventoryView.alpha = 0;
+    self.nameTextField.delegate = self;
 
     [self setupColors];
     [self hideScores];
@@ -422,6 +423,15 @@
     } else {
         self.findFriends.enabled = NO;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if(range.length + range.location > textField.text.length) {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength <= 10;
 }
 
 #pragma mark - iAd Delegates
