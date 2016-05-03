@@ -242,7 +242,14 @@
 -(void)finished {
     [self sendGameOver];
     self.mazeView.userInteractionEnabled = NO;
-    if (!self.assertFailed) {
+    
+    if (self.myScore == 4) {
+        [self hideScores];
+        [self.gameOverButton setTitle:@"YOU WIN" forState:UIControlStateNormal];
+        self.gameOverButton.hidden = NO;
+        self.mazeView.hidden = YES;
+        self.inventoryView.hidden = YES;
+    } else if (!self.assertFailed) {
         [self goInThree:@"Round won! Next level in:"];
         self.myScore++;
         self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
@@ -596,14 +603,23 @@
         } else if ([[NSKeyedUnarchiver unarchiveObjectWithData:receivedData] isEqualToString:@"over"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.mazeView.userInteractionEnabled = NO;
-                [self goInThree:@"Round Lost! Next level in:"];
-                self.enemyScore++;
-                self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
-                self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
-                [self updateScores];
-                self.gameOverButton.hidden = NO;
-                self.mazeView.hidden = YES;
-                self.inventoryView.userInteractionEnabled = NO;
+                
+                if (self.enemyScore == 4) {
+                    [self hideScores];
+                    [self.gameOverButton setTitle:@"YOU LOST" forState:UIControlStateNormal];
+                    self.gameOverButton.hidden = NO;
+                    self.mazeView.hidden = YES;
+                    self.inventoryView.hidden = YES;
+                } else {                    
+                    [self goInThree:@"Round Lost! Next level in:"];
+                    self.enemyScore++;
+                    self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
+                    self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
+                    [self updateScores];
+                    self.gameOverButton.hidden = NO;
+                    self.mazeView.hidden = YES;
+                    self.inventoryView.userInteractionEnabled = NO;
+                }
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
