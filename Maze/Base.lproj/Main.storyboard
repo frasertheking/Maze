@@ -1051,82 +1051,104 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-qy-bWd">
                                 <rect key="frame" x="285" y="285" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" alpha="0.33000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AH9-nF-Yvd">
-                                <rect key="frame" x="15" y="34" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Uoc-Jp-Fry"/>
-                                    <constraint firstAttribute="width" constant="35" id="dVY-8P-eV2"/>
-                                </constraints>
-                                <state key="normal" image="find-user">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="browseForDevices:" destination="PJH-Cf-2Y6" eventType="touchUpInside" id="uYt-nK-VO3"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2w-G6-NOb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2w-G6-NOb">
                                 <rect key="frame" x="279" y="519" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDB-ch-j7u">
-                                <rect key="frame" x="267" y="82" width="50" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-wl-Lgx">
+                                <rect key="frame" x="150" y="212" width="300" height="175"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lG-RT-MWL">
+                                        <rect key="frame" x="12" y="24" width="276" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Lf-xB-bCd">
+                                        <rect key="frame" x="12" y="121" width="276" height="30"/>
+                                        <state key="normal" title="Find Friends"/>
+                                        <connections>
+                                            <action selector="browseForDevices:" destination="PJH-Cf-2Y6" eventType="touchUpInside" id="XKE-jT-mYc"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a display name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T27-1W-T4k">
+                                        <rect key="frame" x="24" y="73" width="252" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="jrL-8p-uRk"/>
-                                    <constraint firstAttribute="width" constant="35" id="rdl-hE-mlt"/>
+                                    <constraint firstItem="T27-1W-T4k" firstAttribute="centerY" secondItem="dlV-wl-Lgx" secondAttribute="centerY" id="B9c-hB-HBs"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Lf-xB-bCd" secondAttribute="bottom" constant="24" id="EUD-Mk-kyi"/>
+                                    <constraint firstItem="8lG-RT-MWL" firstAttribute="top" secondItem="dlV-wl-Lgx" secondAttribute="top" constant="24" id="IAb-Ih-5fv"/>
+                                    <constraint firstAttribute="trailing" secondItem="T27-1W-T4k" secondAttribute="trailing" constant="24" id="Nil-YO-ZkB"/>
+                                    <constraint firstItem="8lG-RT-MWL" firstAttribute="leading" secondItem="dlV-wl-Lgx" secondAttribute="leading" constant="12" id="QuR-ry-Rll"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Lf-xB-bCd" secondAttribute="trailing" constant="12" id="V3R-ed-sum"/>
+                                    <constraint firstAttribute="width" constant="300" id="e78-am-QNh"/>
+                                    <constraint firstItem="T27-1W-T4k" firstAttribute="leading" secondItem="dlV-wl-Lgx" secondAttribute="leading" constant="24" id="eEN-dH-YoE"/>
+                                    <constraint firstItem="T27-1W-T4k" firstAttribute="centerX" secondItem="dlV-wl-Lgx" secondAttribute="centerX" id="f6I-Ww-orn"/>
+                                    <constraint firstAttribute="height" constant="175" id="feb-ZX-oF1"/>
+                                    <constraint firstItem="5Lf-xB-bCd" firstAttribute="leading" secondItem="dlV-wl-Lgx" secondAttribute="leading" constant="12" id="gBo-eb-S9G"/>
+                                    <constraint firstAttribute="trailing" secondItem="8lG-RT-MWL" secondAttribute="trailing" constant="12" id="vCP-o5-9Oq"/>
                                 </constraints>
-                                <state key="normal" image="Ignore-50"/>
-                                <connections>
-                                    <action selector="setHideEnemyMaze:" destination="PJH-Cf-2Y6" eventType="touchDown" id="NhL-vi-HcH"/>
-                                </connections>
-                            </button>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="f6I-Ww-orn"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="0O4-Jx-yR9"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="5qH-9e-TXc"/>
-                            <constraint firstItem="BDs-yt-YI4" firstAttribute="top" secondItem="dDB-ch-j7u" secondAttribute="bottom" constant="12" id="KGM-iH-jCA"/>
+                            <constraint firstItem="dlV-wl-Lgx" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="D0k-Zb-cfr"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
-                            <constraint firstItem="AH9-nF-Yvd" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="MEc-8C-J6w"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
                             <constraint firstItem="My6-fC-VKV" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="SPq-9t-dc2"/>
+                            <constraint firstItem="n2w-G6-NOb" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="8" id="TXL-3x-ueg"/>
+                            <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="TZa-66-whk"/>
                             <constraint firstItem="u7d-wn-QFQ" firstAttribute="top" secondItem="n2w-G6-NOb" secondAttribute="bottom" constant="60" id="Vsv-De-QSn"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" multiplier="1.05" id="X2I-OS-F0E"/>
                             <constraint firstAttribute="trailing" secondItem="w5d-qy-bWd" secondAttribute="trailing" constant="16" id="Y13-iy-R3r"/>
-                            <constraint firstItem="AH9-nF-Yvd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="g8u-xU-RvL"/>
-                            <constraint firstAttribute="trailing" secondItem="AH9-nF-Yvd" secondAttribute="trailing" constant="16" id="gCN-mt-BsB"/>
+                            <constraint firstItem="dlV-wl-Lgx" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="fRi-lx-byq"/>
                             <constraint firstItem="n2w-G6-NOb" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="jf6-gT-I8K"/>
+                            <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="mE5-Ot-As8"/>
                             <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="npC-kJ-n6b"/>
                             <constraint firstItem="qZD-Pv-W1K" firstAttribute="top" secondItem="C5I-wO-S56" secondAttribute="bottom" constant="24" id="oh6-30-eHE"/>
                             <constraint firstItem="BDs-yt-YI4" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="oyv-wR-vju"/>
-                            <constraint firstItem="dDB-ch-j7u" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="rv7-q8-VBL"/>
                             <constraint firstItem="qZD-Pv-W1K" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="wd7-tb-jxG"/>
                             <constraint firstAttribute="trailing" secondItem="qZD-Pv-W1K" secondAttribute="trailing" constant="16" id="xsv-9d-VvR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="gCN-mt-BsB"/>
+                                <exclude reference="KZz-qY-9tR"/>
                                 <exclude reference="MbC-Rh-ARc"/>
                                 <exclude reference="Y13-iy-R3r"/>
                                 <exclude reference="npC-kJ-n6b"/>
                                 <exclude reference="wd7-tb-jxG"/>
+                                <exclude reference="Vsv-De-QSn"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="checkbox" destination="My6-fC-VKV" id="aNy-NQ-6Px"/>
-                        <outlet property="connectedLabel" destination="n2w-G6-NOb" id="nQO-vq-jU6"/>
                         <outlet property="exitButton" destination="qZD-Pv-W1K" id="6ib-Ub-W6o"/>
-                        <outlet property="findPlayers" destination="AH9-nF-Yvd" id="5Xi-CM-xwd"/>
+                        <outlet property="findFriends" destination="5Lf-xB-bCd" id="xA2-hz-60v"/>
                         <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
-                        <outlet property="hideEnemyMazeButton" destination="dDB-ch-j7u" id="0IT-Xz-f7N"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
+                        <outlet property="nameTextField" destination="T27-1W-T4k" id="VQo-Zf-liK"/>
+                        <outlet property="playerNameLabel" destination="n2w-G6-NOb" id="oyW-0D-N5X"/>
+                        <outlet property="setupView" destination="dlV-wl-Lgx" id="hM0-TL-mUu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUa-qu-UDo" sceneMemberID="firstResponder"/>
@@ -1137,10 +1159,8 @@
     <resources>
         <image name="Back" width="50" height="50"/>
         <image name="Delete-50" width="50" height="50"/>
-        <image name="Ignore-50" width="50" height="50"/>
         <image name="ReloadThin" width="50" height="50"/>
         <image name="crazemaze" width="292" height="116"/>
-        <image name="find-user" width="50" height="50"/>
         <image name="me" width="140" height="140"/>
         <image name="purpleCrystal" width="128" height="128"/>
     </resources>

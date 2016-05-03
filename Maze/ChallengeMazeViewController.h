@@ -23,9 +23,10 @@
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
 @property (nonatomic, weak) IBOutlet UIButton *gameOverButton;
-@property (weak, nonatomic) IBOutlet UIButton *findPlayers;
-@property (weak, nonatomic) IBOutlet UIButton *hideEnemyMazeButton;
-@property (weak, nonatomic) IBOutlet UILabel *connectedLabel;
+@property (weak, nonatomic) IBOutlet UIView *setupView;
+@property (weak, nonatomic) IBOutlet UIButton *findFriends;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *playerNameLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

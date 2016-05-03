@@ -21,6 +21,10 @@
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) NSNumber *seed;
+@property (nonatomic) NSString *enemyName;
+@property (nonatomic) int myScore;
+@property (nonatomic) int enemyScore;
+@property (nonatomic) NSString* messageString;
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
 @end
@@ -32,8 +36,10 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    self.size = 20;
+    self.size = 10;
     self.gameOverButton.hidden = YES;
+    self.myScore = 0;
+    self.enemyScore = 0;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
@@ -41,7 +47,6 @@
     [self.mazeView setupGestureRecognizer:self.view];
     self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     self.mazeView.seed = self.seed;
-    [self sendSeed];
     [self.mazeView initMazeWithSize:self.size];
     self.mazeView.score = 0;
     self.topConstraint.constant = -150;
@@ -52,15 +57,21 @@
     self.checkbox.onAnimationType = BEMAnimationTypeFill;
     self.checkbox.offAnimationType = BEMAnimationTypeFill;
     self.checkbox.userInteractionEnabled = NO;
-    [self.gameOverButton addTarget:self action:@selector(rematch) forControlEvents:UIControlEventTouchUpInside];
     self.mazeView.hidden = YES;
-    self.hideEnemyMazeButton.enabled = NO;
+    self.messageString = [[NSString alloc] init];
+
+    self.setupView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    self.setupView.layer.cornerRadius = 6;
+    self.setupView.layer.masksToBounds = YES;
+    self.findFriends.enabled = NO;
+    [self.nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     self.checkbox.tintColor = [UIColor clearColor];
     self.checkbox.onCheckColor = SOLVE;
     self.checkbox.onFillColor = SEVERITY_GREEN;
     self.checkbox.onTintColor = SOLVE;
-    self.connectedLabel.text = @"Not Connected";
     
     [self setupParallaxEffect];
     [self setupAds];
@@ -77,7 +88,6 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
-    [[_appDelegate mcManager] advertiseSelf:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -146,7 +156,9 @@
     [self sendGameOver];
     self.mazeView.userInteractionEnabled = NO;
     if (!self.assertFailed) {
-        [self.gameOverButton setTitle:@"You Won! Rematch?" forState:UIControlStateNormal];
+        [self goInThree:@"Round won! Next level in:"];
+        self.myScore++;
+        self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
         self.gameOverButton.hidden = NO;
         self.mazeView.hidden = YES;
     }
@@ -228,6 +240,14 @@
     [view.layer addAnimation:scaleAnimation forKey:@"scale"];
 }
 
+-(void)textFieldDidChange:(UITextField *)textField {
+    if ([textField.text length] > 0) {
+        self.findFriends.enabled = YES;
+    } else {
+        self.findFriends.enabled = NO;
+    }
+}
+
 #pragma mark - iAd Delegates
 
 - (void)setupAds {
@@ -278,6 +298,23 @@
     }
 }
 
+-(void)sendName{
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: self.nameTextField.text];
+    NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
+    NSError *error;
+    
+    [_appDelegate.mcManager.session sendData:dataToSend
+                                     toPeers:allPeers
+                                    withMode:MCSessionSendDataReliable
+                                       error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+        // NSLog(@"Sent data!!");
+    }
+}
+
 -(void)sendMazeData:(NSMutableArray*)array{
     NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: array];
     NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
@@ -296,7 +333,7 @@
 }
 
 -(void)sendGameOver {
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: @"Game Over"];
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject: @"over"];
     NSArray *allPeers = self.appDelegate.mcManager.session.connectedPeers;
     NSError *error;
     
@@ -357,14 +394,15 @@
         });
     } else if ([dataType isKindOfClass:[NSNumber class]]) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.setupView.hidden = YES;
             self.gameOverButton.hidden = YES;
             self.mazeView.hidden = NO;
-            self.hideEnemyMazeButton.enabled = YES;
             self.mazeView.mazeViewMask.alpha = 1;
             self.mazeView.userInteractionEnabled = YES;
+            self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
             self.mazeView.seed = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+            self.size++;
             [self.mazeView initMazeWithSize:self.size];
-            self.connectedLabel.text = @"Connected";
         });
     } else if ([dataType isKindOfClass:[NSValue class]]) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -383,13 +421,19 @@
                     }];
                 }];
             });
-        } else {
+        } else if ([[NSKeyedUnarchiver unarchiveObjectWithData:receivedData] isEqualToString:@"over"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.mazeView.userInteractionEnabled = NO;
-                self.hideEnemyMazeButton.enabled = NO;
-                [self.gameOverButton setTitle:@"You Lost! Rematch?" forState:UIControlStateNormal];
+                [self goInThree:@"Round Lost! Next level in:"];
+                self.enemyScore++;
+                self.playerNameLabel.text = [NSString stringWithFormat:@"%@: %d     |     %@: %d", self.nameTextField.text, self.myScore, self.enemyName, self.enemyScore];
                 self.gameOverButton.hidden = NO;
                 self.mazeView.hidden = YES;
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.enemyName = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+                [self sendSeed];
             });
         }
     }
@@ -399,24 +443,41 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)rematch {
-    self.gameOverButton.hidden = YES;
-    self.mazeView.userInteractionEnabled = YES;
-    self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
-    self.mazeView.seed = self.seed;
-    [self sendSeed];
-    [self.mazeView initMazeWithSize:self.size];
-    self.mazeView.hidden = NO;
-    self.hideEnemyMazeButton.enabled = YES;
-    self.mazeView.mazeViewMask.alpha = 1;
+- (void)goInThree:(NSString*)string {
+    self.messageString = string;
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInTwo) userInfo:nil repeats:NO];
+    [self.gameOverButton setTitle:[NSString stringWithFormat:@"%@ 3", self.messageString] forState:UIControlStateNormal];
 }
 
-- (IBAction)setHideEnemyMaze:(id)sender {
-    self.hideEnemyMazeButton.enabled = NO;
-    [self sendHideMaze];
+- (void)goInTwo {
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInOne) userInfo:nil repeats:NO];
+    [self.gameOverButton setTitle:[NSString stringWithFormat:@"%@ 2", self.messageString] forState:UIControlStateNormal];
+}
+
+
+- (void)goInOne {
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(rematch) userInfo:nil repeats:NO];
+    [self.gameOverButton setTitle:[NSString stringWithFormat:@"%@ 1", self.messageString] forState:UIControlStateNormal];
+}
+
+
+- (void)rematch {
+    if (![self.messageString isEqualToString:@"Round Lost! Next level in:"]) {
+        self.gameOverButton.hidden = YES;
+        [self.gameOverButton setTitle:[NSString stringWithFormat:@"%@ 3", self.messageString] forState:UIControlStateNormal];
+        self.mazeView.userInteractionEnabled = YES;
+        self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+        self.mazeView.seed = self.seed;
+        [self sendSeed];
+        self.size++;
+        [self.mazeView initMazeWithSize:self.size];
+        self.mazeView.hidden = NO;
+        self.mazeView.mazeViewMask.alpha = 1;
+    }
 }
 
 - (IBAction)browseForDevices:(id)sender {
+    [[_appDelegate mcManager] advertiseSelf:YES];
     [[_appDelegate mcManager] setupMCBrowser];
     [[[_appDelegate mcManager] browser] setDelegate:self];
     [self presentViewController:[[_appDelegate mcManager] browser] animated:YES completion:nil];
@@ -446,17 +507,16 @@
                 self.mazeView.userInteractionEnabled = YES;
                 self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
                 self.mazeView.seed = self.seed;
-                [self sendSeed];
+                [self sendName];
                 [self.mazeView initMazeWithSize:self.size];
                 self.mazeView.hidden = NO;
-                self.hideEnemyMazeButton.enabled = YES;
                 self.mazeView.mazeViewMask.alpha = 1;
-                self.connectedLabel.text = @"Connected";
+                [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
             });
         }
         else if (state == MCSessionStateNotConnected) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.connectedLabel.text = @"Not Connected";
+                self.playerNameLabel.text = @"No connection...";
             });
         }
     }
