@@ -180,19 +180,39 @@
 - (void)updateScores {
     switch (self.myScore) {
         case 1:
-            self.playerScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.playerScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 2:
-            self.playerScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                self.playerScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 3:
-            self.playerScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+        self.playerScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 4:
-            self.playerScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+        self.playerScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 5:
-            self.playerScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+        self.playerScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         default:
             break;
@@ -200,19 +220,39 @@
     
     switch (self.enemyScore) {
         case 1:
-            self.enemyScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.enemyScore1.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 2:
-            self.enemyScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.enemyScore2.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 3:
-            self.enemyScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.enemyScore3.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 4:
-            self.enemyScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.enemyScore4.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         case 5:
-            self.enemyScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.enemyScore5.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+                }];
+            }
             break;
         default:
             break;
