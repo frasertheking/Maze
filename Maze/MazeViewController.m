@@ -385,30 +385,29 @@
 - (void)useItem {
     if (self.itemType >= 0) {
         [self.itemImage.layer removeAllAnimations];
+        switch (self.itemType) {
+            case 0:
+                [self.mazeView showSolvePath];
+                break;
+            case 1:
+                [self freezeTime];
+                break;
+            case 2:
+                [self finished];
+                break;
+            case 3:
+                [self.mazeView activateGodMode];
+                break;
+            default:
+                [self.mazeView showWhiteWalls];
+                break;
+        }
+        self.itemType = -1;
         [UIView animateWithDuration:0.35 animations:^{
             self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 5, 5);
             self.itemImage.alpha = 0;
             self.inventoryView.alpha = 0;
-        } completion:^(BOOL finished) {
-            switch (self.itemType) {
-                case 0:
-                    [self.mazeView showSolvePath];
-                    break;
-                case 1:
-                    [self freezeTime];
-                    break;
-                case 2:
-                    [self finished];
-                    break;
-                case 3:
-                    [self.mazeView activateGodMode];
-                    break;
-                default:
-                    [self.mazeView showWhiteWalls];
-                    break;
-            }
-            self.itemType = -1;
-        }];
+        } completion:nil];
     }
 }
 

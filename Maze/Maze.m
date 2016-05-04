@@ -140,7 +140,7 @@ double rads = DEGREES_TO_RADIANS(180);
     int randomNum = (self.seed ? rand() : arc4random()) % 100;
     [self disableAllMazeDistractions];
     
-    if (self.mazeSize > 6) {
+    if (self.mazeSize > 5) {
         self.power = NO;
 
         if (randomNum >= 0 && randomNum < 15) {
@@ -621,7 +621,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 [((MazeViewController*)self.delegate) bonusTimeFound];
                 
                 float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
-                UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size, self.currentY*size, 50, size)];
+                UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size - 12.5, self.currentY*size, 50, size)];
                 bonusLabel.font = [UIFont systemFontOfSize:6];
                 bonusLabel.text = @"+ time";
                 bonusLabel.alpha = 0;
@@ -1075,7 +1075,7 @@ double rads = DEGREES_TO_RADIANS(180);
             self.mazeViewMask.alpha = 1;
         } completion:^(BOOL finished) {
             if (!finished) return;
-            [self pulseAnimation];
+            if (self.pulse) [self pulseAnimation];
         }];
     }];
 }
