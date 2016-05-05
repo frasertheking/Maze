@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		433FAD751CB7F064004341AE /* StarBackgroundScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 433FAD741CB7F064004341AE /* StarBackgroundScene.m */; };
 		43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */; };
+		434AD6581CDBE2F8004E4BA8 /* AdventurePathView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 434AD6571CDBE2F8004E4BA8 /* AdventurePathView.xib */; };
+		434AD65B1CDBE428004E4BA8 /* AdventurePathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 434AD65A1CDBE428004E4BA8 /* AdventurePathView.m */; };
 		4368A27B1C83D2E9006E1779 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27A1C83D2E9006E1779 /* main.m */; };
 		4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27D1C83D2E9006E1779 /* AppDelegate.m */; };
 		4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2801C83D2E9006E1779 /* MazeViewController.m */; };
@@ -19,6 +21,7 @@
 		4368A29F1C83D2EA006E1779 /* MazeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A29E1C83D2EA006E1779 /* MazeUITests.m */; };
 		4368A2AF1C83D688006E1779 /* DEMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */; };
 		4372D8521CDADC2400D2408D /* AdventureMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4372D8511CDADC2400D2408D /* AdventureMazeViewController.m */; };
+		4372D8551CDBD7F300D2408D /* AdventureLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4372D8541CDBD7F300D2408D /* AdventureLocationView.m */; };
 		437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437368A21CCD4B2C005D3132 /* SettingsViewController.m */; };
 		437368A51CCEE909005D3132 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437368A41CCEE909005D3132 /* iAd.framework */; };
 		437368A71CD0395D005D3132 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437368A61CD0395D005D3132 /* FBSDKShareKit.framework */; };
@@ -63,6 +66,9 @@
 		433FAD741CB7F064004341AE /* StarBackgroundScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarBackgroundScene.m; sourceTree = "<group>"; };
 		43426C9C1CC3F6EE001E6830 /* BonusTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTimeView.h; sourceTree = "<group>"; };
 		43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTimeView.m; sourceTree = "<group>"; };
+		434AD6571CDBE2F8004E4BA8 /* AdventurePathView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdventurePathView.xib; sourceTree = "<group>"; };
+		434AD6591CDBE428004E4BA8 /* AdventurePathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdventurePathView.h; sourceTree = "<group>"; };
+		434AD65A1CDBE428004E4BA8 /* AdventurePathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdventurePathView.m; sourceTree = "<group>"; };
 		4368A2761C83D2E9006E1779 /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368A27A1C83D2E9006E1779 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4368A27C1C83D2E9006E1779 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +90,8 @@
 		4368A2AE1C83D688006E1779 /* DEMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMazeGenerator.m; sourceTree = "<group>"; };
 		4372D8501CDADC2400D2408D /* AdventureMazeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdventureMazeViewController.h; sourceTree = "<group>"; };
 		4372D8511CDADC2400D2408D /* AdventureMazeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdventureMazeViewController.m; sourceTree = "<group>"; };
+		4372D8531CDBD7F300D2408D /* AdventureLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdventureLocationView.h; sourceTree = "<group>"; };
+		4372D8541CDBD7F300D2408D /* AdventureLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdventureLocationView.m; sourceTree = "<group>"; };
 		437368A11CCD4B2C005D3132 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		437368A21CCD4B2C005D3132 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		437368A41CCEE909005D3132 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -191,7 +199,7 @@
 				43B96F691CD16F0000B3D7C2 /* MC */,
 				43A65B321CCBBD6E001431FC /* Model */,
 				439F8D6E1CB7E8FC003F98F7 /* SpriteKit */,
-				43EEE8CE1CB32E880066097A /* Items */,
+				43EEE8CE1CB32E880066097A /* Views */,
 				437B80A41C9CEE6F0024F758 /* MazeGeneration */,
 				43A65B361CCBFF81001431FC /* Navigation */,
 				43A65B2E1CCAFB91001431FC /* Leaderboard */,
@@ -200,6 +208,7 @@
 				4368A27C1C83D2E9006E1779 /* AppDelegate.h */,
 				4368A27D1C83D2E9006E1779 /* AppDelegate.m */,
 				4368A2821C83D2E9006E1779 /* Main.storyboard */,
+				434AD6571CDBE2F8004E4BA8 /* AdventurePathView.xib */,
 				4368A2851C83D2E9006E1779 /* Assets.xcassets */,
 				4368A2871C83D2E9006E1779 /* LaunchScreen.storyboard */,
 				4368A28A1C83D2E9006E1779 /* Info.plist */,
@@ -341,15 +350,19 @@
 			name = MC;
 			sourceTree = "<group>";
 		};
-		43EEE8CE1CB32E880066097A /* Items */ = {
+		43EEE8CE1CB32E880066097A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4372D8531CDBD7F300D2408D /* AdventureLocationView.h */,
+				4372D8541CDBD7F300D2408D /* AdventureLocationView.m */,
 				43EEE8CF1CB32EA80066097A /* PowerUpView.h */,
 				43EEE8D01CB32EA80066097A /* PowerUpView.m */,
 				43426C9C1CC3F6EE001E6830 /* BonusTimeView.h */,
 				43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */,
+				434AD6591CDBE428004E4BA8 /* AdventurePathView.h */,
+				434AD65A1CDBE428004E4BA8 /* AdventurePathView.m */,
 			);
-			name = Items;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		511FC27D7177B7663E55CEED /* Pods */ = {
@@ -468,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				434AD6581CDBE2F8004E4BA8 /* AdventurePathView.xib in Resources */,
 				439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */,
 				4368A2891C83D2E9006E1779 /* LaunchScreen.storyboard in Resources */,
 				4368A2861C83D2E9006E1779 /* Assets.xcassets in Resources */,
@@ -545,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				434AD65B1CDBE428004E4BA8 /* AdventurePathView.m in Sources */,
 				437B80A31C9CE9A30024F758 /* Maze.m in Sources */,
 				43EEE8D11CB32EA80066097A /* PowerUpView.m in Sources */,
 				43B96F6C1CD16F1600B3D7C2 /* ConnectionsViewController.m in Sources */,
@@ -559,6 +574,7 @@
 				43A65B351CCBBD80001431FC /* User.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */,
+				4372D8551CDBD7F300D2408D /* AdventureLocationView.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				43B96F6F1CD170CB00B3D7C2 /* MCManager.m in Sources */,
 				43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */,

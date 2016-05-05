@@ -23,7 +23,7 @@
     
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
-    self.contentViewHeightConstraint.constant = 1600;
+    self.contentViewHeightConstraint.constant = 2650;
     
     [self setGradientBackground];
 }

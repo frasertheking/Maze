@@ -44,6 +44,7 @@
 +(UIColor*)getRandomColor;
 + (void)showHUD:(UIView*)view;
 + (void)hideHUD:(UIView*)view;
++(UIColor*)inverseColor:(UIColor*)color;
 
 @end
 

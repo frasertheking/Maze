@@ -72,6 +72,12 @@
     return tempColor;
 }
 
++(UIColor*)inverseColor:(UIColor*)color {
+    const CGFloat *componentColors = CGColorGetComponents(color.CGColor);
+    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.25) green:(componentColors[1] - 0.25) blue:(componentColors[2] - 0.25) alpha:componentColors[3] - 0.25];
+}
+
+
 - (UIColor *) getRandomColor {
     float golden_ratio_conjugate = 0.618033988749895;
     float h = (float)arc4random() / RAND_MAX;
