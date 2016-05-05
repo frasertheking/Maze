@@ -51,7 +51,7 @@
     [self.view addSubview:self.casualModeButton];
     
     self.tutorialModeButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.tutorialModeButton setTitle:@"Tutorial" forState:UIControlStateNormal];
+    [self.tutorialModeButton setTitle:@"Adventure" forState:UIControlStateNormal];
     self.tutorialModeButton.center =  CGPointMake(self.view.center.x, self.view.center.y + 40);
     self.tutorialModeButton.buttonColor = [UIColor ht_lemonColor];
     self.tutorialModeButton.shadowColor = [UIColor ht_lemonDarkColor];
@@ -98,8 +98,7 @@
 }
 
 - (IBAction)tutorialTapped:(id)sender {
-    //[self performSegueWithIdentifier:@"tutorialSegue" sender:self];
-    NSLog(@"TUTORIAL TAPPED");
+    [self performSegueWithIdentifier:@"adventureSegue" sender:self];
 }
 
 - (IBAction)challengeTapped:(id)sender {
