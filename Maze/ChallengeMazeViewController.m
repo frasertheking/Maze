@@ -59,8 +59,9 @@
     self.messageString = [[NSString alloc] init];
     self.itemImage.alpha = 0;
     self.inventoryView.userInteractionEnabled = YES;
-    self.inventoryView.alpha = 0;
+    self.inventoryView.hidden = YES;
     self.nameTextField.delegate = self;
+    self.lostConnectionView.hidden = YES;
 
     [self setupColors];
     [self hideScores];
@@ -89,7 +90,6 @@
     [self.inventoryView addGestureRecognizer:tapGesture];
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -342,7 +342,7 @@
     
     self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
     [UIView animateWithDuration:0.35 animations:^{
-        self.inventoryView.alpha = 1;
+        self.inventoryView.hidden = NO;
         self.itemImage.alpha = 1;
         self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
     } completion:^(BOOL finished) {
@@ -357,7 +357,7 @@
         [UIView animateWithDuration:0.35 animations:^{
             self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 5, 5);
             self.itemImage.alpha = 0;
-            self.inventoryView.alpha = 0;
+            self.inventoryView.hidden = YES;
         } completion:^(BOOL finished) {
             switch (self.itemType) {
                 case 0:
@@ -382,11 +382,6 @@
 }
 
 #pragma mark - Actions
-
-- (IBAction)randomizeMaze:(id)sender {
-    self.size = 2;
-    [self recreateMaze];
-}
 
 - (IBAction)solveMaze:(id)sender {
     [self.mazeView solve];
@@ -626,6 +621,8 @@
             self.mazeView.mazeViewMask.alpha = 1;
             self.inventoryView.userInteractionEnabled = YES;
             self.mazeView.userInteractionEnabled = YES;
+            self.lostConnectionView.hidden = YES;
+            [self showScores];
             self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
             self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
             [self updateScores];
@@ -719,6 +716,7 @@
 }
 
 - (IBAction)browseForDevices:(id)sender {
+    [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
     [[_appDelegate mcManager] advertiseSelf:YES];
     [[_appDelegate mcManager] setupMCBrowser];
     [[[_appDelegate mcManager] browser] setDelegate:self];
@@ -750,11 +748,9 @@
                 self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
                 self.mazeView.seed = self.seed;
                 [self sendName];
-                [self.mazeView initMazeWithSize:self.size];
-                self.mazeView.hidden = NO;
-                [self showScores];
-                self.inventoryView.userInteractionEnabled = YES;
-                self.mazeView.mazeViewMask.alpha = 1;
+               // [self.mazeView initMazeWithSize:self.size];
+                //self.inventoryView.userInteractionEnabled = YES;
+                //self.mazeView.mazeViewMask.alpha = 1;
                 [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
                 [[_appDelegate mcManager] advertiseSelf:NO];
             });
@@ -763,6 +759,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[_appDelegate mcManager] advertiseSelf:YES];
                 self.inventoryView.userInteractionEnabled = NO;
+                self.mazeView.hidden = YES;
+                [self hideScores];
+                self.lostConnectionView.hidden = NO;
+                self.inventoryView.hidden = YES;
             });
         }
     }

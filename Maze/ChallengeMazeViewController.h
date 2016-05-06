@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIView *enemyScore4;
 @property (weak, nonatomic) IBOutlet UIView *enemyScore5;
 @property (nonatomic, weak) IBOutlet UIView *inventoryView;
+@property (nonatomic, weak) IBOutlet UIView *lostConnectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
 @property (nonatomic, weak) IBOutlet UILabel *usePowerupLabel;
 

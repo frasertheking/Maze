@@ -10,4 +10,9 @@
 
 @interface AdventurePathView : UIView
 
+@property (nonatomic, weak) IBOutlet UIView *topLeftView;
+@property (nonatomic, weak) IBOutlet UIView *middleView;
+@property (nonatomic, weak) IBOutlet UIView *bottomRightView;
+@property (nonatomic, weak) IBOutlet UIView *bottomView;
+
 @end

@@ -311,6 +311,8 @@
 				43BAABBD1CC86166009F4C50 /* HomeViewController.m */,
 				43BAABBF1CC86756009F4C50 /* GameTypeViewController.h */,
 				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
+				4372D8501CDADC2400D2408D /* AdventureMazeViewController.h */,
+				4372D8511CDADC2400D2408D /* AdventureMazeViewController.m */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -324,8 +326,6 @@
 				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
 				43B96F701CD172BF00B3D7C2 /* ChallengeMazeViewController.h */,
 				43B96F711CD172BF00B3D7C2 /* ChallengeMazeViewController.m */,
-				4372D8501CDADC2400D2408D /* AdventureMazeViewController.h */,
-				4372D8511CDADC2400D2408D /* AdventureMazeViewController.m */,
 			);
 			name = MazeViewControllers;
 			sourceTree = "<group>";
