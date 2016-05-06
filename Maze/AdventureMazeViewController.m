@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* contentViewHeightConstraint;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic) int currentLevel;
 
 @end
 
@@ -24,12 +25,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.currentLevel = 35;
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
-    //self.contentViewHeightConstraint.constant = 2800;
-    
     [self setGradientBackground];
     [self setupParticles];
+    [self updateForCurrentLevel];
+}
+
+- (void)updateForCurrentLevel {
+    if (self.currentLevel >= 20) {
+        [self.path1 setAllLevelsComplete];
+    } else {
+        for (int i = 1; i <= self.currentLevel; i++) {
+            [self.path1 setLevelComplete:i];
+        }
+    }
+    
+    if (self.currentLevel >= 40) {
+        [self.path2 setAllLevelsComplete];
+    } else {
+        for (int i = 21; i <= self.currentLevel; i++) {
+            [self.path2 setLevelComplete:i % 20];
+        }
+    }
+    
+    if (self.currentLevel >= 60) {
+        [self.path3 setAllLevelsComplete];
+    } else {
+        for (int i = 41; i <= self.currentLevel; i++) {
+            [self.path3 setLevelComplete:i % 20];
+        }
+    }
+    
+    if (self.currentLevel >= 80) {
+        [self.path4 setAllLevelsComplete];
+        for (int i = 81; i <= self.currentLevel; i++) {
+            [self.path5 setLevelComplete:i % 20];
+        }
+    } else {
+        for (int i = 61; i <= self.currentLevel; i++) {
+            [self.path4 setLevelComplete:i % 20];
+        }
+    }
 }
 
 - (void)setupParticles {

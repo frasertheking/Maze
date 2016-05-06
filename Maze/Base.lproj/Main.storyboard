@@ -956,6 +956,11 @@
                         <outlet property="contentView" destination="fCU-X2-SVo" id="EFr-Eg-f7u"/>
                         <outlet property="contentViewHeightConstraint" destination="DS0-Zm-sJH" id="UV0-yb-QQD"/>
                         <outlet property="particleView" destination="z5H-h2-bdi" id="pJg-hJ-g9i"/>
+                        <outlet property="path1" destination="Ood-ej-c3q" id="or3-hK-9Dw"/>
+                        <outlet property="path2" destination="anF-EM-fNm" id="oIG-kS-bRa"/>
+                        <outlet property="path3" destination="8z7-cg-9lE" id="G4s-9X-edW"/>
+                        <outlet property="path4" destination="OSq-FM-ovZ" id="NdD-NL-6Ec"/>
+                        <outlet property="path5" destination="9zD-qp-CxH" id="TRO-qO-ezb"/>
                         <outlet property="scrollView" destination="t6V-O9-Fk0" id="C1O-ue-MqK"/>
                     </connections>
                 </viewController>

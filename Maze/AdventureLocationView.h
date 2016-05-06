@@ -10,4 +10,6 @@
 
 @interface AdventureLocationView : UIView
 
+@property (nonatomic) BOOL completed;
+
 @end

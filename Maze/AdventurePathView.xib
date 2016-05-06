@@ -10,6 +10,26 @@
             <connections>
                 <outlet property="bottomRightView" destination="PH3-wY-hm9" id="iti-yy-gDw"/>
                 <outlet property="bottomView" destination="UGP-5y-BJF" id="oHh-eI-hj6"/>
+                <outlet property="level10View" destination="DyB-G5-ivm" id="sx0-7o-ukW"/>
+                <outlet property="level11View" destination="IH4-Rg-udt" id="Oio-Hy-tVQ"/>
+                <outlet property="level12View" destination="kfn-21-NHR" id="UTx-MR-4Ls"/>
+                <outlet property="level13View" destination="KPb-hL-aV1" id="ZVK-7x-RE7"/>
+                <outlet property="level14View" destination="9PP-Kq-L0e" id="jfZ-ED-TeG"/>
+                <outlet property="level15View" destination="kJH-Zc-Tz1" id="2u2-WK-6EC"/>
+                <outlet property="level16View" destination="69y-gn-Eoh" id="ybP-Nq-3Fv"/>
+                <outlet property="level17View" destination="YRC-EG-RtU" id="wv1-lb-7Wq"/>
+                <outlet property="level18View" destination="OUc-hH-Ael" id="FBa-hF-bzz"/>
+                <outlet property="level19View" destination="sB9-N3-C0v" id="nop-1O-Rj3"/>
+                <outlet property="level1View" destination="K2r-6v-e0W" id="CeZ-ro-GMA"/>
+                <outlet property="level20View" destination="eN3-EO-rni" id="OcU-bA-abo"/>
+                <outlet property="level2View" destination="Lft-rB-1ce" id="gTW-V3-ifT"/>
+                <outlet property="level3View" destination="Y1f-a4-taB" id="Hom-BE-DHE"/>
+                <outlet property="level4View" destination="Xji-yE-0xb" id="kej-fX-moO"/>
+                <outlet property="level5View" destination="cJh-Z0-TOD" id="N7d-5r-Q9I"/>
+                <outlet property="level6View" destination="bh1-gF-CQY" id="gVF-p1-4Nr"/>
+                <outlet property="level7View" destination="Vhx-HT-2tx" id="nUc-FA-gsm"/>
+                <outlet property="level8View" destination="ZPJ-OU-63J" id="W88-I8-8sp"/>
+                <outlet property="level9View" destination="27Q-po-Ib1" id="3Lm-kn-UdC"/>
                 <outlet property="middleView" destination="TwU-cW-0W7" id="V6z-pp-2a5"/>
                 <outlet property="topLeftView" destination="LdM-u9-JGd" id="vyz-e0-eWQ"/>
             </connections>

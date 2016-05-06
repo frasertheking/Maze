@@ -11,10 +11,17 @@
 
 @implementation AdventureLocationView
 
+@synthesize completed = _completed;
+
 - (void)initialize{
     self.backgroundColor = [UIColor clearColor];
     
-    self.backgroundColor = ORANGE;
+   // if (self.completed) {
+   //     self.backgroundColor = ORANGE;
+   // } else {
+        self.backgroundColor = PALE;
+   // }
+
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.masksToBounds = YES;
     self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
@@ -33,6 +40,11 @@
         [self initialize];
     }
     return self;
+}
+
+- (void)setCompleted:(BOOL)completed {
+    _completed = completed;
+    self.backgroundColor = ORANGE;
 }
 
 @end

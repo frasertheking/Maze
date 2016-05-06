@@ -748,9 +748,9 @@
                 self.seed = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
                 self.mazeView.seed = self.seed;
                 [self sendName];
-               // [self.mazeView initMazeWithSize:self.size];
-                //self.inventoryView.userInteractionEnabled = YES;
-                //self.mazeView.mazeViewMask.alpha = 1;
+                [self.mazeView initMazeWithSize:self.size];
+                self.inventoryView.userInteractionEnabled = YES;
+                self.mazeView.mazeViewMask.alpha = 1;
                 [_appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:nil];
                 [[_appDelegate mcManager] advertiseSelf:NO];
             });
