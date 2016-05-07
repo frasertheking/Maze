@@ -29,10 +29,10 @@
 @property (nonatomic) NSInteger itemType;
 @property (nonatomic) int bonusTimesCollected;
 @property (nonatomic) HTPressableButton *restartButton;
-@property (nonatomic) HTPressableButton *leaderboardButton;
-@property (nonatomic) FBSDKShareButton *shareButton;
+@property (nonatomic) HTPressableButton *continueButton;
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
+@property (nonatomic) int round;
 
 @end
 
@@ -43,8 +43,10 @@
     
     self.size = 10;
     self.itemType = -1;
+    self.round = 1;
     self.timeRemaining = 35;
     self.bonusTimesCollected = 0;
+    self.mazeView.isAdventureMode = YES;
     
     [self setGradientBackground];
     self.mazeView.delegate = self;
@@ -69,27 +71,25 @@
     self.levelFailedView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     self.levelFailedView.layer.cornerRadius = 6;
     self.levelFailedView.layer.masksToBounds = YES;
-    self.pictureCoverView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.pictureCoverView.layer.borderWidth = 1.0f;
-    self.pictureCoverView.alpha = 0;
-    [self.profilePictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBSDKAccessToken currentAccessToken].userID]] placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
+    self.levelFinishedView.alpha = 0;
+    self.levelFinishedView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    self.levelFinishedView.layer.cornerRadius = 6;
+    self.levelFinishedView.layer.masksToBounds = YES;
     self.restartButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.restartButton setTitle:@"Restart" forState:UIControlStateNormal];
-    self.restartButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 145);
+    self.restartButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 50);
     self.restartButton.buttonColor = [UIColor ht_grapeFruitColor];
     self.restartButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
     [self.restartButton addTarget:self action:@selector(retryButtonClick:)forControlEvents:UIControlEventTouchUpInside];
     [self.levelFailedView addSubview:self.restartButton];
     
-    self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.leaderboardButton setTitle:@"Leaderboard" forState:UIControlStateNormal];
-    self.leaderboardButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 85);
-    [self.leaderboardButton addTarget:self action:@selector(leaderboardButtonClick:)forControlEvents:UIControlEventTouchUpInside];
-    [self.levelFailedView addSubview:self.leaderboardButton];
-    
-    self.shareButton = [[FBSDKShareButton alloc] init];
-    self.shareButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 35);
-    [self.levelFailedView addSubview:self.shareButton];
+    self.continueButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.continueButton setTitle:@"Continue" forState:UIControlStateNormal];
+    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 50);
+    self.continueButton.buttonColor = [UIColor ht_mintColor];
+    self.continueButton.shadowColor = [UIColor ht_mintDarkColor];
+    [self.continueButton addTarget:self action:@selector(continueButtonClick:)forControlEvents:UIControlEventTouchUpInside];
+    [self.levelFinishedView addSubview:self.continueButton];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
@@ -172,27 +172,29 @@
 
 - (void)recreateMazeWithTimer {
     self.timerView.alpha = 1;
+    [self resetCountdown];
     [self recreateMaze];
 }
 
 -(void)finished {
     if (!self.assertFailed) {
-        if (!self.mazeView.noTime) {
-            if (self.size > 15) {
-                self.timeRemaining = 15 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
-            } else {
-                self.timeRemaining = 10 + fabs(self.timer.fireDate.timeIntervalSinceNow) + 5*self.bonusTimesCollected;
-            }
-            self.mazeView.score += self.timeRemaining;
+        if (self.round == 4) {
+            self.itemType = -1;
+            self.timeRemaining = 35;
+            self.itemImage.image = nil;
+            self.inventoryView.alpha = 0;
+            self.mazeView.score = 0;
+            self.bonusTimesCollected = 0;
+            self.mazeView.userInteractionEnabled = NO;
+            self.timerView.alpha = 0;
+            [self.timer invalidate];
+            [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                self.mazeView.alpha = 0;
+                self.levelFinishedView.alpha = 1;
+            } completion:nil];
         }
-        
-        NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
-        if (self.mazeView.score > highScore) {
-            [[NSUserDefaults standardUserDefaults] setInteger:self.mazeView.score forKey:@"highScore"];
-        }
-        
-        self.bonusTimesCollected = 0;
 
+        self.round++;
         self.size++;
         
         [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
@@ -257,7 +259,7 @@
     [self.timerView.layer removeAllAnimations];
     self.levelAchieved = self.size;
     [self levelFailed];
-    self.size = 2;
+    self.size = 10;
 }
 
 -(void)freezeTime {
@@ -266,66 +268,19 @@
 
 -(void)levelFailed {
     self.itemType = -1;
-    self.timeRemaining = 10;
+    self.timeRemaining = 35;
     self.itemImage.image = nil;
     self.inventoryView.alpha = 0;
     self.mazeView.score = 0;
+    self.round = 1;
     self.bonusTimesCollected = 0;
     self.mazeView.userInteractionEnabled = NO;
     [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
     
-    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:@"https://frasertheking.com"];
-    content.contentTitle = @"Check Out My CrazeMaze Score!";
-    content.contentDescription = [NSString stringWithFormat:@"I just got to level %d on CrazeMaze! Think you can beat me?", self.levelAchieved-1];
-    content.imageURL = [NSURL URLWithString:@"http://frasertheking.com/images/crazemazelogo.png"];
-    self.shareButton.shareContent = content;
-    
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};
-        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/scores", [FBSDKAccessToken currentAccessToken].userID] parameters:params  HTTPMethod:@"GET"];
-        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                              id result,
-                                              NSError *error) {
-            BOOL newHighScore = NO;
-            if (result) {
-                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.levelAchieved-1) {
-                    newHighScore = YES;
-                    NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.levelAchieved-1],};
-                    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                                  initWithGraphPath:@"/me/scores"
-                                                  parameters:params
-                                                  HTTPMethod:@"POST"];
-                    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                          id result,
-                                                          NSError *error) {
-                        NSLog(@"New High score: %@ %@", result, error);
-                    }];
-                }
-                
-                if (newHighScore) {
-                    self.levelAchievedLabel.text = @"Congratulations";
-                    self.highScoreLabel.text = [NSString stringWithFormat:@"New High Score: %d", self.levelAchieved-1];
-                } else {
-                    self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
-                    self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
-                }
-                [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                    self.mazeView.alpha = 0;
-                    self.levelFailedView.alpha = 1;
-                    self.pictureCoverView.alpha = 1;
-                } completion:nil];
-            }
-        }];
-    } else {
-        self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
-        self.highScoreLabel.text = [NSString stringWithFormat:@"To see your high score, log in with facebook"];
-        [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            self.mazeView.alpha = 0;
-            self.levelFailedView.alpha = 1;
-            self.pictureCoverView.alpha = 1;
-        } completion:nil];
-    }
+    [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.mazeView.alpha = 0;
+        self.levelFailedView.alpha = 1;
+    } completion:nil];
 }
 
 -(void)bonusTimeFound {
@@ -440,6 +395,10 @@
     }
 }
 
+- (IBAction)continueButtonClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)retryButtonClick:(id)sender {
     [self recreateMazeWithTimer];
     self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
@@ -449,7 +408,6 @@
         self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
         self.mazeView.alpha = 1;
         self.levelFailedView.alpha = 0;
-        self.pictureCoverView.alpha = 0;
     } completion:nil];
 }
 

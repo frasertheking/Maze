@@ -119,7 +119,7 @@ double rads = DEGREES_TO_RADIANS(180);
     }
     
     self.noTime = NO;
-    if (!self.isCasualMode && !self.isChallengeMode) {
+    if (!self.isCasualMode && !self.isChallengeMode && !self.isAdventureMode) {
         [self generateMazeDistractions];
         if (self.mazeSize > 3) [self generateTimeBonuses];
     }
@@ -608,7 +608,7 @@ double rads = DEGREES_TO_RADIANS(180);
         NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
         for (NSValue *v in self.timeBonusArray) {
             CGPoint point = v.CGPointValue;
-            if (self.currentX == point.x && self.currentY == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 0 && !self.isCasualMode && !self.isChallengeMode) {
+            if (self.currentX == point.x && self.currentY == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:self.currentX] objectAtIndex:self.currentY] integerValue] == 0 && !self.isCasualMode && !self.isChallengeMode && !self.isAdventureMode) {
                 [discardedItems addObject:v];
                 
                 CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
@@ -799,7 +799,7 @@ double rads = DEGREES_TO_RADIANS(180);
         CGPoint point = v.CGPointValue;
         for (int r = 0; r < self.mazeSize * 2 + 1 ; r++) {
             for (int c = 0; c < self.mazeSize * 2 + 1 ; c++) {
-                if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 && (r == point.x && c == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0) && !self.isCasualMode && !self.isChallengeMode) {
+                if ([[[self.blockArray objectAtIndex:r] objectAtIndex:c] integerValue] == 1 && (r == point.x && c == point.y && (point.x != self.powerUpX) && (point.y != self.powerY) && [[[self.solArray objectAtIndex:r] objectAtIndex:c] integerValue] == 0) && !self.isCasualMode && !self.isChallengeMode && !self.isAdventureMode) {
                     BonusTimeView* bonusTime = [[BonusTimeView alloc] initWithFrame:CGRectMake(r*size, c*size, size, size)];
                     [self.mazeViewBonusTime addSubview:bonusTime];
                 }

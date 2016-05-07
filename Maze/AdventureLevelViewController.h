@@ -28,10 +28,7 @@
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UIView *levelFailedView;
-@property (nonatomic, weak) IBOutlet UILabel *levelAchievedLabel;
-@property (nonatomic, weak) IBOutlet UILabel *highScoreLabel;
-@property (nonatomic, weak) IBOutlet UIView *pictureCoverView;
-@property (nonatomic, weak) IBOutlet UIImageView *profilePictureImageView;
+@property (nonatomic, weak) IBOutlet UIView *levelFinishedView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

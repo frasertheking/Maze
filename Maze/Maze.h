@@ -30,6 +30,7 @@
 @property (nonatomic) BOOL noTime;
 @property (nonatomic) BOOL isCasualMode;
 @property (nonatomic) BOOL isChallengeMode;
+@property (nonatomic) BOOL isAdventureMode;
 @property (nonatomic) NSNumber* seed;
 @property NSInteger score;
 @property (nonatomic) NSMutableArray* attemptArray;
