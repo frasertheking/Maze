@@ -44,7 +44,7 @@
     self.size = 10;
     self.itemType = -1;
     self.round = 1;
-    self.timeRemaining = 35;
+    self.timeRemaining = 50;
     self.bonusTimesCollected = 0;
     self.mazeView.isAdventureMode = YES;
     
@@ -178,9 +178,9 @@
 
 -(void)finished {
     if (!self.assertFailed) {
-        if (self.round == 4) {
+        if (self.round == 5) {
             self.itemType = -1;
-            self.timeRemaining = 35;
+            self.timeRemaining = 50;
             self.itemImage.image = nil;
             self.inventoryView.alpha = 0;
             self.mazeView.score = 0;
@@ -192,31 +192,31 @@
                 self.mazeView.alpha = 0;
                 self.levelFinishedView.alpha = 1;
             } completion:nil];
-        }
-
-        self.round++;
-        self.size++;
-        
-        [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
-            self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
-            self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
-        } completion:^(BOOL f){
-            [self.checkbox setOn:YES animated:YES];
-            [UIView animateWithDuration:1 animations:^{
-                self.mazeViewCenterConstraint.constant = -600;
-                [self.view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self.mazeViewCenterConstraint.constant = 600;
-                [self.view layoutIfNeeded];
-                [self recreateMaze];
-                [self.checkbox setOn:NO animated:YES];
+        } else {
+            self.round++;
+            self.size++;
+            
+            [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
+                self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
+                self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL f){
+                [self.checkbox setOn:YES animated:YES];
                 [UIView animateWithDuration:1 animations:^{
-                    self.mazeViewCenterConstraint.constant = 0;
-                    self.timerView.alpha = 1;
+                    self.mazeViewCenterConstraint.constant = -600;
                     [self.view layoutIfNeeded];
-                } completion:nil];
+                } completion:^(BOOL finished) {
+                    self.mazeViewCenterConstraint.constant = 600;
+                    [self.view layoutIfNeeded];
+                    [self recreateMaze];
+                    [self.checkbox setOn:NO animated:YES];
+                    [UIView animateWithDuration:1 animations:^{
+                        self.mazeViewCenterConstraint.constant = 0;
+                        self.timerView.alpha = 1;
+                        [self.view layoutIfNeeded];
+                    } completion:nil];
+                }];
             }];
-        }];
+        }
     }
 }
 
