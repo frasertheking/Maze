@@ -12,5 +12,6 @@
 
 @property (nonatomic) BOOL completed;
 @property (nonatomic, weak) UIView* delegate;
+@property (nonatomic) int level;
 
 @end

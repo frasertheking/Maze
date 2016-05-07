@@ -48,6 +48,7 @@
 
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    ((AdventurePathView*)self.delegate).level = self.level;
     [(AdventurePathView*)self.delegate segueToGame];
 }
 

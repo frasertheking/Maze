@@ -7,6 +7,7 @@
 //
 
 #import "AdventurePathView.h"
+#import "AdventureMazeViewController.h"
 
 @implementation AdventurePathView
 
@@ -26,25 +27,45 @@
     self.bottomView.alpha = 0.6;
     
     self.level1View.delegate = self;
+    self.level1View.level = 1;
     self.level2View.delegate = self;
+    self.level2View.level = 2;
     self.level3View.delegate = self;
+    self.level3View.level = 3;
     self.level4View.delegate = self;
+    self.level4View.level = 4;
     self.level5View.delegate = self;
+    self.level5View.level = 5;
     self.level6View.delegate = self;
+    self.level6View.level = 6;
     self.level7View.delegate = self;
+    self.level7View.level = 7;
     self.level8View.delegate = self;
+    self.level8View.level = 8;
     self.level9View.delegate = self;
+    self.level9View.level = 9;
     self.level10View.delegate = self;
+    self.level10View.level = 10;
     self.level11View.delegate = self;
+    self.level11View.level = 11;
     self.level12View.delegate = self;
+    self.level12View.level = 12;
     self.level13View.delegate = self;
+    self.level13View.level = 13;
     self.level14View.delegate = self;
+    self.level14View.level = 14;
     self.level15View.delegate = self;
+    self.level15View.level = 15;
     self.level16View.delegate = self;
+    self.level16View.level = 16;
     self.level17View.delegate = self;
+    self.level17View.level = 17;
     self.level18View.delegate = self;
+    self.level18View.level = 18;
     self.level19View.delegate = self;
+    self.level19View.level = 19;
     self.level20View.delegate = self;
+    self.level20View.level = 20;
 }
 
 -(void)setLevelComplete:(int)level {
@@ -138,6 +159,7 @@
 }
 
 - (void)segueToGame {
+ //   ((AdventureMazeViewController*)self.delegate).level = self.level;
     [self.delegate performSegueWithIdentifier:@"adventureGameSegue" sender:self.delegate];
 }
 

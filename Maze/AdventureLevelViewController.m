@@ -41,10 +41,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.size = 10;
+    self.size = 8;
     self.itemType = -1;
     self.round = 1;
-    self.timeRemaining = 50;
+    self.timeRemaining = 70;
     self.bonusTimesCollected = 0;
     self.mazeView.isAdventureMode = YES;
     
@@ -180,7 +180,7 @@
     if (!self.assertFailed) {
         if (self.round == 5) {
             self.itemType = -1;
-            self.timeRemaining = 50;
+            self.timeRemaining = 70;
             self.itemImage.image = nil;
             self.inventoryView.alpha = 0;
             self.mazeView.score = 0;
@@ -188,6 +188,11 @@
             self.mazeView.userInteractionEnabled = NO;
             self.timerView.alpha = 0;
             [self.timer invalidate];
+            
+            if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level) {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level] forKey:@"currentLevel"];
+            }
+            
             [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 self.mazeView.alpha = 0;
                 self.levelFinishedView.alpha = 1;
@@ -259,7 +264,7 @@
     [self.timerView.layer removeAllAnimations];
     self.levelAchieved = self.size;
     [self levelFailed];
-    self.size = 10;
+    self.size = 8;
 }
 
 -(void)freezeTime {
@@ -427,6 +432,10 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
+}
+
+-(void)dealloc {
+    
 }
 
 #pragma mark - Helpers

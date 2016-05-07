@@ -13,7 +13,7 @@
 #import "BEMCheckBox.h"
 #import <iAd/iAd.h>
 
-@interface AdventureLevelViewController : UIViewController
+@interface AdventureLevelViewController : UIViewController <ADBannerViewDelegate, MCBrowserViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UIView *timerView;
@@ -29,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UIView *levelFailedView;
 @property (nonatomic, weak) IBOutlet UIView *levelFinishedView;
+@property (nonatomic) int level;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;

@@ -8,6 +8,7 @@
 
 #import "AdventureMazeViewController.h"
 #import "StarBackgroundScene.h"
+#import "AdventureLevelViewController.h"
 
 @interface AdventureMazeViewController ()
 
@@ -36,6 +37,11 @@
     
     [self setGradientBackground];
     [self setupParticles];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.currentLevel = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"];
     [self updateForCurrentLevel];
 }
 
@@ -110,6 +116,11 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    AdventureLevelViewController *vc = [segue destinationViewController];
+    vc.level = self.level;
+}
+
+-(void)dealloc {
     
 }
 

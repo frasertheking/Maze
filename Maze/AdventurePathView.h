@@ -37,7 +37,8 @@
 @property (nonatomic, weak) IBOutlet AdventureLocationView *level19View;
 @property (nonatomic, weak) IBOutlet AdventureLocationView *level20View;
 
-@property (nonatomic) UIViewController* delegate;
+@property (nonatomic, weak) UIViewController* delegate;
+@property (nonatomic) int level;
 
 -(void)setLevelComplete:(int)level;
 -(void)setAllLevelsComplete;
