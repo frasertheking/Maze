@@ -12,7 +12,7 @@
 @interface AdventureMazeViewController ()
 
 @property (nonatomic, weak) IBOutlet UIView* contentView;
-@property (nonatomic, weak) IBOutlet UIView* scrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView* scrollView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* contentViewHeightConstraint;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentLevel = 35;
+    self.currentLevel = 1;
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
     self.path1.delegate = self;
@@ -39,38 +39,48 @@
     [self updateForCurrentLevel];
 }
 
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250) > (self.contentView.frame.size.height - self.view.frame.size.height)) {
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)];
+    } else if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250) > 0) {
+        [self.scrollView setContentOffset:CGPointMake(0, (self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250)];
+    }
+}
+
 - (void)updateForCurrentLevel {
-    if (self.currentLevel >= 20) {
+    if (self.currentLevel > 20) {
         [self.path1 setAllLevelsComplete];
     } else {
-        for (int i = 1; i <= self.currentLevel; i++) {
+        for (int i = 1; i < self.currentLevel; i++) {
             [self.path1 setLevelComplete:i];
         }
     }
     
-    if (self.currentLevel >= 40) {
+    if (self.currentLevel > 40) {
         [self.path2 setAllLevelsComplete];
     } else {
-        for (int i = 21; i <= self.currentLevel; i++) {
+        for (int i = 21; i < self.currentLevel; i++) {
             [self.path2 setLevelComplete:i % 20];
         }
     }
     
-    if (self.currentLevel >= 60) {
+    if (self.currentLevel > 60) {
         [self.path3 setAllLevelsComplete];
     } else {
-        for (int i = 41; i <= self.currentLevel; i++) {
+        for (int i = 41; i < self.currentLevel; i++) {
             [self.path3 setLevelComplete:i % 20];
         }
     }
     
-    if (self.currentLevel >= 80) {
+    if (self.currentLevel > 80) {
         [self.path4 setAllLevelsComplete];
-        for (int i = 81; i <= self.currentLevel; i++) {
+        for (int i = 81; i < self.currentLevel; i++) {
             [self.path5 setLevelComplete:i % 20];
         }
     } else {
-        for (int i = 61; i <= self.currentLevel; i++) {
+        for (int i = 61; i < self.currentLevel; i++) {
             [self.path4 setLevelComplete:i % 20];
         }
     }
