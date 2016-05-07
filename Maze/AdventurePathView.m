@@ -21,10 +21,10 @@
 }
 
 -(void) setupViews {
-    self.topLeftView.alpha = 0.6;
-    self.middleView.alpha = 0.6;
-    self.bottomRightView.alpha = 0.6;
-    self.bottomView.alpha = 0.6;
+    self.topLeftView.alpha = 0.4;
+    self.middleView.alpha = 0.4;
+    self.bottomRightView.alpha = 0.4;
+    self.bottomView.alpha = 0.4;
 
     self.level1View.delegate = self;
     self.level1View.level = 1 + 20*self.pathNum;
@@ -66,6 +66,11 @@
     self.level19View.level = 19 + 20*self.pathNum;
     self.level20View.delegate = self;
     self.level20View.level = 20 + 20*self.pathNum;
+    
+    self.topLabel.text = [NSString stringWithFormat:@"World\n%d", (self.pathNum*2+1)];
+    self.topLabel.alpha = 0.8;
+    self.bottomLabel.text = [NSString stringWithFormat:@"World\n%d", (self.pathNum*2+2)];
+    self.bottomLabel.alpha = 0.8;
     
     [self.level1View updateBackgrounds];
     [self.level2View updateBackgrounds];
