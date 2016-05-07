@@ -7,6 +7,7 @@
 //
 
 #import "AdventureLocationView.h"
+#import "AdventurePathView.h"
 #import "Appdelegate.h"
 
 @implementation AdventureLocationView
@@ -15,17 +16,15 @@
 
 - (void)initialize{
     self.backgroundColor = [UIColor clearColor];
-    
-   // if (self.completed) {
-   //     self.backgroundColor = ORANGE;
-   // } else {
-        self.backgroundColor = PALE;
-   // }
 
+    self.backgroundColor = PALE;
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.masksToBounds = YES;
     self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
     self.layer.borderWidth = 1;
+    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [self addGestureRecognizer:singleFingerTap];
 }
 
 - (id)initWithCoder:(NSCoder *)aCoder{
@@ -45,6 +44,11 @@
 - (void)setCompleted:(BOOL)completed {
     _completed = completed;
     self.backgroundColor = ORANGE;
+}
+
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [(AdventurePathView*)self.delegate segueToGame];
 }
 
 @end

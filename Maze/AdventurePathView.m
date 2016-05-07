@@ -24,6 +24,27 @@
     self.middleView.alpha = 0.6;
     self.bottomRightView.alpha = 0.6;
     self.bottomView.alpha = 0.6;
+    
+    self.level1View.delegate = self;
+    self.level2View.delegate = self;
+    self.level3View.delegate = self;
+    self.level4View.delegate = self;
+    self.level5View.delegate = self;
+    self.level6View.delegate = self;
+    self.level7View.delegate = self;
+    self.level8View.delegate = self;
+    self.level9View.delegate = self;
+    self.level10View.delegate = self;
+    self.level11View.delegate = self;
+    self.level12View.delegate = self;
+    self.level13View.delegate = self;
+    self.level14View.delegate = self;
+    self.level15View.delegate = self;
+    self.level16View.delegate = self;
+    self.level17View.delegate = self;
+    self.level18View.delegate = self;
+    self.level19View.delegate = self;
+    self.level20View.delegate = self;
 }
 
 -(void)setLevelComplete:(int)level {
@@ -114,6 +135,10 @@
     self.level18View.completed = YES;
     self.level19View.completed = YES;
     self.level20View.completed = YES;
+}
+
+- (void)segueToGame {
+    [self.delegate performSegueWithIdentifier:@"adventureGameSegue" sender:self.delegate];
 }
 
 @end

@@ -28,6 +28,12 @@
     self.currentLevel = 35;
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
+    self.path1.delegate = self;
+    self.path2.delegate = self;
+    self.path3.delegate = self;
+    self.path4.delegate = self;
+    self.path5.delegate = self;
+    
     [self setGradientBackground];
     [self setupParticles];
     [self updateForCurrentLevel];
@@ -91,6 +97,10 @@
     theViewGradient.frame = self.view.bounds;
     
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
 }
 
 #pragma mark - IBActions

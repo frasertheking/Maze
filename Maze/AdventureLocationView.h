@@ -11,5 +11,6 @@
 @interface AdventureLocationView : UIView
 
 @property (nonatomic) BOOL completed;
+@property (nonatomic, weak) UIView* delegate;
 
 @end
