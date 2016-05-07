@@ -184,7 +184,7 @@
 }
 
 - (void)segueToGame {
- //   ((AdventureMazeViewController*)self.delegate).level = self.level;
+    ((AdventureMazeViewController*)self.delegate).level = self.level;
     [self.delegate performSegueWithIdentifier:@"adventureGameSegue" sender:self.delegate];
 }
 

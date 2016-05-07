@@ -45,12 +45,14 @@
 }
 
 - (void)updateBackgrounds {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] > self.level ) {
+    self.userInteractionEnabled = YES;
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] > (self.level-1)) {
         self.backgroundColor = SEVERITY_GREEN;
     } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] == (self.level-1)) {
         self.backgroundColor = ORANGE;
     } else {
         self.backgroundColor = SEVERITY_YELLOW;
+        self.userInteractionEnabled = NO;
     }
 }
 
