@@ -53,6 +53,7 @@
     [self.path5 reinitialize];
     
     [self updateForCurrentLevel];
+    self.currentLevelLabel.text = [NSString stringWithFormat:@"Current Level: %ld", ((long)[[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"]+1)];
 }
 
 -(void)viewDidLayoutSubviews {
@@ -142,10 +143,6 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
-}
-
--(void)dealloc {
-    
 }
 
 @end

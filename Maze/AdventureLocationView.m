@@ -10,6 +10,12 @@
 #import "AdventurePathView.h"
 #import "Appdelegate.h"
 
+@interface AdventureLocationView ()
+
+@property (nonatomic) UILabel *levelLabel;
+
+@end
+
 @implementation AdventureLocationView
 
 @synthesize completed = _completed;
@@ -21,6 +27,11 @@
     self.layer.masksToBounds = YES;
     self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
     self.layer.borderWidth = 1;
+
+    self.levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
+    self.levelLabel.textAlignment = NSTextAlignmentCenter;
+    self.levelLabel.font = [UIFont systemFontOfSize:10];
+    [self addSubview:self.levelLabel];
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self addGestureRecognizer:singleFingerTap];
@@ -42,6 +53,7 @@
 
 - (void)setCompleted:(BOOL)completed {
     _completed = completed;
+    self.levelLabel.text = [NSString stringWithFormat:@"%d", self.level];
 }
 
 - (void)updateBackgrounds {
@@ -54,6 +66,7 @@
         self.backgroundColor = SEVERITY_YELLOW;
         self.userInteractionEnabled = NO;
     }
+    self.levelLabel.text = [NSString stringWithFormat:@"%d", self.level];
 }
 
 
