@@ -13,7 +13,7 @@
 #import "BEMCheckBox.h"
 #import <iAd/iAd.h>
 
-@interface AdventureLevelViewController : UIViewController <ADBannerViewDelegate, MCBrowserViewControllerDelegate>
+@interface AdventureLevelViewController : UIViewController <ADBannerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet UIView *timerView;

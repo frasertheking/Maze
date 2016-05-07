@@ -23,7 +23,7 @@
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"firstRun"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"firstRun"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"adState"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"currentLevel"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"currentLevel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     

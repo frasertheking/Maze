@@ -39,9 +39,11 @@
 
 @property (nonatomic, weak) UIViewController* delegate;
 @property (nonatomic) int level;
+@property (nonatomic) int pathNum;
 
 -(void)setLevelComplete:(int)level;
 -(void)setAllLevelsComplete;
 -(void)segueToGame;
+-(void)reinitialize;
 
 @end

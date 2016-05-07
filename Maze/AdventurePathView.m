@@ -25,47 +25,68 @@
     self.middleView.alpha = 0.6;
     self.bottomRightView.alpha = 0.6;
     self.bottomView.alpha = 0.6;
-    
+
     self.level1View.delegate = self;
-    self.level1View.level = 1;
+    self.level1View.level = 1 + 20*self.pathNum;
     self.level2View.delegate = self;
-    self.level2View.level = 2;
+    self.level2View.level = 2 + 20*self.pathNum;
     self.level3View.delegate = self;
-    self.level3View.level = 3;
+    self.level3View.level = 3 + 20*self.pathNum;
     self.level4View.delegate = self;
-    self.level4View.level = 4;
+    self.level4View.level = 4 + 20*self.pathNum;
     self.level5View.delegate = self;
-    self.level5View.level = 5;
+    self.level5View.level = 5 + 20*self.pathNum;
     self.level6View.delegate = self;
-    self.level6View.level = 6;
+    self.level6View.level = 6 + 20*self.pathNum;
     self.level7View.delegate = self;
-    self.level7View.level = 7;
+    self.level7View.level = 7 + 20*self.pathNum;
     self.level8View.delegate = self;
-    self.level8View.level = 8;
+    self.level8View.level = 8 + 20*self.pathNum;
     self.level9View.delegate = self;
-    self.level9View.level = 9;
+    self.level9View.level = 9 + 20*self.pathNum;
     self.level10View.delegate = self;
-    self.level10View.level = 10;
+    self.level10View.level = 10 + 20*self.pathNum;
     self.level11View.delegate = self;
-    self.level11View.level = 11;
+    self.level11View.level = 11 + 20*self.pathNum;
     self.level12View.delegate = self;
-    self.level12View.level = 12;
+    self.level12View.level = 12 + 20*self.pathNum;
     self.level13View.delegate = self;
-    self.level13View.level = 13;
+    self.level13View.level = 13 + 20*self.pathNum;
     self.level14View.delegate = self;
-    self.level14View.level = 14;
+    self.level14View.level = 14 + 20*self.pathNum;
     self.level15View.delegate = self;
-    self.level15View.level = 15;
+    self.level15View.level = 15 + 20*self.pathNum;
     self.level16View.delegate = self;
-    self.level16View.level = 16;
+    self.level16View.level = 16 + 20*self.pathNum;
     self.level17View.delegate = self;
-    self.level17View.level = 17;
+    self.level17View.level = 17 + 20*self.pathNum;
     self.level18View.delegate = self;
-    self.level18View.level = 18;
+    self.level18View.level = 18 + 20*self.pathNum;
     self.level19View.delegate = self;
-    self.level19View.level = 19;
+    self.level19View.level = 19 + 20*self.pathNum;
     self.level20View.delegate = self;
-    self.level20View.level = 20;
+    self.level20View.level = 20 + 20*self.pathNum;
+    
+    [self.level1View updateBackgrounds];
+    [self.level2View updateBackgrounds];
+    [self.level3View updateBackgrounds];
+    [self.level4View updateBackgrounds];
+    [self.level5View updateBackgrounds];
+    [self.level6View updateBackgrounds];
+    [self.level7View updateBackgrounds];
+    [self.level8View updateBackgrounds];
+    [self.level9View updateBackgrounds];
+    [self.level10View updateBackgrounds];
+    [self.level11View updateBackgrounds];
+    [self.level12View updateBackgrounds];
+    [self.level13View updateBackgrounds];
+    [self.level14View updateBackgrounds];
+    [self.level15View updateBackgrounds];
+    [self.level16View updateBackgrounds];
+    [self.level17View updateBackgrounds];
+    [self.level18View updateBackgrounds];
+    [self.level19View updateBackgrounds];
+    [self.level20View updateBackgrounds];
 }
 
 -(void)setLevelComplete:(int)level {
@@ -156,6 +177,10 @@
     self.level18View.completed = YES;
     self.level19View.completed = YES;
     self.level20View.completed = YES;
+}
+
+-(void)reinitialize {
+    [self setupViews];
 }
 
 - (void)segueToGame {

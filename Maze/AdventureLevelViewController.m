@@ -189,11 +189,11 @@
             self.timerView.alpha = 0;
             [self.timer invalidate];
             
-            if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level) {
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level] forKey:@"currentLevel"];
+            if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level+1) {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level+1] forKey:@"currentLevel"];
             }
             
-            [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 self.mazeView.alpha = 0;
                 self.levelFinishedView.alpha = 1;
             } completion:nil];
@@ -401,6 +401,8 @@
 }
 
 - (IBAction)continueButtonClick:(id)sender {
+    [self.timer invalidate];
+    self.mazeView.delegate = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -432,10 +434,6 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
-}
-
--(void)dealloc {
-    
 }
 
 #pragma mark - Helpers
@@ -499,6 +497,10 @@
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
     [self timesUp];
     return YES;
+}
+
+-(void)dealloc {
+    
 }
 
 @end

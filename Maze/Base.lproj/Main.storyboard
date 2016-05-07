@@ -848,34 +848,34 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCU-X2-SVo">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="3305"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="3325"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zD-qp-CxH" customClass="AdventurePathView">
-                                                <rect key="frame" x="0.0" y="2690" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="2660" width="600" height="640"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="640" id="ECs-I9-9oP"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSq-FM-ovZ" customClass="AdventurePathView">
-                                                <rect key="frame" x="0.0" y="2060" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="2030" width="600" height="640"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="640" id="ldU-g0-nLT"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8z7-cg-9lE" customClass="AdventurePathView">
-                                                <rect key="frame" x="0.0" y="1430" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="1400" width="600" height="640"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="640" id="x8r-II-7Ez"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anF-EM-fNm" customClass="AdventurePathView">
-                                                <rect key="frame" x="0.0" y="800" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="770" width="600" height="640"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="640" id="Z62-xb-B6P"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ood-ej-c3q" customClass="AdventurePathView">
-                                                <rect key="frame" x="0.0" y="170" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="140" width="600" height="640"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="640" id="3nC-Lc-7e8"/>
                                                 </constraints>
@@ -890,7 +890,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9zD-qp-CxH" secondAttribute="trailing" id="0b4-cj-Iyl"/>
-                                            <constraint firstItem="Ood-ej-c3q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NCe-ga-6Bx" secondAttribute="bottom" constant="100" id="5I4-Zp-ZNh"/>
+                                            <constraint firstItem="Ood-ej-c3q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NCe-ga-6Bx" secondAttribute="bottom" constant="70" id="5I4-Zp-ZNh"/>
                                             <constraint firstItem="NCe-ga-6Bx" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" constant="16" id="8oH-wb-otX"/>
                                             <constraint firstItem="anF-EM-fNm" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="8ub-lI-wvY"/>
                                             <constraint firstItem="Ood-ej-c3q" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="BYI-6i-SEy"/>
@@ -906,7 +906,7 @@
                                             <constraint firstAttribute="trailing" secondItem="8z7-cg-9lE" secondAttribute="trailing" id="ize-8s-8EF"/>
                                             <constraint firstItem="9zD-qp-CxH" firstAttribute="top" secondItem="OSq-FM-ovZ" secondAttribute="bottom" constant="-10" id="ocn-M1-6OB"/>
                                             <constraint firstItem="8z7-cg-9lE" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="qqA-FA-FDL"/>
-                                            <constraint firstAttribute="bottom" secondItem="9zD-qp-CxH" secondAttribute="bottom" constant="-25" id="uCB-w5-uJH"/>
+                                            <constraint firstAttribute="bottom" secondItem="9zD-qp-CxH" secondAttribute="bottom" constant="25" id="uCB-w5-uJH"/>
                                             <constraint firstItem="OSq-FM-ovZ" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="zb4-rW-yvl"/>
                                         </constraints>
                                     </view>

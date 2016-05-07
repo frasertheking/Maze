@@ -16,8 +16,7 @@
 
 - (void)initialize{
     self.backgroundColor = [UIColor clearColor];
-
-    self.backgroundColor = PALE;
+    
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.masksToBounds = YES;
     self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
@@ -43,7 +42,16 @@
 
 - (void)setCompleted:(BOOL)completed {
     _completed = completed;
-    self.backgroundColor = ORANGE;
+}
+
+- (void)updateBackgrounds {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] > self.level ) {
+        self.backgroundColor = SEVERITY_GREEN;
+    } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] == (self.level-1)) {
+        self.backgroundColor = ORANGE;
+    } else {
+        self.backgroundColor = SEVERITY_YELLOW;
+    }
 }
 
 

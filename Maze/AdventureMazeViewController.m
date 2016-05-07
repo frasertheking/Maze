@@ -26,22 +26,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentLevel = 1;
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
-    self.path1.delegate = self;
-    self.path2.delegate = self;
-    self.path3.delegate = self;
-    self.path4.delegate = self;
-    self.path5.delegate = self;
     
     [self setGradientBackground];
     [self setupParticles];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.currentLevel = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.path1.pathNum = 0;
+    self.path1.delegate = self;
+    self.path2.pathNum = 1;
+    self.path2.delegate = self;
+    self.path3.pathNum = 2;
+    self.path3.delegate = self;
+    self.path4.pathNum = 3;
+    self.path4.delegate = self;
+    self.path5.pathNum = 4;
+    self.path5.delegate = self;
+    [self.path1 reinitialize];
+    [self.path2 reinitialize];
+    [self.path3 reinitialize];
+    [self.path4 reinitialize];
+    [self.path5 reinitialize];
+    
     [self updateForCurrentLevel];
 }
 
@@ -120,10 +130,6 @@
     vc.level = self.level;
 }
 
--(void)dealloc {
-    
-}
-
 #pragma mark - IBActions
 
 - (IBAction)backPressed:(id)sender {
@@ -136,6 +142,10 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
+}
+
+-(void)dealloc {
+    
 }
 
 @end

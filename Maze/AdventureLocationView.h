@@ -14,4 +14,6 @@
 @property (nonatomic, weak) UIView* delegate;
 @property (nonatomic) int level;
 
+- (void)updateBackgrounds;
+
 @end
