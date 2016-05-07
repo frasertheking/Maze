@@ -33,6 +33,7 @@
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) int round;
+@property (nonatomic) int myScore;
 
 @end
 
@@ -44,6 +45,7 @@
     self.size = 8;
     self.itemType = -1;
     self.round = 1;
+    self.myScore = 0;
     self.timeRemaining = 70;
     self.bonusTimesCollected = 0;
     self.mazeView.isAdventureMode = YES;
@@ -107,6 +109,7 @@
     [self setupParallaxEffect];
     [self resetCountdown];
     [self setupAds];
+    [self showScores];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -172,6 +175,9 @@
 
 - (void)recreateMazeWithTimer {
     self.timerView.alpha = 1;
+    self.myScore = 0;
+    [self updateScores];
+    [self showScores];
     [self resetCountdown];
     [self recreateMaze];
 }
@@ -188,6 +194,7 @@
             self.mazeView.userInteractionEnabled = NO;
             self.timerView.alpha = 0;
             [self.timer invalidate];
+            [self hideScores];
             
             if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level+1) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level] forKey:@"currentLevel"];
@@ -200,6 +207,8 @@
         } else {
             self.round++;
             self.size++;
+            self.myScore++;
+            [self updateScores];
             
             [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
                 self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
@@ -273,7 +282,7 @@
 
 -(void)levelFailed {
     self.itemType = -1;
-    self.timeRemaining = 35;
+    self.timeRemaining = 70;
     self.itemImage.image = nil;
     self.inventoryView.alpha = 0;
     self.mazeView.score = 0;
@@ -281,6 +290,7 @@
     self.bonusTimesCollected = 0;
     self.mazeView.userInteractionEnabled = NO;
     [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
+    [self hideScores];
     
     [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.mazeView.alpha = 0;
@@ -410,6 +420,7 @@
     [self recreateMazeWithTimer];
     self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
     self.mazeView.userInteractionEnabled = YES;
+    [self showScores];
     [self.mazeView.layer removeAllAnimations];
     [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
@@ -463,6 +474,76 @@
     scaleAnimation.toValue = [NSNumber numberWithFloat:0.9];
     [view.layer addAnimation:scaleAnimation forKey:@"scale"];
 }
+
+#pragma mark - Score stuff
+
+- (void)hideScores {
+    self.score1View.hidden = YES;
+    self.score2View.hidden = YES;
+    self.score3View.hidden = YES;
+    self.score4View.hidden = YES;
+    self.score5View.hidden = YES;
+}
+
+- (void)showScores {
+    self.score1View.hidden = NO;
+    self.score2View.hidden = NO;
+    self.score3View.hidden = NO;
+    self.score4View.hidden = NO;
+    self.score5View.hidden = NO;
+    [self setupColors];
+}
+
+- (void)setupColors {
+    self.score1View.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.score2View.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.score3View.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.score4View.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+    self.score5View.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.15f];
+}
+
+- (void)updateScores {
+    switch (self.myScore) {
+        case 1:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.score1View.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            }];
+        }
+            break;
+        case 2:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.score2View.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            }];
+        }
+            break;
+        case 3:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.score3View.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            }];
+        }
+            break;
+        case 4:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.score4View.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            }];
+        }
+            break;
+        case 5:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.score5View.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.9f];
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 
 #pragma mark - iAd Delegates
 

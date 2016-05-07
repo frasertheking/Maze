@@ -29,6 +29,11 @@
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UIView *levelFailedView;
 @property (nonatomic, weak) IBOutlet UIView *levelFinishedView;
+@property (weak, nonatomic) IBOutlet UIView *score1View;
+@property (weak, nonatomic) IBOutlet UIView *score2View;
+@property (weak, nonatomic) IBOutlet UIView *score3View;
+@property (weak, nonatomic) IBOutlet UIView *score4View;
+@property (weak, nonatomic) IBOutlet UIView *score5View;
 @property (nonatomic) int level;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
