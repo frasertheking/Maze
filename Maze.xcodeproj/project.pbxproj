@@ -11,6 +11,7 @@
 		43426C9E1CC3F6EE001E6830 /* BonusTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43426C9D1CC3F6EE001E6830 /* BonusTimeView.m */; };
 		434AD6581CDBE2F8004E4BA8 /* AdventurePathView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 434AD6571CDBE2F8004E4BA8 /* AdventurePathView.xib */; };
 		434AD65B1CDBE428004E4BA8 /* AdventurePathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 434AD65A1CDBE428004E4BA8 /* AdventurePathView.m */; };
+		434AD65E1CDD759C004E4BA8 /* AdventureLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434AD65D1CDD759C004E4BA8 /* AdventureLevelViewController.m */; };
 		4368A27B1C83D2E9006E1779 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27A1C83D2E9006E1779 /* main.m */; };
 		4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A27D1C83D2E9006E1779 /* AppDelegate.m */; };
 		4368A2811C83D2E9006E1779 /* MazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368A2801C83D2E9006E1779 /* MazeViewController.m */; };
@@ -69,6 +70,8 @@
 		434AD6571CDBE2F8004E4BA8 /* AdventurePathView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdventurePathView.xib; sourceTree = "<group>"; };
 		434AD6591CDBE428004E4BA8 /* AdventurePathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdventurePathView.h; sourceTree = "<group>"; };
 		434AD65A1CDBE428004E4BA8 /* AdventurePathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdventurePathView.m; sourceTree = "<group>"; };
+		434AD65C1CDD759C004E4BA8 /* AdventureLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdventureLevelViewController.h; sourceTree = "<group>"; };
+		434AD65D1CDD759C004E4BA8 /* AdventureLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdventureLevelViewController.m; sourceTree = "<group>"; };
 		4368A2761C83D2E9006E1779 /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368A27A1C83D2E9006E1779 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4368A27C1C83D2E9006E1779 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 				43BAABC31CC9962A009F4C50 /* CasualMazeViewController.m */,
 				43B96F701CD172BF00B3D7C2 /* ChallengeMazeViewController.h */,
 				43B96F711CD172BF00B3D7C2 /* ChallengeMazeViewController.m */,
+				434AD65C1CDD759C004E4BA8 /* AdventureLevelViewController.h */,
+				434AD65D1CDD759C004E4BA8 /* AdventureLevelViewController.m */,
 			);
 			name = MazeViewControllers;
 			sourceTree = "<group>";
@@ -577,6 +582,7 @@
 				4372D8551CDBD7F300D2408D /* AdventureLocationView.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				43B96F6F1CD170CB00B3D7C2 /* MCManager.m in Sources */,
+				434AD65E1CDD759C004E4BA8 /* AdventureLevelViewController.m in Sources */,
 				43A65B311CCAFBB6001431FC /* LeaderboardEntryCell.m in Sources */,
 				437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */,
 				43BAABC41CC9962A009F4C50 /* CasualMazeViewController.m in Sources */,

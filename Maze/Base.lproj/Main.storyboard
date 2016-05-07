@@ -1497,10 +1497,10 @@
             </objects>
             <point key="canvasLocation" x="426" y="1105"/>
         </scene>
-        <!--Maze View Controller-->
+        <!--Adventure Level View Controller-->
         <scene sceneID="oUH-xt-TNZ">
             <objects>
-                <viewController id="jNy-WC-Ht5" customClass="MazeViewController" sceneMemberID="viewController">
+                <viewController id="jNy-WC-Ht5" customClass="AdventureLevelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fTC-n7-T7S"/>
                         <viewControllerLayoutGuide type="bottom" id="vO3-vR-Qol"/>
@@ -1536,15 +1536,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agn-5E-rFk">
-                                <rect key="frame" x="150" y="471" width="300" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="agL-pr-ADb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeI-BI-U80" userLabel="InventoryView">
                                 <rect key="frame" x="200" y="79" width="200" height="60"/>
                                 <subviews>
@@ -1697,7 +1688,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lgG-Ug-Iao" secondAttribute="trailing" id="03B-0y-d7I"/>
-                            <constraint firstItem="OeI-BI-U80" firstAttribute="leading" secondItem="agn-5E-rFk" secondAttribute="trailing" constant="20" id="1Sp-F6-5dM"/>
                             <constraint firstItem="100-4J-60R" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="1v9-vK-abw"/>
                             <constraint firstItem="100-4J-60R" firstAttribute="top" secondItem="Jmk-to-SSK" secondAttribute="bottom" constant="25" id="2uQ-Qn-H1q"/>
                             <constraint firstAttribute="trailing" secondItem="OeI-BI-U80" secondAttribute="trailing" constant="60" id="6IA-Od-0hJ"/>
@@ -1710,28 +1700,22 @@
                             <constraint firstItem="OeI-BI-U80" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="EeJ-wa-cgx"/>
                             <constraint firstAttribute="bottom" secondItem="lgG-Ug-Iao" secondAttribute="bottom" id="FPW-bm-pXO"/>
                             <constraint firstItem="OeI-BI-U80" firstAttribute="leading" secondItem="sy6-r8-3Cc" secondAttribute="leading" constant="60" id="MuA-Mh-q0L"/>
-                            <constraint firstItem="100-4J-60R" firstAttribute="leading" secondItem="agn-5E-rFk" secondAttribute="leading" id="NPD-He-wx7"/>
                             <constraint firstItem="100-4J-60R" firstAttribute="centerY" secondItem="sy6-r8-3Cc" secondAttribute="centerY" multiplier="1.05" id="OVk-b0-j75"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="top" secondItem="100-4J-60R" secondAttribute="bottom" constant="10" id="QIG-XP-Nri"/>
                             <constraint firstItem="CyB-lC-JfR" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="R21-7y-kIV"/>
-                            <constraint firstItem="agn-5E-rFk" firstAttribute="top" secondItem="Jmk-to-SSK" secondAttribute="bottom" constant="12" id="RsK-bi-CTP"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="top" secondItem="sy6-r8-3Cc" secondAttribute="top" constant="75" id="SVC-8x-Va7"/>
                             <constraint firstAttribute="trailing" secondItem="Jmk-to-SSK" secondAttribute="trailing" constant="40" id="SzP-eJ-YTW"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="WSN-cv-7xd"/>
-                            <constraint firstItem="agn-5E-rFk" firstAttribute="top" secondItem="Jmk-to-SSK" secondAttribute="bottom" constant="8" id="WWg-lP-rSL"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="leading" secondItem="sy6-r8-3Cc" secondAttribute="leading" constant="40" id="aOl-sF-T4V"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="top" secondItem="OeI-BI-U80" secondAttribute="bottom" constant="8" id="bWh-h2-dcS"/>
                             <constraint firstAttribute="trailing" secondItem="lgG-Ug-Iao" secondAttribute="trailing" id="eiO-mP-BP6"/>
                             <constraint firstItem="lgG-Ug-Iao" firstAttribute="leading" secondItem="sy6-r8-3Cc" secondAttribute="leading" id="f3u-JS-YXh"/>
                             <constraint firstItem="Jmk-to-SSK" firstAttribute="top" secondItem="100-4J-60R" secondAttribute="bottom" constant="10" id="fOg-Fu-1Z7"/>
-                            <constraint firstItem="agn-5E-rFk" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="gnG-wi-l7i"/>
                             <constraint firstItem="lgG-Ug-Iao" firstAttribute="top" secondItem="sy6-r8-3Cc" secondAttribute="top" id="jbc-O7-Xu2"/>
-                            <constraint firstItem="agn-5E-rFk" firstAttribute="top" secondItem="100-4J-60R" secondAttribute="bottom" constant="6" id="ngP-Oe-ux7"/>
                             <constraint firstItem="100-4J-60R" firstAttribute="top" secondItem="Jmk-to-SSK" secondAttribute="bottom" constant="8" id="nnD-Od-IZv"/>
                             <constraint firstAttribute="bottom" secondItem="lgG-Ug-Iao" secondAttribute="bottom" id="oZG-dq-TyF"/>
                             <constraint firstItem="oht-5J-m5c" firstAttribute="centerY" secondItem="sy6-r8-3Cc" secondAttribute="centerY" id="omT-aD-cdF"/>
                             <constraint firstItem="eDB-zO-hAl" firstAttribute="centerX" secondItem="sy6-r8-3Cc" secondAttribute="centerX" id="sg2-qS-yig"/>
-                            <constraint firstItem="OeI-BI-U80" firstAttribute="centerY" secondItem="agn-5E-rFk" secondAttribute="centerY" id="y9y-6F-Q6t"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1744,21 +1728,15 @@
                                 <exclude reference="QIG-XP-Nri"/>
                                 <exclude reference="SVC-8x-Va7"/>
                                 <exclude reference="fOg-Fu-1Z7"/>
-                                <exclude reference="y9y-6F-Q6t"/>
-                                <exclude reference="1Sp-F6-5dM"/>
                                 <exclude reference="6IA-Od-0hJ"/>
                                 <exclude reference="MuA-Mh-q0L"/>
                                 <exclude reference="2uQ-Qn-H1q"/>
                                 <exclude reference="Cq1-RZ-zZM"/>
-                                <exclude reference="NPD-He-wx7"/>
-                                <exclude reference="WWg-lP-rSL"/>
-                                <exclude reference="RsK-bi-CTP"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="checkbox" destination="CyB-lC-JfR" id="cRa-Kd-Hwl"/>
-                        <outlet property="currentLevelLabel" destination="agn-5E-rFk" id="a5p-nY-Wys"/>
                         <outlet property="exitButton" destination="L9i-c2-Ibc" id="tHz-PQ-Kqk"/>
                         <outlet property="highScoreLabel" destination="IDO-0R-q8z" id="6iC-Df-bc5"/>
                         <outlet property="inventoryView" destination="OeI-BI-U80" id="xap-Ff-1o4"/>
