@@ -61,7 +61,7 @@
     [self.view addSubview:self.playButton];
     
     self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.leaderboardButton setTitle:@"Leaderboard" forState:UIControlStateNormal];
+    [self.leaderboardButton setTitle:@"Store" forState:UIControlStateNormal];
     self.leaderboardButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
     self.leaderboardButton.buttonColor = [UIColor ht_grapeFruitColor];
     self.leaderboardButton.shadowColor = [UIColor ht_grapeFruitDarkColor];

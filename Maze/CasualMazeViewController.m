@@ -231,6 +231,7 @@
 - (void)setupAds {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adState"]) {
         self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
+        self.adBanner.backgroundColor = [UIColor clearColor];
         self.adBanner.delegate = self;
     }
 }
