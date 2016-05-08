@@ -482,6 +482,7 @@
         [UIView animateWithDuration:0.15 animations:^{
             self.leaderboardTopButton.alpha = 0.33;
         } completion:^(BOOL finished) {
+            [self timesUp];
             [self performSegueWithIdentifier:@"showLeaderboardSegue" sender:self];
         }];
     }];
