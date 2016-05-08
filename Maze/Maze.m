@@ -33,18 +33,6 @@
 @property NSInteger powerUpX;
 @property NSInteger powerUpY;
 @property NSInteger powerUpType;
-@property BOOL powerOverwhelming;
-@property BOOL power;
-@property BOOL animate;
-@property BOOL finished;
-@property BOOL totalRandomColors;
-@property BOOL reRandomize;
-@property BOOL duality;
-@property BOOL kaleidoscope;
-@property BOOL pulse;
-@property BOOL timeTreasureLevel;
-@property BOOL showWhiteWall;
-@property BOOL backgroundFlash;
 
 @end
 
@@ -119,9 +107,9 @@ double rads = DEGREES_TO_RADIANS(180);
     }
     
     self.noTime = NO;
-    if (!self.isCasualMode && !self.isChallengeMode && !self.isAdventureMode) {
+    if (!self.isCasualMode && !self.isChallengeMode) {
         [self generateMazeDistractions];
-        if (self.mazeSize > 3) [self generateTimeBonuses];
+        if (self.mazeSize > 3 && !self.isAdventureMode) [self generateTimeBonuses];
     }
     
     if (self.isChallengeMode || self.isAdventureMode) self.power = NO;

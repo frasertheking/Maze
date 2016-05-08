@@ -34,6 +34,18 @@
 @property (nonatomic) NSNumber* seed;
 @property NSInteger score;
 @property (nonatomic) NSMutableArray* attemptArray;
+@property BOOL powerOverwhelming;
+@property BOOL power;
+@property BOOL animate;
+@property BOOL finished;
+@property BOOL totalRandomColors;
+@property BOOL reRandomize;
+@property BOOL duality;
+@property BOOL kaleidoscope;
+@property BOOL pulse;
+@property BOOL timeTreasureLevel;
+@property BOOL showWhiteWall;
+@property BOOL backgroundFlash;
 
 -(void)createMaze;
 -(void)solve;
