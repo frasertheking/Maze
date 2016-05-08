@@ -87,7 +87,7 @@
     [self.levelFailedView addSubview:self.restartButton];
     
     self.continueButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.continueButton setTitle:@"Continue" forState:UIControlStateNormal];
+    [self.continueButton setTitle:[NSString stringWithFormat:@"Level %d Complete", self.level] forState:UIControlStateNormal];
     self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 150, self.levelFailedView.frame.size.height - 50);
     self.continueButton.buttonColor = [UIColor ht_mintColor];
     self.continueButton.shadowColor = [UIColor ht_mintDarkColor];
@@ -112,7 +112,6 @@
     [self setupParticles];
     [self setupParallaxEffect];
     //[self resetCountdown];
-    [self setupAds];
     [self hideScores];
     [self goInThree];
 }
@@ -146,6 +145,7 @@
 - (void)goNow {
     self.countdownOver = YES;
     [self recreateMazeWithTimer];
+    [self setupAds];
     [UIView animateWithDuration:0.25 delay:0.1 options:0 animations:^{
         self.countdownLabel.alpha = 0;
         self.mazeView.alpha = 1;

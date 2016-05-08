@@ -112,7 +112,6 @@
     [self setupParticles];
     [self setupParallaxEffect];
    // [self resetCountdown];
-    [self setupAds];
     [self goInThree];
 }
 
@@ -145,6 +144,7 @@
 - (void)goNow {
     self.countdownOver = YES;
     [self recreateMaze];
+    [self setupAds];
     [UIView animateWithDuration:0.25 delay:0.1 options:0 animations:^{
         self.countdownLabel.alpha = 0;
         self.mazeView.alpha = 1;
