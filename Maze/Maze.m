@@ -124,7 +124,7 @@ double rads = DEGREES_TO_RADIANS(180);
         if (self.mazeSize > 3) [self generateTimeBonuses];
     }
     
-    if (self.isChallengeMode) self.power = NO;
+    if (self.isChallengeMode || self.isAdventureMode) self.power = NO;
 
     self.powerUpX = -1;
     self.powerUpY = -1;

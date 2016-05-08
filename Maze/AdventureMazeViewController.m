@@ -70,10 +70,12 @@
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.topLine.bounds byRoundingCorners: UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii: (CGSize){5, 5}].CGPath;
     self.topLine.layer.mask = maskLayer;
     
-    if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250) > (self.contentView.frame.size.height - self.view.frame.size.height)) {
+    self.currentLevel = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"];
+    
+    if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 100) > (self.contentView.frame.size.height - self.view.frame.size.height)) {
         [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)];
-    } else if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250) > 0) {
-        [self.scrollView setContentOffset:CGPointMake(0, (self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250)];
+    } else if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 100) > 0) {
+        [self.scrollView setContentOffset:CGPointMake(0, (self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 100)];
     }
 }
 
