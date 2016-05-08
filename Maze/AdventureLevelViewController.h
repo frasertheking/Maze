@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *score3View;
 @property (weak, nonatomic) IBOutlet UIView *score4View;
 @property (weak, nonatomic) IBOutlet UIView *score5View;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property (nonatomic) int level;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;

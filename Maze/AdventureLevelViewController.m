@@ -53,7 +53,7 @@
     [self setGradientBackground];
     self.mazeView.delegate = self;
     [self.mazeView setupGestureRecognizer:self.view];
-    [self.mazeView initMazeWithSize:self.size];
+    //[self.mazeView initMazeWithSize:self.size];
     self.mazeView.score = 0;
     self.topConstraint.constant = -150;
     self.bottomConstraint.constant = -150;
@@ -105,11 +105,15 @@
     self.checkbox.onFillColor = SEVERITY_GREEN;
     self.checkbox.onTintColor = SOLVE;
     
+    self.mazeView.alpha = 0;
+    self.timerView.alpha = 0;
+    
     [self setupParticles];
     [self setupParallaxEffect];
-    [self resetCountdown];
+    //[self resetCountdown];
     [self setupAds];
-    [self showScores];
+    [self hideScores];
+    [self goInThree];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -118,6 +122,35 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+#pragma mark - Countdown
+
+- (void)goInThree {
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInTwo) userInfo:nil repeats:NO];
+    self.countdownLabel.text = @"3";
+}
+
+- (void)goInTwo {
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInOne) userInfo:nil repeats:NO];
+    self.countdownLabel.text = @"2";
+}
+
+
+- (void)goInOne {
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goNow) userInfo:nil repeats:NO];
+    self.countdownLabel.text = @"1";
+}
+
+- (void)goNow {
+    [self recreateMazeWithTimer];
+    [UIView animateWithDuration:0.25 delay:0.1 options:0 animations:^{
+        self.countdownLabel.alpha = 0;
+        self.mazeView.alpha = 1;
+        self.timerView.alpha = 1;
+    } completion:^(BOOL finished) {
+        [self showScores];
+    }];
 }
 
 - (void)setupParticles {

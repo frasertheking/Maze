@@ -23,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet BEMCheckBox *checkbox;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
+@property (nonatomic, weak) IBOutlet UILabel *countdownLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
