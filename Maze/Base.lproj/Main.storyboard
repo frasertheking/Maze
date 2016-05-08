@@ -91,7 +91,6 @@
                         <outlet property="mazeView" destination="BH2-yX-rxo" id="pWr-Ce-Akd"/>
                         <outlet property="particleView" destination="IaX-ug-nvM" id="RpV-2D-3Go"/>
                         <segue destination="To7-x9-SGd" kind="show" identifier="playSegue" id="5mO-50-0Yd"/>
-                        <segue destination="5tG-ex-CPo" kind="show" identifier="leaderboardSegue" id="a0C-vz-DUy"/>
                         <segue destination="G9Z-97-1cQ" kind="show" identifier="settingsSegue" id="Kwo-hp-p7e"/>
                     </connections>
                 </viewController>
@@ -569,12 +568,25 @@
                                             <action selector="exitGamePressed:" destination="BYZ-38-t0r" eventType="touchDown" id="oJo-Qa-B9r"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" alpha="0.33000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0S-9u-TLw">
+                                        <rect key="frame" x="43" y="30" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="XPE-b3-g73"/>
+                                            <constraint firstAttribute="width" constant="35" id="jTM-dp-qVO"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="leaderboard"/>
+                                        <connections>
+                                            <action selector="leaderboardPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="bL4-Tj-Oj7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Mz0-ck-92W" firstAttribute="top" secondItem="Edp-id-Za9" secondAttribute="top" constant="30" id="Bw4-Xq-yuM"/>
                                     <constraint firstItem="Mz0-ck-92W" firstAttribute="centerX" secondItem="Edp-id-Za9" secondAttribute="centerX" multiplier="1.8" id="LsB-2y-kCS"/>
                                     <constraint firstAttribute="trailing" secondItem="Mz0-ck-92W" secondAttribute="trailing" constant="10" id="PkT-vv-d9v"/>
+                                    <constraint firstItem="u0S-9u-TLw" firstAttribute="centerX" secondItem="Edp-id-Za9" secondAttribute="centerX" multiplier="0.2" id="T4r-x5-p2c"/>
+                                    <constraint firstItem="u0S-9u-TLw" firstAttribute="top" secondItem="Edp-id-Za9" secondAttribute="top" constant="30" id="yc5-NX-zdp"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -809,6 +821,7 @@
                         <outlet property="highScoreLabel" destination="Qgg-tw-Zad" id="l6k-8p-iJS"/>
                         <outlet property="inventoryView" destination="iAh-r6-qwD" id="aly-ic-4Lr"/>
                         <outlet property="itemImage" destination="4vV-jE-3Lp" id="2s5-dm-5by"/>
+                        <outlet property="leaderboardTopButton" destination="u0S-9u-TLw" id="PjF-Ke-Rj4"/>
                         <outlet property="leadingTimerConstraint" destination="ExA-Qj-5N6" id="G8W-1r-3JV"/>
                         <outlet property="levelAchievedLabel" destination="18p-81-zrW" id="qdm-ap-ZZC"/>
                         <outlet property="levelFailedView" destination="96Q-fX-U5M" id="Jyn-sH-BiH"/>
@@ -1838,10 +1851,8 @@
         <image name="Delete-50" width="50" height="50"/>
         <image name="ReloadThin" width="50" height="50"/>
         <image name="crazemaze" width="292" height="116"/>
+        <image name="leaderboard" width="50" height="50"/>
         <image name="me" width="140" height="140"/>
         <image name="purpleCrystal" width="128" height="128"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="6y8-dX-ff2"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -20,7 +20,7 @@
 
 @property (nonatomic, weak) IBOutlet FBSDKLoginButton *loginButton;
 @property (nonatomic) HTPressableButton *playButton;
-@property (nonatomic) HTPressableButton *leaderboardButton;
+@property (nonatomic) HTPressableButton *storeButton;
 @property (nonatomic) HTPressableButton *settingsButton;
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
@@ -60,13 +60,13 @@
     [self.playButton addTarget:self action:@selector(playTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.playButton];
     
-    self.leaderboardButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.leaderboardButton setTitle:@"Store" forState:UIControlStateNormal];
-    self.leaderboardButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
-    self.leaderboardButton.buttonColor = [UIColor ht_grapeFruitColor];
-    self.leaderboardButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
-    [self.leaderboardButton addTarget:self action:@selector(leaderboardTapped:)forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.leaderboardButton];
+    self.storeButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
+    [self.storeButton setTitle:@"Store" forState:UIControlStateNormal];
+    self.storeButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
+    self.storeButton.buttonColor = [UIColor ht_grapeFruitColor];
+    self.storeButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
+    [self.storeButton addTarget:self action:@selector(storeTapped:)forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.storeButton];
     
     self.settingsButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
@@ -102,8 +102,8 @@
     [self performSegueWithIdentifier:@"playSegue" sender:self];
 }
 
-- (IBAction)leaderboardTapped:(id)sender {
-    [self performSegueWithIdentifier:@"leaderboardSegue" sender:self];
+- (IBAction)storeTapped:(id)sender {
+    NSLog(@"store tapped");
 }
 
 - (IBAction)settingsTapped:(id)sender {

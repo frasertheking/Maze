@@ -475,6 +475,18 @@
     }];
 }
 
+- (IBAction)leaderboardPressed:(id)sender {
+    [UIView animateWithDuration:0.15 animations:^{
+        self.leaderboardTopButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.leaderboardTopButton.alpha = 0.33;
+        } completion:^(BOOL finished) {
+            [self performSegueWithIdentifier:@"showLeaderboardSegue" sender:self];
+        }];
+    }];
+}
+
 #pragma mark - Helpers
 
 -(UIColor*) inverseColor:(UIColor*)color {

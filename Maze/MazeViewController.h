@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *itemImage;
 @property (nonatomic, weak) IBOutlet UILabel *usePowerupLabel;
 @property (nonatomic, weak) IBOutlet UIButton *exitButton;
+@property (nonatomic, weak) IBOutlet UIButton *leaderboardTopButton;
 @property (nonatomic, weak) IBOutlet UILabel *currentLevelLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTimerConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTimerConstraint;
