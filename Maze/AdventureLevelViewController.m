@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.size = 8;
+    self.size = 5 + self.level / 8;
     self.itemType = -1;
     self.round = 1;
     self.myScore = 0;
@@ -308,7 +308,7 @@
     [self.timerView.layer removeAllAnimations];
     self.levelAchieved = self.size;
     [self levelFailed];
-    self.size = 8;
+    self.size = 5 + self.level / 8;
 }
 
 -(void)freezeTime {
@@ -417,7 +417,7 @@
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
-    self.size = 2;
+    self.size = 5 + self.level / 8;
     [self recreateMaze];
 }
 
