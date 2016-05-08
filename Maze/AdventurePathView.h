@@ -36,8 +36,11 @@
 @property (nonatomic, weak) IBOutlet AdventureLocationView *level18View;
 @property (nonatomic, weak) IBOutlet AdventureLocationView *level19View;
 @property (nonatomic, weak) IBOutlet AdventureLocationView *level20View;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomBarLeadingConstraint;
 @property (nonatomic, weak) IBOutlet UILabel *topLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bottomLabel;
+@property (nonatomic, weak) IBOutlet UIView *topLabelView;
+@property (nonatomic, weak) IBOutlet UIView *bottomLabelView;
 
 @property (nonatomic, weak) UIViewController* delegate;
 @property (nonatomic) int level;

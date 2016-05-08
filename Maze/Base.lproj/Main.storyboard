@@ -899,12 +899,24 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Current Level: 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huw-ua-Zzs">
-                                                <rect key="frame" x="235" y="95" width="130" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTI-N5-YI4">
+                                                <rect key="frame" x="188" y="103" width="225" height="45"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Level: 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huw-ua-Zzs">
+                                                        <rect key="frame" x="40" y="11" width="144" height="23"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="Huw-ua-Zzs" firstAttribute="centerY" secondItem="uTI-N5-YI4" secondAttribute="centerY" id="9ZS-Dp-wDB"/>
+                                                    <constraint firstItem="Huw-ua-Zzs" firstAttribute="centerX" secondItem="uTI-N5-YI4" secondAttribute="centerX" id="B1H-2a-sqo"/>
+                                                    <constraint firstAttribute="height" constant="45" id="HF9-fO-FjR"/>
+                                                    <constraint firstAttribute="width" constant="225" id="JG1-b4-jlL"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -919,19 +931,19 @@
                                             <constraint firstItem="NCe-ga-6Bx" firstAttribute="top" secondItem="fCU-X2-SVo" secondAttribute="top" constant="36" id="Lik-NP-INh"/>
                                             <constraint firstAttribute="trailing" secondItem="anF-EM-fNm" secondAttribute="trailing" id="M1A-go-sgP"/>
                                             <constraint firstItem="OSq-FM-ovZ" firstAttribute="top" secondItem="8z7-cg-9lE" secondAttribute="bottom" constant="-10" id="Mgd-IB-Hy7"/>
-                                            <constraint firstItem="1tN-h3-Wju" firstAttribute="top" secondItem="Huw-ua-Zzs" secondAttribute="bottom" constant="8" id="Qxu-Of-KkN"/>
+                                            <constraint firstItem="1tN-h3-Wju" firstAttribute="top" secondItem="uTI-N5-YI4" secondAttribute="bottom" constant="-24" id="S5t-cO-N2I"/>
                                             <constraint firstItem="8z7-cg-9lE" firstAttribute="top" secondItem="anF-EM-fNm" secondAttribute="bottom" constant="-10" id="WvI-qp-74Y"/>
                                             <constraint firstAttribute="trailing" secondItem="Ood-ej-c3q" secondAttribute="trailing" id="d7Y-CJ-XnP"/>
                                             <constraint firstAttribute="trailing" secondItem="OSq-FM-ovZ" secondAttribute="trailing" id="dJE-3s-B21"/>
                                             <constraint firstAttribute="trailing" secondItem="NCe-ga-6Bx" secondAttribute="trailing" constant="16" id="dLA-Op-z9i"/>
                                             <constraint firstItem="1tN-h3-Wju" firstAttribute="centerX" secondItem="fCU-X2-SVo" secondAttribute="centerX" id="dg0-WB-4pA"/>
                                             <constraint firstItem="9zD-qp-CxH" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="gZc-Hu-H06"/>
+                                            <constraint firstItem="uTI-N5-YI4" firstAttribute="centerX" secondItem="fCU-X2-SVo" secondAttribute="centerX" id="hF8-iN-zVv"/>
                                             <constraint firstAttribute="trailing" secondItem="8z7-cg-9lE" secondAttribute="trailing" id="ize-8s-8EF"/>
                                             <constraint firstAttribute="trailing" secondItem="1tN-h3-Wju" secondAttribute="trailing" constant="24" id="jcK-4s-EZk"/>
                                             <constraint firstItem="9zD-qp-CxH" firstAttribute="top" secondItem="OSq-FM-ovZ" secondAttribute="bottom" constant="-10" id="ocn-M1-6OB"/>
                                             <constraint firstItem="8z7-cg-9lE" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="qqA-FA-FDL"/>
                                             <constraint firstAttribute="bottom" secondItem="9zD-qp-CxH" secondAttribute="bottom" constant="25" id="uCB-w5-uJH"/>
-                                            <constraint firstItem="Huw-ua-Zzs" firstAttribute="centerX" secondItem="fCU-X2-SVo" secondAttribute="centerX" id="xlJ-zb-Cl1"/>
                                             <constraint firstItem="OSq-FM-ovZ" firstAttribute="leading" secondItem="fCU-X2-SVo" secondAttribute="leading" id="zb4-rW-yvl"/>
                                         </constraints>
                                         <variation key="default">
@@ -986,6 +998,7 @@
                         <outlet property="contentView" destination="fCU-X2-SVo" id="EFr-Eg-f7u"/>
                         <outlet property="contentViewHeightConstraint" destination="DS0-Zm-sJH" id="UV0-yb-QQD"/>
                         <outlet property="currentLevelLabel" destination="Huw-ua-Zzs" id="TMa-i9-QMJ"/>
+                        <outlet property="currentLevelView" destination="uTI-N5-YI4" id="Vr4-Eg-2h6"/>
                         <outlet property="particleView" destination="z5H-h2-bdi" id="pJg-hJ-g9i"/>
                         <outlet property="path1" destination="Ood-ej-c3q" id="or3-hK-9Dw"/>
                         <outlet property="path2" destination="anF-EM-fNm" id="oIG-kS-bRa"/>
@@ -993,6 +1006,7 @@
                         <outlet property="path4" destination="OSq-FM-ovZ" id="NdD-NL-6Ec"/>
                         <outlet property="path5" destination="9zD-qp-CxH" id="TRO-qO-ezb"/>
                         <outlet property="scrollView" destination="t6V-O9-Fk0" id="C1O-ue-MqK"/>
+                        <outlet property="topLine" destination="1tN-h3-Wju" id="kX9-cV-GCY"/>
                         <segue destination="jNy-WC-Ht5" kind="show" identifier="adventureGameSegue" id="EUV-2l-EqN"/>
                     </connections>
                 </viewController>

@@ -25,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet AdventurePathView* path4;
 @property (nonatomic, weak) IBOutlet AdventurePathView* path5;
 @property (nonatomic, weak) IBOutlet UILabel* currentLevelLabel;
+@property (nonatomic, weak) IBOutlet UIView* currentLevelView;
+@property (nonatomic, weak) IBOutlet UIView* topLine;
 @property (nonatomic) int level;
 
 @end

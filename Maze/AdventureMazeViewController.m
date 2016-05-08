@@ -9,6 +9,7 @@
 #import "AdventureMazeViewController.h"
 #import "StarBackgroundScene.h"
 #import "AdventureLevelViewController.h"
+#import "UIColor+HTColor.h"
 
 @interface AdventureMazeViewController ()
 
@@ -28,6 +29,12 @@
     
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
+    
+    self.currentLevelView.layer.cornerRadius = 6;
+    self.currentLevelView.layer.masksToBounds = YES;
+    self.currentLevelView.backgroundColor = [UIColor ht_peterRiverColor];
+    self.currentLevelView.layer.borderColor = [UIColor ht_belizeHoleColor].CGColor;
+    self.currentLevelView.layer.borderWidth = 2;
     
     [self setGradientBackground];
     [self setupParticles];
@@ -58,6 +65,10 @@
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    
+    CAShapeLayer * maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.topLine.bounds byRoundingCorners: UIRectCornerTopRight | UIRectCornerBottomRight cornerRadii: (CGSize){5, 5}].CGPath;
+    self.topLine.layer.mask = maskLayer;
     
     if (((self.contentView.frame.size.height * ((float)self.currentLevel / (float)100)) - 250) > (self.contentView.frame.size.height - self.view.frame.size.height)) {
         [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)];

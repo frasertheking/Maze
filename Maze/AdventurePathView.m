@@ -8,6 +8,7 @@
 
 #import "AdventurePathView.h"
 #import "AdventureMazeViewController.h"
+#import "UIColor+HTColor.h"
 
 @implementation AdventurePathView
 
@@ -15,6 +16,18 @@
     if ((self = [super initWithCoder:aDecoder])) {
         [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"AdventurePathView" owner:self options:nil] objectAtIndex:0]];
         self.backgroundColor = [UIColor clearColor];
+        self.topLabelView.layer.cornerRadius = 6;
+        self.topLabelView.layer.masksToBounds = YES;
+        self.topLabelView.backgroundColor = [[UIColor ht_mediumColor] colorWithAlphaComponent:0.4];
+        self.topLabelView.layer.borderColor = [[UIColor ht_mediumDarkColor] colorWithAlphaComponent:0.4].CGColor;
+        self.topLabelView.layer.borderWidth = 2;
+        
+        self.bottomLabelView.layer.cornerRadius = 6;
+        self.bottomLabelView.layer.masksToBounds = YES;
+        self.bottomLabelView.backgroundColor = [[UIColor ht_mediumColor] colorWithAlphaComponent:0.4];
+        self.bottomLabelView.layer.borderColor = [[UIColor ht_mediumDarkColor] colorWithAlphaComponent:0.4].CGColor;
+        self.bottomLabelView.layer.borderWidth = 2;
+        
         [self setupViews];
     }
     return self;
@@ -67,9 +80,9 @@
     self.level20View.delegate = self;
     self.level20View.level = 20 + 20*self.pathNum;
     
-    self.topLabel.text = [NSString stringWithFormat:@"World\n%d", (self.pathNum*2+1)];
+    self.topLabel.text = [NSString stringWithFormat:@"World %d", (self.pathNum*2+1)];
     self.topLabel.alpha = 0.8;
-    self.bottomLabel.text = [NSString stringWithFormat:@"World\n%d", (self.pathNum*2+2)];
+    self.bottomLabel.text = [NSString stringWithFormat:@"World %d", (self.pathNum*2+2)];
     self.bottomLabel.alpha = 0.8;
     
     [self.level1View updateBackgrounds];
@@ -92,6 +105,12 @@
     [self.level18View updateBackgrounds];
     [self.level19View updateBackgrounds];
     [self.level20View updateBackgrounds];
+    
+    if (self.pathNum == 4) {
+        self.bottomBarLeadingConstraint.constant = 60;
+    } else {
+        self.bottomBarLeadingConstraint.constant = 24;
+    }
 }
 
 -(void)setLevelComplete:(int)level {
