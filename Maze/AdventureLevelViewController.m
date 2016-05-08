@@ -34,6 +34,7 @@
 @property (nonatomic) ADBannerView *adBanner;
 @property (nonatomic) int round;
 @property (nonatomic) int myScore;
+@property (nonatomic) BOOL countdownOver;
 
 @end
 
@@ -143,6 +144,7 @@
 }
 
 - (void)goNow {
+    self.countdownOver = YES;
     [self recreateMazeWithTimer];
     [UIView animateWithDuration:0.25 delay:0.1 options:0 animations:^{
         self.countdownLabel.alpha = 0;
@@ -336,49 +338,51 @@
 }
 
 -(void)itemFound:(NSInteger)type {
-    self.mazeView.score += 1000;
-    switch (type) {
-        case 0:
-            self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
-            self.usePowerupLabel.text = @"Show Correct Path";
-            self.inventoryView.backgroundColor = INVENTORY_RED;
-            self.itemType = 0;
-            break;
-        case 1:
-            self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
-            self.usePowerupLabel.text = @"Reset Remaining Time";
-            self.inventoryView.backgroundColor = INVENTORY_BLUE;
-            self.itemType = 1;
-            break;
-        case 2:
-            self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
-            self.usePowerupLabel.text = @"Skip This Level";
-            self.inventoryView.backgroundColor = INVENTORY_GREEN;
-            self.itemType = 2;
-            break;
-        case 3:
-            self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
-            self.usePowerupLabel.text = @"Activate God Mode";
-            self.inventoryView.backgroundColor = INVENTORY_ORANGE;
-            self.itemType = 3;
-            break;
-        default:
-            self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
-            self.usePowerupLabel.text = @"Improve Visibility";
-            self.inventoryView.backgroundColor = INVENTORY_PURPLE;
-            self.itemType = 4;
-            break;
+    if (self.countdownOver) {
+        self.mazeView.score += 1000;
+        switch (type) {
+            case 0:
+                self.itemImage.image = [UIImage imageNamed:@"redCrystal"];
+                self.usePowerupLabel.text = @"Show Correct Path";
+                self.inventoryView.backgroundColor = INVENTORY_RED;
+                self.itemType = 0;
+                break;
+            case 1:
+                self.itemImage.image = [UIImage imageNamed:@"blueCrystal"];
+                self.usePowerupLabel.text = @"Reset Remaining Time";
+                self.inventoryView.backgroundColor = INVENTORY_BLUE;
+                self.itemType = 1;
+                break;
+            case 2:
+                self.itemImage.image = [UIImage imageNamed:@"greenCrystal"];
+                self.usePowerupLabel.text = @"Skip This Level";
+                self.inventoryView.backgroundColor = INVENTORY_GREEN;
+                self.itemType = 2;
+                break;
+            case 3:
+                self.itemImage.image = [UIImage imageNamed:@"orangeCrystal"];
+                self.usePowerupLabel.text = @"Activate God Mode";
+                self.inventoryView.backgroundColor = INVENTORY_ORANGE;
+                self.itemType = 3;
+                break;
+            default:
+                self.itemImage.image = [UIImage imageNamed:@"purpleCrystal"];
+                self.usePowerupLabel.text = @"Improve Visibility";
+                self.inventoryView.backgroundColor = INVENTORY_PURPLE;
+                self.itemType = 4;
+                break;
+        }
+        
+        self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
+        [UIView animateWithDuration:0.35 animations:^{
+            self.inventoryView.alpha = 1;
+            self.itemImage.alpha = 1;
+            self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+        } completion:^(BOOL finished) {
+            [self runSpinAnimationOnView:self.itemImage duration:25 rotations:0.1 repeat:1];
+            [self pulseView:self.itemImage];
+        }];
     }
-    
-    self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
-    [UIView animateWithDuration:0.35 animations:^{
-        self.inventoryView.alpha = 1;
-        self.itemImage.alpha = 1;
-        self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
-    } completion:^(BOOL finished) {
-        [self runSpinAnimationOnView:self.itemImage duration:25 rotations:0.1 repeat:1];
-        [self pulseView:self.itemImage];
-    }];
 }
 
 - (void)useItem {
