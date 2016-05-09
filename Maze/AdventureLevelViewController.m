@@ -88,7 +88,7 @@
     
     self.continueButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.continueButton setTitle:[NSString stringWithFormat:@"Level %d Complete", self.level] forState:UIControlStateNormal];
-    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 140, self.levelFailedView.frame.size.height - 50);
+    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 135, self.levelFailedView.frame.size.height - 50);
     self.continueButton.buttonColor = [UIColor ht_mintColor];
     self.continueButton.shadowColor = [UIColor ht_mintDarkColor];
     [self.continueButton addTarget:self action:@selector(continueButtonClick:)forControlEvents:UIControlEventTouchUpInside];
@@ -128,18 +128,18 @@
 
 - (void)goInThree {
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInTwo) userInfo:nil repeats:NO];
-    self.countdownLabel.text = @"3";
+    self.countdownLabel.text = @"Begin in 3";
 }
 
 - (void)goInTwo {
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goInOne) userInfo:nil repeats:NO];
-    self.countdownLabel.text = @"2";
+    self.countdownLabel.text = @"Begin in 2";
 }
 
 
 - (void)goInOne {
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(goNow) userInfo:nil repeats:NO];
-    self.countdownLabel.text = @"1";
+    self.countdownLabel.text = @"Begin in 1";
 }
 
 - (void)goNow {
