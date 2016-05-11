@@ -26,6 +26,7 @@
 		437368A31CCD4B2C005D3132 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437368A21CCD4B2C005D3132 /* SettingsViewController.m */; };
 		437368A51CCEE909005D3132 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437368A41CCEE909005D3132 /* iAd.framework */; };
 		437368A71CD0395D005D3132 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437368A61CD0395D005D3132 /* FBSDKShareKit.framework */; };
+		437684061CE0BD96006239AC /* StatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437684051CE0BD96006239AC /* StatisticsViewController.m */; };
 		437B80A31C9CE9A30024F758 /* Maze.m in Sources */ = {isa = PBXBuildFile; fileRef = 437B80A21C9CE9A30024F758 /* Maze.m */; };
 		439F8D711CB7E9E7003F98F7 /* MazeBackgroundParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */; };
 		439F8D721CB7E9E7003F98F7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 439F8D701CB7E9E7003F98F7 /* bokeh.png */; };
@@ -99,6 +100,8 @@
 		437368A21CCD4B2C005D3132 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		437368A41CCEE909005D3132 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		437368A61CD0395D005D3132 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20160412/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		437684041CE0BD96006239AC /* StatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsViewController.h; sourceTree = "<group>"; };
+		437684051CE0BD96006239AC /* StatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsViewController.m; sourceTree = "<group>"; };
 		437B80A11C9CE9A30024F758 /* Maze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Maze.h; sourceTree = "<group>"; };
 		437B80A21C9CE9A30024F758 /* Maze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Maze.m; sourceTree = "<group>"; };
 		439F8D6F1CB7E9E7003F98F7 /* MazeBackgroundParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeBackgroundParticle.sks; sourceTree = "<group>"; };
@@ -204,7 +207,7 @@
 				439F8D6E1CB7E8FC003F98F7 /* SpriteKit */,
 				43EEE8CE1CB32E880066097A /* Views */,
 				437B80A41C9CEE6F0024F758 /* MazeGeneration */,
-				43A65B361CCBFF81001431FC /* Navigation */,
+				43A65B361CCBFF81001431FC /* ViewControllers */,
 				43A65B2E1CCAFB91001431FC /* Leaderboard */,
 				437368A01CCD4B10005D3132 /* Settings */,
 				43A65B371CCBFFA8001431FC /* MazeViewControllers */,
@@ -307,7 +310,7 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		43A65B361CCBFF81001431FC /* Navigation */ = {
+		43A65B361CCBFF81001431FC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				43BAABBC1CC86166009F4C50 /* HomeViewController.h */,
@@ -316,8 +319,10 @@
 				43BAABC01CC86756009F4C50 /* GameTypeViewController.m */,
 				4372D8501CDADC2400D2408D /* AdventureMazeViewController.h */,
 				4372D8511CDADC2400D2408D /* AdventureMazeViewController.m */,
+				437684041CE0BD96006239AC /* StatisticsViewController.h */,
+				437684051CE0BD96006239AC /* StatisticsViewController.m */,
 			);
-			name = Navigation;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		43A65B371CCBFFA8001431FC /* MazeViewControllers */ = {
@@ -579,6 +584,7 @@
 				43A65B351CCBBD80001431FC /* User.m in Sources */,
 				4368A27E1C83D2E9006E1779 /* AppDelegate.m in Sources */,
 				43B96F681CD0568400B3D7C2 /* AboutViewController.m in Sources */,
+				437684061CE0BD96006239AC /* StatisticsViewController.m in Sources */,
 				4372D8551CDBD7F300D2408D /* AdventureLocationView.m in Sources */,
 				4368A27B1C83D2E9006E1779 /* main.m in Sources */,
 				43B96F6F1CD170CB00B3D7C2 /* MCManager.m in Sources */,

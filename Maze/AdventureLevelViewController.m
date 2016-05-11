@@ -88,7 +88,7 @@
     
     self.continueButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.continueButton setTitle:[NSString stringWithFormat:@"Level %d Complete", self.level] forState:UIControlStateNormal];
-    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 135, self.levelFailedView.frame.size.height - 50);
+    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 142, self.levelFailedView.frame.size.height - 50);
     self.continueButton.buttonColor = [UIColor ht_mintColor];
     self.continueButton.shadowColor = [UIColor ht_mintDarkColor];
     [self.continueButton addTarget:self action:@selector(continueButtonClick:)forControlEvents:UIControlEventTouchUpInside];

@@ -61,7 +61,7 @@
     [self.view addSubview:self.playButton];
     
     self.storeButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-    [self.storeButton setTitle:@"Store" forState:UIControlStateNormal];
+    [self.storeButton setTitle:@"Statistics" forState:UIControlStateNormal];
     self.storeButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
     self.storeButton.buttonColor = [UIColor ht_grapeFruitColor];
     self.storeButton.shadowColor = [UIColor ht_grapeFruitDarkColor];
@@ -82,8 +82,8 @@
     self.mazeView.hidden = NO;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     self.mazeView.hidden = YES;
 }
 
@@ -103,7 +103,7 @@
 }
 
 - (IBAction)storeTapped:(id)sender {
-    NSLog(@"store tapped");
+    [self performSegueWithIdentifier:@"statsSegue" sender:self];
 }
 
 - (IBAction)settingsTapped:(id)sender {
