@@ -47,7 +47,7 @@
     self.itemType = -1;
     self.round = 1;
     self.myScore = 0;
-    self.timeRemaining = 70;
+    self.timeRemaining = 40 + self.level / 2;
     self.bonusTimesCollected = 0;
     self.mazeView.isAdventureMode = YES;
     
@@ -221,7 +221,7 @@
     if (!self.assertFailed) {
         if (self.round == 5) {
             self.itemType = -1;
-            self.timeRemaining = 70;
+            self.timeRemaining = 40 + self.level / 2;
             self.itemImage.image = nil;
             self.inventoryView.alpha = 0;
             self.mazeView.score = 0;
@@ -317,7 +317,7 @@
 
 -(void)levelFailed {
     self.itemType = -1;
-    self.timeRemaining = 70;
+    self.timeRemaining = 40 + self.level / 2;
     self.itemImage.image = nil;
     self.inventoryView.alpha = 0;
     self.mazeView.score = 0;

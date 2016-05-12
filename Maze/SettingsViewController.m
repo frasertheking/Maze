@@ -63,7 +63,7 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
-    switchview.tintColor = [UIColor blackColor];
+    switchview.tintColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
     
     switch (indexPath.row) {
         case 0:

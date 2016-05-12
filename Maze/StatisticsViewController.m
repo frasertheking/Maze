@@ -37,7 +37,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor blackColor];
+    self.tableView.separatorColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.allowsSelection = NO;
 

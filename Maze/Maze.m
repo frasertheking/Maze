@@ -851,16 +851,7 @@ double rads = DEGREES_TO_RADIANS(180);
     if (self.duality) {
         [UIView animateWithDuration:10 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor whiteColor];
-        } completion: ^(BOOL finished) {
-//            [UIView animateWithDuration:10.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-//                self.backgroundColor = [UIColor blackColor];
-//            } completion:^(BOOL finished) {
-//                NSArray *toColors = @[(id)[UIColor whiteColor].CGColor,
-//                                      (id)[UIColor whiteColor].CGColor];
-//                
-//                [self.wallsGradientLayer setColors:toColors];
-//            }];
-        }];
+        } completion: nil];
         self.wallsGradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor whiteColor].CGColor, nil];
         
         NSArray *fromColors = self.wallsGradientLayer.colors;

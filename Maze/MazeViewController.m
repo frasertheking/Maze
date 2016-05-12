@@ -70,7 +70,7 @@
     self.levelFailedView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     self.levelFailedView.layer.cornerRadius = 6;
     self.levelFailedView.layer.masksToBounds = YES;
-    self.pictureCoverView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.pictureCoverView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
     self.pictureCoverView.layer.borderWidth = 1.0f;
     self.pictureCoverView.alpha = 0;
     [self.profilePictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBSDKAccessToken currentAccessToken].userID]] placeholderImage:[UIImage imageNamed:@"placeholder-user"]];
