@@ -87,6 +87,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
         [self performSegueWithIdentifier:@"showAboutSegue" sender:self];
+    } else if (indexPath.row == 3) {        
+        [self prepareFeedbackEmail];
+    } else if (indexPath.row == 4) {
+        [self share];
     }
 }
 
@@ -116,6 +120,36 @@
     BOOL state = [sender isOn];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:state] forKey:@"soundState"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)prepareFeedbackEmail {
+    MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+    mailCont.mailComposeDelegate = (id <MFMailComposeViewControllerDelegate>)self;
+    [mailCont setSubject:@"CrazeMaze Feedback"];
+    [mailCont setToRecipients:[NSArray arrayWithObjects:@"frasertheking@gmail.com",nil]];
+    NSString *emailBody = [NSString stringWithFormat:@"\n\n\nSystem Diagnostics:\nModel: %@\nVersion: %@",
+                           [UIDevice currentDevice].model,
+                           [UIDevice currentDevice].systemVersion];
+    [mailCont setMessageBody:emailBody isHTML:NO];
+    [self presentViewController:mailCont animated:YES completion:nil];
+}
+
+- (void)share {
+    NSString *text = @"Check out CrazeMaze, a new game by Frase! It has multiple game modes including a ranked mode which forces you to solve increasingly difficult mazes in short amounts of time. There are literally millions of mazes waiting for you to solve! Come check it out on the app store today!";
+    UIImage *image = [UIImage imageNamed:@"Icon-60"];
+    NSArray *activityItems = @[text, image];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypePostToTwitter, UIActivityTypePostToWeibo];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    if(error) NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    return;
 }
 
 @end

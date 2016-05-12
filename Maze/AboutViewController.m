@@ -27,6 +27,10 @@
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
 }
 
+- (IBAction)goToWebsite {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.frasertheking.com"]];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)backPressed:(id)sender {
