@@ -99,12 +99,12 @@
     [visualEffectView addSubview:label];
     switch (section) {
         case 0:
-            [label setText:@"Ranked Mode"];
-            imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ranked"]];
-            break;
-        case 1:
             [label setText:@"Adventure Mode"];
             imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"adventure"]];
+            break;
+        case 1:
+            [label setText:@"Ranked Mode"];
+            imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ranked"]];
             break;
         case 2:
             [label setText:@"Casual Mode"];
@@ -134,20 +134,21 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = @"Highest Achieved Level:";
+    cell.textLabel.text = @"High Score:";
     cell.detailTextLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
     
     switch (indexPath.section) {
         case 0:
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rankedHighScore"]) {
-                cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"rankedHighScore"];
+            cell.textLabel.text = @"Current Level:";
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"currentLevel"]) {
+                cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentLevel"];
             } else {
                 cell.detailTextLabel.text = @"0";
             }
             break;
         case 1:
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"currentLevel"]) {
-                cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentLevel"];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rankedHighScore"]) {
+                cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"rankedHighScore"];
             } else {
                 cell.detailTextLabel.text = @"0";
             }
