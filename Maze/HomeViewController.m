@@ -71,8 +71,8 @@
     self.settingsButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
     self.settingsButton.center =  CGPointMake(self.view.center.x, self.view.center.y + 120);
-    self.settingsButton.buttonColor = [UIColor ht_mintColor];
-    self.settingsButton.shadowColor = [UIColor ht_mintDarkColor];
+    self.settingsButton.buttonColor = [UIColor ht_concreteColor];
+    self.settingsButton.shadowColor = [UIColor ht_asbestosColor];
     [self.settingsButton addTarget:self action:@selector(settingsTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.settingsButton];
 }

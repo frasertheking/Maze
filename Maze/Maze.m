@@ -968,8 +968,10 @@ double rads = DEGREES_TO_RADIANS(180);
 
 -(UIColor*) inverseColor:(UIColor*)color {
     const CGFloat *componentColors = CGColorGetComponents(color.CGColor);
-    
-    return [[UIColor alloc] initWithRed:(componentColors[0] - 0.25) green:(componentColors[1] - 0.25) blue:(componentColors[2] - 0.25) alpha:componentColors[3] - 0.25];
+    if (componentColors) {
+        return [[UIColor alloc] initWithRed:(componentColors[0] - 0.25) green:(componentColors[1] - 0.25) blue:(componentColors[2] - 0.25) alpha:componentColors[3] - 0.25];
+    }
+    return ORANGE;
 }
 
 - (UIColor *) getRandomColor {
