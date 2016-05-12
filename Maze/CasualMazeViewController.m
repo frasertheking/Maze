@@ -157,6 +157,10 @@
     if (!self.assertFailed) {
         self.size++;
         
+        if([[NSUserDefaults standardUserDefaults] integerForKey:@"casualHighScore"] < self.size - 1) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.size - 1] forKey:@"casualHighScore"];
+        }
+        
         [UIView animateWithDuration:0.15 delay:0.1 options:0 animations:^{
             self.mazeView.mazeViewWalls.transform = CGAffineTransformMakeScale(1, 1);
             self.mazeView.mazeViewPath.transform = CGAffineTransformMakeScale(1, 1);

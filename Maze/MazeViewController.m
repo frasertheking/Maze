@@ -347,6 +347,7 @@
                 if (newHighScore) {
                     self.levelAchievedLabel.text = @"Congratulations";
                     self.highScoreLabel.text = [NSString stringWithFormat:@"New High Score: %d", self.levelAchieved-1];
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.levelAchieved - 1] forKey:@"rankedHighScore"];
                 } else {
                     self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
                     self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
@@ -359,6 +360,9 @@
             }
         }];
     } else {
+        if([[NSUserDefaults standardUserDefaults] integerForKey:@"rankedHighScore"] < self.levelAchieved - 1) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.levelAchieved - 1] forKey:@"rankedHighScore"];
+        }
         self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
         self.highScoreLabel.text = [NSString stringWithFormat:@"To see your high score, log in with facebook"];
         [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
