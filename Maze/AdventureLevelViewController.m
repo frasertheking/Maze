@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.size = 5 + self.level / 8;
+    self.size = 8 + self.level / 7;
     self.itemType = -1;
     self.round = 1;
     self.myScore = 0;
@@ -88,7 +88,7 @@
     
     self.continueButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50) buttonStyle:HTPressableButtonStyleRounded];
     [self.continueButton setTitle:[NSString stringWithFormat:@"Level %d Complete", self.level] forState:UIControlStateNormal];
-    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 142, self.levelFailedView.frame.size.height - 50);
+    self.continueButton.center =  CGPointMake(self.levelFailedView.center.x - 144, self.levelFailedView.frame.size.height - 50);
     self.continueButton.buttonColor = [UIColor ht_mintColor];
     self.continueButton.shadowColor = [UIColor ht_mintDarkColor];
     [self.continueButton addTarget:self action:@selector(continueButtonClick:)forControlEvents:UIControlEventTouchUpInside];
@@ -232,7 +232,7 @@
             [self hideScores];
             
             if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level+1) {
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level] forKey:@"currentLevel"];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level+1] forKey:@"currentLevel"];
             }
             
             [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -275,9 +275,9 @@
     [self.timer invalidate];
     [self.timerView.layer removeAllAnimations];
     if (!self.mazeView.noTime) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timeRemaining target:self selector:@selector(timesUp) userInfo:nil repeats:NO];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:45 target:self selector:@selector(timesUp) userInfo:nil repeats:NO];
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.x"];
-        scaleAnimation.duration = self.timeRemaining + 0.25;
+        scaleAnimation.duration = 45 + 0.25;
         scaleAnimation.repeatCount = 0;
         scaleAnimation.autoreverses = YES;
         scaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
@@ -308,11 +308,11 @@
     [self.timerView.layer removeAllAnimations];
     self.levelAchieved = self.size;
     [self levelFailed];
-    self.size = 5 + self.level / 8;
+    self.size = 8 + self.level / 7;
 }
 
 -(void)freezeTime {
-    //[self resetCountdown];
+    [self resetCountdown];
 }
 
 -(void)levelFailed {
@@ -417,7 +417,7 @@
 #pragma mark - Actions
 
 - (IBAction)randomizeMaze:(id)sender {
-    self.size = 5 + self.level / 8;
+    self.size = 8 + self.level / 7;
     [self recreateMaze];
 }
 
