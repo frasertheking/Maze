@@ -61,7 +61,6 @@
     self.inventoryView.userInteractionEnabled = YES;
     self.inventoryView.hidden = YES;
     self.nameTextField.delegate = self;
-    self.lostConnectionView.hidden = YES;
 
     [self setupColors];
     [self hideScores];
@@ -286,7 +285,10 @@
     
     if (self.myScore == 4) {
         [self hideScores];
-        [self.gameOverButton setTitle:@"YOU WIN" forState:UIControlStateNormal];
+        [self.gameOverButton setTitle:@"YOU WON" forState:UIControlStateNormal];
+        NSMutableArray *array  = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"challengeMatchResults"]];
+        [array replaceObjectAtIndex:array.count-1 withObject:@"WON"];
+        [[NSUserDefaults standardUserDefaults] setObject: array forKey: @"challengeMatchResults"];
         self.gameOverButton.hidden = NO;
         self.mazeView.hidden = YES;
         self.inventoryView.hidden = YES;
@@ -622,7 +624,6 @@
             self.mazeView.mazeViewMask.alpha = 1;
             self.inventoryView.userInteractionEnabled = YES;
             self.mazeView.userInteractionEnabled = YES;
-            self.lostConnectionView.hidden = YES;
             [self showScores];
             self.playerNameLabel.text = [NSString stringWithFormat:@"%@", self.nameTextField.text];
             self.enemyNameLabel.text = [NSString stringWithFormat:@"%@", self.enemyName];
@@ -650,6 +651,9 @@
             });
         } else if ([[NSKeyedUnarchiver unarchiveObjectWithData:receivedData] isEqualToString:@"over"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSMutableArray *array  = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"challengeMatchResults"]];
+                [array replaceObjectAtIndex:array.count-1 withObject:@"LOST"];
+                [[NSUserDefaults standardUserDefaults] setObject: array forKey: @"challengeMatchResults"];
                 self.mazeView.userInteractionEnabled = NO;
                 
                 if (self.enemyScore == 4) {
@@ -672,6 +676,12 @@
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.enemyName = [NSKeyedUnarchiver unarchiveObjectWithData:receivedData];
+                NSMutableArray *array  = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"enemyNames"]];
+                [array addObject:self.enemyName];
+                [[NSUserDefaults standardUserDefaults] setObject: array forKey: @"enemyNames"];
+                NSMutableArray *array2  = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"challengeMatchResults"]];
+                [array2 addObject:@"TIE"];
+                [[NSUserDefaults standardUserDefaults] setObject: array2 forKey: @"challengeMatchResults"];
                 [self sendSeed];
             });
         }
@@ -762,7 +772,6 @@
                 self.inventoryView.userInteractionEnabled = NO;
                 self.mazeView.hidden = YES;
                 [self hideScores];
-                self.lostConnectionView.hidden = NO;
                 self.inventoryView.hidden = YES;
             });
         }

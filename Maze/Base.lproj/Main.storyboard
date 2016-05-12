@@ -1447,29 +1447,10 @@
                                     <constraint firstAttribute="width" constant="8" id="LsJ-Be-6ZO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-lU-l2i">
-                                <rect key="frame" x="180" y="240" width="240" height="120"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lost Connection..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oes-Qf-EZ0">
-                                        <rect key="frame" x="2" y="50" width="139" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="8ox-Ud-R70"/>
-                                    <constraint firstItem="oes-Qf-EZ0" firstAttribute="centerY" secondItem="LeT-lU-l2i" secondAttribute="centerY" id="Pz8-6p-g43"/>
-                                    <constraint firstItem="oes-Qf-EZ0" firstAttribute="centerX" secondItem="LeT-lU-l2i" secondAttribute="centerX" id="RCv-iT-Qc5"/>
-                                    <constraint firstAttribute="width" constant="240" id="v0n-gs-vfo"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Mai-IS-Q9a" firstAttribute="leading" secondItem="z60-0Z-3Bb" secondAttribute="trailing" constant="3" id="0KO-ac-Ro8"/>
-                            <constraint firstItem="LeT-lU-l2i" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="0S0-J8-CXe"/>
                             <constraint firstItem="Cc7-9D-485" firstAttribute="top" secondItem="BDs-yt-YI4" secondAttribute="bottom" constant="5" id="0UY-NV-WjP"/>
                             <constraint firstItem="Cc7-9D-485" firstAttribute="trailing" secondItem="BDs-yt-YI4" secondAttribute="trailing" id="42N-N6-0wQ"/>
                             <constraint firstItem="Mai-IS-Q9a" firstAttribute="centerY" secondItem="BXo-Zg-ZMH" secondAttribute="centerY" id="4FV-z9-fkA"/>
@@ -1486,7 +1467,6 @@
                             <constraint firstItem="TWO-rU-8Th" firstAttribute="leading" secondItem="Qp7-5T-sKu" secondAttribute="trailing" constant="3" id="F1Y-9d-4gF"/>
                             <constraint firstItem="z60-0Z-3Bb" firstAttribute="centerY" secondItem="vzR-Bd-Ynb" secondAttribute="centerY" id="IGr-Ee-S5L"/>
                             <constraint firstItem="Qp7-5T-sKu" firstAttribute="centerY" secondItem="wAx-QI-npO" secondAttribute="centerY" id="K5B-0F-der"/>
-                            <constraint firstItem="LeT-lU-l2i" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KBB-R0-Geb"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="centerX" secondItem="BXo-Zg-ZMH" secondAttribute="centerX" id="KZz-qY-9tR"/>
                             <constraint firstItem="w5d-qy-bWd" firstAttribute="leading" secondItem="BXo-Zg-ZMH" secondAttribute="leading" constant="16" id="MbC-Rh-ARc"/>
                             <constraint firstItem="TWO-rU-8Th" firstAttribute="centerY" secondItem="wAx-QI-npO" secondAttribute="centerY" id="OYQ-rL-JOJ"/>
@@ -1556,7 +1536,6 @@
                         <outlet property="gameOverButton" destination="w5d-qy-bWd" id="why-7x-E5o"/>
                         <outlet property="inventoryView" destination="f2c-fp-0ev" id="y0V-yb-k9r"/>
                         <outlet property="itemImage" destination="ngJ-j2-3Hp" id="R7l-BC-8eN"/>
-                        <outlet property="lostConnectionView" destination="LeT-lU-l2i" id="Vq7-Lv-sZy"/>
                         <outlet property="mazeView" destination="BDs-yt-YI4" id="Qcw-wL-weZ"/>
                         <outlet property="mazeViewCenterConstraint" destination="oyv-wR-vju" id="JXC-mz-icd"/>
                         <outlet property="nameTextField" destination="T27-1W-T4k" id="VQo-Zf-liK"/>

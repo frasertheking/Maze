@@ -15,6 +15,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic) NSArray *enemyNames;
+@property (nonatomic) NSArray *matchHistory;
 
 @end
 
@@ -29,13 +31,16 @@
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     
+    self.enemyNames = [NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"enemyNames"]];
+    self.matchHistory = [NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"challengeMatchResults"]];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor blackColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.allowsSelection = NO;
-    
+
     [self setupParticles];
 }
 
@@ -61,7 +66,12 @@
 #pragma mark - UITableView Delegate and Datasource method implementation
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    if (self.enemyNames.count > 0) {
+        return 4;
+    } else {
+        self.tableView.separatorColor = [UIColor clearColor];
+        return 3;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -72,7 +82,7 @@
     } else if (section == 2) {
         return 1;
     } else {
-        return 3;
+        return self.enemyNames.count;
     }
 }
 
@@ -147,6 +157,15 @@
                 cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"casualHighScore"];
             } else {
                 cell.detailTextLabel.text = @"0";
+            }
+            break;
+        case 3:
+            cell.textLabel.text = [NSString stringWithFormat:@"Me vs. %@", self.enemyNames[indexPath.row]];
+            cell.detailTextLabel.text = self.matchHistory[indexPath.row];
+            if ([self.matchHistory[indexPath.row] isEqualToString:@"WON"]) {
+                cell.detailTextLabel.textColor = SEVERITY_GREEN;
+            } else if ([self.matchHistory[indexPath.row] isEqualToString:@"LOST"]) {
+                cell.detailTextLabel.textColor = SEVERITY_RED;
             }
             break;
         default:
