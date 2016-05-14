@@ -25,6 +25,7 @@
 @property (nonatomic) int startCol;
 @property (nonatomic) NSTimer *gradientTimer;
 @property (nonatomic) NSTimer *gradientTimer2;
+@property (nonatomic) NSTimer *gradientTimer3;
 @property (nonatomic) NSMutableArray *timeBonusArray;
 @property NSInteger currentX;
 @property NSInteger currentY;
@@ -173,14 +174,14 @@ double rads = DEGREES_TO_RADIANS(180);
             //[self transform];
         }
         
-        if (randomNum >= 65 && randomNum < 68) {
+        if (randomNum >= 65 && randomNum < 67) {
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:2];
             [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:4];
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:8];
-            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:12];
+            [self performSelector:@selector(reRandomizeMaze) withObject:self afterDelay:6];
             self.fadeOverTime = YES;
         }
         
-        if (randomNum >= 68 && randomNum < 73) {
+        if (randomNum >= 67 && randomNum < 73) {
             self.powerOverwhelming = YES;
         }
         
@@ -196,7 +197,7 @@ double rads = DEGREES_TO_RADIANS(180);
             self.timeTreasureLevel = YES;
         }
         
-        if (randomNum >= 88 && randomNum < 90) {
+        if (randomNum >= 88 && randomNum < 91) {
             self.backgroundFlash = YES;
         }
         
@@ -278,6 +279,7 @@ double rads = DEGREES_TO_RADIANS(180);
     [self removeSubviews:self.mazeViewEnemyPath];
     [self.gradientTimer invalidate];
     [self.gradientTimer2 invalidate];
+    [self.gradientTimer3 invalidate];
     self.wallsGradientLayer = nil;
     self.attemptPathGradientLayer = nil;
     self.backgroundGradientLayer = nil;
@@ -815,6 +817,9 @@ double rads = DEGREES_TO_RADIANS(180);
         self.attemptPathGradientLayer.endPoint = CGPointMake(1.0f, 1.0f);
         [self.mazeViewPath.layer insertSublayer:self.attemptPathGradientLayer atIndex:0];
         self.mazeViewPath.maskView = self.mazeViewPathMask;
+        if (!self.godMode) {
+            [self animateAttemptPath];
+        }
     }
 }
 
@@ -1000,6 +1005,27 @@ double rads = DEGREES_TO_RADIANS(180);
     
     [self.wallsGradientLayer addAnimation:animation forKey:@"animateGradient"];
     self.gradientTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target:self selector:@selector(animateWalls) userInfo:nil repeats:NO];
+}
+
+-(void)animateAttemptPath {
+    NSArray *fromColors = self.attemptPathGradientLayer.colors;
+    NSArray *toColors = @[(id)[self getRandomColor].CGColor,
+                          (id)[self getRandomColor].CGColor,];
+    
+    [self.attemptPathGradientLayer setColors:toColors];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"colors"];
+    
+    animation.fromValue             = fromColors;
+    animation.toValue               = toColors;
+    animation.duration              = 2.00;
+    animation.removedOnCompletion   = YES;
+    animation.fillMode              = kCAFillModeForwards;
+    animation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.delegate              = self;
+    
+    [self.attemptPathGradientLayer addAnimation:animation forKey:@"animateGradient"];
+    self.gradientTimer3 = [NSTimer scheduledTimerWithTimeInterval: 2 target:self selector:@selector(animateAttemptPath) userInfo:nil repeats:NO];
 }
 
 -(void)animateBackground {
