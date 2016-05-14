@@ -321,7 +321,7 @@
     [self runSpinAnimationOnView:self.mazeView duration:2 rotations:0.5 repeat:0];
    
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:@"https://frasertheking.com"];
+    content.contentURL = [NSURL URLWithString:@"http://www.frasertheking.com"];
     content.contentTitle = @"Check Out My CrazeMaze Score!";
     content.contentDescription = [NSString stringWithFormat:@"I just got to level %d on CrazeMaze! Think you can beat me?", self.levelAchieved-1];
     content.imageURL = [NSURL URLWithString:@"http://frasertheking.com/images/crazemazelogo.png"];
