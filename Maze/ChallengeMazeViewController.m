@@ -26,6 +26,7 @@
 @property (nonatomic) int enemyScore;
 @property (nonatomic) NSString* messageString;
 @property (nonatomic) NSInteger itemType;
+
 -(void)didReceiveDataWithNotification:(NSNotification *)notification;
 
 @end
@@ -87,8 +88,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(useItem)];
     tapGesture.numberOfTapsRequired = 1;
     [self.inventoryView addGestureRecognizer:tapGesture];
-    
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self.appDelegate playGameMusic];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -280,6 +280,7 @@
 }
 
 -(void)finished {
+    [self.appDelegate successSound];
     [self sendGameOver];
     self.mazeView.userInteractionEnabled = NO;
     
@@ -308,6 +309,7 @@
 
 
 -(void)itemFound:(NSInteger)type {
+    [self.appDelegate powerUpSound];
     self.mazeView.score += 1000;
     switch (type) {
         case 0:
@@ -355,6 +357,7 @@
 
 - (void)useItem {
     if (self.itemType >= 0) {
+        [self.appDelegate selectionSound];
         [self.itemImage.layer removeAllAnimations];
         [UIView animateWithDuration:0.35 animations:^{
             self.itemImage.transform = CGAffineTransformScale(CGAffineTransformIdentity, 5, 5);
@@ -393,24 +396,6 @@
     [self.mazeView transformMaze];
 }
 
-- (IBAction)showOptions:(id)sender {
-    if (self.showingOptions) {
-        [UIView animateWithDuration:0.5 delay:0.0  options:0 animations:^{
-            self.topConstraint.constant = -150;
-            self.bottomConstraint.constant = -150;
-            self.showingOptions = NO;
-            [self.view layoutIfNeeded];
-        } completion:nil];
-    } else {
-        [UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
-            self.topConstraint.constant = 36;
-            self.bottomConstraint.constant = 16;
-            self.showingOptions = YES;
-            [self.view layoutIfNeeded];
-        } completion:nil];
-    }
-}
-
 - (IBAction)exitGamePressed:(id)sender {
     [UIView animateWithDuration:0.15 animations:^{
         self.exitButton.alpha = 0;
@@ -421,6 +406,7 @@
             self.mazeView.delegate = nil;
             [[_appDelegate mcManager] advertiseSelf:NO];
             [_appDelegate.mcManager.session disconnect];
+            [self.appDelegate playMenuMusic];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];
@@ -727,6 +713,7 @@
 }
 
 - (IBAction)browseForDevices:(id)sender {
+    [self.appDelegate selectionSound];
     [[self.appDelegate mcManager] setupPeerAndSessionWithDisplayName:[UIDevice currentDevice].name];
     [[_appDelegate mcManager] advertiseSelf:YES];
     [[_appDelegate mcManager] setupMCBrowser];

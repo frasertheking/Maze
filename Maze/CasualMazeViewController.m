@@ -19,6 +19,7 @@
 @property (nonatomic) BOOL assertFailed;
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) ADBannerView *adBanner;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -140,11 +141,12 @@
     self.lineBottomColor = [AppDelegate getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
+    [self.appDelegate playGameMusic];
 }
 
 -(void)recreateMaze {
@@ -155,6 +157,7 @@
 
 -(void)finished {
     if (!self.assertFailed) {
+        [self.appDelegate successSound];
         self.size++;
         
         if([[NSUserDefaults standardUserDefaults] integerForKey:@"casualHighScore"] < self.size - 1) {
@@ -224,6 +227,7 @@
             self.exitButton.alpha = 1;
         } completion:^(BOOL finished) {
             self.mazeView.delegate = nil;
+            [self.appDelegate playMenuMusic];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];

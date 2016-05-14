@@ -24,6 +24,7 @@
 @property (nonatomic) HTPressableButton *settingsButton;
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -33,8 +34,8 @@
     [super viewDidLoad];
 
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     
@@ -75,6 +76,8 @@
     self.settingsButton.shadowColor = [UIColor ht_grassDarkColor];
     [self.settingsButton addTarget:self action:@selector(settingsTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.settingsButton];
+    
+    [self.appDelegate playMenuMusic];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,14 +102,17 @@
 #pragma mark - IBActions
 
 - (IBAction)playTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"playSegue" sender:self];
 }
 
 - (IBAction)storeTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"statsSegue" sender:self];
 }
 
 - (IBAction)settingsTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"settingsSegue" sender:self];
 }
 

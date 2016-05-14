@@ -35,6 +35,7 @@
 @property (nonatomic) int round;
 @property (nonatomic) int myScore;
 @property (nonatomic) BOOL countdownOver;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -196,11 +197,12 @@
     self.lineBottomColor = [AppDelegate getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
+    [self.appDelegate playGameMusic];
 }
 
 -(void)recreateMaze {
@@ -219,6 +221,7 @@
 
 -(void)finished {
     if (!self.assertFailed) {
+        [self.appDelegate successSound];
         if (self.round == 5) {
             self.itemType = -1;
             self.timeRemaining = 40 + self.level / 2;
@@ -316,6 +319,7 @@
 }
 
 -(void)levelFailed {
+    [self.appDelegate gameOverSound];
     self.itemType = -1;
     self.timeRemaining = 40 + self.level / 2;
     self.itemImage.image = nil;
@@ -338,6 +342,7 @@
 }
 
 -(void)itemFound:(NSInteger)type {
+    [self.appDelegate powerUpSound];
     if (self.countdownOver) {
         self.mazeView.score += 1000;
         switch (type) {
@@ -387,6 +392,7 @@
 
 - (void)useItem {
     if (self.itemType >= 0) {
+        [self.appDelegate selectionSound];
         [self.itemImage.layer removeAllAnimations];
         switch (self.itemType) {
             case 0:
@@ -448,12 +454,14 @@
 }
 
 - (IBAction)continueButtonClick:(id)sender {
+    [self.appDelegate selectionSound];
     [self.timer invalidate];
     self.mazeView.delegate = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)retryButtonClick:(id)sender {
+    [self.appDelegate selectionSound];
     [self recreateMazeWithTimer];
     self.mazeView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
     self.mazeView.userInteractionEnabled = YES;
@@ -467,6 +475,7 @@
 }
 
 - (IBAction)leaderboardButtonClick:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"showLeaderboardSegue" sender:self];
 }
 
@@ -479,6 +488,7 @@
         } completion:^(BOOL finished) {
             [self.timer invalidate];
             self.mazeView.delegate = nil;
+            [self.appDelegate playMenuMusic];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];

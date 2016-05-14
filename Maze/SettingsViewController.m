@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIButton* backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic) NSMutableArray *settingNameArray;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -27,8 +28,8 @@
     self.settingNameArray = [[NSMutableArray alloc] initWithObjects:@"Ads Enabled", @"Sounds Enabled", @"About", @"Feedback", @"Share", nil];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
@@ -120,6 +121,11 @@
     BOOL state = [sender isOn];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:state] forKey:@"soundState"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!state) {
+        [self.appDelegate cancelSounds];
+    } else {
+        [self.appDelegate startSounds];
+    }
 }
 
 - (void)prepareFeedbackEmail {

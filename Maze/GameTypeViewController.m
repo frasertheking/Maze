@@ -20,6 +20,7 @@
 @property (nonatomic) HTPressableButton *challengeModeButton;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -29,8 +30,8 @@
     [super viewDidLoad];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     
@@ -90,18 +91,22 @@
 }
 
 - (IBAction)rankedTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"timedSegue" sender:self];
 }
 
 - (IBAction)casualTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"casualSegue" sender:self];
 }
 
 - (IBAction)tutorialTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"adventureSegue" sender:self];
 }
 
 - (IBAction)challengeTapped:(id)sender {
+    [self.appDelegate selectionSound];
     [self performSegueWithIdentifier:@"challengeSegue" sender:self];
 }
 

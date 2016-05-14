@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
 @property (nonatomic) int currentLevel;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -132,14 +133,15 @@
     self.lineBottomColor = [AppDelegate getRandomColor];
     
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)delegate.topColor.CGColor, (id)delegate.bottomColor.CGColor, nil];
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)self.appDelegate.topColor.CGColor, (id)self.appDelegate.bottomColor.CGColor, nil];
     theViewGradient.frame = self.view.bounds;
     
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self.appDelegate selectionSound];
     AdventureLevelViewController *vc = [segue destinationViewController];
     vc.level = self.level;
 }

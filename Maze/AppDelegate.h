@@ -42,9 +42,17 @@
 @property (nonatomic, strong) MCManager *mcManager;
 
 +(UIColor*)getRandomColor;
-+ (void)showHUD:(UIView*)view;
-+ (void)hideHUD:(UIView*)view;
++(void)showHUD:(UIView*)view;
++(void)hideHUD:(UIView*)view;
 +(UIColor*)inverseColor:(UIColor*)color;
-
+-(void) playMenuMusic;
+-(void) playGameMusic;
+-(void) selectionSound;
+-(void) gameOverSound;
+-(void) powerUpSound;
+-(void) successSound;
+-(void) backSound;
+-(void)cancelSounds;
+-(void)startSounds;
 @end
 

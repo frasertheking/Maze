@@ -11,6 +11,7 @@
 #import "PowerUpView.h"
 #import "BonusTimeView.h"
 #import "ChallengeMazeViewController.h"
+#import "AppDelegate.h"
 
 @interface Maze ()
 
@@ -33,6 +34,7 @@
 @property NSInteger powerUpX;
 @property NSInteger powerUpY;
 @property NSInteger powerUpType;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -57,6 +59,7 @@ double rads = DEGREES_TO_RADIANS(180);
 }
 
 - (void)initialize {
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.mazeViewWalls = [[UIView alloc] initWithFrame:self.bounds];
     [self setupViews:self.mazeViewWalls];
     
@@ -607,6 +610,7 @@ double rads = DEGREES_TO_RADIANS(180);
                 scaleAnimation.toValue = [NSNumber numberWithFloat:1.15];
                 [self.layer addAnimation:scaleAnimation forKey:@"scale"];
                 [((MazeViewController*)self.delegate) bonusTimeFound];
+                [self.appDelegate powerUpSound];
                 
                 float size = (self.frame.size.width) / (self.mazeSize * 2 + 1);
                 UILabel *bonusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.currentX*size - 12.5, self.currentY*size, 50, size)];

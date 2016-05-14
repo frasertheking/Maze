@@ -9,8 +9,13 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "MBProgressHUD.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) AVAudioPlayer *backgroundPlayer;
+@property (nonatomic, strong) AVAudioPlayer *additionalSoundPlayer;
 
 @end
 
@@ -23,9 +28,13 @@
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"firstRun"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"firstRun"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"adState"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"soundState"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"currentLevel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:NULL];
     
     self.topColor = [self getRandomColor];
     self.bottomColor = [self getRandomColor];
@@ -103,6 +112,85 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideAllHUDsForView:view animated:YES];
     });
+}
+
+-(void) playMenuMusic {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/menu.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.backgroundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.backgroundPlayer.numberOfLoops = -1;
+        [self.backgroundPlayer play];
+    }
+}
+
+-(void) playGameMusic {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/background_music.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.backgroundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.backgroundPlayer.numberOfLoops = -1;
+        [self.backgroundPlayer play];
+    }
+}
+
+-(void) selectionSound {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/selection.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.additionalSoundPlayer.numberOfLoops = 0;
+        [self.additionalSoundPlayer play];
+    }
+}
+
+-(void) backSound {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/back.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.additionalSoundPlayer.numberOfLoops = 0;
+        [self.additionalSoundPlayer play];
+    }
+}
+
+-(void) gameOverSound {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/game_over.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.additionalSoundPlayer.numberOfLoops = 0;
+        [self.additionalSoundPlayer play];
+    }
+}
+
+-(void) powerUpSound {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/powerup.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.additionalSoundPlayer.numberOfLoops = 0;
+        [self.additionalSoundPlayer play];
+    }
+}
+
+-(void) successSound {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/success.wav", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.additionalSoundPlayer.numberOfLoops = 0;
+        [self.additionalSoundPlayer play];
+    }
+}
+
+-(void)cancelSounds {
+    [self.backgroundPlayer stop];
+    [self.additionalSoundPlayer stop];
+}
+
+-(void)startSounds {
+    [self playMenuMusic];
 }
 
 @end
