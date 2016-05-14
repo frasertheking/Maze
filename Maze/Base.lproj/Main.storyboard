@@ -88,6 +88,7 @@
                     <navigationItem key="navigationItem" id="NIz-Dp-uzb"/>
                     <connections>
                         <outlet property="loginButton" destination="eEL-fw-qxY" id="RXp-qW-BUp"/>
+                        <outlet property="mazeTitleImageView" destination="Ud3-sl-7b5" id="rM0-js-x4y"/>
                         <outlet property="mazeView" destination="BH2-yX-rxo" id="pWr-Ce-Akd"/>
                         <outlet property="particleView" destination="IaX-ug-nvM" id="RpV-2D-3Go"/>
                         <segue destination="To7-x9-SGd" kind="show" identifier="playSegue" id="5mO-50-0Yd"/>

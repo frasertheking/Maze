@@ -24,6 +24,7 @@
 @property (nonatomic) HTPressableButton *settingsButton;
 @property (nonatomic, weak) IBOutlet Maze *mazeView;
 @property (nonatomic, weak) IBOutlet SKView *particleView;
+@property (nonatomic, weak) IBOutlet UIImageView *mazeTitleImageView;
 @property (nonatomic) AppDelegate *appDelegate;
 
 @end
@@ -83,6 +84,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.mazeView.hidden = NO;
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.35;
+    scaleAnimation.repeatCount = HUGE_VAL;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:1.03];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0.97];
+    [self.mazeTitleImageView.layer addAnimation:scaleAnimation forKey:@"scale"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
