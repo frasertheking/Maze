@@ -141,7 +141,7 @@
         case 0:
             cell.textLabel.text = @"Current Level:";
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"currentLevel"]) {
-                cell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentLevel"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", ([[[NSUserDefaults standardUserDefaults] stringForKey:@"currentLevel"] intValue] + 1)];
             } else {
                 cell.detailTextLabel.text = @"0";
             }

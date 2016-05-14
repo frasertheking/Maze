@@ -232,7 +232,7 @@
             [self hideScores];
             
             if([[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"] < self.level+1) {
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level+1] forKey:@"currentLevel"];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.level] forKey:@"currentLevel"];
             }
             
             [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
