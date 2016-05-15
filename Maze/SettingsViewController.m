@@ -141,7 +141,7 @@
 }
 
 - (void)share {
-    NSString *text = @"Check out CrazeMaze, a new game by Frase! It has multiple game modes including a ranked mode which forces you to solve increasingly difficult mazes in short amounts of time. There are literally millions of mazes waiting for you to solve! Come check it out on the app store today!";
+    NSString *text = @"CrazeMaze is a puzzle game that challenges players to solve increasingly difficult mazes in a certain amount of time. Each maze is generated dynamically and thus CrazeMaze provides players with millions of unique and exciting maze combinations to discover. Collect in-game power-ups and time boosts to help you through each level of the adventure mode. Play today by yourself or with friends via the challenge mode to see who will become the next CrazeMaze master! Come check it out on the app store today!";
     UIImage *image = [UIImage imageNamed:@"Icon-60"];
     NSArray *activityItems = @[text, image];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
