@@ -337,10 +337,40 @@
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
                                               NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+
             BOOL newHighScore = NO;
             if (result) {
-                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.levelAchieved-1) {
-                    newHighScore = YES;
+                NSLog(@"Fraser %@", [[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"]);
+                if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"] count] > 0) {
+                    if ([[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue] < self.levelAchieved-1) {
+                        newHighScore = YES;
+                        NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.levelAchieved-1],};
+                        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                                      initWithGraphPath:@"/me/scores"
+                                                      parameters:params
+                                                      HTTPMethod:@"POST"];
+                        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                              id result,
+                                                              NSError *error) {
+                            NSLog(@"New High score: %@ %@", result, error);
+                        }];
+                    }
+                    
+                    if (newHighScore) {
+                        self.levelAchievedLabel.text = @"Congratulations";
+                        self.highScoreLabel.text = [NSString stringWithFormat:@"New High Score: %d", self.levelAchieved-1];
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.levelAchieved - 1] forKey:@"rankedHighScore"];
+                    } else {
+                        self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
+                        self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
+                    }
+                    [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                        self.mazeView.alpha = 0;
+                        self.levelFailedView.alpha = 1;
+                        self.pictureCoverView.alpha = 1;
+                    } completion:nil];
+                } else {
                     NSDictionary *params = @{ @"score": [NSString stringWithFormat:@"%d", self.levelAchieved-1],};
                     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                                   initWithGraphPath:@"/me/scores"
@@ -351,22 +381,20 @@
                                                           NSError *error) {
                         NSLog(@"New High score: %@ %@", result, error);
                     }];
-                }
-                
-                if (newHighScore) {
+                    
                     self.levelAchievedLabel.text = @"Congratulations";
                     self.highScoreLabel.text = [NSString stringWithFormat:@"New High Score: %d", self.levelAchieved-1];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.levelAchieved - 1] forKey:@"rankedHighScore"];
-                } else {
-                    self.levelAchievedLabel.text = [NSString stringWithFormat:@"Level Achieved: %d", self.levelAchieved-1];
-                    self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %d", [[[((NSDictionary*)result) objectForKey:@"data"] valueForKey:@"score"][0] intValue]];
+
+                    [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                        self.mazeView.alpha = 0;
+                        self.levelFailedView.alpha = 1;
+                        self.pictureCoverView.alpha = 1;
+                    } completion:nil];
+
                 }
-                [UIView animateWithDuration:2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                    self.mazeView.alpha = 0;
-                    self.levelFailedView.alpha = 1;
-                    self.pictureCoverView.alpha = 1;
-                } completion:nil];
             }
+            });
         }];
     } else {
         if([[NSUserDefaults standardUserDefaults] integerForKey:@"rankedHighScore"] < self.levelAchieved - 1) {
