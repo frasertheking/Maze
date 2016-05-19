@@ -52,8 +52,11 @@
     self.mazeView.delegate = self;
     self.mazeView.isCasualMode = YES;
     [self.mazeView initMazeWithSize:25];
-    [self setupParticles];
-    self.particleView.hidden = YES;
+    if ([self.appDelegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }
     self.mazeView.alpha = 0.15f;
    
     self.playButton = [[HTPressableButton alloc] initWithFrame:CGRectMake(0, 0, 260, 50) buttonStyle:HTPressableButtonStyleRounded];

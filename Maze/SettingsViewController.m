@@ -34,7 +34,11 @@
     [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self setupParticles];
+    if ([self.appDelegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }
 }
 
 - (void)setupParticles {

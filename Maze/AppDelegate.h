@@ -54,5 +54,6 @@
 -(void) backSound;
 -(void)cancelSounds;
 -(void)startSounds;
+- (BOOL)isAbove8;
 @end
 

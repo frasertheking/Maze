@@ -66,8 +66,11 @@
     self.challengeModeButton.shadowColor = [UIColor ht_midnightBlueColor];
     [self.challengeModeButton addTarget:self action:@selector(challengeTapped:)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.challengeModeButton];
-    [self setupParticles];
-}
+    if ([self.appDelegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }}
 
 - (void)setupParticles {
     StarBackgroundScene* scene = [StarBackgroundScene sceneWithSize:self.particleView.bounds.size];

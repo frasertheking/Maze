@@ -115,7 +115,7 @@
 }
 
 -(void) playMenuMusic {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/menu.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.backgroundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -125,7 +125,7 @@
 }
 
 -(void) playGameMusic {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/background_music.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.backgroundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -135,7 +135,7 @@
 }
 
 -(void) selectionSound {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/selection.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -145,7 +145,7 @@
 }
 
 -(void) backSound {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/back.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -155,7 +155,7 @@
 }
 
 -(void) gameOverSound {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/game_over.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -165,7 +165,7 @@
 }
 
 -(void) powerUpSound {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/powerup.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -175,7 +175,7 @@
 }
 
 -(void) successSound {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundState"] == 1 && [self isAbove8]) {
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/success.wav", [[NSBundle mainBundle] resourcePath]];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         self.additionalSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
@@ -191,6 +191,15 @@
 
 -(void)startSounds {
     [self playMenuMusic];
+}
+
+- (BOOL)isAbove8 {
+    NSOperatingSystemVersion ios9_0_0 = (NSOperatingSystemVersion){9, 0, 0};
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9_0_0]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

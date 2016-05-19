@@ -51,8 +51,11 @@
     theViewGradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:theViewGradient atIndex:0];
     [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
-    [self setupParticles];
-}
+    if ([delegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }}
 
 - (void)getLeaderboardData {
     NSDictionary *params = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString], @"fields": @"user, score"};

@@ -110,7 +110,11 @@
     self.currentLevelLabel.alpha = 0;
     self.leaderboardTopButton.alpha = 0;
     
-    [self setupParticles];
+    if ([self.appDelegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }
     [self setupParallaxEffect];
    // [self resetCountdown];
     [self goInThree];

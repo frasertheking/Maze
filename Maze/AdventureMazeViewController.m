@@ -38,7 +38,11 @@
     self.currentLevelView.layer.borderWidth = 2;
     
     [self setGradientBackground];
-    [self setupParticles];
+    if ([self.appDelegate isAbove8]) {
+        [self setupParticles];
+    } else {
+        self.particleView.alpha = 0;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
